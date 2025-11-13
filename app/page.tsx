@@ -19,7 +19,9 @@ const tools = [
     category: 'Data Format',
     items: [
       { name: 'JSON Formatter', path: '/json', icon: '📋', desc: 'JSON 포맷팅 및 검증' },
-      { name: 'JWT Decoder', path: '/jwt', icon: '🎫', desc: 'JWT 토큰 디코딩' },
+      { name: 'JWT Decoder', path: '/jwt', icon: '🎫', desc: 'JWT 토큰 디코딩 및 검증' },
+      { name: 'SQL Formatter', path: '/sql', icon: '🗃️', desc: 'SQL 쿼리 포맷팅' },
+      { name: 'CSV/JSON Converter', path: '/csv', icon: '📊', desc: 'CSV ↔ JSON 변환' },
       { name: 'HTML/XML Formatter', path: '/html', icon: '🏷️', desc: 'HTML/XML 포맷팅' },
     ]
   },
@@ -43,7 +45,8 @@ const tools = [
     category: 'Tools',
     items: [
       { name: 'Regex Tester', path: '/regex', icon: '🔍', desc: '정규식 테스트' },
-      { name: 'Diff Checker', path: '/diff', icon: '📊', desc: '텍스트 비교' },
+      { name: 'Cron Parser', path: '/cron', icon: '⏰', desc: 'Cron 표현식 해석' },
+      { name: 'Diff Checker', path: '/diff', icon: '📄', desc: '텍스트 비교' },
     ]
   }
 ]
@@ -55,8 +58,11 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
           개발자를 위한 필수 도구 모음
         </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">
           개발하면서 자주 사용하는 유틸리티 도구들을 한 곳에서
+        </p>
+        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+          ✨ 18개의 전문 개발 도구 제공
         </p>
       </div>
 

@@ -10,16 +10,19 @@ const tools = [
   { name: 'Jasypt', path: '/jasypt', icon: '🔐' },
   { name: 'JSON', path: '/json', icon: '📋' },
   { name: 'JWT', path: '/jwt', icon: '🎫' },
-  { name: 'Timestamp', path: '/timestamp', icon: '⏰' },
+  { name: 'SQL', path: '/sql', icon: '🗃️' },
+  { name: 'CSV/JSON', path: '/csv', icon: '📊' },
+  { name: 'Cron', path: '/cron', icon: '⏰' },
+  { name: 'Timestamp', path: '/timestamp', icon: '🕐' },
   { name: 'UUID', path: '/uuid', icon: '🆔' },
   { name: 'Hash', path: '/hash', icon: '🔒' },
   { name: 'Regex', path: '/regex', icon: '🔍' },
   { name: 'Color', path: '/color', icon: '🎨' },
-  { name: 'Diff', path: '/diff', icon: '📊' },
+  { name: 'Diff', path: '/diff', icon: '📄' },
   { name: 'QR Code', path: '/qrcode', icon: '📱' },
   { name: 'Case Convert', path: '/case', icon: '📝' },
   { name: 'HTML/XML', path: '/html', icon: '🏷️' },
-  { name: 'Lorem Ipsum', path: '/lorem', icon: '📄' },
+  { name: 'Lorem Ipsum', path: '/lorem', icon: '✏️' },
 ]
 
 export default function Navigation() {
