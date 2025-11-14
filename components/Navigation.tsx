@@ -11,6 +11,7 @@ const tools = [
   { name: 'JSON', path: '/json', icon: '📋' },
   { name: 'JWT', path: '/jwt', icon: '🎫' },
   { name: 'SQL', path: '/sql', icon: '🗃️' },
+  { name: 'MyBatis', path: '/mybatis', icon: '🐦' },
   { name: 'CSV/JSON', path: '/csv', icon: '📊' },
   { name: 'Cron', path: '/cron', icon: '⏰' },
   { name: 'Timestamp', path: '/timestamp', icon: '🕐' },

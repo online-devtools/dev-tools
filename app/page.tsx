@@ -21,6 +21,7 @@ const tools = [
       { name: 'JSON Formatter', path: '/json', icon: '📋', desc: 'JSON 포맷팅 및 검증' },
       { name: 'JWT Decoder', path: '/jwt', icon: '🎫', desc: 'JWT 토큰 디코딩 및 검증' },
       { name: 'SQL Formatter', path: '/sql', icon: '🗃️', desc: 'SQL 쿼리 포맷팅' },
+      { name: 'MyBatis to SQL', path: '/mybatis', icon: '🐦', desc: 'MyBatis 쿼리를 실행 가능한 SQL로 변환' },
       { name: 'CSV/JSON Converter', path: '/csv', icon: '📊', desc: 'CSV ↔ JSON 변환' },
       { name: 'HTML/XML Formatter', path: '/html', icon: '🏷️', desc: 'HTML/XML 포맷팅' },
     ]
