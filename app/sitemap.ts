@@ -5,6 +5,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '',
+    '/about',
+    '/privacy',
+    '/terms',
+    '/contact',
     '/base64',
     '/url',
     '/jasypt',
