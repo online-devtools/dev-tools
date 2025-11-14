@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dev-tools.example.com'), // 실제 배포 URL로 변경 필요
@@ -129,11 +130,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-          <Navigation />
-          <main className="container mx-auto px-4 py-8">
-            {children}
-          </main>
+        <LanguageProvider>
+          <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+            <Navigation />
+            <main className="container mx-auto px-4 py-8">
+              {children}
+            </main>
           <footer className="mt-auto py-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             <div className="container mx-auto px-4">
               <div className="grid md:grid-cols-3 gap-8 mb-6">
@@ -175,7 +177,8 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-        </div>
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   )

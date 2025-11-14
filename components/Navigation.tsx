@@ -3,30 +3,33 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import LanguageSwitcher from './LanguageSwitcher'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const tools = [
-  { name: 'Base64', path: '/base64', icon: '🔤' },
-  { name: 'URL Encode', path: '/url', icon: '🔗' },
-  { name: 'Jasypt', path: '/jasypt', icon: '🔐' },
-  { name: 'JSON', path: '/json', icon: '📋' },
-  { name: 'JWT', path: '/jwt', icon: '🎫' },
-  { name: 'SQL', path: '/sql', icon: '🗃️' },
-  { name: 'MyBatis', path: '/mybatis', icon: '🐦' },
-  { name: 'CSV/JSON', path: '/csv', icon: '📊' },
-  { name: 'Cron', path: '/cron', icon: '⏰' },
-  { name: 'Timestamp', path: '/timestamp', icon: '🕐' },
-  { name: 'UUID', path: '/uuid', icon: '🆔' },
-  { name: 'Hash', path: '/hash', icon: '🔒' },
-  { name: 'Regex', path: '/regex', icon: '🔍' },
-  { name: 'Color', path: '/color', icon: '🎨' },
-  { name: 'Diff', path: '/diff', icon: '📄' },
-  { name: 'QR Code', path: '/qrcode', icon: '📱' },
-  { name: 'Case Convert', path: '/case', icon: '📝' },
-  { name: 'HTML/XML', path: '/html', icon: '🏷️' },
-  { name: 'Lorem Ipsum', path: '/lorem', icon: '✏️' },
+  { nameKey: 'tool.base64', path: '/base64', icon: '🔤' },
+  { nameKey: 'tool.url', path: '/url', icon: '🔗' },
+  { nameKey: 'tool.jasypt', path: '/jasypt', icon: '🔐' },
+  { nameKey: 'tool.json', path: '/json', icon: '📋' },
+  { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫' },
+  { nameKey: 'tool.sql', path: '/sql', icon: '🗃️' },
+  { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦' },
+  { nameKey: 'tool.csv', path: '/csv', icon: '📊' },
+  { nameKey: 'tool.cron', path: '/cron', icon: '⏰' },
+  { nameKey: 'tool.timestamp', path: '/timestamp', icon: '🕐' },
+  { nameKey: 'tool.uuid', path: '/uuid', icon: '🆔' },
+  { nameKey: 'tool.hash', path: '/hash', icon: '🔒' },
+  { nameKey: 'tool.regex', path: '/regex', icon: '🔍' },
+  { nameKey: 'tool.color', path: '/color', icon: '🎨' },
+  { nameKey: 'tool.diff', path: '/diff', icon: '📄' },
+  { nameKey: 'tool.qrcode', path: '/qrcode', icon: '📱' },
+  { nameKey: 'tool.case', path: '/case', icon: '📝' },
+  { nameKey: 'tool.html', path: '/html', icon: '🏷️' },
+  { nameKey: 'tool.lorem', path: '/lorem', icon: '✏️' },
 ]
 
 export default function Navigation() {
+  const { t } = useLanguage()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -40,51 +43,57 @@ export default function Navigation() {
             </span>
           </Link>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <svg
-              className="w-6 h-6 text-gray-600 dark:text-gray-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+          {/* Desktop: Tools + Language Switcher */}
+          <div className="hidden md:flex md:items-center md:gap-4">
+            <div className="flex flex-wrap gap-2 max-w-4xl">
+              {tools.map((tool) => (
+                <Link
+                  key={tool.path}
+                  href={tool.path}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    pathname === tool.path
+                      ? 'bg-blue-500 text-white'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="mr-1">{tool.icon}</span>
+                  {t(tool.nameKey)}
+                </Link>
+              ))}
+            </div>
+            <LanguageSwitcher />
+          </div>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex md:flex-wrap md:gap-2 md:max-w-4xl">
-            {tools.map((tool) => (
-              <Link
-                key={tool.path}
-                href={tool.path}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname === tool.path
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}
+          {/* Mobile: Menu button + Language Switcher */}
+          <div className="flex md:hidden items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <svg
+                className="w-6 h-6 text-gray-600 dark:text-gray-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <span className="mr-1">{tool.icon}</span>
-                {tool.name}
-              </Link>
-            ))}
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -103,7 +112,7 @@ export default function Navigation() {
                 }`}
               >
                 <span className="mr-1">{tool.icon}</span>
-                {tool.name}
+                {t(tool.nameKey)}
               </Link>
             ))}
           </div>

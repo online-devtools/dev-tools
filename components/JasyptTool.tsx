@@ -3,11 +3,13 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import CryptoJS from 'crypto-js'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type EncryptionType = 'one-way' | 'two-way'
 type ActionType = 'encrypt' | 'decrypt' | 'match'
 
 export default function JasyptTool() {
+  const { t } = useLanguage()
   // Encryption Section
   const [encryptionType, setEncryptionType] = useState<EncryptionType>('two-way')
   const [plainText, setPlainText] = useState('')
@@ -47,7 +49,7 @@ export default function JasyptTool() {
       setEncryptedResult('')
 
       if (!plainText.trim()) {
-        setError('암호화할 텍스트를 입력해주세요.')
+        setError(t('jasypt.error.plaintext'))
         return
       }
 
@@ -58,7 +60,7 @@ export default function JasyptTool() {
       } else {
         // 양방향 암호화
         if (!encryptSecretKey.trim()) {
-          setError('암호화 키를 입력해주세요.')
+          setError(t('jasypt.error.secretkey'))
           return
         }
         const encrypted = twoWayEncrypt(plainText, encryptSecretKey)
@@ -66,7 +68,7 @@ export default function JasyptTool() {
       }
     } catch (e) {
       console.error('Encryption error:', e)
-      setError(`암호화 실패: ${e instanceof Error ? e.message : '오류가 발생했습니다.'}`)
+      setError(`${t('jasypt.error.encrypt')}: ${e instanceof Error ? e.message : t('jasypt.error.generic')}`)
     }
   }
 
@@ -77,40 +79,40 @@ export default function JasyptTool() {
       setDecryptResult('')
 
       if (!encryptedText.trim()) {
-        setError('암호화된 텍스트를 입력해주세요.')
+        setError(t('jasypt.error.encryptedtext'))
         return
       }
 
       if (actionType === 'match') {
         // Match Password
         if (!plainTextToMatch.trim()) {
-          setError('비교할 평문을 입력해주세요.')
+          setError(t('jasypt.error.plainmatch'))
           return
         }
 
         const hashedInput = oneWayEncrypt(plainTextToMatch)
         if (hashedInput === encryptedText.trim()) {
-          setDecryptResult('✅ Match! 비밀번호가 일치합니다.')
+          setDecryptResult(`✅ ${t('jasypt.match.success')}`)
         } else {
-          setDecryptResult('❌ Not Match! 비밀번호가 일치하지 않습니다.')
+          setDecryptResult(`❌ ${t('jasypt.match.fail')}`)
         }
       } else {
         // Decrypt
         if (!decryptSecretKey.trim()) {
-          setError('복호화 키를 입력해주세요.')
+          setError(t('jasypt.error.decryptkey'))
           return
         }
 
         const decrypted = twoWayDecrypt(encryptedText.trim(), decryptSecretKey)
         if (!decrypted) {
-          setError('복호화 실패: 올바른 암호문과 키를 확인해주세요.')
+          setError(t('jasypt.error.decrypt'))
           return
         }
         setDecryptResult(decrypted)
       }
     } catch (e) {
       console.error('Decryption/Match error:', e)
-      setError(`처리 실패: ${e instanceof Error ? e.message : '올바른 값을 입력해주세요.'}`)
+      setError(`${t('jasypt.error.process')}: ${e instanceof Error ? e.message : t('jasypt.error.generic')}`)
     }
   }
 
@@ -133,20 +135,20 @@ export default function JasyptTool() {
     <div className="space-y-8">
       {/* Jasypt Encryption Section */}
       <ToolCard
-        title="🔐 Jasypt Encryption"
-        description="평문을 암호화합니다"
+        title={t('jasypt.encryption.title')}
+        description={t('jasypt.encryption.description')}
       >
         <div className="space-y-4">
           {/* Plain Text Input */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Enter Plain Text to Encrypt
+              {t('jasypt.plaintext')}
             </label>
             <input
               type="text"
               value={plainText}
               onChange={(e) => setPlainText(e.target.value)}
-              placeholder="암호화할 텍스트를 입력하세요..."
+              placeholder={t('jasypt.plaintext.placeholder')}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
             />
           </div>
@@ -154,7 +156,7 @@ export default function JasyptTool() {
           {/* Encryption Type Selection */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Select Type of Encryption
+              {t('jasypt.encryptionType')}
             </label>
             <div className="space-y-2">
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -166,7 +168,7 @@ export default function JasyptTool() {
                   className="w-4 h-4 text-blue-600"
                 />
                 <span className="text-gray-700 dark:text-gray-300">
-                  One Way Encryption (Without Secret Text)
+                  {t('jasypt.oneWay')}
                 </span>
               </label>
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -178,7 +180,7 @@ export default function JasyptTool() {
                   className="w-4 h-4 text-blue-600"
                 />
                 <span className="text-gray-700 dark:text-gray-300">
-                  Two Way Encryption (With Secret Text)
+                  {t('jasypt.twoWay')}
                 </span>
               </label>
             </div>
@@ -188,13 +190,13 @@ export default function JasyptTool() {
           {encryptionType === 'two-way' && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Enter Secret Key
+                {t('jasypt.secretKey')}
               </label>
               <input
                 type="password"
                 value={encryptSecretKey}
                 onChange={(e) => setEncryptSecretKey(e.target.value)}
-                placeholder="암호화 키를 입력하세요..."
+                placeholder={t('jasypt.secretKey.placeholder')}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
               />
             </div>
@@ -206,13 +208,13 @@ export default function JasyptTool() {
               onClick={handleEncrypt}
               className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
             >
-              Encrypt
+              {t('jasypt.encrypt')}
             </button>
             <button
               onClick={handleClearEncrypt}
               className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
             >
-              Clear
+              {t('common.clear')}
             </button>
           </div>
 
@@ -220,7 +222,7 @@ export default function JasyptTool() {
           {encryptedResult && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Jasypt Encrypted String
+                {t('jasypt.result')}
               </label>
               <div className="relative">
                 <textarea
@@ -233,7 +235,7 @@ export default function JasyptTool() {
                   onClick={() => navigator.clipboard.writeText(encryptedResult)}
                   className="absolute top-2 right-2 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded-md transition-colors"
                 >
-                  Copy
+                  {t('common.copy')}
                 </button>
               </div>
             </div>
@@ -243,20 +245,20 @@ export default function JasyptTool() {
 
       {/* Jasypt Decryption Section */}
       <ToolCard
-        title="🔓 Jasypt Decryption"
-        description="암호화된 텍스트를 복호화하거나 비밀번호를 검증합니다"
+        title={t('jasypt.decryption.title')}
+        description={t('jasypt.decryption.description')}
       >
         <div className="space-y-4">
           {/* Encrypted Text Input */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Enter Jasypt Encrypted Text
+              {t('jasypt.encryptedText')}
             </label>
             <input
               type="text"
               value={encryptedText}
               onChange={(e) => setEncryptedText(e.target.value)}
-              placeholder="암호화된 텍스트를 입력하세요..."
+              placeholder={t('jasypt.encryptedText.placeholder')}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
             />
           </div>
@@ -264,7 +266,7 @@ export default function JasyptTool() {
           {/* Action Type Selection */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Select Action Type
+              {t('jasypt.actionType')}
             </label>
             <div className="space-y-2">
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -276,7 +278,7 @@ export default function JasyptTool() {
                   className="w-4 h-4 text-blue-600"
                 />
                 <span className="text-gray-700 dark:text-gray-300">
-                  Match Password
+                  {t('jasypt.match')}
                 </span>
               </label>
               <label className="flex items-center space-x-2 cursor-pointer">
@@ -288,7 +290,7 @@ export default function JasyptTool() {
                   className="w-4 h-4 text-blue-600"
                 />
                 <span className="text-gray-700 dark:text-gray-300">
-                  Decrypt Password
+                  {t('jasypt.decrypt')}
                 </span>
               </label>
             </div>
@@ -298,13 +300,13 @@ export default function JasyptTool() {
           {actionType === 'match' && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Enter the Plain Text to Match
+                {t('jasypt.plainMatch')}
               </label>
               <input
                 type="text"
                 value={plainTextToMatch}
                 onChange={(e) => setPlainTextToMatch(e.target.value)}
-                placeholder="비교할 평문을 입력하세요..."
+                placeholder={t('jasypt.plainMatch.placeholder')}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
               />
             </div>
@@ -314,13 +316,13 @@ export default function JasyptTool() {
           {actionType === 'decrypt' && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Secret Key Used during Encryption
+                {t('jasypt.decryptKey')}
               </label>
               <input
                 type="password"
                 value={decryptSecretKey}
                 onChange={(e) => setDecryptSecretKey(e.target.value)}
-                placeholder="복호화 키를 입력하세요..."
+                placeholder={t('jasypt.decryptKey.placeholder')}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
               />
             </div>
@@ -332,13 +334,13 @@ export default function JasyptTool() {
               onClick={handleDecryptOrMatch}
               className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
             >
-              {actionType === 'match' ? 'Match' : 'Decrypt'}
+              {actionType === 'match' ? t('jasypt.match') : t('jasypt.decrypt')}
             </button>
             <button
               onClick={handleClearDecrypt}
               className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
             >
-              Clear
+              {t('common.clear')}
             </button>
           </div>
 
@@ -346,7 +348,7 @@ export default function JasyptTool() {
           {decryptResult && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Result:
+                {t('jasypt.resultLabel')}
               </label>
               <div className={`p-4 rounded-lg border ${
                 decryptResult.includes('✅')
@@ -373,12 +375,12 @@ export default function JasyptTool() {
 
       {/* Info Box */}
       <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-sm text-gray-700 dark:text-gray-300">
-        <p className="font-semibold mb-2">💡 사용 방법:</p>
+        <p className="font-semibold mb-2">{t('jasypt.info.title')}</p>
         <ul className="list-disc list-inside space-y-1">
-          <li><strong>One Way Encryption:</strong> MD5 해시를 사용한 일방향 암호화 (복호화 불가능)</li>
-          <li><strong>Two Way Encryption:</strong> AES를 사용한 양방향 암호화 (복호화 가능)</li>
-          <li><strong>Match Password:</strong> 입력한 평문이 암호화된 값과 일치하는지 확인</li>
-          <li><strong>Decrypt Password:</strong> 암호화된 텍스트를 원본으로 복호화</li>
+          <li>{t('jasypt.info.oneWay')}</li>
+          <li>{t('jasypt.info.twoWay')}</li>
+          <li>{t('jasypt.info.match')}</li>
+          <li>{t('jasypt.info.decrypt')}</li>
         </ul>
       </div>
     </div>
