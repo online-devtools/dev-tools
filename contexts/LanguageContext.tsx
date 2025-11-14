@@ -34,7 +34,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Home Page
     'home.title': '개발자를 위한 필수 도구 모음',
     'home.subtitle': '개발하면서 자주 사용하는 유틸리티 도구들을 한 곳에서',
-    'home.toolCount': '✨ 18개의 전문 개발 도구 제공',
+    'home.toolCount': '✨ 23개의 전문 개발 도구 제공',
     'home.aboutTitle': 'Developer Tools란?',
     'home.aboutText1': 'Developer Tools는 웹 개발자, 백엔드 개발자, 프론트엔드 개발자, 풀스택 개발자 등 모든 개발자들이 일상적으로 필요로 하는 다양한 온라인 유틸리티 도구를 한 곳에서 제공하는 무료 웹 서비스입니다. Base64 인코딩/디코딩, JSON 포맷팅, JWT 토큰 디코딩, 정규식 테스트, QR 코드 생성 등 개발 과정에서 자주 사용되는 18가지 이상의 전문 도구를 별도의 설치나 회원가입 없이 바로 사용할 수 있습니다.',
     'home.aboutText2': '모든 도구는 클라이언트 사이드에서만 작동하여 사용자의 데이터가 서버로 전송되지 않으므로 완벽한 프라이버시를 보장합니다. 또한 반응형 디자인으로 제작되어 데스크톱, 태블릿, 모바일 등 모든 기기에서 최적화된 사용 경험을 제공합니다. 다크 모드를 자동으로 지원하여 장시간 개발 작업 시에도 눈의 피로를 최소화할 수 있습니다.',
@@ -59,6 +59,8 @@ const translations: Record<Language, Record<string, string>> = {
     'category.generators': 'Generators',
     'category.converters': 'Converters',
     'category.tools': 'Tools',
+    'category.linux': 'Linux & System',
+    'category.network': 'Network & DevOps',
 
     // Tool Names
     'tool.base64': 'Base64',
@@ -80,6 +82,10 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.case': 'Case Convert',
     'tool.html': 'HTML/XML',
     'tool.lorem': 'Lorem Ipsum',
+    'tool.chmod': 'chmod',
+    'tool.ipcalc': 'IP Calc',
+    'tool.baseconv': 'Base Conv',
+    'tool.password': 'Password',
 
     // Tool Descriptions
     'tool.base64.desc': 'Base64 인코딩 및 디코딩',
@@ -101,6 +107,10 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.case.desc': '문자열 케이스 변환',
     'tool.html.desc': 'HTML/XML 포맷팅',
     'tool.lorem.desc': '더미 텍스트 생성',
+    'tool.chmod.desc': 'Unix 파일 권한 계산기',
+    'tool.ipcalc.desc': 'IP/CIDR 서브넷 계산기',
+    'tool.baseconv.desc': '2/8/10/16진수 변환',
+    'tool.password.desc': '안전한 비밀번호 생성',
 
     // Jasypt 페이지
     'jasypt.title': 'Jasypt 암호화/복호화',
@@ -193,7 +203,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Home Page
     'home.title': 'Essential Tools for Developers',
     'home.subtitle': 'Utility tools frequently used in development, all in one place',
-    'home.toolCount': '✨ 18 Professional Development Tools',
+    'home.toolCount': '✨ 23 Professional Development Tools',
     'home.aboutTitle': 'About Developer Tools',
     'home.aboutText1': 'Developer Tools is a free web service that provides a variety of online utility tools that all developers need on a daily basis, including web developers, backend developers, frontend developers, and full-stack developers, in one place. You can use more than 18 professional tools frequently used in the development process, such as Base64 encoding/decoding, JSON formatting, JWT token decoding, regular expression testing, and QR code generation, without installation or registration.',
     'home.aboutText2': 'All tools work only on the client side, so your data is never sent to the server, ensuring complete privacy. It is also designed responsively to provide an optimized user experience on all devices, including desktops, tablets, and mobile devices. It automatically supports dark mode to minimize eye strain during long development sessions.',
@@ -218,6 +228,8 @@ const translations: Record<Language, Record<string, string>> = {
     'category.generators': 'Generators',
     'category.converters': 'Converters',
     'category.tools': 'Tools',
+    'category.linux': 'Linux & System',
+    'category.network': 'Network & DevOps',
 
     // Tool Names
     'tool.base64': 'Base64',
@@ -239,6 +251,10 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.case': 'Case Convert',
     'tool.html': 'HTML/XML',
     'tool.lorem': 'Lorem Ipsum',
+    'tool.chmod': 'chmod',
+    'tool.ipcalc': 'IP Calc',
+    'tool.baseconv': 'Base Conv',
+    'tool.password': 'Password',
 
     // Tool Descriptions
     'tool.base64.desc': 'Base64 encoding and decoding',
@@ -260,6 +276,10 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.case.desc': 'String case conversion',
     'tool.html.desc': 'HTML/XML formatting',
     'tool.lorem.desc': 'Dummy text generation',
+    'tool.chmod.desc': 'Unix file permission calculator',
+    'tool.ipcalc.desc': 'IP/CIDR subnet calculator',
+    'tool.baseconv.desc': '2/8/10/16 base converter',
+    'tool.password.desc': 'Secure password generator',
 
     // Jasypt page
     'jasypt.title': 'Jasypt Encryption and Decryption',

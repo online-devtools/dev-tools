@@ -54,6 +54,20 @@ const toolsConfig = [
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰', descKey: 'tool.cron.desc' },
       { nameKey: 'tool.diff', path: '/diff', icon: '📄', descKey: 'tool.diff.desc' },
     ]
+  },
+  {
+    categoryKey: 'category.linux',
+    items: [
+      { nameKey: 'tool.chmod', path: '/chmod', icon: '🔐', descKey: 'tool.chmod.desc' },
+      { nameKey: 'tool.baseconv', path: '/baseconv', icon: '🔢', descKey: 'tool.baseconv.desc' },
+    ]
+  },
+  {
+    categoryKey: 'category.network',
+    items: [
+      { nameKey: 'tool.ipcalc', path: '/ipcalc', icon: '🌐', descKey: 'tool.ipcalc.desc' },
+      { nameKey: 'tool.password', path: '/password', icon: '🔑', descKey: 'tool.password.desc' },
+    ]
   }
 ]
 

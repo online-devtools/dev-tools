@@ -34,7 +34,7 @@ export default function ContactPage() {
               문의사항은 아래 이메일 주소로 보내주세요:
             </p>
             <p className="text-xl font-mono text-blue-600 dark:text-blue-400">
-              contact@devtools.example.com
+              wxyz0904@naver.com
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
               * 영업일 기준 1-2일 내에 답변드리겠습니다.

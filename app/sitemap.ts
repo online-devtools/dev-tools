@@ -28,6 +28,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/case',
     '/html',
     '/lorem',
+    '/chmod',
+    '/ipcalc',
+    '/baseconv',
+    '/password',
   ]
 
   return routes.map((route) => ({
