@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     canonical: 'https://dev-tools.example.com',
   },
   verification: {
-    google: 'google-site-verification-code', // Google Search Console에서 발급받은 코드로 변경
+    google: 'Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k',
     // yandex: 'yandex-verification-code',
     // bing: 'bing-verification-code',
   },
@@ -86,6 +86,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <meta
+          name="google-site-verification"
+          content="Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k"
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6853743390551388"
