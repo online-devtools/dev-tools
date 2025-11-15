@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: 'Developer Tools',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image',
         width: 1200,
         height: 630,
         alt: 'Developer Tools - 개발자 도구 모음',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     description: '개발자를 위한 15가지 필수 온라인 도구 모음',
-    images: ['/og-image.png'],
+    images: ['/og-image'],
   },
   alternates: {
     canonical: 'https://dev-tools.example.com',
