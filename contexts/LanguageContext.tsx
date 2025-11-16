@@ -4,15 +4,17 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 
 type Language = 'ko' | 'en'
 
+type TranslationReplacements = Record<string, string | number>
+
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: string) => string
+  t: (key: string, replacements?: TranslationReplacements) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-// 번역 데이터
+// Translation strings are grouped by language so UI text lives in one place.
 const translations: Record<Language, Record<string, string>> = {
   ko: {
     // 공통
@@ -68,6 +70,8 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.jasypt': 'Jasypt',
     'tool.json': 'JSON',
     'tool.jwt': 'JWT',
+    'tool.jwtSigner': 'JWT Signer',
+    'tool.jwtSigner': 'JWT 서명기',
     'tool.sql': 'SQL',
     'tool.mybatis': 'MyBatis',
     'tool.csv': 'CSV/JSON',
@@ -93,6 +97,7 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.jasypt.desc': 'AES 암호화 및 복호화',
     'tool.json.desc': 'JSON 포맷팅 및 검증',
     'tool.jwt.desc': 'JWT 토큰 디코딩 및 검증',
+    'tool.jwtSigner.desc': 'JWT 토큰 생성 및 서명',
     'tool.sql.desc': 'SQL 쿼리 포맷팅',
     'tool.mybatis.desc': 'MyBatis 쿼리를 실행 가능한 SQL로 변환',
     'tool.csv.desc': 'CSV ↔ JSON 변환',
@@ -111,6 +116,75 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.ipcalc.desc': 'IP/CIDR 서브넷 계산기',
     'tool.baseconv.desc': '2/8/10/16진수 변환',
     'tool.password.desc': '안전한 비밀번호 생성',
+
+    // Base64 Tool
+    'base64.title': 'Base64 인코더/디코더',
+    'base64.description': '텍스트를 Base64로 인코딩하거나 디코딩합니다',
+    'base64.input.label': '입력',
+    'base64.input.placeholder': '변환할 텍스트를 입력하세요...',
+    'base64.output.label': '결과',
+    'base64.output.placeholder': '결과가 여기에 표시됩니다...',
+    'base64.actions.encode': '인코딩',
+    'base64.actions.decode': '디코딩',
+    'base64.actions.clear': '초기화',
+    'base64.error.encode': '인코딩 실패: 올바른 텍스트를 입력해주세요.',
+    'base64.error.decode': '디코딩 실패: 올바른 Base64 문자열을 입력해주세요.',
+
+    // Regex Tool
+    'regex.title': '정규식 테스터',
+    'regex.description': '정규식 패턴을 테스트하고 매칭 결과를 확인합니다',
+    'regex.pattern.label': '정규식 패턴',
+    'regex.pattern.placeholder': '예: [a-z]+',
+    'regex.flags.label': '플래그',
+    'regex.flags.placeholder': 'g, i, m',
+    'regex.commonPatterns.label': '자주 사용하는 패턴',
+    'regex.commonPatterns.email': '이메일',
+    'regex.commonPatterns.url': 'URL',
+    'regex.commonPatterns.phone': '전화번호',
+    'regex.commonPatterns.ip': 'IP 주소',
+    'regex.commonPatterns.hex': '16진수 컬러',
+    'regex.testString.label': '테스트 문자열',
+    'regex.testString.placeholder': '테스트할 문자열을 입력하세요...',
+    'regex.actions.test': '테스트',
+    'regex.actions.clear': '초기화',
+    'regex.results.label': '매칭 결과 ({{count}}개)',
+    'regex.results.match': 'Match {{index}}',
+    'regex.error.required': '정규식 패턴을 입력해주세요.',
+    'regex.error.noMatch': '매칭되는 문자열이 없습니다.',
+    'regex.error.syntax': '정규식 오류: {{message}}',
+
+    // Password Generator
+    'password.title': 'Password Generator',
+    'password.description': '안전한 비밀번호 생성기',
+    'password.length.label': '길이: {{length}}자',
+    'password.options.uppercase': '대문자 (A-Z)',
+    'password.options.lowercase': '소문자 (a-z)',
+    'password.options.numbers': '숫자 (0-9)',
+    'password.options.symbols': '특수문자 (!@#$...)',
+    'password.actions.generate': '비밀번호 생성',
+    'password.result.label': '생성된 비밀번호',
+    'password.strength.title': '강도:',
+    'password.strength.weak': '약함',
+    'password.strength.medium': '보통',
+    'password.strength.strong': '강함',
+    'password.tips.title': '🛡️ 안전한 비밀번호 팁',
+    'password.tips.1': '• 최소 12자 이상 사용하세요',
+    'password.tips.2': '• 대소문자, 숫자, 특수문자를 모두 포함하세요',
+    'password.tips.3': '• 여러 사이트에서 같은 비밀번호를 사용하지 마세요',
+    'password.tips.4': '• 개인정보(생일, 이름 등)를 사용하지 마세요',
+
+    // JWT Signer
+    'jwtSigner.title': 'JWT Signer',
+    'jwtSigner.description': '시크릿으로 서명된 JWT 토큰을 생성합니다',
+    'jwtSigner.header.label': '헤더 (JSON)',
+    'jwtSigner.payload.label': '페이로드 (JSON)',
+    'jwtSigner.payload.placeholder': '{ "sub": "user", "exp": 1719820800 }',
+    'jwtSigner.secret.label': '비밀 키',
+    'jwtSigner.secret.placeholder': '서명에 사용할 비밀 키를 입력하세요...',
+    'jwtSigner.algorithm.label': '알고리즘',
+    'jwtSigner.algorithm.hs256': 'HS256 (HMAC SHA-256)',
+    'jwtSigner.algorithm.hs384': 'HS384 (HMAC SHA-384)',
+    'jwtSigner.algorithm.hs512': 'HS512 (HMAC SHA-512)',  <-- wait unintentional? need correct key name. whoops
 
     // Jasypt 페이지
     'jasypt.title': 'Jasypt 암호화/복호화',
@@ -262,6 +336,7 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.jasypt.desc': 'AES encryption and decryption',
     'tool.json.desc': 'JSON formatting and validation',
     'tool.jwt.desc': 'JWT token decoding and validation',
+    'tool.jwtSigner.desc': 'Generate and sign JWT tokens',
     'tool.sql.desc': 'SQL query formatting',
     'tool.mybatis.desc': 'Convert MyBatis query to executable SQL',
     'tool.csv.desc': 'CSV ↔ JSON conversion',
@@ -280,6 +355,93 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.ipcalc.desc': 'IP/CIDR subnet calculator',
     'tool.baseconv.desc': '2/8/10/16 base converter',
     'tool.password.desc': 'Secure password generator',
+
+    // Base64 Tool
+    'base64.title': 'Base64 Encoder/Decoder',
+    'base64.description': 'Encode plain text or decode Base64 strings',
+    'base64.input.label': 'Input',
+    'base64.input.placeholder': 'Type text to convert...',
+    'base64.output.label': 'Output',
+    'base64.output.placeholder': 'Results will appear here...',
+    'base64.actions.encode': 'Encode',
+    'base64.actions.decode': 'Decode',
+    'base64.actions.clear': 'Clear',
+    'base64.error.encode': 'Encoding failed: please provide valid text.',
+    'base64.error.decode': 'Decoding failed: please provide a valid Base64 string.',
+
+    // Regex Tool
+    'regex.title': 'Regex Tester',
+    'regex.description': 'Test regular expressions and inspect matches',
+    'regex.pattern.label': 'Regex Pattern',
+    'regex.pattern.placeholder': 'e.g. [a-z]+',
+    'regex.flags.label': 'Flags',
+    'regex.flags.placeholder': 'g, i, m',
+    'regex.commonPatterns.label': 'Common Patterns',
+    'regex.commonPatterns.email': 'Email',
+    'regex.commonPatterns.url': 'URL',
+    'regex.commonPatterns.phone': 'Phone Number',
+    'regex.commonPatterns.ip': 'IP Address',
+    'regex.commonPatterns.hex': 'Hex Color',
+    'regex.testString.label': 'Test String',
+    'regex.testString.placeholder': 'Paste the string you want to test...',
+    'regex.actions.test': 'Test',
+    'regex.actions.clear': 'Clear',
+    'regex.results.label': 'Matches ({{count}})',
+    'regex.results.match': 'Match {{index}}',
+    'regex.error.required': 'Please provide a regex pattern.',
+    'regex.error.noMatch': 'No matches found.',
+    'regex.error.syntax': 'Regex error: {{message}}',
+
+    // Password Generator
+    'password.title': 'Password Generator',
+    'password.description': 'Generate secure passwords instantly',
+    'password.length.label': 'Length: {{length}} chars',
+    'password.options.uppercase': 'Uppercase (A-Z)',
+    'password.options.lowercase': 'Lowercase (a-z)',
+    'password.options.numbers': 'Numbers (0-9)',
+    'password.options.symbols': 'Symbols (!@#$...)',
+    'password.actions.generate': 'Generate Password',
+    'password.result.label': 'Generated Password',
+    'password.strength.title': 'Strength:',
+    'password.strength.weak': 'Weak',
+    'password.strength.medium': 'Medium',
+    'password.strength.strong': 'Strong',
+    'password.tips.title': '🛡️ Password Safety Tips',
+    'password.tips.1': '• Aim for at least 12 characters.',
+    'password.tips.2': '• Mix uppercase, lowercase, numbers, and symbols.',
+    'password.tips.3': '• Avoid reusing passwords across services.',
+    'password.tips.4': '• Never include personal information.',
+
+    // JWT Signer
+    'jwtSigner.title': 'JWT Signer',
+    'jwtSigner.description': 'Generate signed JWT tokens with your secret',
+    'jwtSigner.header.label': 'Header (JSON)',
+    'jwtSigner.payload.label': 'Payload (JSON)',
+    'jwtSigner.payload.placeholder': '{ \"sub\": \"user\", \"exp\": 1719820800 }',
+    'jwtSigner.secret.label': 'Secret',
+    'jwtSigner.secret.placeholder': 'Enter the secret used for signing...',
+    'jwtSigner.algorithm.label': 'Algorithm',
+    'jwtSigner.algorithm.hs256': 'HS256 (HMAC SHA-256)',
+    'jwtSigner.algorithm.hs384': 'HS384 (HMAC SHA-384)',
+    'jwtSigner.algorithm.hs512': 'HS512 (HMAC SHA-512)',
+    'jwtSigner.actions.generate': '토큰 생성',
+    'jwtSigner.actions.clear': '초기화',
+    'jwtSigner.result.label': '생성된 JWT',
+    'jwtSigner.result.signingInput': 'Signing Input',
+    'jwtSigner.result.note': '토큰을 안전하게 보관하고 주기적으로 키를 교체하세요.',
+    'jwtSigner.error.invalidHeader': '헤더 JSON을 확인해주세요.',
+    'jwtSigner.error.invalidPayload': '페이로드 JSON을 확인해주세요.',
+    'jwtSigner.error.secretRequired': '비밀 키를 입력해주세요.',
+    'jwtSigner.hint': 'exp, iss 등의 클레임을 추가하여 토큰을 완성하세요.',
+    'jwtSigner.actions.generate': 'Generate Token',
+    'jwtSigner.actions.clear': 'Clear',
+    'jwtSigner.result.label': 'Generated JWT',
+    'jwtSigner.result.signingInput': 'Signing Input',
+    'jwtSigner.result.note': 'Keep your tokens safe and rotate secrets periodically.',
+    'jwtSigner.error.invalidHeader': 'Please provide a valid JSON header.',
+    'jwtSigner.error.invalidPayload': 'Please provide a valid JSON payload.',
+    'jwtSigner.error.secretRequired': 'Secret is required to sign a token.',
+    'jwtSigner.hint': 'Add claims such as exp, iss, aud to complete the payload.',
 
     // Jasypt page
     'jasypt.title': 'Jasypt Encryption and Decryption',
@@ -358,7 +520,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ko')
 
   useEffect(() => {
-    // 브라우저 언어 감지
+    // Prefer a persisted language, otherwise detect from the browser locale once on mount.
     const browserLang = navigator.language.toLowerCase()
     const savedLang = localStorage.getItem('language') as Language
 
@@ -376,8 +538,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', lang)
   }
 
-  const t = (key: string): string => {
-    return translations[language][key] || key
+  // t() centralizes lookup + interpolation so every component consumes strings consistently.
+  const t = (key: string, replacements?: TranslationReplacements): string => {
+    const template = translations[language][key] || key
+    if (!replacements) {
+      return template
+    }
+
+    return Object.entries(replacements).reduce((acc, [token, value]) => {
+      const pattern = new RegExp(`{{\\s*${token}\\s*}}`, 'g')
+      return acc.replace(pattern, String(value))
+    }, template)
   }
 
   return (

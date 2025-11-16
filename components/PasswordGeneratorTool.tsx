@@ -3,16 +3,25 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
+
+type StrengthLevel = 'weak' | 'medium' | 'strong'
+interface StrengthState {
+  score: number
+  level: StrengthLevel
+}
 
 export default function PasswordGeneratorTool() {
+  const { t } = useLanguage()
   const [length, setLength] = useState(16)
   const [includeUppercase, setIncludeUppercase] = useState(true)
   const [includeLowercase, setIncludeLowercase] = useState(true)
   const [includeNumbers, setIncludeNumbers] = useState(true)
   const [includeSymbols, setIncludeSymbols] = useState(true)
   const [password, setPassword] = useState('')
-  const [strength, setStrength] = useState({ score: 0, label: '', color: '' })
+  const [strength, setStrength] = useState<StrengthState>({ score: 0, level: 'weak' })
 
+  // Generate the password entirely on the client via crypto.getRandomValues for security.
   const generatePassword = () => {
     const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const lowercase = 'abcdefghijklmnopqrstuvwxyz'
@@ -42,6 +51,7 @@ export default function PasswordGeneratorTool() {
     calculateStrength(result)
   }
 
+  // Basic heuristic so users know if additional character classes/length are needed.
   const calculateStrength = (pwd: string) => {
     let score = 0
     if (pwd.length >= 8) score++
@@ -52,25 +62,44 @@ export default function PasswordGeneratorTool() {
     if (/[^a-zA-Z\d]/.test(pwd)) score++
 
     if (score <= 2) {
-      setStrength({ score, label: '약함', color: 'text-red-600 dark:text-red-400' })
+      setStrength({ score, level: 'weak' })
     } else if (score <= 4) {
-      setStrength({ score, label: '보통', color: 'text-yellow-600 dark:text-yellow-400' })
+      setStrength({ score, level: 'medium' })
     } else {
-      setStrength({ score, label: '강함', color: 'text-green-600 dark:text-green-400' })
+      setStrength({ score, level: 'strong' })
     }
   }
 
+  const strengthLabelClasses: Record<StrengthLevel, string> = {
+    weak: 'text-red-600 dark:text-red-400',
+    medium: 'text-yellow-600 dark:text-yellow-400',
+    strong: 'text-green-600 dark:text-green-400',
+  }
+
+  const strengthBarClasses: Record<StrengthLevel, string> = {
+    weak: 'bg-red-500',
+    medium: 'bg-yellow-500',
+    strong: 'bg-green-500',
+  }
+
+  const tips = [
+    t('password.tips.1'),
+    t('password.tips.2'),
+    t('password.tips.3'),
+    t('password.tips.4'),
+  ]
+
   return (
     <ToolCard
-      title="🔐 Password Generator"
-      description="안전한 비밀번호 생성기"
+      title={`🔐 ${t('password.title')}`}
+      description={t('password.description')}
     >
       <div className="space-y-6">
         {/* Length Control */}
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              길이: {length}자
+              {t('password.length.label', { length })}
             </label>
           </div>
           <input
@@ -97,7 +126,7 @@ export default function PasswordGeneratorTool() {
               className="w-5 h-5 text-blue-600 rounded"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              대문자 (A-Z)
+              {t('password.options.uppercase')}
             </span>
           </label>
 
@@ -109,7 +138,7 @@ export default function PasswordGeneratorTool() {
               className="w-5 h-5 text-blue-600 rounded"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              소문자 (a-z)
+              {t('password.options.lowercase')}
             </span>
           </label>
 
@@ -121,7 +150,7 @@ export default function PasswordGeneratorTool() {
               className="w-5 h-5 text-blue-600 rounded"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              숫자 (0-9)
+              {t('password.options.numbers')}
             </span>
           </label>
 
@@ -133,7 +162,7 @@ export default function PasswordGeneratorTool() {
               className="w-5 h-5 text-blue-600 rounded"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              특수문자 (!@#$...)
+              {t('password.options.symbols')}
             </span>
           </label>
         </div>
@@ -143,7 +172,7 @@ export default function PasswordGeneratorTool() {
           onClick={generatePassword}
           className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
         >
-          비밀번호 생성
+          {t('password.actions.generate')}
         </button>
 
         {/* Generated Password */}
@@ -152,7 +181,7 @@ export default function PasswordGeneratorTool() {
             <TextAreaWithCopy
               value={password}
               readOnly
-              label="생성된 비밀번호"
+              label={t('password.result.label')}
               rows={2}
             />
 
@@ -160,21 +189,15 @@ export default function PasswordGeneratorTool() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-gray-600 dark:text-gray-400">
-                  강도:
+                  {t('password.strength.title')}
                 </span>
-                <span className={`text-sm font-semibold ${strength.color}`}>
-                  {strength.label}
+                <span className={`text-sm font-semibold ${strengthLabelClasses[strength.level]}`}>
+                  {t(`password.strength.${strength.level}`)}
                 </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all ${
-                    strength.score <= 2
-                      ? 'bg-red-500'
-                      : strength.score <= 4
-                      ? 'bg-yellow-500'
-                      : 'bg-green-500'
-                  }`}
+                  className={`h-2 rounded-full transition-all ${strengthBarClasses[strength.level]}`}
                   style={{ width: `${(strength.score / 6) * 100}%` }}
                 />
               </div>
@@ -185,13 +208,12 @@ export default function PasswordGeneratorTool() {
         {/* Security Tips */}
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
           <h3 className="font-semibold text-gray-800 dark:text-white mb-2 text-sm">
-            🛡️ 안전한 비밀번호 팁
+            {t('password.tips.title')}
           </h3>
           <ul className="space-y-1 text-xs text-gray-700 dark:text-gray-300">
-            <li>• 최소 12자 이상 사용하세요</li>
-            <li>• 대소문자, 숫자, 특수문자를 모두 포함하세요</li>
-            <li>• 여러 사이트에서 같은 비밀번호를 사용하지 마세요</li>
-            <li>• 개인정보(생일, 이름 등)를 사용하지 마세요</li>
+            {tips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
           </ul>
         </div>
       </div>

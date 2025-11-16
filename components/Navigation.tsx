@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { FocusEvent, KeyboardEvent, useState } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+// The menu is data-driven so adding a tool is as simple as listing it here.
 const toolCategories = [
   {
     categoryKey: 'category.encoding',
@@ -20,6 +21,7 @@ const toolCategories = [
     icon: '🔐',
     tools: [
       { nameKey: 'tool.jasypt', path: '/jasypt', icon: '🔐' },
+      { nameKey: 'tool.jwtSigner', path: '/jwt-signer', icon: '🧾' },
       { nameKey: 'tool.hash', path: '/hash', icon: '🔒' },
       { nameKey: 'tool.password', path: '/password', icon: '🔑' },
     ]
@@ -80,6 +82,24 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
+  // Manual keyboard handling is required because the dropdown is built from divs, not <select>.
+  const handleCategoryKeyDown = (event: KeyboardEvent<HTMLButtonElement>, categoryKey: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      setOpenDropdown((prev) => (prev === categoryKey ? null : categoryKey))
+    } else if (event.key === 'Escape') {
+      setOpenDropdown(null)
+      event.currentTarget.blur()
+    }
+  }
+
+  const handleCategoryBlur = (event: FocusEvent<HTMLDivElement>) => {
+    const nextFocus = event.relatedTarget as Node | null
+    if (!nextFocus || !event.currentTarget.contains(nextFocus)) {
+      setOpenDropdown(null)
+    }
+  }
+
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -92,44 +112,58 @@ export default function Navigation() {
 
           {/* Desktop: Category Dropdowns + Language Switcher */}
           <div className="hidden md:flex md:items-center md:gap-2">
-            {toolCategories.map((category) => (
-              <div
-                key={category.categoryKey}
-                className="relative"
-                onMouseEnter={() => setOpenDropdown(category.categoryKey)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <button
-                  className="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-1"
+            {toolCategories.map((category) => {
+              const dropdownId = `dropdown-${category.categoryKey.replace(/\./g, '-')}`
+              return (
+                <div
+                  key={category.categoryKey}
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown(category.categoryKey)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                  onBlur={handleCategoryBlur}
                 >
-                  <span>{category.icon}</span>
-                  <span>{t(category.categoryKey)}</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                  <button
+                    className="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-1"
+                    aria-haspopup="true"
+                    aria-expanded={openDropdown === category.categoryKey}
+                    aria-controls={dropdownId}
+                    onFocus={() => setOpenDropdown(category.categoryKey)}
+                    onKeyDown={(event) => handleCategoryKeyDown(event, category.categoryKey)}
+                  >
+                    <span>{category.icon}</span>
+                    <span>{t(category.categoryKey)}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-                {/* Dropdown Menu */}
-                {openDropdown === category.categoryKey && (
-                  <div className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 min-w-[200px] z-50">
-                    {category.tools.map((tool) => (
-                      <Link
-                        key={tool.path}
-                        href={tool.path}
-                        className={`block px-4 py-2 text-sm transition-colors ${
-                          pathname === tool.path
-                            ? 'bg-blue-500 text-white'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                        }`}
-                      >
-                        <span className="mr-2">{tool.icon}</span>
-                        {t(tool.nameKey)}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                  {/* Dropdown Menu */}
+                  {openDropdown === category.categoryKey && (
+                    <div
+                      id={dropdownId}
+                      role="menu"
+                      className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 min-w-[200px] z-50"
+                    >
+                      {category.tools.map((tool) => (
+                        <Link
+                          key={tool.path}
+                          href={tool.path}
+                          className={`block px-4 py-2 text-sm transition-colors ${
+                            pathname === tool.path
+                              ? 'bg-blue-500 text-white'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
+                          role="menuitem"
+                        >
+                          <span className="mr-2">{tool.icon}</span>
+                          {t(tool.nameKey)}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
             <LanguageSwitcher />
           </div>
 
