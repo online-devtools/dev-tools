@@ -184,7 +184,7 @@ const translations: Record<Language, Record<string, string>> = {
     'jwtSigner.algorithm.label': '알고리즘',
     'jwtSigner.algorithm.hs256': 'HS256 (HMAC SHA-256)',
     'jwtSigner.algorithm.hs384': 'HS384 (HMAC SHA-384)',
-    'jwtSigner.algorithm.hs512': 'HS512 (HMAC SHA-512)',  <-- wait unintentional? need correct key name. whoops
+    'jwtSigner.algorithm.hs512': 'HS512 (HMAC SHA-512)',
 
     // Jasypt 페이지
     'jasypt.title': 'Jasypt 암호화/복호화',
