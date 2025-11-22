@@ -55,19 +55,19 @@ export default function RegexPage() {
             <div className="space-y-3">
               <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
                 <p className="text-sm font-semibold mb-1">이메일 주소</p>
-                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</code>
+                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`}</code>
               </div>
               <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
                 <p className="text-sm font-semibold mb-1">한국 전화번호</p>
-                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">^01[0-9]-\d{3,4}-\d{4}$</code>
+                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{`^01[0-9]-\\d{3,4}-\\d{4}$`}</code>
               </div>
               <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
                 <p className="text-sm font-semibold mb-1">URL</p>
-                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$</code>
+                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{`^(https?:\\/\\/)?([\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$`}</code>
               </div>
               <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
                 <p className="text-sm font-semibold mb-1">IPv4 주소</p>
-                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$</code>
+                <code className="text-xs bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">{`^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$`}</code>
               </div>
             </div>
           </section>
@@ -79,7 +79,7 @@ export default function RegexPage() {
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-4 rounded-lg">
               <ul className="list-disc list-inside space-y-2 text-sm">
                 <li><strong>ReDoS 공격:</strong> 복잡한 정규식은 특정 입력에서 극도로 느려질 수 있습니다. 입력 길이 제한을 두세요.</li>
-                <li><strong>이스케이프:</strong> 특수문자(., *, +, ?, [, ], {, }, (, ), ^, $, |, \)는 \ 로 이스케이프해야 합니다.</li>
+                <li><strong>이스케이프:</strong> 특수문자(., *, +, ?, [, ], {'{'}, {'}'}, (, ), ^, $, |, \)는 \ 로 이스케이프해야 합니다.</li>
                 <li><strong>그리디 vs 비그리디:</strong> .*는 최대한 많이 매칭하고, .*?는 최소한만 매칭합니다.</li>
                 <li><strong>언어별 차이:</strong> JavaScript, Python, Java 등 언어마다 정규식 문법이 약간씩 다를 수 있습니다.</li>
                 <li><strong>HTML 파싱:</strong> 복잡한 HTML은 정규식보다 DOM 파서를 사용하는 것이 좋습니다.</li>

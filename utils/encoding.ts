@@ -26,7 +26,7 @@ function encodeBytesToBase64(bytes: Uint8Array): string {
 function decodeBase64ToBytes(value: string): Uint8Array {
   if (hasBrowserAtob) {
     const binary = (globalThis as any).atob(value)
-    return Uint8Array.from(binary, (char) => char.charCodeAt(0))
+    return Uint8Array.from(binary, (char: string) => char.charCodeAt(0))
   }
 
   if (hasNodeBuffer) {
