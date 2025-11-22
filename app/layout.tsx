@@ -157,6 +157,9 @@ export default function RootLayout({
                       <a href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">소개</a>
                     </li>
                     <li>
+                      <a href="/faq" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">자주 묻는 질문</a>
+                    </li>
+                    <li>
                       <a href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">문의하기</a>
                     </li>
                   </ul>

@@ -145,15 +145,64 @@ export default function AboutPage() {
 
           <section className="border-t border-gray-200 dark:border-gray-700 pt-6">
             <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
-              문의하기
+              운영 정보
             </h2>
-            <p className="leading-relaxed">
+            <div className="space-y-4">
+              <div className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg">
+                <h3 className="font-semibold text-gray-800 dark:text-white mb-2">운영 주체</h3>
+                <p className="leading-relaxed">
+                  Developer Tools는 개인 개발자가 운영하는 비영리 오픈 서비스입니다.
+                  개발자 커뮤니티에 유용한 도구를 제공하기 위해 2025년 1월에 시작되었으며,
+                  지속적으로 새로운 기능을 추가하고 개선하고 있습니다.
+                </p>
+              </div>
+
+              <div className="bg-green-50 dark:bg-gray-700 p-4 rounded-lg">
+                <h3 className="font-semibold text-gray-800 dark:text-white mb-2">운영 원칙</h3>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>완전 무료: 모든 기능은 영구적으로 무료로 제공됩니다</li>
+                  <li>프라이버시 우선: 사용자 데이터는 절대 수집하거나 저장하지 않습니다</li>
+                  <li>오픈 소스 지향: 커뮤니티 피드백을 적극 반영합니다</li>
+                  <li>지속적 개선: 정기적으로 새로운 도구를 추가하고 기존 도구를 개선합니다</li>
+                </ul>
+              </div>
+
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <h3 className="font-semibold text-gray-800 dark:text-white mb-2">업데이트 이력</h3>
+                <p className="leading-relaxed mb-2">
+                  최근 업데이트 내역은
+                  <a href="/changelog" className="text-blue-500 hover:text-blue-600 ml-1">
+                    변경 로그
+                  </a>
+                  에서 확인하실 수 있습니다.
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  2025년 1월 기준 12개 이상의 주요 업데이트가 진행되었습니다.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
+              문의 및 제안
+            </h2>
+            <p className="leading-relaxed mb-4">
               Developer Tools에 대한 제안이나 문의사항이 있으시면
               <a href="/contact" className="text-blue-500 hover:text-blue-600 ml-1">
                 문의 페이지
               </a>
               를 통해 연락해 주세요.
             </p>
+            <div className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg">
+              <p className="font-semibold text-gray-800 dark:text-white mb-2">이메일 문의</p>
+              <p className="text-gray-700 dark:text-gray-300">
+                wxyz0904@naver.com
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                * 영업일 기준 1-2일 내에 답변드립니다
+              </p>
+            </div>
           </section>
         </div>
       </div>

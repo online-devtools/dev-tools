@@ -164,6 +164,36 @@ export default function Navigation() {
                 </div>
               )
             })}
+            <Link
+              href="/snippets"
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === '/snippets'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              {t('nav.snippets')}
+            </Link>
+            <Link
+              href="/faq"
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === '/faq'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              {t('nav.faq')}
+            </Link>
+            <Link
+              href="/changelog"
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === '/changelog'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              {t('nav.changelog')}
+            </Link>
             <LanguageSwitcher />
           </div>
 
@@ -203,6 +233,41 @@ export default function Navigation() {
         {/* Mobile menu - Accordion style */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2">
+            <div className="px-2">
+              <Link
+                href="/snippets"
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  pathname === '/snippets'
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('nav.snippets')}
+              </Link>
+              <Link
+                href="/faq"
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  pathname === '/faq'
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('nav.faq')}
+              </Link>
+              <Link
+                href="/changelog"
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  pathname === '/changelog'
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {t('nav.changelog')}
+              </Link>
+            </div>
             {toolCategories.map((category) => (
               <div key={category.categoryKey} className="border-b border-gray-200 dark:border-gray-700 last:border-0">
                 <button

@@ -77,16 +77,47 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-          {t('home.title')}
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">
-          {t('home.subtitle')}
-        </p>
-        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-          {t('home.toolCount')}
-        </p>
+      {/* Hero Section - 핵심 가치 제안 */}
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-8 md:p-12 mb-12 border border-blue-100 dark:border-gray-700">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+            개발자 필수 도구
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            개발 작업을 더 빠르고 쉽게
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+            Base64 인코딩부터 JWT 디버깅까지, 개발자가 자주 사용하는 23개의 온라인 도구를
+            <span className="font-bold text-blue-600 dark:text-blue-400"> 무료로, 설치 없이, 안전하게</span> 사용하세요
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
+            ✨ 모든 데이터는 브라우저에서만 처리되어 서버로 전송되지 않습니다
+          </p>
+
+          {/* Key Features - 핵심 특징 */}
+          <div className="grid md:grid-cols-4 gap-4 mt-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-2xl mb-2">🔒</div>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">완벽한 프라이버시</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">클라이언트 사이드 처리</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-2xl mb-2">⚡</div>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">즉시 사용</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">회원가입 불필요</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-2xl mb-2">💯</div>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">완전 무료</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">모든 기능 제한 없음</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-2xl mb-2">📱</div>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">모든 기기 지원</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">반응형 디자인</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-8">
@@ -118,6 +149,47 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10 space-y-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+              {t('nav.snippets')}
+            </p>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
+              {t('home.snippets.title')}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              {t('home.snippets.desc')}
+            </p>
+          </div>
+          <Link
+            href="/snippets"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+          >
+            {t('home.snippets.cta')}
+          </Link>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+              {t('nav.changelog')}
+            </p>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
+              {t('home.changelog.title')}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+              {t('home.changelog.desc')}
+            </p>
+          </div>
+          <Link
+            href="/changelog"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+          >
+            {t('home.changelog.cta')}
+          </Link>
+        </div>
       </div>
 
       {/* 접을 수 있는 소개 섹션 - 맨 아래 */}
