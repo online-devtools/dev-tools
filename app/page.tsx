@@ -11,6 +11,8 @@ const toolsConfig = [
     items: [
       { nameKey: 'tool.base64', path: '/base64', icon: '🔤', descKey: 'tool.base64.desc' },
       { nameKey: 'tool.url', path: '/url', icon: '🔗', descKey: 'tool.url.desc' },
+      { nameKey: 'tool.htmlEntities', path: '/html-entities', icon: '&', descKey: 'HTML 엔티티 인코딩/디코딩' },
+      { nameKey: 'tool.base64File', path: '/base64-file', icon: '📁', descKey: '파일 ↔ Base64 변환' },
     ]
   },
   {
@@ -18,6 +20,14 @@ const toolsConfig = [
     items: [
       { nameKey: 'tool.jasypt', path: '/jasypt', icon: '🔐', descKey: 'tool.jasypt.desc' },
       { nameKey: 'tool.hash', path: '/hash', icon: '🔒', descKey: 'tool.hash.desc' },
+      { nameKey: 'tool.password', path: '/password', icon: '🔑', descKey: 'tool.password.desc' },
+      { nameKey: 'tool.bcrypt', path: '/bcrypt', icon: '🔐', descKey: 'Bcrypt 비밀번호 해싱' },
+      { nameKey: 'tool.hmac', path: '/hmac', icon: '🔒', descKey: 'HMAC 메시지 인증 코드' },
+      { nameKey: 'tool.otp', path: '/otp', icon: '🔢', descKey: 'OTP 일회용 비밀번호 생성' },
+      { nameKey: 'tool.basicAuth', path: '/basic-auth', icon: '🔑', descKey: 'HTTP 기본 인증 생성' },
+      { nameKey: 'tool.stringObfuscator', path: '/string-obfuscator', icon: '🎭', descKey: '문자열 마스킹/난독화' },
+      { nameKey: 'tool.passwordStrength', path: '/password-strength', icon: '💪', descKey: '비밀번호 강도 분석' },
+      { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐', descKey: 'BIP39 니모닉 생성' },
     ]
   },
   {
@@ -29,6 +39,14 @@ const toolsConfig = [
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦', descKey: 'tool.mybatis.desc' },
       { nameKey: 'tool.csv', path: '/csv', icon: '📊', descKey: 'tool.csv.desc' },
       { nameKey: 'tool.html', path: '/html', icon: '🏷️', descKey: 'tool.html.desc' },
+      { nameKey: 'tool.yamlJson', path: '/yaml-json', icon: '🔄', descKey: 'YAML ↔ JSON 변환' },
+      { nameKey: 'tool.yamlToml', path: '/yaml-toml', icon: '🔄', descKey: 'YAML ↔ TOML 변환' },
+      { nameKey: 'tool.jsonToml', path: '/json-toml', icon: '🔄', descKey: 'JSON ↔ TOML 변환' },
+      { nameKey: 'tool.xmlJson', path: '/xml-json', icon: '🔄', descKey: 'XML ↔ JSON 변환' },
+      { nameKey: 'tool.markdownHtml', path: '/markdown-html', icon: '📝', descKey: 'Markdown → HTML 변환' },
+      { nameKey: 'tool.jsonMinify', path: '/json-minify', icon: '📦', descKey: 'JSON 압축/포맷' },
+      { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊', descKey: 'JSON → CSV 변환' },
+      { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍', descKey: 'JSON 비교' },
     ]
   },
   {
@@ -37,6 +55,12 @@ const toolsConfig = [
       { nameKey: 'tool.uuid', path: '/uuid', icon: '🆔', descKey: 'tool.uuid.desc' },
       { nameKey: 'tool.qrcode', path: '/qrcode', icon: '📱', descKey: 'tool.qrcode.desc' },
       { nameKey: 'tool.lorem', path: '/lorem', icon: '📄', descKey: 'tool.lorem.desc' },
+      { nameKey: 'tool.tokenGenerator', path: '/token-generator', icon: '🎲', descKey: '랜덤 토큰/문자열 생성' },
+      { nameKey: 'tool.ulid', path: '/ulid', icon: '🆔', descKey: 'ULID 생성기' },
+      { nameKey: 'tool.portGenerator', path: '/port-generator', icon: '🔌', descKey: '랜덤 포트 생성기' },
+      { nameKey: 'tool.emojiPicker', path: '/emoji-picker', icon: '😀', descKey: '이모지 선택 및 복사' },
+      { nameKey: 'tool.asciiArt', path: '/ascii-art', icon: '🎨', descKey: 'ASCII 아트 생성' },
+      { nameKey: 'tool.macAddress', path: '/mac-address', icon: '🖧', descKey: 'MAC 주소 생성/검증' },
     ]
   },
   {
@@ -45,28 +69,58 @@ const toolsConfig = [
       { nameKey: 'tool.timestamp', path: '/timestamp', icon: '⏰', descKey: 'tool.timestamp.desc' },
       { nameKey: 'tool.color', path: '/color', icon: '🎨', descKey: 'tool.color.desc' },
       { nameKey: 'tool.case', path: '/case', icon: '📝', descKey: 'tool.case.desc' },
+      { nameKey: 'tool.baseconv', path: '/baseconv', icon: '🔢', descKey: 'tool.baseconv.desc' },
+      { nameKey: 'tool.romanNumeral', path: '/roman-numeral', icon: 'Ⅰ', descKey: '로마 숫자 변환' },
+      { nameKey: 'tool.tempConverter', path: '/temp-converter', icon: '🌡️', descKey: '온도 변환기' },
     ]
   },
   {
-    categoryKey: 'category.tools',
+    categoryKey: 'category.text',
     items: [
-      { nameKey: 'tool.regex', path: '/regex', icon: '🔍', descKey: 'tool.regex.desc' },
-      { nameKey: 'tool.cron', path: '/cron', icon: '⏰', descKey: 'tool.cron.desc' },
-      { nameKey: 'tool.diff', path: '/diff', icon: '📄', descKey: 'tool.diff.desc' },
+      { nameKey: 'tool.slugify', path: '/slugify', icon: '🔗', descKey: 'URL/파일명 안전 문자열 변환' },
+      { nameKey: 'tool.natoAlphabet', path: '/nato-alphabet', icon: '📻', descKey: 'NATO 음성 문자 변환' },
+      { nameKey: 'tool.textBinary', path: '/text-binary', icon: '0', descKey: '텍스트 ↔ 이진수 변환' },
+      { nameKey: 'tool.textUnicode', path: '/text-unicode', icon: 'U', descKey: '텍스트 ↔ 유니코드 변환' },
+      { nameKey: 'tool.textStats', path: '/text-stats', icon: '📊', descKey: '텍스트 통계 분석' },
+      { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n', descKey: 'Numeronym 생성기' },
+      { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃', descKey: '리스트 정렬/변환' },
+      { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧', descKey: '이메일 정규화' },
+    ]
+  },
+  {
+    categoryKey: 'category.calculators',
+    items: [
+      { nameKey: 'tool.mathEval', path: '/math-eval', icon: '🧮', descKey: '수식 계산기' },
+      { nameKey: 'tool.percentageCalc', path: '/percentage-calc', icon: '%', descKey: '퍼센트 계산기' },
+    ]
+  },
+  {
+    categoryKey: 'category.info',
+    items: [
+      { nameKey: 'tool.httpStatus', path: '/http-status', icon: '🌐', descKey: 'HTTP 상태 코드 목록' },
+      { nameKey: 'tool.mimeTypes', path: '/mime-types', icon: '📄', descKey: 'MIME 타입 변환' },
+      { nameKey: 'tool.keycode', path: '/keycode', icon: '⌨️', descKey: '키보드 이벤트 정보' },
+      { nameKey: 'tool.deviceInfo', path: '/device-info', icon: '📱', descKey: '기기 정보' },
+      { nameKey: 'tool.userAgent', path: '/user-agent', icon: '🖥️', descKey: 'User Agent 파서' },
+      { nameKey: 'tool.phoneParser', path: '/phone-parser', icon: '📞', descKey: '전화번호 파싱/검증' },
+      { nameKey: 'tool.ibanValidator', path: '/iban-validator', icon: '🏦', descKey: 'IBAN 검증/파싱' },
     ]
   },
   {
     categoryKey: 'category.linux',
     items: [
       { nameKey: 'tool.chmod', path: '/chmod', icon: '🔐', descKey: 'tool.chmod.desc' },
-      { nameKey: 'tool.baseconv', path: '/baseconv', icon: '🔢', descKey: 'tool.baseconv.desc' },
+      { nameKey: 'tool.regex', path: '/regex', icon: '🔍', descKey: 'tool.regex.desc' },
+      { nameKey: 'tool.cron', path: '/cron', icon: '⏰', descKey: 'tool.cron.desc' },
     ]
   },
   {
     categoryKey: 'category.network',
     items: [
       { nameKey: 'tool.ipcalc', path: '/ipcalc', icon: '🌐', descKey: 'tool.ipcalc.desc' },
-      { nameKey: 'tool.password', path: '/password', icon: '🔑', descKey: 'tool.password.desc' },
+      { nameKey: 'tool.diff', path: '/diff', icon: '📄', descKey: 'tool.diff.desc' },
+      { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍', descKey: 'URL 분석 및 파싱' },
+      { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢', descKey: 'IPv4 주소 변환' },
     ]
   }
 ]
@@ -87,7 +141,7 @@ export default function Home() {
             개발 작업을 더 빠르고 쉽게
           </h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-            Base64 인코딩부터 JWT 디버깅까지, 개발자가 자주 사용하는 23개의 온라인 도구를
+            Base64 인코딩부터 JWT 디버깅까지, 개발자가 자주 사용하는 70개 이상의 온라인 도구를
             <span className="font-bold text-blue-600 dark:text-blue-400"> 무료로, 설치 없이, 안전하게</span> 사용하세요
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">

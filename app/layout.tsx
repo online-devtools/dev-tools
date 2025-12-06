@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Navigation from '@/components/Navigation'
+import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
@@ -135,56 +135,55 @@ export default function RootLayout({
       </head>
       <body>
         <LanguageProvider>
-          <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-            <Navigation />
-            <main className="container mx-auto px-4 py-8">
+          <LayoutWrapper>
+            <div className="container mx-auto px-4 py-8">
               {children}
-            </main>
-          <footer className="mt-auto py-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <div className="container mx-auto px-4">
-              <div className="grid md:grid-cols-3 gap-8 mb-6">
-                <div>
-                  <h3 className="font-semibold text-gray-800 dark:text-white mb-3">Developer Tools</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    개발자를 위한 18가지 이상의 무료 온라인 도구를 제공합니다.
-                    Base64, JSON, JWT, 정규식 등 필수 개발 도구를 한 곳에서.
+            </div>
+            <footer className="mt-auto py-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <div className="container mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-8 mb-6">
+                  <div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">Developer Tools</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      개발자를 위한 18가지 이상의 무료 온라인 도구를 제공합니다.
+                      Base64, JSON, JWT, 정규식 등 필수 개발 도구를 한 곳에서.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">바로가기</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li>
+                        <a href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">소개</a>
+                      </li>
+                      <li>
+                        <a href="/faq" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">자주 묻는 질문</a>
+                      </li>
+                      <li>
+                        <a href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">문의하기</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">법적 고지</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li>
+                        <a href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">이용약관</a>
+                      </li>
+                      <li>
+                        <a href="/privacy" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">개인정보 처리방침</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
+                  <p>Developer Tools © 2025. All rights reserved.</p>
+                  <p className="mt-2 text-xs">
+                    모든 도구는 클라이언트 사이드에서만 작동하며, 입력 데이터는 서버로 전송되지 않습니다.
                   </p>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 dark:text-white mb-3">바로가기</h3>
-                  <ul className="space-y-2 text-sm">
-                    <li>
-                      <a href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">소개</a>
-                    </li>
-                    <li>
-                      <a href="/faq" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">자주 묻는 질문</a>
-                    </li>
-                    <li>
-                      <a href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">문의하기</a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 dark:text-white mb-3">법적 고지</h3>
-                  <ul className="space-y-2 text-sm">
-                    <li>
-                      <a href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">이용약관</a>
-                    </li>
-                    <li>
-                      <a href="/privacy" className="text-gray-600 dark:text-gray-400 hover:text-blue-500">개인정보 처리방침</a>
-                    </li>
-                  </ul>
-                </div>
               </div>
-              <div className="pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
-                <p>Developer Tools © 2025. All rights reserved.</p>
-                <p className="mt-2 text-xs">
-                  모든 도구는 클라이언트 사이드에서만 작동하며, 입력 데이터는 서버로 전송되지 않습니다.
-                </p>
-              </div>
-            </div>
-          </footer>
-          </div>
+            </footer>
+          </LayoutWrapper>
         </LanguageProvider>
       </body>
     </html>
