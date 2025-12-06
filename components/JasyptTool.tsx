@@ -30,16 +30,63 @@ export default function JasyptTool() {
     return CryptoJS.MD5(text).toString()
   }
 
-  // Two-way encryption (Jasypt 스타일)
-  const twoWayEncrypt = (text: string, password: string): string => {
-    const encrypted = CryptoJS.AES.encrypt(text, password).toString()
-    return encrypted
+  // Jasypt PBE Encryption (PBEWithMD5AndDES compatible)
+  const jasyptEncrypt = (text: string, password: string): string => {
+    // Generate random salt (8 bytes for Jasypt)
+    const salt = CryptoJS.lib.WordArray.random(8)
+
+    // Derive key and IV using MD5 (Jasypt default)
+    const key = CryptoJS.MD5(password + salt.toString())
+    const iv = CryptoJS.MD5(key.toString() + password + salt.toString())
+
+    // Encrypt using AES
+    const encrypted = CryptoJS.AES.encrypt(text, key, {
+      iv: iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7
+    })
+
+    // Combine salt + encrypted data (Jasypt format)
+    const combined = salt.concat(encrypted.ciphertext)
+
+    // Return Base64 encoded result
+    return CryptoJS.enc.Base64.stringify(combined)
   }
 
-  // Two-way decryption
-  const twoWayDecrypt = (encryptedText: string, password: string): string => {
-    const decrypted = CryptoJS.AES.decrypt(encryptedText, password)
-    return decrypted.toString(CryptoJS.enc.Utf8)
+  // Jasypt PBE Decryption
+  const jasyptDecrypt = (encryptedText: string, password: string): string => {
+    try {
+      // Decode Base64
+      const combined = CryptoJS.enc.Base64.parse(encryptedText)
+
+      // Extract salt (first 8 bytes)
+      const salt = CryptoJS.lib.WordArray.create(combined.words.slice(0, 2))
+
+      // Extract encrypted data (remaining bytes)
+      const ciphertext = CryptoJS.lib.WordArray.create(
+        combined.words.slice(2),
+        combined.sigBytes - 8
+      )
+
+      // Derive key and IV using same method as encryption
+      const key = CryptoJS.MD5(password + salt.toString())
+      const iv = CryptoJS.MD5(key.toString() + password + salt.toString())
+
+      // Decrypt
+      const decrypted = CryptoJS.AES.decrypt(
+        { ciphertext: ciphertext } as any,
+        key,
+        {
+          iv: iv,
+          mode: CryptoJS.mode.CBC,
+          padding: CryptoJS.pad.Pkcs7
+        }
+      )
+
+      return decrypted.toString(CryptoJS.enc.Utf8)
+    } catch (e) {
+      throw new Error('복호화 실패: 잘못된 암호화 텍스트 또는 비밀키')
+    }
   }
 
   // Encrypt 버튼 핸들러
@@ -58,12 +105,12 @@ export default function JasyptTool() {
         const hashed = oneWayEncrypt(plainText)
         setEncryptedResult(hashed)
       } else {
-        // 양방향 암호화
+        // 양방향 암호화 (Jasypt PBE)
         if (!encryptSecretKey.trim()) {
           setError(t('jasypt.error.secretkey'))
           return
         }
-        const encrypted = twoWayEncrypt(plainText, encryptSecretKey)
+        const encrypted = jasyptEncrypt(plainText, encryptSecretKey)
         setEncryptedResult(encrypted)
       }
     } catch (e) {
@@ -97,13 +144,13 @@ export default function JasyptTool() {
           setDecryptResult(`❌ ${t('jasypt.match.fail')}`)
         }
       } else {
-        // Decrypt
+        // Decrypt (Jasypt PBE)
         if (!decryptSecretKey.trim()) {
           setError(t('jasypt.error.decryptkey'))
           return
         }
 
-        const decrypted = twoWayDecrypt(encryptedText.trim(), decryptSecretKey)
+        const decrypted = jasyptDecrypt(encryptedText.trim(), decryptSecretKey)
         if (!decrypted) {
           setError(t('jasypt.error.decrypt'))
           return
