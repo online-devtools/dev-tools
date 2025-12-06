@@ -30,24 +30,46 @@ export default function JasyptTool() {
     return CryptoJS.MD5(text).toString()
   }
 
-  // Jasypt PBE Encryption (PBEWithMD5AndDES compatible)
+  // OpenSSL EVP_BytesToKey algorithm for key derivation
+  const evpBytesToKey = (password: string, salt: CryptoJS.lib.WordArray, keySize: number, ivSize: number) => {
+    const passwordWordArray = CryptoJS.enc.Utf8.parse(password)
+    let derivedKey = CryptoJS.lib.WordArray.create()
+    let block = CryptoJS.lib.WordArray.create()
+
+    while (derivedKey.sigBytes < (keySize + ivSize) * 4) {
+      if (block.sigBytes > 0) {
+        block = CryptoJS.MD5(block.concat(passwordWordArray).concat(salt))
+      } else {
+        block = CryptoJS.MD5(passwordWordArray.concat(salt))
+      }
+      derivedKey = derivedKey.concat(block)
+    }
+
+    return {
+      key: CryptoJS.lib.WordArray.create(derivedKey.words.slice(0, keySize)),
+      iv: CryptoJS.lib.WordArray.create(derivedKey.words.slice(keySize, keySize + ivSize))
+    }
+  }
+
+  // Jasypt PBE Encryption (OpenSSL compatible)
   const jasyptEncrypt = (text: string, password: string): string => {
-    // Generate random salt (8 bytes for Jasypt)
+    // Generate random salt (8 bytes)
     const salt = CryptoJS.lib.WordArray.random(8)
 
-    // Derive key and IV using MD5 (Jasypt default)
-    const key = CryptoJS.MD5(password + salt.toString())
-    const iv = CryptoJS.MD5(key.toString() + password + salt.toString())
+    // Derive key and IV using OpenSSL EVP_BytesToKey (MD5)
+    // AES-256 requires 32 bytes (8 words) for key, 16 bytes (4 words) for IV
+    const derived = evpBytesToKey(password, salt, 8, 4)
 
     // Encrypt using AES
-    const encrypted = CryptoJS.AES.encrypt(text, key, {
-      iv: iv,
+    const encrypted = CryptoJS.AES.encrypt(text, derived.key, {
+      iv: derived.iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7
     })
 
-    // Combine salt + encrypted data (Jasypt format)
-    const combined = salt.concat(encrypted.ciphertext)
+    // OpenSSL format: "Salted__" + salt + ciphertext
+    const saltedPrefix = CryptoJS.enc.Utf8.parse('Salted__')
+    const combined = saltedPrefix.concat(salt).concat(encrypted.ciphertext)
 
     // Return Base64 encoded result
     return CryptoJS.enc.Base64.stringify(combined)
@@ -59,32 +81,49 @@ export default function JasyptTool() {
       // Decode Base64
       const combined = CryptoJS.enc.Base64.parse(encryptedText)
 
-      // Extract salt (first 8 bytes)
-      const salt = CryptoJS.lib.WordArray.create(combined.words.slice(0, 2))
+      // Check for "Salted__" prefix (OpenSSL format)
+      const saltedPrefix = CryptoJS.lib.WordArray.create(combined.words.slice(0, 2))
+      const saltedPrefixStr = CryptoJS.enc.Utf8.stringify(saltedPrefix)
+
+      if (saltedPrefixStr !== 'Salted__') {
+        throw new Error('잘못된 암호화 형식입니다')
+      }
+
+      // Extract salt (8 bytes after "Salted__")
+      const salt = CryptoJS.lib.WordArray.create(combined.words.slice(2, 4))
 
       // Extract encrypted data (remaining bytes)
       const ciphertext = CryptoJS.lib.WordArray.create(
-        combined.words.slice(2),
-        combined.sigBytes - 8
+        combined.words.slice(4),
+        combined.sigBytes - 16 // 8 bytes prefix + 8 bytes salt
       )
 
       // Derive key and IV using same method as encryption
-      const key = CryptoJS.MD5(password + salt.toString())
-      const iv = CryptoJS.MD5(key.toString() + password + salt.toString())
+      const derived = evpBytesToKey(password, salt, 8, 4)
 
       // Decrypt
       const decrypted = CryptoJS.AES.decrypt(
         { ciphertext: ciphertext } as any,
-        key,
+        derived.key,
         {
-          iv: iv,
+          iv: derived.iv,
           mode: CryptoJS.mode.CBC,
           padding: CryptoJS.pad.Pkcs7
         }
       )
 
-      return decrypted.toString(CryptoJS.enc.Utf8)
+      const result = decrypted.toString(CryptoJS.enc.Utf8)
+
+      // Validate decryption result
+      if (!result || result.length === 0) {
+        throw new Error('잘못된 비밀키이거나 암호화 텍스트가 손상되었습니다')
+      }
+
+      return result
     } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(`복호화 실패: ${e.message}`)
+      }
       throw new Error('복호화 실패: 잘못된 암호화 텍스트 또는 비밀키')
     }
   }
