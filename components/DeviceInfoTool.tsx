@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function DeviceInfoTool() {
   const { t } = useLanguage()
-  // 브라우저와 화면 정보를 수집해 표시합니다.
+  // 브라우저/시스템/스크린 정보를 수집해 상태로 보관합니다.
   const [info, setInfo] = useState<any>(null)
 
   useEffect(() => {

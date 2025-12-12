@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function EmailNormalizerTool() {
+  const { t } = useLanguage()
+  // 입력 이메일 목록과 정규화 결과를 상태로 관리해 중복 제거 후 번역된 결과를 보여줍니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
 
@@ -51,37 +54,37 @@ export default function EmailNormalizerTool() {
 
   return (
     <ToolCard
-      title="Email Normalizer"
-      description="이메일 주소를 정규화하고 중복을 제거합니다"
+      title={`📧 ${t('emailNormalizer.title')}`}
+      description={t('emailNormalizer.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="이메일 입력 (한 줄에 하나씩)"
-          placeholder="user.name+tag@gmail.com&#10;another.user@example.com"
+          label={t('emailNormalizer.input.label')}
+          placeholder={t('emailNormalizer.input.placeholder')}
         />
 
         <button
           onClick={normalize}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          정규화
+          {t('emailNormalizer.actions.normalize')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="정규화된 이메일"
+          label={t('emailNormalizer.output.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">정규화 규칙</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('emailNormalizer.rules.title')}</h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• Gmail: 점(.) 제거, +태그 제거</li>
-            <li>• Outlook/Hotmail: +태그 제거</li>
-            <li>• Yahoo: 하이픈(-) 제거, +태그 제거</li>
-            <li>• 모든 이메일: 소문자 변환, 중복 제거</li>
+            <li>• {t('emailNormalizer.rules.gmail')}</li>
+            <li>• {t('emailNormalizer.rules.outlook')}</li>
+            <li>• {t('emailNormalizer.rules.yahoo')}</li>
+            <li>• {t('emailNormalizer.rules.common')}</li>
           </ul>
         </div>
       </div>

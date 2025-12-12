@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function IPv4ConverterTool() {
+  const { t } = useLanguage()
+  // 입력 IP/숫자와 변환 결과, 에러 상태를 관리해 IPv4 포맷 변환 및 클래스 조회를 수행합니다.
   const [input, setInput] = useState('')
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
@@ -59,7 +62,7 @@ export default function IPv4ConverterTool() {
       const trimmed = input.trim()
 
       if (!trimmed) {
-        setError('IPv4 주소를 입력해주세요')
+        setError(t('ipv4.error.required'))
         return
       }
 
@@ -71,13 +74,13 @@ export default function IPv4ConverterTool() {
         const octal = ipToOctal(trimmed)
 
         const info = {
-          '원본 (점-십진 표기)': trimmed,
-          '십진수': decimal.toString(),
-          '이진수': binary,
-          '16진수': hex,
-          '8진수': octal,
-          '16진수 (0x 접두사)': '0x' + trimmed.split('.').map(p => parseInt(p).toString(16).padStart(2, '0').toUpperCase()).join(''),
-          '정수형': decimal.toString(),
+          [t('ipv4.result.original')]: trimmed,
+          [t('ipv4.result.decimal')]: decimal.toString(),
+          [t('ipv4.result.binary')]: binary,
+          [t('ipv4.result.hex')]: hex,
+          [t('ipv4.result.octal')]: octal,
+          [t('ipv4.result.hexPrefixed')]: '0x' + trimmed.split('.').map(p => parseInt(p).toString(16).padStart(2, '0').toUpperCase()).join(''),
+          [t('ipv4.result.integer')]: decimal.toString(),
         }
 
         setResult(Object.entries(info).map(([key, value]) => `${key}: ${value}`).join('\n'))
@@ -86,7 +89,7 @@ export default function IPv4ConverterTool() {
       else if (/^\d+$/.test(trimmed)) {
         const decimal = parseInt(trimmed, 10)
         if (decimal < 0 || decimal > 4294967295) {
-          setError('십진수 값은 0에서 4294967295 사이여야 합니다')
+          setError(t('ipv4.error.decRange'))
           return
         }
 
@@ -96,20 +99,20 @@ export default function IPv4ConverterTool() {
         const octal = ipToOctal(ip)
 
         const info = {
-          '십진수': trimmed,
-          'IPv4 주소': ip,
-          '이진수': binary,
-          '16진수': hex,
-          '8진수': octal,
+          [t('ipv4.result.decimal')]: trimmed,
+          [t('ipv4.result.ip')]: ip,
+          [t('ipv4.result.binary')]: binary,
+          [t('ipv4.result.hex')]: hex,
+          [t('ipv4.result.octal')]: octal,
         }
 
         setResult(Object.entries(info).map(([key, value]) => `${key}: ${value}`).join('\n'))
       }
       else {
-        setError('유효한 IPv4 주소 또는 십진수를 입력해주세요')
+        setError(t('ipv4.error.invalid'))
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : '변환 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('ipv4.error.convert'))
     }
   }
 
@@ -121,7 +124,7 @@ export default function IPv4ConverterTool() {
       const trimmed = input.trim()
 
       if (!isValidIPv4(trimmed)) {
-        setError('유효한 IPv4 주소를 입력해주세요')
+        setError(t('ipv4.error.invalidIp'))
         return
       }
 
@@ -135,27 +138,27 @@ export default function IPv4ConverterTool() {
         ipClass = 'A'
         range = '1.0.0.0 - 126.255.255.255'
         defaultMask = '255.0.0.0 (/8)'
-        type = '대규모 네트워크용'
+        type = t('ipv4.class.typeA')
       } else if (firstOctet >= 128 && firstOctet <= 191) {
         ipClass = 'B'
         range = '128.0.0.0 - 191.255.255.255'
         defaultMask = '255.255.0.0 (/16)'
-        type = '중규모 네트워크용'
+        type = t('ipv4.class.typeB')
       } else if (firstOctet >= 192 && firstOctet <= 223) {
         ipClass = 'C'
         range = '192.0.0.0 - 223.255.255.255'
         defaultMask = '255.255.255.0 (/24)'
-        type = '소규모 네트워크용'
+        type = t('ipv4.class.typeC')
       } else if (firstOctet >= 224 && firstOctet <= 239) {
         ipClass = 'D'
         range = '224.0.0.0 - 239.255.255.255'
         defaultMask = '해당 없음'
-        type = '멀티캐스트용'
+        type = t('ipv4.class.typeD')
       } else if (firstOctet >= 240 && firstOctet <= 255) {
         ipClass = 'E'
         range = '240.0.0.0 - 255.255.255.255'
         defaultMask = '해당 없음'
-        type = '실험적 용도'
+        type = t('ipv4.class.typeE')
       }
 
       // Check for private IP
@@ -168,36 +171,36 @@ export default function IPv4ConverterTool() {
       const isLoopback = trimmed.startsWith('127.')
 
       const info = {
-        'IP 주소': trimmed,
-        'IP 클래스': ipClass,
-        '범위': range,
-        '기본 서브넷 마스크': defaultMask,
-        '용도': type,
-        '사설 IP': isPrivate ? '✅ 예' : '❌ 아니오',
-        '루프백': isLoopback ? '✅ 예' : '❌ 아니오',
+        [t('ipv4.result.ip')]: trimmed,
+        [t('ipv4.result.class')]: ipClass,
+        [t('ipv4.result.range')]: range,
+        [t('ipv4.result.defaultMask')]: defaultMask,
+        [t('ipv4.result.usage')]: type,
+        [t('ipv4.result.private')]: isPrivate ? t('ipv4.result.boolean.yes') : t('ipv4.result.boolean.no'),
+        [t('ipv4.result.loopback')]: isLoopback ? t('ipv4.result.boolean.yes') : t('ipv4.result.boolean.no'),
       }
 
       setResult(Object.entries(info).map(([key, value]) => `${key}: ${value}`).join('\n'))
     } catch (err) {
-      setError(err instanceof Error ? err.message : '클래스 확인 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('ipv4.error.class'))
     }
   }
 
   return (
     <ToolCard
-      title="IPv4 Address Converter"
-      description="IPv4 주소를 다양한 형식으로 변환하고 정보를 확인합니다"
+      title={`🌐 ${t('ipv4.title')}`}
+      description={t('ipv4.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            IPv4 주소 또는 십진수 입력
+            {t('ipv4.input.label')}
           </label>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="192.168.1.1 또는 3232235777"
+            placeholder={t('ipv4.input.placeholder')}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
           />
         </div>
@@ -207,13 +210,13 @@ export default function IPv4ConverterTool() {
             onClick={convertIP}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            🔄 형식 변환
+            🔄 {t('ipv4.actions.convert')}
           </button>
           <button
             onClick={getIPClass}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            📊 IP 클래스 확인
+            📊 {t('ipv4.actions.class')}
           </button>
         </div>
 
@@ -226,16 +229,16 @@ export default function IPv4ConverterTool() {
         <TextAreaWithCopy
           value={result}
           readOnly
-          label="결과"
+          label={t('ipv4.result.label')}
           rows={10}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 사용 예시</h4>
+          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 {t('ipv4.examples.title')}</h4>
           <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
-            <li>• IP 주소 입력: 192.168.1.1</li>
-            <li>• 십진수 입력: 3232235777</li>
-            <li>• 사설 IP 범위: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</li>
+            <li>• {t('ipv4.examples.ip')}</li>
+            <li>• {t('ipv4.examples.decimal')}</li>
+            <li>• {t('ipv4.examples.private')}</li>
           </ul>
         </div>
       </div>
