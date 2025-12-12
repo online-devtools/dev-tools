@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 환경에 따라 자동으로 올바른 URL 사용
+  // 프로덕션 URL만 사용 (preview URL 제외)
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
-                  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
+                  process.env.NEXT_PUBLIC_VERCEL_URL ||
+                  'http://localhost:3000'
 
   const routes = [
     '',
