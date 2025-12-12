@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://dev-tools.example.com'
+  // 환경에 따라 자동으로 올바른 URL 사용
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
+                  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
 
   const routes = [
     '',

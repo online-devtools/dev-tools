@@ -4,8 +4,11 @@ import { useState } from 'react'
 import he from 'he'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function HTMLEntitiesTool() {
+  const { t } = useLanguage()
+  // 입력 텍스트와 변환 결과를 상태로 관리해 엔티티 인코딩/디코딩을 제공합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
 
@@ -19,14 +22,14 @@ export default function HTMLEntitiesTool() {
 
   return (
     <ToolCard
-      title="HTML Entities Encoder/Decoder"
-      description="HTML 특수문자를 엔티티로 변환합니다"
+      title={`&lt;/&gt; ${t('htmlEntities.title')}`}
+      description={t('htmlEntities.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력"
+          label={t('htmlEntities.input.label')}
           placeholder="<div>Hello & World</div>"
         />
 
@@ -35,24 +38,24 @@ export default function HTMLEntitiesTool() {
             onClick={encode}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            Encode (인코딩)
+            {t('htmlEntities.actions.encode')}
           </button>
           <button
             onClick={decode}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            Decode (디코딩)
+            {t('htmlEntities.actions.decode')}
           </button>
         </div>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('htmlEntities.output.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">주요 HTML 엔티티</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('htmlEntities.common.title')}</h3>
           <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
             <div>&lt; = &amp;lt;</div>
             <div>&gt; = &amp;gt;</div>
