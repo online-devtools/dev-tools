@@ -3,15 +3,18 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function BasicAuthTool() {
+  const { t } = useLanguage()
+  // 사용자명/비밀번호 입력과 결과 헤더 상태를 관리해 번역된 안내를 제공합니다.
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [output, setOutput] = useState('')
 
   const generate = () => {
     if (!username || !password) {
-      setOutput('사용자명과 비밀번호를 모두 입력해주세요.')
+      setOutput(t('basicAuth.error.required'))
       return
     }
 
@@ -31,39 +34,39 @@ export default function BasicAuthTool() {
       setPassword(pass || '')
       setOutput(header)
     } catch (err) {
-      setOutput('올바른 Basic Auth 헤더가 아닙니다.')
+      setOutput(t('basicAuth.error.invalidHeader'))
     }
   }
 
   return (
     <ToolCard
-      title="Basic Auth Generator"
-      description="HTTP 기본 인증 헤더를 생성합니다"
+      title={`🔑 ${t('basicAuth.title')}`}
+      description={t('basicAuth.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            사용자명
+            {t('basicAuth.username')}
           </label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder="username"
+            placeholder={t('basicAuth.usernamePlaceholder')}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            비밀번호
+            {t('basicAuth.password')}
           </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder="password"
+            placeholder={t('basicAuth.passwordPlaceholder')}
           />
         </div>
 
@@ -71,20 +74,20 @@ export default function BasicAuthTool() {
           onClick={generate}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          생성
+          {t('basicAuth.actions.generate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="Authorization 헤더"
+          label={t('basicAuth.output.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">사용 방법</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('basicAuth.howto.title')}</h3>
           <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <div>• HTTP 헤더에 추가: Authorization: {output || 'Basic <base64>'}</div>
-            <div>• curl 예시: curl -H "Authorization: {output || 'Basic <base64>'}" URL</div>
+            <div>• {t('basicAuth.howto.header', { header: output || 'Basic <base64>' })}</div>
+            <div>• {t('basicAuth.howto.curl', { header: output || 'Basic <base64>' })}</div>
           </div>
         </div>
       </div>

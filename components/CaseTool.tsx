@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CaseTool() {
+  const { t } = useLanguage()
+  // 변환 대상 텍스트 상태를 관리하고 여러 케이스 스타일로 즉시 변환합니다.
   const [input, setInput] = useState('')
 
   const toCamelCase = (str: string) => {
@@ -72,18 +75,18 @@ export default function CaseTool() {
 
   return (
     <ToolCard
-      title="📝 Case Converter"
-      description="문자열을 다양한 케이스 스타일로 변환합니다"
+      title={`📝 ${t('caseTool.title')}`}
+      description={t('caseTool.description')}
     >
       <div className="space-y-4">
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            입력 텍스트
+            {t('caseTool.input.label')}
           </label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="변환할 텍스트를 입력하세요... (예: my variable name)"
+            placeholder={t('caseTool.input.placeholder')}
             rows={4}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-800 dark:text-gray-200"
           />
@@ -92,7 +95,7 @@ export default function CaseTool() {
         {input && (
           <div className="space-y-3">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              변환 결과
+              {t('caseTool.output.label')}
             </label>
             {conversions.map((conversion) => (
               <div
@@ -107,17 +110,17 @@ export default function CaseTool() {
                     <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
                       (예: {conversion.example})
                     </span>
-                  </div>
-                  <button
-                    onClick={() => copyToClipboard(conversion.fn(input))}
-                    className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded-md transition-colors"
-                  >
-                    Copy
-                  </button>
                 </div>
-                <code className="block font-mono text-sm text-gray-800 dark:text-gray-200 break-all">
-                  {conversion.fn(input)}
-                </code>
+                <button
+                  onClick={() => copyToClipboard(conversion.fn(input))}
+                  className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded-md transition-colors"
+                >
+                  {t('common.copy')}
+                </button>
+              </div>
+              <code className="block font-mono text-sm text-gray-800 dark:text-gray-200 break-all">
+                {conversion.fn(input)}
+              </code>
               </div>
             ))}
           </div>
@@ -125,7 +128,7 @@ export default function CaseTool() {
 
         {!input && (
           <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            텍스트를 입력하면 다양한 케이스로 변환된 결과를 볼 수 있습니다
+            {t('caseTool.empty')}
           </div>
         )}
       </div>

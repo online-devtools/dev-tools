@@ -8,64 +8,100 @@ export default function AdBlockDetector() {
 
   useEffect(() => {
     const detectAdBlock = async () => {
+      let detectionCount = 0
+      const detectionThreshold = 2 // 3가지 중 2가지 이상 감지되면 차단
+
       try {
         // 방법 1: 베이트 요소 생성 (애드블락이 숨기는 클래스명 사용)
         const bait = document.createElement('div')
-        bait.className = 'adsbygoogle ad-placement ad-banner adsbox doubleclick'
-        bait.style.cssText = 'position:absolute;top:-1px;left:-1px;width:1px;height:1px;'
+        bait.className = 'pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links adsbygoogle'
+        bait.setAttribute('id', 'ad-banner')
+        bait.style.cssText = 'width:1px !important;height:1px !important;position:absolute !important;left:-10000px !important;top:-1000px !important;'
         document.body.appendChild(bait)
 
-        // 짧은 대기 시간 후 확인
-        await new Promise(resolve => setTimeout(resolve, 100))
+        // 애드블락이 작동할 시간을 충분히 줌
+        await new Promise(resolve => setTimeout(resolve, 300))
 
         // 요소가 숨겨졌는지 확인
-        const rect = bait.getBoundingClientRect()
+        const computedStyle = window.getComputedStyle(bait)
         const isHidden =
+          bait.offsetParent === null ||
           bait.offsetHeight === 0 ||
           bait.offsetWidth === 0 ||
-          rect.height === 0 ||
-          rect.width === 0 ||
-          window.getComputedStyle(bait).display === 'none' ||
-          window.getComputedStyle(bait).visibility === 'hidden'
+          computedStyle.display === 'none' ||
+          computedStyle.visibility === 'hidden' ||
+          computedStyle.opacity === '0'
 
         document.body.removeChild(bait)
 
         if (isHidden) {
-          setAdBlockDetected(true)
-          setIsChecking(false)
-          return
+          detectionCount++
+          console.log('[AdBlock] 베이트 요소가 차단되었습니다')
         }
 
-        // 방법 2: Google AdSense 스크립트 로드 확인
-        const adsenseCheck = new Promise((resolve) => {
+        // 방법 2: 광고 스크립트 fetch 시도
+        try {
+          const response = await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {
+            method: 'HEAD',
+            mode: 'no-cors',
+            cache: 'no-cache'
+          })
+          // no-cors 모드에서는 response가 opaque이므로 도달했다는 것만으로 차단되지 않았다고 판단
+        } catch (error) {
+          detectionCount++
+          console.log('[AdBlock] 광고 스크립트 fetch가 차단되었습니다')
+        }
+
+        // 방법 3: Google AdSense 요소 검사
+        const adsenseCheck = await new Promise<boolean>((resolve) => {
           const testAd = document.createElement('div')
           testAd.innerHTML = '&nbsp;'
           testAd.className = 'adsbygoogle'
-          testAd.style.cssText = 'width:1px;height:1px;position:absolute;left:-100px;top:-100px;'
+          testAd.style.cssText = 'width:300px !important;height:250px !important;position:absolute !important;left:-10000px !important;top:-1000px !important;'
+          testAd.setAttribute('data-ad-client', 'ca-pub-test')
           document.body.appendChild(testAd)
 
           setTimeout(() => {
-            const isAdBlocked = !testAd.clientHeight
+            const isBlocked = testAd.offsetHeight === 0 || testAd.offsetWidth === 0
             document.body.removeChild(testAd)
-            resolve(isAdBlocked)
-          }, 100)
+            resolve(isBlocked)
+          }, 300)
         })
 
-        const isBlocked = await adsenseCheck
-        setAdBlockDetected(isBlocked as boolean)
+        if (adsenseCheck) {
+          detectionCount++
+          console.log('[AdBlock] AdSense 요소가 차단되었습니다')
+        }
+
+        // 방법 4: 가짜 광고 파일 요청
+        try {
+          await fetch('/ads.js', { method: 'HEAD', cache: 'no-cache' }).catch(() => {
+            // 파일이 없어도 요청이 가는지만 확인
+          })
+        } catch (error) {
+          detectionCount++
+          console.log('[AdBlock] 광고 파일 요청이 차단되었습니다')
+        }
+
+        console.log(`[AdBlock] 총 ${detectionCount}개 감지됨 (임계값: ${detectionThreshold})`)
+
+        if (detectionCount >= detectionThreshold) {
+          setAdBlockDetected(true)
+        }
+
         setIsChecking(false)
 
       } catch (error) {
         console.error('AdBlock detection error:', error)
-        // 에러 발생 시 애드블락 없다고 가정 (사용자 경험 우선)
+        // 에러 발생 시에도 감지되지 않았다고 가정
         setIsChecking(false)
       }
     }
 
-    // 페이지 로드 후 감지 시작
+    // 페이지 로드 후 감지 시작 (충분한 시간 확보)
     const timer = setTimeout(() => {
       detectAdBlock()
-    }, 1000)
+    }, 1500)
 
     return () => clearTimeout(timer)
   }, [])

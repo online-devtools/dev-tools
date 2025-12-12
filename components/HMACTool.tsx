@@ -4,8 +4,11 @@ import { useState } from 'react'
 import CryptoJS from 'crypto-js'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function HMACTool() {
+  const { t } = useLanguage()
+  // 메시지/시크릿/알고리즘 상태를 관리하며 HMAC 생성 결과를 번역된 UI로 제공합니다.
   const [message, setMessage] = useState('')
   const [secretKey, setSecretKey] = useState('')
   const [algorithm, setAlgorithm] = useState('SHA256')
@@ -14,7 +17,7 @@ export default function HMACTool() {
   const generateHMAC = () => {
     try {
       if (!message || !secretKey) {
-        setOutput('메시지와 비밀 키를 모두 입력해주세요.')
+        setOutput(t('hmac.error.required'))
         return
       }
 
@@ -38,39 +41,39 @@ export default function HMACTool() {
 
       setOutput(hmac)
     } catch (error) {
-      setOutput('HMAC 생성 중 오류가 발생했습니다.')
+      setOutput(t('hmac.error.generate'))
     }
   }
 
   return (
     <ToolCard
-      title="HMAC Generator"
-      description="비밀 키를 사용하여 메시지 인증 코드를 생성합니다"
+      title={`🔐 ${t('hmac.title')}`}
+      description={t('hmac.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={message}
           onChange={setMessage}
-          label="메시지"
-          placeholder="인증할 메시지 입력"
+          label={t('hmac.message')}
+          placeholder={t('hmac.messagePlaceholder')}
         />
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            비밀 키 (Secret Key)
+            {t('hmac.secret')}
           </label>
           <input
             type="text"
             value={secretKey}
             onChange={(e) => setSecretKey(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder="비밀 키 입력"
+            placeholder={t('hmac.secretPlaceholder')}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            해시 알고리즘
+            {t('hmac.algorithm')}
           </label>
           <select
             value={algorithm}
@@ -88,21 +91,21 @@ export default function HMACTool() {
           onClick={generateHMAC}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          생성
+          {t('hmac.actions.generate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="HMAC 결과"
+          label={t('hmac.result.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">HMAC이란?</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('hmac.info.title')}</h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• 비밀 키와 해시 함수를 사용한 메시지 인증 코드</li>
-            <li>• API 요청 서명, 데이터 무결성 검증에 사용</li>
-            <li>• 송신자와 수신자만 아는 비밀 키로 검증 가능</li>
+            <li>• {t('hmac.info.bullet1')}</li>
+            <li>• {t('hmac.info.bullet2')}</li>
+            <li>• {t('hmac.info.bullet3')}</li>
           </ul>
         </div>
       </div>

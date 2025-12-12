@@ -4,8 +4,11 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import * as bip39 from 'bip39'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function BIP39Tool() {
+  const { t } = useLanguage()
+  // 단어 개수/언어/입력된 니모닉/Seed/패스프레이즈 상태를 관리하며 BIP39 변환/검증 결과를 다국어로 표시합니다.
   const [wordCount, setWordCount] = useState<12 | 15 | 18 | 21 | 24>(12)
   const [mnemonic, setMnemonic] = useState('')
   const [inputMnemonic, setInputMnemonic] = useState('')
@@ -40,7 +43,7 @@ export default function BIP39Tool() {
       const generated = bip39.generateMnemonic(strength, undefined, wordlist)
       setMnemonic(generated)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Mnemonic 생성 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('bip39.error.generate'))
     }
   }
 
@@ -49,7 +52,7 @@ export default function BIP39Tool() {
 
     try {
       if (!inputMnemonic.trim()) {
-        setError('Mnemonic을 입력해주세요')
+        setError(t('bip39.error.required'))
         return
       }
 
@@ -58,12 +61,12 @@ export default function BIP39Tool() {
 
       if (valid) {
         setError('')
-        alert('✅ 유효한 BIP39 Mnemonic입니다!')
+        alert(t('bip39.validate.success'))
       } else {
-        setError('❌ 유효하지 않은 BIP39 Mnemonic입니다')
+        setError(t('bip39.validate.fail'))
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Mnemonic 검증 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('bip39.error.validate'))
     }
   }
 
@@ -75,13 +78,13 @@ export default function BIP39Tool() {
       const mnemonicToUse = inputMnemonic.trim() || mnemonic
 
       if (!mnemonicToUse) {
-        setError('Mnemonic을 입력하거나 생성해주세요')
+        setError(t('bip39.error.requiredOrGenerate'))
         return
       }
 
       const wordlist = getWordlist(language)
       if (!bip39.validateMnemonic(mnemonicToUse, wordlist)) {
-        setError('유효하지 않은 Mnemonic입니다')
+        setError(t('bip39.validate.fail'))
         return
       }
 
@@ -89,7 +92,7 @@ export default function BIP39Tool() {
       const seedHex = seedBuffer.toString('hex')
       setSeed(seedHex)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Seed 생성 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('bip39.error.seed'))
     }
   }
 
@@ -99,20 +102,20 @@ export default function BIP39Tool() {
 
     try {
       if (!entropyHex.trim()) {
-        setError('Entropy(16진수)를 입력해주세요')
+        setError(t('bip39.error.entropyRequired'))
         return
       }
 
       const cleaned = entropyHex.trim().replace(/[^0-9a-fA-F]/g, '')
 
       if (!/^[0-9a-fA-F]+$/.test(cleaned)) {
-        setError('유효한 16진수 값을 입력해주세요')
+        setError(t('bip39.error.entropyHex'))
         return
       }
 
       const validLengths = [32, 40, 48, 56, 64] // 128, 160, 192, 224, 256 bits
       if (!validLengths.includes(cleaned.length)) {
-        setError(`Entropy 길이는 ${validLengths.join(', ')} 문자(16진수) 중 하나여야 합니다`)
+        setError(t('bip39.error.entropyLength', { lengths: validLengths.join(', ') }))
         return
       }
 
@@ -120,7 +123,7 @@ export default function BIP39Tool() {
       const generated = bip39.entropyToMnemonic(cleaned, wordlist)
       setMnemonic(generated)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Entropy에서 Mnemonic 생성 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('bip39.error.entropyToMnemonic'))
     }
   }
 
@@ -131,33 +134,33 @@ export default function BIP39Tool() {
       const mnemonicToUse = inputMnemonic.trim() || mnemonic
 
       if (!mnemonicToUse) {
-        setError('Mnemonic을 입력하거나 생성해주세요')
+        setError(t('bip39.error.requiredOrGenerate'))
         return
       }
 
       const wordlist = getWordlist(language)
       if (!bip39.validateMnemonic(mnemonicToUse, wordlist)) {
-        setError('유효하지 않은 Mnemonic입니다')
+        setError(t('bip39.validate.fail'))
         return
       }
 
       const entropy = bip39.mnemonicToEntropy(mnemonicToUse, wordlist)
-      alert(`Entropy (16진수):\n${entropy}`)
+      alert(t('bip39.entropy.result', { entropy }))
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Entropy 추출 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('bip39.error.entropyExtract'))
     }
   }
 
   return (
     <ToolCard
-      title="BIP39 Mnemonic Generator"
-      description="암호화폐 지갑용 BIP39 니모닉 구문을 생성하고 검증합니다"
+      title={`🪙 ${t('bip39.title')}`}
+      description={t('bip39.description')}
     >
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              단어 개수
+              {t('bip39.wordCount')}
             </label>
             <select
               value={wordCount}
@@ -166,14 +169,14 @@ export default function BIP39Tool() {
             >
               {wordCounts.map((count) => (
                 <option key={count} value={count}>
-                  {count} 단어 ({(count * 32) / 3} bits)
+                  {t('bip39.wordCountOption', { count, bits: (count * 32) / 3 })}
                 </option>
               ))}
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              언어
+              {t('bip39.language')}
             </label>
             <select
               value={language}
@@ -192,26 +195,26 @@ export default function BIP39Tool() {
           onClick={generateMnemonic}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          🎲 Mnemonic 생성
+          🎲 {t('bip39.actions.generate')}
         </button>
 
         {mnemonic && (
           <TextAreaWithCopy
             value={mnemonic}
             readOnly
-            label="생성된 Mnemonic"
+            label={t('bip39.result.mnemonic')}
             rows={3}
           />
         )}
 
         <div className="border-t border-gray-300 dark:border-gray-600 pt-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Mnemonic 입력 (검증/변환용)
+            {t('bip39.input.label')}
           </label>
           <textarea
             value={inputMnemonic}
             onChange={(e) => setInputMnemonic(e.target.value)}
-            placeholder="단어들을 공백으로 구분하여 입력하세요"
+            placeholder={t('bip39.input.placeholder')}
             rows={3}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-sm"
           />
@@ -222,29 +225,29 @@ export default function BIP39Tool() {
             onClick={validateMnemonic}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            ✅ 검증
+            ✅ {t('bip39.actions.validate')}
           </button>
           <button
             onClick={mnemonicToEntropy}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            🔢 Entropy 추출
+            🔢 {t('bip39.actions.toEntropy')}
           </button>
         </div>
 
         <div className="border-t border-gray-300 dark:border-gray-600 pt-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Passphrase (선택사항)
+            {t('bip39.passphrase.label')}
           </label>
           <input
             type="text"
             value={passphrase}
             onChange={(e) => setPassphrase(e.target.value)}
-            placeholder="BIP39 passphrase (25th word)"
+            placeholder={t('bip39.passphrase.placeholder')}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Passphrase는 추가 보안 계층을 제공합니다 (BIP39 25th word)
+            {t('bip39.passphrase.help')}
           </p>
         </div>
 
@@ -252,14 +255,14 @@ export default function BIP39Tool() {
           onClick={mnemonicToSeed}
           className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          🌱 Seed 생성
+          🌱 {t('bip39.actions.toSeed')}
         </button>
 
         {seed && (
           <TextAreaWithCopy
             value={seed}
             readOnly
-            label="생성된 Seed (64바이트 16진수)"
+            label={t('bip39.result.seed')}
             rows={4}
           />
         )}
@@ -271,23 +274,23 @@ export default function BIP39Tool() {
         )}
 
         <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-          <h4 className="font-semibold text-yellow-900 dark:text-yellow-300 mb-2">⚠️ 보안 경고</h4>
+          <h4 className="font-semibold text-yellow-900 dark:text-yellow-300 mb-2">⚠️ {t('bip39.security.title')}</h4>
           <ul className="text-sm text-yellow-800 dark:text-yellow-400 space-y-1">
-            <li>• Mnemonic은 암호화폐 지갑의 마스터 키입니다</li>
-            <li>• 절대로 다른 사람과 공유하지 마세요</li>
-            <li>• 안전한 오프라인 환경에서 보관하세요</li>
-            <li>• 이 도구는 테스트/교육 목적으로만 사용하세요</li>
-            <li>• 실제 자산용 지갑은 하드웨어 지갑 사용을 권장합니다</li>
+            <li>• {t('bip39.security.bullet1')}</li>
+            <li>• {t('bip39.security.bullet2')}</li>
+            <li>• {t('bip39.security.bullet3')}</li>
+            <li>• {t('bip39.security.bullet4')}</li>
+            <li>• {t('bip39.security.bullet5')}</li>
           </ul>
         </div>
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 BIP39란?</h4>
+          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 {t('bip39.info.title')}</h4>
           <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
-            <li>• Bitcoin Improvement Proposal 39</li>
-            <li>• 니모닉 구문을 사용한 결정적 키 생성 표준</li>
-            <li>• 12-24개의 단어로 암호화폐 지갑을 복구할 수 있습니다</li>
-            <li>• 대부분의 주요 암호화폐 지갑에서 지원됩니다</li>
+            <li>• {t('bip39.info.bullet1')}</li>
+            <li>• {t('bip39.info.bullet2')}</li>
+            <li>• {t('bip39.info.bullet3')}</li>
+            <li>• {t('bip39.info.bullet4')}</li>
           </ul>
         </div>
       </div>

@@ -5,8 +5,11 @@ import * as yaml from 'js-yaml'
 import * as TOML from '@iarna/toml'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function YAMLTOMLTool() {
+  const { t } = useLanguage()
+  // YAML/TOML 입력과 결과, 에러 상태를 관리하며 번역된 상태 메시지를 제공합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -18,7 +21,7 @@ export default function YAMLTOMLTool() {
       const tomlStr = TOML.stringify(obj as any)
       setOutput(tomlStr)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('yamlTomlTool.error.convert', { message: err.message }))
       setOutput('')
     }
   }
@@ -30,22 +33,22 @@ export default function YAMLTOMLTool() {
       const yamlStr = yaml.dump(obj)
       setOutput(yamlStr)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('yamlTomlTool.error.convert', { message: err.message }))
       setOutput('')
     }
   }
 
   return (
     <ToolCard
-      title="YAML ↔ TOML Converter"
-      description="YAML과 TOML 형식을 상호 변환합니다"
+      title={`📑 ${t('yamlTomlTool.title')}`}
+      description={t('yamlTomlTool.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력"
-          placeholder="YAML 또는 TOML 입력"
+          label={t('yamlTomlTool.input.label')}
+          placeholder={t('yamlTomlTool.input.placeholder')}
         />
 
         <div className="grid grid-cols-2 gap-2">
@@ -53,13 +56,13 @@ export default function YAMLTOMLTool() {
             onClick={yamlToToml}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            YAML → TOML
+            {t('yamlTomlTool.actions.yamlToToml')}
           </button>
           <button
             onClick={tomlToYaml}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            TOML → YAML
+            {t('yamlTomlTool.actions.tomlToYaml')}
           </button>
         </div>
 
@@ -72,7 +75,7 @@ export default function YAMLTOMLTool() {
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('yamlTomlTool.output.label')}
         />
       </div>
     </ToolCard>

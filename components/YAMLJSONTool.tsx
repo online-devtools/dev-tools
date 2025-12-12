@@ -4,8 +4,11 @@ import { useState } from 'react'
 import * as yaml from 'js-yaml'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function YAMLJSONTool() {
+  const { t } = useLanguage()
+  // 입력/출력/에러 상태를 관리하며 YAML ↔ JSON 변환 시 언어별 메시지를 제공합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -17,7 +20,7 @@ export default function YAMLJSONTool() {
       const json = JSON.stringify(obj, null, 2)
       setOutput(json)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('yamlJsonTool.error.convert', { message: err.message }))
       setOutput('')
     }
   }
@@ -29,22 +32,22 @@ export default function YAMLJSONTool() {
       const yamlStr = yaml.dump(obj)
       setOutput(yamlStr)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('yamlJsonTool.error.convert', { message: err.message }))
       setOutput('')
     }
   }
 
   return (
     <ToolCard
-      title="YAML ↔ JSON Converter"
-      description="YAML과 JSON 형식을 상호 변환합니다"
+      title={`🧾 ${t('yamlJsonTool.title')}`}
+      description={t('yamlJsonTool.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력"
-          placeholder="YAML 또는 JSON 입력"
+          label={t('yamlJsonTool.input.label')}
+          placeholder={t('yamlJsonTool.input.placeholder')}
         />
 
         <div className="grid grid-cols-2 gap-2">
@@ -52,13 +55,13 @@ export default function YAMLJSONTool() {
             onClick={yamlToJson}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            YAML → JSON
+            {t('yamlJsonTool.actions.yamlToJson')}
           </button>
           <button
             onClick={jsonToYaml}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            JSON → YAML
+            {t('yamlJsonTool.actions.jsonToYaml')}
           </button>
         </div>
 
@@ -71,7 +74,7 @@ export default function YAMLJSONTool() {
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('yamlJsonTool.output.label')}
         />
       </div>
     </ToolCard>
