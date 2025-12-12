@@ -4,8 +4,11 @@ import { useState } from 'react'
 import bcrypt from 'bcryptjs'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function BcryptTool() {
+  const { t } = useLanguage()
+  // State values capture inputs and outputs so translation-aware messaging renders with the latest values.
   const [password, setPassword] = useState('')
   const [rounds, setRounds] = useState('10')
   const [hash, setHash] = useState('')
@@ -13,66 +16,70 @@ export default function BcryptTool() {
   const [compareHash, setCompareHash] = useState('')
   const [compareResult, setCompareResult] = useState('')
 
+  // Create a bcrypt hash after validating the password and cost factor.
   const generateHash = async () => {
     try {
       if (!password) {
-        setHash('비밀번호를 입력해주세요.')
+        setHash(t('bcrypt.error.missingPassword'))
         return
       }
 
-      const saltRounds = parseInt(rounds)
+      const saltRounds = parseInt(rounds, 10)
       if (isNaN(saltRounds) || saltRounds < 4 || saltRounds > 16) {
-        setHash('Rounds는 4에서 16 사이여야 합니다.')
+        setHash(t('bcrypt.error.invalidRounds'))
         return
       }
 
       const hashed = await bcrypt.hash(password, saltRounds)
       setHash(hashed)
-    } catch (error) {
-      setHash('해시 생성 중 오류가 발생했습니다.')
+    } catch {
+      setHash(t('bcrypt.error.hash'))
     }
   }
 
+  // Compare a plain password and a bcrypt hash to confirm if they match.
   const comparePasswords = async () => {
     try {
       if (!comparePassword || !compareHash) {
-        setCompareResult('비밀번호와 해시를 모두 입력해주세요.')
+        setCompareResult(t('bcrypt.compare.missingInput'))
         return
       }
 
       const isMatch = await bcrypt.compare(comparePassword, compareHash)
-      setCompareResult(isMatch ? '✅ 일치합니다!' : '❌ 일치하지 않습니다.')
-    } catch (error) {
-      setCompareResult('비교 중 오류가 발생했습니다. 올바른 bcrypt 해시인지 확인해주세요.')
+      setCompareResult(isMatch ? t('bcrypt.compare.success') : t('bcrypt.compare.fail'))
+    } catch {
+      setCompareResult(t('bcrypt.error.compare'))
     }
   }
 
   return (
     <ToolCard
-      title="Bcrypt"
-      description="Bcrypt를 사용하여 비밀번호를 안전하게 해싱하고 검증합니다"
+      title={`🔐 ${t('tool.bcrypt')}`}
+      description={t('bcrypt.description')}
     >
       <div className="space-y-6">
         {/* Hash Generation */}
         <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">해시 생성</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+            {t('bcrypt.hash.title')}
+          </h3>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              비밀번호
+              {t('bcrypt.hash.passwordLabel')}
             </label>
             <input
               type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-              placeholder="해싱할 비밀번호 입력"
+              placeholder={t('bcrypt.hash.passwordPlaceholder')}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Salt Rounds (4-16)
+              {t('bcrypt.hash.roundsLabel')}
             </label>
             <input
               type="number"
@@ -83,7 +90,7 @@ export default function BcryptTool() {
               max="16"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              값이 클수록 안전하지만 처리 시간이 늘어납니다
+              {t('bcrypt.hash.roundsHelp')}
             </p>
           </div>
 
@@ -91,45 +98,47 @@ export default function BcryptTool() {
             onClick={generateHash}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            해시 생성
+            {t('bcrypt.hash.action')}
           </button>
 
           <TextAreaWithCopy
             value={hash}
             readOnly
-            label="생성된 해시"
+            label={t('bcrypt.hash.resultLabel')}
           />
         </div>
 
         {/* Hash Comparison */}
         <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">해시 검증</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+            {t('bcrypt.compare.title')}
+          </h3>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              비밀번호
+              {t('bcrypt.compare.passwordLabel')}
             </label>
             <input
               type="text"
               value={comparePassword}
               onChange={(e) => setComparePassword(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-              placeholder="검증할 비밀번호 입력"
+              placeholder={t('bcrypt.compare.passwordPlaceholder')}
             />
           </div>
 
           <TextAreaWithCopy
             value={compareHash}
             onChange={setCompareHash}
-            label="Bcrypt 해시"
-            placeholder="검증할 bcrypt 해시 입력"
+            label={t('bcrypt.compare.hashLabel')}
+            placeholder={t('bcrypt.compare.hashPlaceholder')}
           />
 
           <button
             onClick={comparePasswords}
             className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            비교
+            {t('bcrypt.compare.action')}
           </button>
 
           {compareResult && (

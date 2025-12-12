@@ -3,12 +3,16 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function SQLFormatter() {
+  const { t } = useLanguage()
+  // 입력, 결과, 에러 메시지를 상태로 관리해 번역된 문구를 즉시 반영합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
+  // 간단한 규칙 기반 포매터: 주요 키워드 앞에 줄바꿈을 추가하고 들여쓰기를 적용합니다.
   const formatSQL = (sql: string): string => {
     const keywords = [
       'SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'ORDER BY', 'GROUP BY', 'HAVING',
@@ -20,72 +24,75 @@ export default function SQLFormatter() {
 
     let formatted = sql.trim()
 
-    // Remove extra spaces
+    // 연속 공백을 하나로 축소합니다.
     formatted = formatted.replace(/\s+/g, ' ')
 
-    // Add line breaks before major keywords
+    // 주요 키워드 앞에 줄바꿈을 삽입합니다.
     keywords.forEach(keyword => {
       const regex = new RegExp(`\\b${keyword}\\b`, 'gi')
       formatted = formatted.replace(regex, match => `\n${match.toUpperCase()}`)
     })
 
-    // Indent clauses
+    // 줄 단위로 나누어 들여쓰기 규칙을 적용합니다.
     const lines = formatted.split('\n').filter(line => line.trim())
-    const indented = lines.map((line, index) => {
-      line = line.trim()
+    const indented = lines.map((line) => {
+      const trimmed = line.trim()
 
-      // Main clauses (no indent)
-      if (line.startsWith('SELECT') || line.startsWith('FROM') ||
-          line.startsWith('WHERE') || line.startsWith('ORDER BY') ||
-          line.startsWith('GROUP BY') || line.startsWith('HAVING') ||
-          line.startsWith('INSERT') || line.startsWith('UPDATE') ||
-          line.startsWith('DELETE') || line.startsWith('CREATE') ||
-          line.startsWith('ALTER') || line.startsWith('DROP')) {
-        return line
+      if (
+        trimmed.startsWith('SELECT') || trimmed.startsWith('FROM') ||
+        trimmed.startsWith('WHERE') || trimmed.startsWith('ORDER BY') ||
+        trimmed.startsWith('GROUP BY') || trimmed.startsWith('HAVING') ||
+        trimmed.startsWith('INSERT') || trimmed.startsWith('UPDATE') ||
+        trimmed.startsWith('DELETE') || trimmed.startsWith('CREATE') ||
+        trimmed.startsWith('ALTER') || trimmed.startsWith('DROP')
+      ) {
+        return trimmed
       }
 
-      // Sub-clauses (indent)
-      if (line.startsWith('AND') || line.startsWith('OR') ||
-          line.startsWith('JOIN') || line.startsWith('INNER JOIN') ||
-          line.startsWith('LEFT JOIN') || line.startsWith('RIGHT JOIN') ||
-          line.startsWith('ON') || line.startsWith('SET') ||
-          line.startsWith('VALUES')) {
-        return '  ' + line
+      if (
+        trimmed.startsWith('AND') || trimmed.startsWith('OR') ||
+        trimmed.startsWith('JOIN') || trimmed.startsWith('INNER JOIN') ||
+        trimmed.startsWith('LEFT JOIN') || trimmed.startsWith('RIGHT JOIN') ||
+        trimmed.startsWith('ON') || trimmed.startsWith('SET') ||
+        trimmed.startsWith('VALUES')
+      ) {
+        return `  ${trimmed}`
       }
 
-      // Default: slight indent
-      return '    ' + line
+      return `    ${trimmed}`
     })
 
     return indented.join('\n')
   }
 
+  // 입력을 포맷하고 예외 시 번역된 에러 메시지를 노출합니다.
   const handleFormat = () => {
     try {
       setError('')
       if (!input.trim()) {
-        setError('SQL 쿼리를 입력해주세요.')
+        setError(t('sql.error.required'))
         return
       }
       const formatted = formatSQL(input)
       setOutput(formatted)
     } catch (e) {
-      setError(`포맷 실패: ${e instanceof Error ? e.message : '알 수 없는 오류'}`)
+      setError(t('sql.error.format', { message: e instanceof Error ? e.message : t('sql.error.unknown') }))
       setOutput('')
     }
   }
 
+  // 공백을 하나로 줄여 압축 버전을 제공합니다.
   const handleMinify = () => {
     try {
       setError('')
       if (!input.trim()) {
-        setError('SQL 쿼리를 입력해주세요.')
+        setError(t('sql.error.required'))
         return
       }
       const minified = input.replace(/\s+/g, ' ').trim()
       setOutput(minified)
     } catch (e) {
-      setError(`압축 실패: ${e instanceof Error ? e.message : '알 수 없는 오류'}`)
+      setError(t('sql.error.minify', { message: e instanceof Error ? e.message : t('sql.error.unknown') }))
       setOutput('')
     }
   }
@@ -98,15 +105,15 @@ export default function SQLFormatter() {
 
   return (
     <ToolCard
-      title="🗃️ SQL Formatter"
-      description="SQL 쿼리를 포맷하고 최적화합니다"
+      title={`🗃️ ${t('sql.title')}`}
+      description={t('sql.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          placeholder="SELECT * FROM users WHERE id = 1"
-          label="입력 SQL"
+          placeholder={t('sql.input.placeholder')}
+          label={t('sql.input.label')}
           rows={10}
         />
 
@@ -115,19 +122,19 @@ export default function SQLFormatter() {
             onClick={handleFormat}
             className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
           >
-            Format
+            {t('sql.actions.format')}
           </button>
           <button
             onClick={handleMinify}
             className="px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-colors"
           >
-            Minify
+            {t('sql.actions.minify')}
           </button>
           <button
             onClick={handleClear}
             className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
-            Clear
+            {t('sql.actions.clear')}
           </button>
         </div>
 
@@ -139,9 +146,9 @@ export default function SQLFormatter() {
 
         <TextAreaWithCopy
           value={output}
-          placeholder="포맷된 SQL이 여기에 표시됩니다..."
+          placeholder={t('sql.result.placeholder')}
           readOnly
-          label="결과"
+          label={t('sql.result.label')}
           rows={10}
         />
       </div>

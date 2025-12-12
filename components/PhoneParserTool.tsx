@@ -4,8 +4,11 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { parsePhoneNumber, isValidPhoneNumber, getCountryCallingCode, CountryCode } from 'libphonenumber-js'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PhoneParserTool() {
+  const { t } = useLanguage()
+  // 입력, 국가 코드, 결과, 에러 메시지를 상태로 관리해 번역된 UI를 제공합니다.
   const [input, setInput] = useState('')
   const [country, setCountry] = useState<CountryCode>('KR')
   const [result, setResult] = useState('')
@@ -17,34 +20,35 @@ export default function PhoneParserTool() {
 
     try {
       if (!input.trim()) {
-        setError('전화번호를 입력해주세요')
+        setError(t('phoneParser.error.required'))
         return
       }
 
       const phoneNumber = parsePhoneNumber(input, country)
 
       if (!phoneNumber) {
-        setError('유효하지 않은 전화번호입니다')
+        setError(t('phoneParser.error.invalid'))
         return
       }
 
-      const info = {
-        '원본 입력': input,
-        '국제 형식 (E.164)': phoneNumber.number,
-        '국제 형식 (포맷)': phoneNumber.formatInternational(),
-        '국내 형식': phoneNumber.formatNational(),
-        'URI 형식': phoneNumber.getURI(),
-        '국가 코드': phoneNumber.country || '',
-        '국가 번호': '+' + phoneNumber.countryCallingCode,
-        '국내 번호': phoneNumber.nationalNumber,
-        '유효성': isValidPhoneNumber(phoneNumber.number) ? '✅ 유효' : '❌ 유효하지 않음',
-        '타입': phoneNumber.getType() || '알 수 없음',
-        '가능 여부': phoneNumber.isPossible() ? '✅ 가능' : '❌ 불가능',
-      }
+      const validity = isValidPhoneNumber(phoneNumber.number)
+      const infoLines = [
+        { key: 'phoneParser.info.original', value: input },
+        { key: 'phoneParser.info.e164', value: phoneNumber.number },
+        { key: 'phoneParser.info.international', value: phoneNumber.formatInternational() },
+        { key: 'phoneParser.info.national', value: phoneNumber.formatNational() },
+        { key: 'phoneParser.info.uri', value: phoneNumber.getURI() },
+        { key: 'phoneParser.info.countryCode', value: phoneNumber.country || '' },
+        { key: 'phoneParser.info.callingCode', value: `+${phoneNumber.countryCallingCode}` },
+        { key: 'phoneParser.info.nationalNumber', value: phoneNumber.nationalNumber },
+        { key: 'phoneParser.info.validity', value: t(validity ? 'phoneParser.info.valid' : 'phoneParser.info.invalid') },
+        { key: 'phoneParser.info.type', value: phoneNumber.getType() || t('phoneParser.info.typeUnknown') },
+        { key: 'phoneParser.info.possible', value: t(phoneNumber.isPossible() ? 'phoneParser.info.possible.yes' : 'phoneParser.info.possible.no') },
+      ]
 
-      setResult(Object.entries(info).map(([key, value]) => `${key}: ${value}`).join('\n'))
+      setResult(infoLines.map(({ key, value }) => `${t(key)}: ${value}`).join('\n'))
     } catch (err) {
-      setError(err instanceof Error ? err.message : '전화번호 파싱 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('phoneParser.error.parse'))
     }
   }
 
@@ -54,14 +58,14 @@ export default function PhoneParserTool() {
 
     try {
       if (!input.trim()) {
-        setError('전화번호를 입력해주세요')
+        setError(t('phoneParser.error.required'))
         return
       }
 
       const valid = isValidPhoneNumber(input, country)
-      setResult(valid ? '✅ 유효한 전화번호입니다' : '❌ 유효하지 않은 전화번호입니다')
+      setResult(valid ? t('phoneParser.result.valid') : t('phoneParser.result.invalid'))
     } catch (err) {
-      setError(err instanceof Error ? err.message : '전화번호 검증 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('phoneParser.error.validate'))
     }
   }
 
@@ -71,14 +75,14 @@ export default function PhoneParserTool() {
 
     try {
       if (!input.trim()) {
-        setError('전화번호를 입력해주세요')
+        setError(t('phoneParser.error.required'))
         return
       }
 
       const phoneNumber = parsePhoneNumber(input, country)
 
       if (!phoneNumber) {
-        setError('유효하지 않은 전화번호입니다')
+        setError(t('phoneParser.error.invalid'))
         return
       }
 
@@ -100,7 +104,7 @@ export default function PhoneParserTool() {
 
       setResult(formatted)
     } catch (err) {
-      setError(err instanceof Error ? err.message : '전화번호 포맷팅 중 오류가 발생했습니다')
+      setError(err instanceof Error ? err.message : t('phoneParser.error.format'))
     }
   }
 
@@ -111,13 +115,13 @@ export default function PhoneParserTool() {
 
   return (
     <ToolCard
-      title="Phone Number Parser"
-      description="전화번호를 파싱하고 검증하며 다양한 형식으로 포맷팅합니다"
+      title={`📞 ${t('phoneParser.title')}`}
+      description={t('phoneParser.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            기본 국가 코드
+            {t('phoneParser.country.label')}
           </label>
           <select
             value={country}
@@ -134,13 +138,13 @@ export default function PhoneParserTool() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            전화번호 입력
+            {t('phoneParser.input.label')}
           </label>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="010-1234-5678 또는 +82 10 1234 5678"
+            placeholder={t('phoneParser.input.placeholder')}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
           />
         </div>
@@ -150,37 +154,37 @@ export default function PhoneParserTool() {
             onClick={parsePhone}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            📱 파싱
+            📱 {t('phoneParser.actions.parse')}
           </button>
           <button
             onClick={validatePhone}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            ✅ 검증
+            ✅ {t('phoneParser.actions.validate')}
           </button>
           <button
             onClick={() => formatPhone('international')}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            🌍 국제 형식
+            🌍 {t('phoneParser.actions.international')}
           </button>
           <button
             onClick={() => formatPhone('national')}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            🏠 국내 형식
+            🏠 {t('phoneParser.actions.national')}
           </button>
           <button
             onClick={() => formatPhone('e164')}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            📞 E.164
+            📞 {t('phoneParser.actions.e164')}
           </button>
           <button
             onClick={() => formatPhone('rfc3966')}
             className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            🔗 URI
+            🔗 {t('phoneParser.actions.uri')}
           </button>
         </div>
 
@@ -193,16 +197,16 @@ export default function PhoneParserTool() {
         <TextAreaWithCopy
           value={result}
           readOnly
-          label="결과"
+          label={t('phoneParser.result.label')}
           rows={12}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 사용 예시</h4>
+          <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">💡 {t('phoneParser.examples.title')}</h4>
           <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
-            <li>• 한국: 010-1234-5678, 01012345678, +82 10 1234 5678</li>
-            <li>• 미국: (555) 123-4567, +1 555 123 4567</li>
-            <li>• 일본: 090-1234-5678, +81 90 1234 5678</li>
+            <li>• {t('phoneParser.examples.kr')}</li>
+            <li>• {t('phoneParser.examples.us')}</li>
+            <li>• {t('phoneParser.examples.jp')}</li>
           </ul>
         </div>
       </div>

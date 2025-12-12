@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PortGeneratorTool() {
+  const { t } = useLanguage()
+  // 포트 범위와 개수, 결과를 상태로 관리해 번역된 메시지를 표시합니다.
   const [output, setOutput] = useState('')
   const [count, setCount] = useState('1')
   const [min, setMin] = useState('1024')
@@ -12,41 +15,41 @@ export default function PortGeneratorTool() {
 
   const generatePorts = () => {
     try {
-      const num = parseInt(count)
-      const minPort = parseInt(min)
-      const maxPort = parseInt(max)
+      const num = parseInt(count, 10)
+      const minPort = parseInt(min, 10)
+      const maxPort = parseInt(max, 10)
 
       if (isNaN(num) || num < 1 || num > 1000) {
-        setOutput('개수는 1에서 1000 사이여야 합니다.')
+        setOutput(t('port.error.count'))
         return
       }
 
       if (isNaN(minPort) || isNaN(maxPort) || minPort < 0 || maxPort > 65535 || minPort >= maxPort) {
-        setOutput('올바른 포트 범위를 입력해주세요 (0-65535).')
+        setOutput(t('port.error.range'))
         return
       }
 
       const ports: number[] = []
-      for (let i = 0; i < num; i++) {
+      for (let i = 0; i < num; i += 1) {
         const port = Math.floor(Math.random() * (maxPort - minPort + 1)) + minPort
         ports.push(port)
       }
 
       setOutput(ports.join('\n'))
-    } catch (error) {
-      setOutput('포트 생성 중 오류가 발생했습니다.')
+    } catch {
+      setOutput(t('port.error.generate'))
     }
   }
 
   return (
     <ToolCard
-      title="Random Port Generator"
-      description="랜덤 네트워크 포트 번호를 생성합니다"
+      title={`🔌 ${t('port.title')}`}
+      description={t('port.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            생성 개수
+            {t('port.count.label')}
           </label>
           <input
             type="number"
@@ -61,7 +64,7 @@ export default function PortGeneratorTool() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              최소 포트
+              {t('port.min.label')}
             </label>
             <input
               type="number"
@@ -74,7 +77,7 @@ export default function PortGeneratorTool() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              최대 포트
+              {t('port.max.label')}
             </label>
             <input
               type="number"
@@ -91,21 +94,21 @@ export default function PortGeneratorTool() {
           onClick={generatePorts}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          생성
+          {t('port.actions.generate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="생성된 포트"
+          label={t('port.result.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">포트 범위</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('port.info.title')}</h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• 0-1023: Well-known ports (시스템 포트)</li>
-            <li>• 1024-49151: Registered ports (등록된 포트)</li>
-            <li>• 49152-65535: Dynamic/Private ports (동적 포트)</li>
+            <li>• {t('port.info.wellKnown')}</li>
+            <li>• {t('port.info.registered')}</li>
+            <li>• {t('port.info.dynamic')}</li>
           </ul>
         </div>
       </div>

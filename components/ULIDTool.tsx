@@ -4,39 +4,43 @@ import { useState } from 'react'
 import { ulid } from 'ulid'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ULIDTool() {
+  const { t } = useLanguage()
+  // 생성 요청 수, 생성 결과를 상태로 관리합니다.
   const [output, setOutput] = useState('')
   const [count, setCount] = useState('1')
 
+  // 입력한 개수만큼 ULID를 생성하고, 유효하지 않은 값이면 번역된 오류를 보여줍니다.
   const generateULID = () => {
     try {
-      const num = parseInt(count)
+      const num = parseInt(count, 10)
       if (isNaN(num) || num < 1 || num > 1000) {
-        setOutput('개수는 1에서 1000 사이여야 합니다.')
+        setOutput(t('ulidTool.error.count'))
         return
       }
 
       const ulids: string[] = []
-      for (let i = 0; i < num; i++) {
+      for (let i = 0; i < num; i += 1) {
         ulids.push(ulid())
       }
 
       setOutput(ulids.join('\n'))
-    } catch (error) {
-      setOutput('ULID 생성 중 오류가 발생했습니다.')
+    } catch {
+      setOutput(t('ulidTool.error.generate'))
     }
   }
 
   return (
     <ToolCard
-      title="ULID Generator"
-      description="시간순으로 정렬 가능한 고유 식별자를 생성합니다"
+      title={`🆔 ${t('ulidTool.title')}`}
+      description={t('ulidTool.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            생성 개수
+            {t('ulidTool.count.label')}
           </label>
           <input
             type="number"
@@ -52,22 +56,24 @@ export default function ULIDTool() {
           onClick={generateULID}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          생성
+          {t('ulidTool.action.generate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="생성된 ULID"
+          label={t('ulidTool.result.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">ULID란?</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
+            {t('ulidTool.info.title')}
+          </h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• 128비트 크기의 고유 식별자</li>
-            <li>• 시간순으로 정렬 가능 (타임스탬프 포함)</li>
-            <li>• UUID v4와 호환 가능</li>
-            <li>• URL-safe, 대소문자 구분 없음</li>
+            <li>• {t('ulidTool.info.bullet1')}</li>
+            <li>• {t('ulidTool.info.bullet2')}</li>
+            <li>• {t('ulidTool.info.bullet3')}</li>
+            <li>• {t('ulidTool.info.bullet4')}</li>
           </ul>
         </div>
       </div>
