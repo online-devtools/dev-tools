@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function JSONMinifyTool() {
+  const { t } = useLanguage()
+  // JSON 입력/출력 및 에러 상태를 관리합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -15,7 +18,7 @@ export default function JSONMinifyTool() {
       const obj = JSON.parse(input)
       setOutput(JSON.stringify(obj))
     } catch (err: any) {
-      setError(`오류: ${err.message}`)
+      setError(t('jsonMinify.error', { message: err.message }))
       setOutput('')
     }
   }
@@ -26,21 +29,21 @@ export default function JSONMinifyTool() {
       const obj = JSON.parse(input)
       setOutput(JSON.stringify(obj, null, 2))
     } catch (err: any) {
-      setError(`오류: ${err.message}`)
+      setError(t('jsonMinify.error', { message: err.message }))
       setOutput('')
     }
   }
 
   return (
     <ToolCard
-      title="JSON Minify"
-      description="JSON을 압축하거나 포맷합니다"
+      title={`📦 ${t('jsonMinify.title')}`}
+      description={t('jsonMinify.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력 JSON"
+          label={t('jsonMinify.input.label')}
           placeholder='{"name": "John", "age": 30}'
         />
 
@@ -49,13 +52,13 @@ export default function JSONMinifyTool() {
             onClick={minify}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            압축 (Minify)
+            {t('jsonMinify.actions.minify')}
           </button>
           <button
             onClick={prettify}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            포맷 (Prettify)
+            {t('jsonMinify.actions.prettify')}
           </button>
         </div>
 
@@ -68,13 +71,16 @@ export default function JSONMinifyTool() {
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('jsonMinify.output.label')}
         />
 
         {output && (
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            압축률: {input.length > 0 ? ((1 - output.length / input.length) * 100).toFixed(1) : 0}%
-            ({input.length} → {output.length} bytes)
+            {t('jsonMinify.compression', {
+              ratio: input.length > 0 ? ((1 - output.length / input.length) * 100).toFixed(1) : 0,
+              before: input.length,
+              after: output.length,
+            })}
           </div>
         )}
       </div>

@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function DeviceInfoTool() {
+  const { t } = useLanguage()
+  // 브라우저와 화면 정보를 수집해 표시합니다.
   const [info, setInfo] = useState<any>(null)
 
   useEffect(() => {
@@ -38,30 +41,30 @@ export default function DeviceInfoTool() {
 
   return (
     <ToolCard
-      title="Device Information"
-      description="현재 기기의 정보를 확인합니다"
+      title={`📱 ${t('deviceInfoTool.title')}`}
+      description={t('deviceInfoTool.description')}
     >
       <div className="space-y-4">
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">화면</h3>
-          <InfoRow label="화면 크기" value={`${info.screenWidth} × ${info.screenHeight}`} />
-          <InfoRow label="사용 가능 영역" value={`${info.availWidth} × ${info.availHeight}`} />
-          <InfoRow label="뷰포트 크기" value={`${info.viewportWidth} × ${info.viewportHeight}`} />
-          <InfoRow label="픽셀 비율" value={info.devicePixelRatio} />
-          <InfoRow label="색 깊이" value={`${info.colorDepth} bit`} />
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{t('deviceInfoTool.section.screen')}</h3>
+          <InfoRow label={t('deviceInfoTool.screen.size')} value={`${info.screenWidth} × ${info.screenHeight}`} />
+          <InfoRow label={t('deviceInfoTool.screen.available')} value={`${info.availWidth} × ${info.availHeight}`} />
+          <InfoRow label={t('deviceInfoTool.screen.viewport')} value={`${info.viewportWidth} × ${info.viewportHeight}`} />
+          <InfoRow label={t('deviceInfoTool.screen.dpr')} value={info.devicePixelRatio} />
+          <InfoRow label={t('deviceInfoTool.screen.colorDepth')} value={`${info.colorDepth} bit`} />
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">시스템</h3>
-          <InfoRow label="플랫폼" value={info.platform} />
-          <InfoRow label="언어" value={info.language} />
-          <InfoRow label="시간대" value={info.timezone} />
-          <InfoRow label="쿠키 사용" value={info.cookieEnabled ? '활성화' : '비활성화'} />
-          <InfoRow label="온라인 상태" value={info.online ? '온라인' : '오프라인'} />
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{t('deviceInfoTool.section.system')}</h3>
+          <InfoRow label={t('deviceInfoTool.system.platform')} value={info.platform} />
+          <InfoRow label={t('deviceInfoTool.system.language')} value={info.language} />
+          <InfoRow label={t('deviceInfoTool.system.timezone')} value={info.timezone} />
+          <InfoRow label={t('deviceInfoTool.system.cookies')} value={info.cookieEnabled ? t('deviceInfoTool.system.enabled') : t('deviceInfoTool.system.disabled')} />
+          <InfoRow label={t('deviceInfoTool.system.online')} value={info.online ? t('deviceInfoTool.system.online.true') : t('deviceInfoTool.system.online.false')} />
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">User Agent</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{t('deviceInfoTool.section.ua')}</h3>
           <div className="p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
             <p className="text-sm text-gray-900 dark:text-white break-all font-mono">
               {info.userAgent}

@@ -2,8 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function QRCodeTool() {
+  const { t } = useLanguage()
+  // QR 코드 대상 텍스트, 이미지 URL, 크기 상태를 관리합니다.
   const [text, setText] = useState('')
   const [qrCode, setQrCode] = useState('')
   const [size, setSize] = useState(200)
@@ -37,18 +40,18 @@ export default function QRCodeTool() {
 
   return (
     <ToolCard
-      title="📱 QR Code Generator"
-      description="텍스트나 URL을 QR 코드로 변환합니다"
+      title={`📱 ${t('qrcodeTool.title')}`}
+      description={t('qrcodeTool.description')}
     >
       <div className="space-y-4">
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            텍스트 또는 URL
+            {t('qrcodeTool.input.label')}
           </label>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="QR 코드로 변환할 텍스트나 URL을 입력하세요..."
+            placeholder={t('qrcodeTool.input.placeholder')}
             rows={4}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-800 dark:text-gray-200"
           />
@@ -56,7 +59,7 @@ export default function QRCodeTool() {
 
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            크기: {size}x{size}px
+            {t('qrcodeTool.size.label', { width: size, height: size })}
           </label>
           <input
             type="range"
@@ -85,14 +88,14 @@ export default function QRCodeTool() {
               onClick={handleDownload}
               className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
             >
-              Download QR Code
+              {t('qrcodeTool.download')}
             </button>
           </div>
         )}
 
         {!text && (
           <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            텍스트를 입력하면 QR 코드가 자동으로 생성됩니다
+            {t('qrcodeTool.empty')}
           </div>
         )}
       </div>

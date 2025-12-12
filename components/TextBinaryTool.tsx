@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function TextBinaryTool() {
+  const { t } = useLanguage()
+  // 입력/출력/에러 상태를 관리해 텍스트와 바이너리를 상호 변환합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -18,7 +21,7 @@ export default function TextBinaryTool() {
         .join(' ')
       setOutput(binary)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('textBinary.error.convert', { message: err.message }))
       setOutput('')
     }
   }
@@ -32,22 +35,22 @@ export default function TextBinaryTool() {
         .join('')
       setOutput(text)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('textBinary.error.convert', { message: err.message }))
       setOutput('')
     }
   }
 
   return (
     <ToolCard
-      title="Text to ASCII Binary"
-      description="텍스트와 ASCII 이진수를 상호 변환합니다"
+      title={`0️⃣ ${t('textBinary.title')}`}
+      description={t('textBinary.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력"
-          placeholder="Hello 또는 01001000 01100101 01101100 01101100 01101111"
+          label={t('textBinary.input.label')}
+          placeholder={t('textBinary.input.placeholder')}
         />
 
         <div className="grid grid-cols-2 gap-2">
@@ -55,13 +58,13 @@ export default function TextBinaryTool() {
             onClick={textToBinary}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            Text → Binary
+            {t('textBinary.actions.textToBinary')}
           </button>
           <button
             onClick={binaryToText}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           >
-            Binary → Text
+            {t('textBinary.actions.binaryToText')}
           </button>
         </div>
 
@@ -74,14 +77,14 @@ export default function TextBinaryTool() {
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('textBinary.output.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">예시</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('textBinary.examples.title')}</h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• "A" → "01000001"</li>
-            <li>• "Hello" → "01001000 01100101 01101100 01101100 01101111"</li>
+            <li>• {t('textBinary.examples.a')}</li>
+            <li>• {t('textBinary.examples.hello')}</li>
           </ul>
         </div>
       </div>

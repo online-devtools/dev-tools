@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function URLParserTool() {
+  const { t } = useLanguage()
   const [input, setInput] = useState('')
   const [parsed, setParsed] = useState<any>(null)
 
@@ -51,40 +53,40 @@ export default function URLParserTool() {
 
   return (
     <ToolCard
-      title="URL Parser"
-      description="URL을 구성 요소별로 분석합니다"
+      title={`🔍 ${t('urlParser.title')}`}
+      description={t('urlParser.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            URL 입력
+            {t('urlParser.input.label')}
           </label>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
-            placeholder="https://example.com:8080/path?key=value#hash"
+            placeholder={t('urlParser.input.placeholder')}
           />
         </div>
 
         {parsed && (
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">분석 결과</h3>
-            <InfoRow label="Full URL" value={parsed.href} />
-            <InfoRow label="Protocol" value={parsed.protocol} />
-            <InfoRow label="Origin" value={parsed.origin} />
-            <InfoRow label="Hostname" value={parsed.hostname} />
-            <InfoRow label="Port" value={parsed.port} />
-            <InfoRow label="Pathname" value={parsed.pathname} />
-            <InfoRow label="Search" value={parsed.search} />
-            <InfoRow label="Hash" value={parsed.hash} />
-            {parsed.username && <InfoRow label="Username" value={parsed.username} />}
-            {parsed.password && <InfoRow label="Password" value="●●●●●●" />}
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('urlParser.result.title')}</h3>
+            <InfoRow label={t('urlParser.result.full')} value={parsed.href} />
+            <InfoRow label={t('urlParser.result.protocol')} value={parsed.protocol} />
+            <InfoRow label={t('urlParser.result.origin')} value={parsed.origin} />
+            <InfoRow label={t('urlParser.result.hostname')} value={parsed.hostname} />
+            <InfoRow label={t('urlParser.result.port')} value={parsed.port} />
+            <InfoRow label={t('urlParser.result.pathname')} value={parsed.pathname} />
+            <InfoRow label={t('urlParser.result.search')} value={parsed.search} />
+            <InfoRow label={t('urlParser.result.hash')} value={parsed.hash} />
+            {parsed.username && <InfoRow label={t('urlParser.result.username')} value={parsed.username} />}
+            {parsed.password && <InfoRow label={t('urlParser.result.password')} value="●●●●●●" />}
 
             {Object.keys(parsed.params).length > 0 && (
               <div className="mt-4">
-                <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Query Parameters</h4>
+                <h4 className="font-semibold text-gray-800 dark:text-white mb-2">{t('urlParser.result.query')}</h4>
                 <div className="space-y-2">
                   {Object.entries(parsed.params).map(([key, value]) => (
                     <InfoRow key={key} label={key} value={value as string} />
@@ -97,7 +99,7 @@ export default function URLParserTool() {
 
         {!parsed && input && (
           <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg">
-            올바른 URL 형식이 아닙니다.
+            {t('urlParser.error.invalid')}
           </div>
         )}
       </div>

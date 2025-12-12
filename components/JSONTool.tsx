@@ -3,8 +3,11 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function JSONTool() {
+  const { t } = useLanguage()
+  // 입력 JSON과 결과/에러 상태를 관리해 번역된 메시지를 즉시 반영합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -16,7 +19,7 @@ export default function JSONTool() {
       const formatted = JSON.stringify(parsed, null, 2)
       setOutput(formatted)
     } catch (e) {
-      setError(`포맷 실패: ${e instanceof Error ? e.message : '올바른 JSON을 입력해주세요.'}`)
+      setError(t('jsonTool.error.format', { message: e instanceof Error ? e.message : t('jsonTool.error.invalid') }))
       setOutput('')
     }
   }
@@ -28,7 +31,7 @@ export default function JSONTool() {
       const minified = JSON.stringify(parsed)
       setOutput(minified)
     } catch (e) {
-      setError(`압축 실패: ${e instanceof Error ? e.message : '올바른 JSON을 입력해주세요.'}`)
+      setError(t('jsonTool.error.minify', { message: e instanceof Error ? e.message : t('jsonTool.error.invalid') }))
       setOutput('')
     }
   }
@@ -37,9 +40,9 @@ export default function JSONTool() {
     try {
       setError('')
       JSON.parse(input)
-      setOutput('✅ 유효한 JSON입니다!')
+      setOutput(t('jsonTool.validate.success'))
     } catch (e) {
-      setError(`❌ 유효하지 않은 JSON: ${e instanceof Error ? e.message : ''}`)
+      setError(t('jsonTool.validate.fail', { message: e instanceof Error ? e.message : '' }))
       setOutput('')
     }
   }
@@ -52,15 +55,15 @@ export default function JSONTool() {
 
   return (
     <ToolCard
-      title="📋 JSON Formatter/Validator"
-      description="JSON을 포맷하고, 압축하고, 검증합니다"
+      title={`📋 ${t('jsonTool.title')}`}
+      description={t('jsonTool.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          placeholder='{"key": "value"}'
-          label="입력 JSON"
+          placeholder={t('jsonTool.input.placeholder')}
+          label={t('jsonTool.input.label')}
           rows={8}
         />
 
@@ -69,25 +72,25 @@ export default function JSONTool() {
             onClick={handleFormat}
             className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
           >
-            Format
+            {t('jsonTool.actions.format')}
           </button>
           <button
             onClick={handleMinify}
             className="px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-colors"
           >
-            Minify
+            {t('jsonTool.actions.minify')}
           </button>
           <button
             onClick={handleValidate}
             className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
           >
-            Validate
+            {t('jsonTool.actions.validate')}
           </button>
           <button
             onClick={handleClear}
             className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
-            Clear
+            {t('jsonTool.actions.clear')}
           </button>
         </div>
 
@@ -99,9 +102,9 @@ export default function JSONTool() {
 
         <TextAreaWithCopy
           value={output}
-          placeholder="결과가 여기에 표시됩니다..."
+          placeholder={t('jsonTool.result.placeholder')}
           readOnly
-          label="결과"
+          label={t('jsonTool.result.label')}
           rows={8}
         />
       </div>

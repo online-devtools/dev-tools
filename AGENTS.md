@@ -22,3 +22,8 @@ Existing history favors short, imperative commit subjects (“Update image URLs�
 
 
 너가 작성하는 모든 코드에 백엔드 출신이 내가 봐도 이해할 수 있는 수준의 자세한 문법과 로직의 주석을 작성해야한다.
+
+
+### Remember
+You should use tools as much as possible, ideally more than 100 times. You should also implement your own tests first before attempting the problem.
+새로운 기능 추가시 영어 다국어 처리도 반든시 추가해야한다.

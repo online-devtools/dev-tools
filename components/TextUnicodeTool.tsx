@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function TextUnicodeTool() {
+  const { t } = useLanguage()
+  // 텍스트/유니코드 상호 변환을 위한 입력/출력/에러/포맷 상태를 관리합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -23,7 +26,7 @@ export default function TextUnicodeTool() {
         .join(' ')
       setOutput(unicode)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('textUnicode.error.convert', { message: err.message }))
       setOutput('')
     }
   }
@@ -39,52 +42,52 @@ export default function TextUnicodeTool() {
         .join('')
       setOutput(text)
     } catch (err: any) {
-      setError(`변환 오류: ${err.message}`)
+      setError(t('textUnicode.error.convert', { message: err.message }))
       setOutput('')
     }
   }
 
   return (
     <ToolCard
-      title="Text to Unicode"
-      description="텍스트와 유니코드를 상호 변환합니다"
+      title={`🔣 ${t('textUnicode.title')}`}
+      description={t('textUnicode.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력"
-          placeholder="Hello 또는 U+0048 U+0065 U+006C U+006C U+006F"
+          label={t('textUnicode.input.label')}
+          placeholder={t('textUnicode.input.placeholder')}
         />
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            유니코드 형식
+            {t('textUnicode.format.label')}
           </label>
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value as 'U+' | '\\u' | '&#')}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
-            <option value="U+">U+ (예: U+0048)</option>
-            <option value="\u">\u (예: \u0048)</option>
-            <option value="&#">HTML (예: &#x0048;)</option>
+            <option value="U+">U+ (e.g., U+0048)</option>
+            <option value="\u">\u (e.g., \u0048)</option>
+            <option value="&#">HTML (e.g., &#x0048;)</option>
           </select>
         </div>
 
         <div className="grid grid-cols-2 gap-2">
           <button
-            onClick={textToUnicode}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            Text → Unicode
-          </button>
-          <button
-            onClick={unicodeToText}
-            className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            Unicode → Text
-          </button>
+          onClick={textToUnicode}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        >
+          {t('textUnicode.actions.textToUnicode')}
+        </button>
+        <button
+          onClick={unicodeToText}
+          className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        >
+          {t('textUnicode.actions.unicodeToText')}
+        </button>
         </div>
 
         {error && (
@@ -96,7 +99,7 @@ export default function TextUnicodeTool() {
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="출력"
+          label={t('textUnicode.output.label')}
         />
       </div>
     </ToolCard>

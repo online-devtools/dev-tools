@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function TokenGeneratorTool() {
+  const { t } = useLanguage()
+  // 길이, 문자 유형 선택, 생성 결과를 상태로 관리합니다.
   const [length, setLength] = useState('32')
   const [uppercase, setUppercase] = useState(true)
   const [lowercase, setLowercase] = useState(true)
@@ -14,9 +17,9 @@ export default function TokenGeneratorTool() {
 
   const generateToken = () => {
     try {
-      const len = parseInt(length)
+      const len = parseInt(length, 10)
       if (isNaN(len) || len < 1 || len > 10000) {
-        setOutput('길이는 1에서 10000 사이여야 합니다.')
+        setOutput(t('token.error.length'))
         return
       }
 
@@ -27,7 +30,7 @@ export default function TokenGeneratorTool() {
       if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?'
 
       if (chars.length === 0) {
-        setOutput('최소 하나의 문자 유형을 선택해주세요.')
+        setOutput(t('token.error.noChars'))
         return
       }
 
@@ -40,20 +43,20 @@ export default function TokenGeneratorTool() {
       }
 
       setOutput(token)
-    } catch (error) {
-      setOutput('토큰 생성 중 오류가 발생했습니다.')
+    } catch {
+      setOutput(t('token.error.generate'))
     }
   }
 
   return (
     <ToolCard
-      title="Token Generator"
-      description="원하는 문자 조합으로 랜덤 토큰과 문자열을 생성합니다"
+      title={`🎲 ${t('token.title')}`}
+      description={t('token.description')}
     >
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            길이
+            {t('token.length.label')}
           </label>
           <input
             type="number"
@@ -67,7 +70,7 @@ export default function TokenGeneratorTool() {
 
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            문자 유형
+            {t('token.charTypes.label')}
           </label>
           <div className="flex flex-wrap gap-4">
             <label className="flex items-center space-x-2">
@@ -77,7 +80,7 @@ export default function TokenGeneratorTool() {
                 onChange={(e) => setUppercase(e.target.checked)}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">대문자 (A-Z)</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{t('token.charTypes.uppercase')}</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -86,7 +89,7 @@ export default function TokenGeneratorTool() {
                 onChange={(e) => setLowercase(e.target.checked)}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">소문자 (a-z)</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{t('token.charTypes.lowercase')}</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -95,7 +98,7 @@ export default function TokenGeneratorTool() {
                 onChange={(e) => setNumbers(e.target.checked)}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">숫자 (0-9)</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{t('token.charTypes.numbers')}</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -104,7 +107,7 @@ export default function TokenGeneratorTool() {
                 onChange={(e) => setSymbols(e.target.checked)}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">특수문자</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{t('token.charTypes.symbols')}</span>
             </label>
           </div>
         </div>
@@ -113,13 +116,13 @@ export default function TokenGeneratorTool() {
           onClick={generateToken}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          생성
+          {t('token.actions.generate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="생성된 토큰"
+          label={t('token.result.label')}
         />
       </div>
     </ToolCard>

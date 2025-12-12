@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type Base = 'binary' | 'octal' | 'decimal' | 'hexadecimal'
 
 export default function BaseConverterTool() {
+  const { t } = useLanguage()
+  // 입력 값, 입력 진법, 변환 결과, 에러 상태를 관리합니다.
   const [inputValue, setInputValue] = useState('255')
   const [inputBase, setInputBase] = useState<Base>('decimal')
   const [results, setResults] = useState<Record<Base, string>>({
@@ -31,28 +34,28 @@ export default function BaseConverterTool() {
       switch (fromBase) {
         case 'binary':
           if (!/^[01]+$/.test(value)) {
-            setError('2진수는 0과 1만 입력 가능합니다')
+            setError(t('baseConv.error.binary'))
             return
           }
           decimalValue = parseInt(value, 2)
           break
         case 'octal':
           if (!/^[0-7]+$/.test(value)) {
-            setError('8진수는 0-7만 입력 가능합니다')
+            setError(t('baseConv.error.octal'))
             return
           }
           decimalValue = parseInt(value, 8)
           break
         case 'decimal':
           if (!/^\d+$/.test(value)) {
-            setError('10진수는 0-9만 입력 가능합니다')
+            setError(t('baseConv.error.decimal'))
             return
           }
           decimalValue = parseInt(value, 10)
           break
         case 'hexadecimal':
           if (!/^[0-9A-Fa-f]+$/.test(value)) {
-            setError('16진수는 0-9, A-F만 입력 가능합니다')
+            setError(t('baseConv.error.hex'))
             return
           }
           decimalValue = parseInt(value, 16)
@@ -60,7 +63,7 @@ export default function BaseConverterTool() {
       }
 
       if (isNaN(decimalValue) || decimalValue < 0) {
-        setError('올바른 숫자를 입력하세요')
+        setError(t('baseConv.error.invalidNumber'))
         return
       }
 
@@ -72,7 +75,7 @@ export default function BaseConverterTool() {
         hexadecimal: decimalValue.toString(16).toUpperCase()
       })
     } catch (e) {
-      setError('변환 중 오류가 발생했습니다')
+      setError(t('baseConv.error.generic'))
       setResults({ binary: '', octal: '', decimal: '', hexadecimal: '' })
     }
   }
@@ -92,23 +95,23 @@ export default function BaseConverterTool() {
   }
 
   const baseInfo = {
-    binary: { label: '2진수 (Binary)', placeholder: '11111111', prefix: '0b' },
-    octal: { label: '8진수 (Octal)', placeholder: '377', prefix: '0o' },
-    decimal: { label: '10진수 (Decimal)', placeholder: '255', prefix: '' },
-    hexadecimal: { label: '16진수 (Hexadecimal)', placeholder: 'FF', prefix: '0x' }
+    binary: { label: t('baseConv.label.binary'), placeholder: '11111111', prefix: '0b' },
+    octal: { label: t('baseConv.label.octal'), placeholder: '377', prefix: '0o' },
+    decimal: { label: t('baseConv.label.decimal'), placeholder: '255', prefix: '' },
+    hexadecimal: { label: t('baseConv.label.hex'), placeholder: 'FF', prefix: '0x' }
   }
 
   return (
     <ToolCard
-      title="🔢 Base Converter"
-      description="진법 변환기 (2/8/10/16진수)"
+      title={`🔢 ${t('baseConv.title')}`}
+      description={t('baseConv.description')}
     >
       <div className="space-y-6">
         {/* Input Section */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              입력 진법 선택
+              {t('baseConv.inputBase')}
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {(Object.keys(baseInfo) as Base[]).map((base) => (
@@ -171,7 +174,7 @@ export default function BaseConverterTool() {
                     onClick={() => copyToClipboard(results[base])}
                     className="px-2 py-1 text-xs bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 rounded transition-colors"
                   >
-                    Copy
+                    {t('common.copy')}
                   </button>
                 </div>
                 <div className="font-mono text-lg font-bold text-gray-800 dark:text-white break-all">
@@ -190,7 +193,7 @@ export default function BaseConverterTool() {
         {/* Quick Reference */}
         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <h3 className="font-semibold text-gray-800 dark:text-white mb-3">
-            📖 진법 변환 참고
+            {t('baseConv.referenceTitle')}
           </h3>
           <div className="grid md:grid-cols-2 gap-3 text-sm">
             <div className="space-y-1">

@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function StringObfuscatorTool() {
+  const { t } = useLanguage()
+  // 입력/출력과 마스킹 옵션을 상태로 관리해 번역된 메시지를 보여줍니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [visibleStart, setVisibleStart] = useState('4')
@@ -33,27 +36,27 @@ export default function StringObfuscatorTool() {
 
       setOutput(startPart + masked + endPart)
     } catch (error) {
-      setOutput('난독화 중 오류가 발생했습니다.')
+      setOutput(t('stringObfuscator.error.generic'))
     }
   }
 
   return (
     <ToolCard
-      title="String Obfuscator"
-      description="민감한 문자열을 부분적으로 숨겨 안전하게 공유합니다"
+      title={`🎭 ${t('stringObfuscator.title')}`}
+      description={t('stringObfuscator.description')}
     >
       <div className="space-y-4">
         <TextAreaWithCopy
           value={input}
           onChange={setInput}
-          label="입력 문자열"
-          placeholder="example_api_key_1234567890abcdefgh"
+          label={t('stringObfuscator.input.label')}
+          placeholder={t('stringObfuscator.input.placeholder')}
         />
 
         <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              앞에서 표시할 문자 수
+              {t('stringObfuscator.visible.start')}
             </label>
             <input
               type="number"
@@ -65,7 +68,7 @@ export default function StringObfuscatorTool() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              뒤에서 표시할 문자 수
+              {t('stringObfuscator.visible.end')}
             </label>
             <input
               type="number"
@@ -77,7 +80,7 @@ export default function StringObfuscatorTool() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              마스킹 문자
+              {t('stringObfuscator.maskChar')}
             </label>
             <input
               type="text"
@@ -93,21 +96,21 @@ export default function StringObfuscatorTool() {
           onClick={obfuscate}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
-          난독화
+          {t('stringObfuscator.actions.obfuscate')}
         </button>
 
         <TextAreaWithCopy
           value={output}
           readOnly
-          label="난독화된 문자열"
+          label={t('stringObfuscator.output.label')}
         />
 
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">사용 예시</h3>
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('stringObfuscator.examples.title')}</h3>
           <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>• API 키: "sk_live_1234..." → "sk_l****************1234"</li>
-            <li>• IBAN: "GB82 WEST 1234..." → "GB82****************1234"</li>
-            <li>• 이메일: "user@example.com" → "use***@example.com"</li>
+            <li>• {t('stringObfuscator.examples.api')}</li>
+            <li>• {t('stringObfuscator.examples.iban')}</li>
+            <li>• {t('stringObfuscator.examples.email')}</li>
           </ul>
         </div>
       </div>
