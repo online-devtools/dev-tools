@@ -60,7 +60,7 @@ export default function ASCIIArtTool() {
     }
 
     try {
-      figlet.text(
+      figlet(
         input,
         {
           font: font,

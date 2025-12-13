@@ -50,6 +50,7 @@ export const toolCategories = [
       { nameKey: 'tool.jsonSchema', path: '/json-schema', icon: '📐' },
       { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
       { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
+      { nameKey: 'tool.envManager', path: '/env-manager', icon: '⚙️' },
     ]
   },
   {
@@ -66,6 +67,10 @@ export const toolCategories = [
       { nameKey: 'tool.emojiPicker', path: '/emoji-picker', icon: '😀' },
       { nameKey: 'tool.asciiArt', path: '/ascii-art', icon: '🎨' },
       { nameKey: 'tool.macAddress', path: '/mac-address', icon: '🖧' },
+      { nameKey: 'tool.metaTags', path: '/meta-tags', icon: '🏷️' },
+      { nameKey: 'tool.cssGradient', path: '/css-gradient', icon: '🎨' },
+      { nameKey: 'tool.boxShadow', path: '/box-shadow', icon: '📦' },
+      { nameKey: 'tool.mockData', path: '/mock-data', icon: '🎲' },
     ]
   },
   {
@@ -94,6 +99,7 @@ export const toolCategories = [
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧' },
       { nameKey: 'tool.sorter', path: '/sorter', icon: '↕️' },
+      { nameKey: 'tool.markdownTable', path: '/markdown-table', icon: '📋' },
     ]
   },
   {

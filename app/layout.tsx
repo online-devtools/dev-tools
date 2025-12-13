@@ -84,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <meta
           name="google-site-verification"
@@ -132,8 +132,24 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (() => {
+                try {
+                  const saved = localStorage.getItem('theme')
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+                  const useDark = saved ? saved === 'dark' : prefersDark
+                  document.documentElement.classList[useDark ? 'add' : 'remove']('dark')
+                } catch (e) {
+                  // If access fails, fallback to system preference via CSS
+                }
+              })();
+            `
+          }}
+        />
       </head>
-      <body>
+      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <LanguageProvider>
           <LayoutWrapper>
             <div className="container mx-auto px-4 py-8">

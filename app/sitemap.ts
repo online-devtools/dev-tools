@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/json-csv',
     '/json-diff',
     '/json-schema',
+    '/env-manager',
     // Generators
     '/uuid',
     '/qrcode',
@@ -57,6 +58,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ulid',
     '/port-generator',
     '/emoji-picker',
+    '/meta-tags',
+    '/css-gradient',
+    '/box-shadow',
+    '/mock-data',
     // Converters
     '/timestamp',
     '/color',
@@ -74,6 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/numeronym',
     '/list-converter',
     '/email-normalizer',
+    '/markdown-table',
     // Calculators
     '/math-eval',
     '/percentage-calc',
