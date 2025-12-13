@@ -49,6 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/json-diff',
     '/json-schema',
     '/env-manager',
+    '/code-minifier',
+    '/sql-builder',
     // Generators
     '/uuid',
     '/qrcode',
@@ -70,6 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/roman-numeral',
     '/temp-converter',
     '/svg-optimizer',
+    '/curl-converter',
     // Text
     '/slugify',
     '/nato-alphabet',

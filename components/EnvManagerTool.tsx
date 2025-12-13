@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+// 상태 관리와 렌더 사이드이펙트를 모두 사용하므로 useEffect를 함께 가져옵니다.
+import { useEffect, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -22,6 +23,9 @@ export default function EnvManagerTool() {
   const [nextId, setNextId] = useState(2)
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('env')
   const [error, setError] = useState('')
+
+  // 메모이제이션 없이 render마다 호출하면 무한렌더 위험이 있으므로 별도 상태로 보관합니다.
+  const [generatedOutput, setGeneratedOutput] = useState('')
 
   const addVariable = () => {
     setVariables([
@@ -141,6 +145,18 @@ export default function EnvManagerTool() {
     }
   }
 
+  // outputFormat이나 variables가 바뀔 때만 결과를 갱신해 불필요한 렌더를 막습니다.
+  const refreshOutput = () => {
+    const out = generateOutput()
+    setGeneratedOutput(out)
+  }
+
+  // 초기 1회 및 의존성 변경 시 출력 갱신
+  useEffect(() => {
+    refreshOutput()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variables, outputFormat])
+
   return (
     <ToolCard
       title={t('envManager.title')}
@@ -248,7 +264,7 @@ export default function EnvManagerTool() {
 
         {/* Output */}
         <TextAreaWithCopy
-          value={generateOutput()}
+          value={generatedOutput}
           readOnly
           label={t('envManager.output')}
           rows={12}

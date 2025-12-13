@@ -8,6 +8,7 @@ export const toolCategories = [
       { nameKey: 'tool.htmlEntities', path: '/html-entities', icon: '&' },
       { nameKey: 'tool.base64File', path: '/base64-file', icon: '📁' },
       { nameKey: 'tool.imageBase64', path: '/image-base64', icon: '🖼️' },
+      { nameKey: 'tool.dataUrl', path: '/data-url', icon: '🧾' },
     ]
   },
   {
@@ -27,6 +28,7 @@ export const toolCategories = [
       { nameKey: 'tool.passwordStrength', path: '/password-strength', icon: '💪' },
       { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐' },
       { nameKey: 'tool.cryptoBundle', path: '/crypto-bundle', icon: '🧰' },
+      { nameKey: 'tool.regexSafety', path: '/regex-safety', icon: '🛡️' },
     ]
   },
   {
@@ -51,6 +53,8 @@ export const toolCategories = [
       { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
       { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
       { nameKey: 'tool.envManager', path: '/env-manager', icon: '⚙️' },
+      { nameKey: 'tool.codeMinifier', path: '/code-minifier', icon: '📦' },
+      { nameKey: 'tool.sqlBuilder', path: '/sql-builder', icon: '🗃️' },
     ]
   },
   {
@@ -84,6 +88,7 @@ export const toolCategories = [
       { nameKey: 'tool.romanNumeral', path: '/roman-numeral', icon: 'Ⅰ' },
       { nameKey: 'tool.tempConverter', path: '/temp-converter', icon: '🌡️' },
       { nameKey: 'tool.svgOptimizer', path: '/svg-optimizer', icon: '⚡' },
+      { nameKey: 'tool.curlConverter', path: '/curl-converter', icon: '🔄' },
     ]
   },
   {
@@ -121,6 +126,7 @@ export const toolCategories = [
       { nameKey: 'tool.userAgent', path: '/user-agent', icon: '🖥️' },
       { nameKey: 'tool.phoneParser', path: '/phone-parser', icon: '📞' },
       { nameKey: 'tool.ibanValidator', path: '/iban-validator', icon: '🏦' },
+      { nameKey: 'tool.a11yCheck', path: '/a11y-check', icon: '♿' },
     ]
   },
   {
@@ -131,6 +137,7 @@ export const toolCategories = [
       { nameKey: 'tool.regex', path: '/regex', icon: '🔍' },
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰' },
       { nameKey: 'tool.gitignoreGenerator', path: '/gitignore-generator', icon: '📝' },
+      { nameKey: 'tool.cronHuman', path: '/cron-human', icon: '🗓️' },
     ]
   },
   {
@@ -141,6 +148,7 @@ export const toolCategories = [
       { nameKey: 'tool.diff', path: '/diff', icon: '📄' },
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢' },
+      { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪' },
     ]
   }
 ]

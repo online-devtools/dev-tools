@@ -137,7 +137,8 @@ export default function RootLayout({
             __html: `
               (() => {
                 try {
-                  const saved = localStorage.getItem('theme')
+                  // ThemeProvider에서 사용하는 저장 키와 동일하게 맞춰 초기 렌더 시 깜박임을 줄입니다.
+                  const saved = localStorage.getItem('dev-tools-theme')
                   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
                   const useDark = saved ? saved === 'dark' : prefersDark
                   document.documentElement.classList[useDark ? 'add' : 'remove']('dark')
