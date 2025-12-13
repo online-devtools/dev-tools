@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  // 프로덕션 URL 설정 - 환경 변수 우선, 없으면 기본값 사용
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
-                  'https://dev-tools-online.vercel.app'
+  // 프로덕션 URL 설정 - 프로덕션 환경에서만 실제 도메인 사용
+  const isProduction = process.env.VERCEL_ENV === 'production'
+  const baseUrl = isProduction
+    ? 'https://dev-tools-online.vercel.app'
+    : process.env.NEXT_PUBLIC_SITE_URL || 'https://dev-tools-online.vercel.app'
 
   return {
     rules: [
