@@ -7,6 +7,7 @@ export const toolCategories = [
       { nameKey: 'tool.url', path: '/url', icon: '🔗' },
       { nameKey: 'tool.htmlEntities', path: '/html-entities', icon: '&' },
       { nameKey: 'tool.base64File', path: '/base64-file', icon: '📁' },
+      { nameKey: 'tool.imageBase64', path: '/image-base64', icon: '🖼️' },
     ]
   },
   {
@@ -15,6 +16,7 @@ export const toolCategories = [
     tools: [
       { nameKey: 'tool.jasypt', path: '/jasypt', icon: '🔐' },
       { nameKey: 'tool.jwtSigner', path: '/jwt-signer', icon: '🧾' },
+      { nameKey: 'tool.jwtKeys', path: '/jwt-keys', icon: '🗝️' },
       { nameKey: 'tool.hash', path: '/hash', icon: '🔒' },
       { nameKey: 'tool.password', path: '/password', icon: '🔑' },
       { nameKey: 'tool.bcrypt', path: '/bcrypt', icon: '🔐' },
@@ -24,6 +26,7 @@ export const toolCategories = [
       { nameKey: 'tool.stringObfuscator', path: '/string-obfuscator', icon: '🎭' },
       { nameKey: 'tool.passwordStrength', path: '/password-strength', icon: '💪' },
       { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐' },
+      { nameKey: 'tool.cryptoBundle', path: '/crypto-bundle', icon: '🧰' },
     ]
   },
   {
@@ -44,6 +47,9 @@ export const toolCategories = [
       { nameKey: 'tool.jsonMinify', path: '/json-minify', icon: '📦' },
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍' },
+      { nameKey: 'tool.jsonSchema', path: '/json-schema', icon: '📐' },
+      { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
+      { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
     ]
   },
   {
@@ -54,6 +60,7 @@ export const toolCategories = [
       { nameKey: 'tool.qrcode', path: '/qrcode', icon: '📱' },
       { nameKey: 'tool.lorem', path: '/lorem', icon: '✏️' },
       { nameKey: 'tool.tokenGenerator', path: '/token-generator', icon: '🎲' },
+      { nameKey: 'tool.tokenCounter', path: '/token-counter', icon: '🤖' },
       { nameKey: 'tool.ulid', path: '/ulid', icon: '🆔' },
       { nameKey: 'tool.portGenerator', path: '/port-generator', icon: '🔌' },
       { nameKey: 'tool.emojiPicker', path: '/emoji-picker', icon: '😀' },
@@ -71,6 +78,7 @@ export const toolCategories = [
       { nameKey: 'tool.baseconv', path: '/baseconv', icon: '🔢' },
       { nameKey: 'tool.romanNumeral', path: '/roman-numeral', icon: 'Ⅰ' },
       { nameKey: 'tool.tempConverter', path: '/temp-converter', icon: '🌡️' },
+      { nameKey: 'tool.svgOptimizer', path: '/svg-optimizer', icon: '⚡' },
     ]
   },
   {
@@ -85,6 +93,7 @@ export const toolCategories = [
       { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n' },
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧' },
+      { nameKey: 'tool.sorter', path: '/sorter', icon: '↕️' },
     ]
   },
   {
@@ -115,6 +124,7 @@ export const toolCategories = [
       { nameKey: 'tool.chmod', path: '/chmod', icon: '🔐' },
       { nameKey: 'tool.regex', path: '/regex', icon: '🔍' },
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰' },
+      { nameKey: 'tool.gitignoreGenerator', path: '/gitignore-generator', icon: '📝' },
     ]
   },
   {

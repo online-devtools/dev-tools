@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function KeycodeTool() {
+  const { t } = useLanguage()
   const [keyInfo, setKeyInfo] = useState<{
     key: string
     code: string
@@ -18,7 +20,16 @@ export default function KeycodeTool() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      e.preventDefault()
+      // Don't prevent default for certain important keys
+      // Allow Ctrl+K, Ctrl+R, F5, etc.
+      const allowedKeys = ['k', 'r', 'F5', 'F12']
+      const isAllowedShortcut = (e.ctrlKey || e.metaKey) && allowedKeys.includes(e.key)
+      const isFunctionKey = e.key.startsWith('F') && !isNaN(parseInt(e.key.substring(1)))
+
+      if (!isAllowedShortcut && !isFunctionKey) {
+        e.preventDefault()
+      }
+
       setKeyInfo({
         key: e.key,
         code: e.code,
@@ -38,24 +49,24 @@ export default function KeycodeTool() {
 
   return (
     <ToolCard
-      title="Keycode Info"
-      description="키보드 키를 눌러 정보를 확인하세요"
+      title={t('keycode.title')}
+      description={t('keycode.description')}
     >
       <div className="space-y-4">
         {!keyInfo ? (
-          <div className="p-8 text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="p-8 text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
             <div className="text-6xl mb-4">⌨️</div>
             <div className="text-lg font-medium text-gray-800 dark:text-white">
-              아무 키나 눌러보세요
+              {t('keycode.prompt')}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              키보드의 모든 정보가 표시됩니다
+              {t('keycode.info')}
             </div>
           </div>
         ) : (
           <>
-            <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg text-center">
-              <div className="text-7xl font-bold text-gray-900 dark:text-white mb-2">
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg border border-blue-100 dark:border-blue-800 text-center">
+              <div className="text-7xl font-bold text-gray-900 dark:text-white mb-2 break-all">
                 {keyInfo.key.length === 1 ? keyInfo.key : keyInfo.code}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -64,26 +75,26 @@ export default function KeycodeTool() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                <div className="text-sm text-gray-600 dark:text-gray-400">key</div>
-                <div className="text-xl font-bold text-gray-900 dark:text-white">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">key</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-white break-all">
                   {keyInfo.key}
                 </div>
               </div>
-              <div className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                <div className="text-sm text-gray-600 dark:text-gray-400">code</div>
-                <div className="text-xl font-bold text-gray-900 dark:text-white">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">code</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-white break-all">
                   {keyInfo.code}
                 </div>
               </div>
-              <div className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                <div className="text-sm text-gray-600 dark:text-gray-400">keyCode</div>
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">keyCode</div>
                 <div className="text-xl font-bold text-gray-900 dark:text-white">
                   {keyInfo.keyCode}
                 </div>
               </div>
-              <div className="p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                <div className="text-sm text-gray-600 dark:text-gray-400">which</div>
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">which</div>
                 <div className="text-xl font-bold text-gray-900 dark:text-white">
                   {keyInfo.which}
                 </div>
@@ -91,13 +102,15 @@ export default function KeycodeTool() {
             </div>
 
             {(keyInfo.altKey || keyInfo.ctrlKey || keyInfo.shiftKey || keyInfo.metaKey) && (
-              <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <div className="font-semibold text-gray-800 dark:text-white mb-2">수정 키</div>
+              <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                <div className="font-semibold text-gray-800 dark:text-white mb-2">
+                  {t('keycode.modifiers')}
+                </div>
                 <div className="flex flex-wrap gap-2">
-                  {keyInfo.altKey && <span className="px-2 py-1 bg-yellow-200 dark:bg-yellow-800 rounded text-sm">Alt</span>}
-                  {keyInfo.ctrlKey && <span className="px-2 py-1 bg-yellow-200 dark:bg-yellow-800 rounded text-sm">Ctrl</span>}
-                  {keyInfo.shiftKey && <span className="px-2 py-1 bg-yellow-200 dark:bg-yellow-800 rounded text-sm">Shift</span>}
-                  {keyInfo.metaKey && <span className="px-2 py-1 bg-yellow-200 dark:bg-yellow-800 rounded text-sm">Meta</span>}
+                  {keyInfo.altKey && <span className="px-3 py-1 bg-yellow-200 dark:bg-yellow-700 text-gray-800 dark:text-white rounded font-medium text-sm">Alt</span>}
+                  {keyInfo.ctrlKey && <span className="px-3 py-1 bg-yellow-200 dark:bg-yellow-700 text-gray-800 dark:text-white rounded font-medium text-sm">Ctrl</span>}
+                  {keyInfo.shiftKey && <span className="px-3 py-1 bg-yellow-200 dark:bg-yellow-700 text-gray-800 dark:text-white rounded font-medium text-sm">Shift</span>}
+                  {keyInfo.metaKey && <span className="px-3 py-1 bg-yellow-200 dark:bg-yellow-700 text-gray-800 dark:text-white rounded font-medium text-sm">Meta</span>}
                 </div>
               </div>
             )}

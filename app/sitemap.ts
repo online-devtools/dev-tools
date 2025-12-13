@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/url',
     '/html-entities',
     '/base64-file',
+    '/image-base64',
     // Security
     '/jasypt',
     '/hash',
@@ -44,11 +45,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/json-minify',
     '/json-csv',
     '/json-diff',
+    '/json-schema',
     // Generators
     '/uuid',
     '/qrcode',
     '/lorem',
     '/token-generator',
+    '/token-counter',
     '/ulid',
     '/port-generator',
     '/emoji-picker',
@@ -59,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/baseconv',
     '/roman-numeral',
     '/temp-converter',
+    '/svg-optimizer',
     // Text
     '/slugify',
     '/nato-alphabet',
@@ -81,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/chmod',
     '/regex',
     '/cron',
+    '/gitignore-generator',
     // Network
     '/ipcalc',
     '/diff',
