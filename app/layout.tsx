@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dev-tools.example.com'), // 실제 배포 URL로 변경 필요
@@ -140,7 +141,14 @@ export default function RootLayout({
                   // ThemeProvider에서 사용하는 저장 키와 동일하게 맞춰 초기 렌더 시 깜박임을 줄입니다.
                   const saved = localStorage.getItem('dev-tools-theme')
                   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-                  const useDark = saved ? saved === 'dark' : prefersDark
+
+                  let useDark = false
+                  if (!saved || saved === 'auto') {
+                    useDark = prefersDark
+                  } else {
+                    useDark = saved === 'dark'
+                  }
+
                   document.documentElement.classList[useDark ? 'add' : 'remove']('dark')
                 } catch (e) {
                   // If access fails, fallback to system preference via CSS
@@ -151,11 +159,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        <LanguageProvider>
-          <LayoutWrapper>
-            <div className="container mx-auto px-4 py-8">
-              {children}
-            </div>
+        <ThemeProvider>
+          <LanguageProvider>
+            <LayoutWrapper>
+              <div className="container mx-auto px-4 py-8">
+                {children}
+              </div>
             <footer className="mt-auto py-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
               <div className="container mx-auto px-4">
                 <div className="grid md:grid-cols-3 gap-8 mb-6">
@@ -202,6 +211,7 @@ export default function RootLayout({
             </footer>
           </LayoutWrapper>
         </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
