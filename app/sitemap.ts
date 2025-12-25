@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/regex-safety',
     // Data Format
     '/json',
+    '/jsonl',
     '/jwt',
     '/sql',
     '/mybatis',
@@ -94,6 +95,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Calculators
     '/math-eval',
     '/percentage-calc',
+    '/semver',
     // Info
     '/http-status',
     '/mime-types',
@@ -112,6 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/diff',
     '/url-parser',
     '/ipv4-converter',
+    '/http-headers',
     '/http-builder',
     // Additional tools
     '/phone-parser',

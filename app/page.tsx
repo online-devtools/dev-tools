@@ -34,6 +34,7 @@ const toolsConfig = [
     categoryKey: 'category.dataFormat',
     items: [
       { nameKey: 'tool.json', path: '/json', icon: '📋', descKey: 'tool.json.desc' },
+      { nameKey: 'tool.jsonl', path: '/jsonl', icon: '🧾', descKey: 'tool.jsonl.desc' },
       { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫', descKey: 'tool.jwt.desc' },
       { nameKey: 'tool.sql', path: '/sql', icon: '🗃️', descKey: 'tool.sql.desc' },
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦', descKey: 'tool.mybatis.desc' },
@@ -93,6 +94,7 @@ const toolsConfig = [
     items: [
       { nameKey: 'tool.mathEval', path: '/math-eval', icon: '🧮', descKey: 'tool.mathEval.desc' },
       { nameKey: 'tool.percentageCalc', path: '/percentage-calc', icon: '%', descKey: 'tool.percentageCalc.desc' },
+      { nameKey: 'tool.semver', path: '/semver', icon: '🔢', descKey: 'tool.semver.desc' },
     ]
   },
   {
@@ -122,6 +124,7 @@ const toolsConfig = [
       { nameKey: 'tool.diff', path: '/diff', icon: '📄', descKey: 'tool.diff.desc' },
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍', descKey: 'tool.urlParser.desc' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢', descKey: 'tool.ipv4Converter.desc' },
+      { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨', descKey: 'tool.httpHeaders.desc' },
     ]
   }
 ]

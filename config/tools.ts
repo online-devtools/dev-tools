@@ -36,6 +36,7 @@ export const toolCategories = [
     icon: '📋',
     tools: [
       { nameKey: 'tool.json', path: '/json', icon: '📋' },
+      { nameKey: 'tool.jsonl', path: '/jsonl', icon: '🧾' },
       { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫' },
       { nameKey: 'tool.sql', path: '/sql', icon: '🗃️' },
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦' },
@@ -113,6 +114,7 @@ export const toolCategories = [
     tools: [
       { nameKey: 'tool.mathEval', path: '/math-eval', icon: '🧮' },
       { nameKey: 'tool.percentageCalc', path: '/percentage-calc', icon: '%' },
+      { nameKey: 'tool.semver', path: '/semver', icon: '🔢' },
     ]
   },
   {
@@ -148,6 +150,7 @@ export const toolCategories = [
       { nameKey: 'tool.diff', path: '/diff', icon: '📄' },
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢' },
+      { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨' },
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪' },
     ]
   }
