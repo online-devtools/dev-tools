@@ -80,6 +80,7 @@ export const toolCategories = [
       { nameKey: 'tool.cssGradient', path: '/css-gradient', icon: '🎨' },
       { nameKey: 'tool.boxShadow', path: '/box-shadow', icon: '📦' },
       { nameKey: 'tool.mockData', path: '/mock-data', icon: '🎲' },
+      { nameKey: 'tool.exif', path: '/exif', icon: '📷' },
     ]
   },
   {
@@ -160,6 +161,7 @@ export const toolCategories = [
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪' },
       { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌' },
       { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐' },
+      { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐' },
     ]
   }
 ]
