@@ -1,16 +1,10 @@
 import { MetadataRoute } from 'next'
-import { normalizeBaseUrl } from '@/utils/normalizeBaseUrl'
+import { getSiteBaseUrl } from '@/utils/siteUrl'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Vercel이 production으로 배포된 경우에만 실서비스 도메인을 사용하고,
-  // 그 외 환경에서는 NEXT_PUBLIC_SITE_URL(없으면 기본값)로 생성한다.
-  // sitemap에 적힌 URL은 절대경로만 허용되므로 이 값을 먼저 확정한다.
-  const isProduction = process.env.VERCEL_ENV === 'production'
-  const rawBaseUrl = isProduction
-    ? 'https://dev-tools-online.vercel.app'
-    : process.env.NEXT_PUBLIC_SITE_URL || 'https://dev-tools-online.vercel.app'
-  // 환경별 원본 URL을 정규화하여 잘못된 URL(스킴 누락 등)을 방지한다.
-  const baseUrl = normalizeBaseUrl(rawBaseUrl)
+  // sitemap에는 절대 URL만 허용되므로 공통 유틸에서 base URL을 확정한다.
+  // metadata와 동일한 값으로 맞춰야 검색 엔진이 canonical과 sitemap을 일치시킨다.
+  const baseUrl = getSiteBaseUrl()
 
   // 정적 라우트들을 일괄 정의한다.
   // Next.js App Router의 각 도구 페이지 폴더를 명시적으로 나열해 검색 엔진이 모든 툴을 인덱싱할 수 있도록 한다.

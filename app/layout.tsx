@@ -4,9 +4,16 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
+import { getSiteBaseUrl } from '@/utils/siteUrl'
+
+// Derive a single canonical base URL so every metadata field is consistent for SEO.
+// This ensures Open Graph, JSON-LD, and canonical tags all point to the same domain.
+const siteBaseUrl = getSiteBaseUrl()
+const siteBase = new URL(siteBaseUrl)
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dev-tools.example.com'), // 실제 배포 URL로 변경 필요
+  // metadataBase must be an absolute URL object so relative metadata resolves correctly.
+  metadataBase: siteBase,
   title: {
     default: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     template: '%s | Developer Tools'
@@ -50,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://dev-tools.example.com',
+    url: siteBaseUrl,
     title: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     description: '개발자를 위한 15가지 필수 온라인 도구 모음. Base64, JSON, JWT, 정규식, QR 코드 등 개발에 필요한 모든 유틸리티',
     siteName: 'Developer Tools',
@@ -70,7 +77,7 @@ export const metadata: Metadata = {
     images: ['/og-image'],
   },
   alternates: {
-    canonical: 'https://dev-tools.example.com',
+    canonical: siteBaseUrl,
   },
   verification: {
     google: 'Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k',
@@ -105,7 +112,8 @@ export default function RootLayout({
               '@type': 'WebApplication',
               name: 'Developer Tools',
               description: '개발자를 위한 15가지 필수 온라인 도구 모음',
-              url: 'https://dev-tools.example.com',
+              // 구조화된 데이터도 canonical과 동일한 base URL을 사용해 검색 엔진 혼선을 줄인다.
+              url: siteBaseUrl,
               applicationCategory: 'DeveloperApplication',
               operatingSystem: 'Any',
               offers: {

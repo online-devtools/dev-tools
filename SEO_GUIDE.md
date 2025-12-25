@@ -33,13 +33,11 @@
 
 ## 📋 배포 후 해야 할 일
 
-### 1. URL 변경
-다음 파일들에서 `https://dev-tools.example.com`을 실제 도메인으로 변경하세요:
+### 1. URL 설정
+메타데이터/robots/sitemap의 base URL은 `utils/siteUrl.ts`에서 공통으로 계산합니다.
 
-- `app/layout.tsx` (line 6)
-- `app/robots.ts` (line 12)
-- `app/sitemap.ts` (line 4)
-- `app/layout.tsx` (line 96 - JSON-LD)
+- **권장**: `NEXT_PUBLIC_SITE_URL`을 실제 도메인으로 설정
+- **대체**: 미설정 시 `VERCEL_URL` 또는 기본값(`https://dev-tools-online.vercel.app`)을 사용
 
 ### 2. Google Search Console 등록
 1. [Google Search Console](https://search.google.com/search-console) 접속
@@ -113,7 +111,7 @@ import Script from 'next/script'
 - [x] 보안 헤더
 - [ ] Google Search Console 등록
 - [ ] 이미지 파일 생성
-- [ ] 실제 도메인으로 URL 변경
+- [ ] 실제 도메인 사용 시 `NEXT_PUBLIC_SITE_URL` 설정
 
 ## 📊 SEO 성능 측정
 
