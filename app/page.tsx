@@ -35,6 +35,9 @@ const toolsConfig = [
     items: [
       { nameKey: 'tool.json', path: '/json', icon: '📋', descKey: 'tool.json.desc' },
       { nameKey: 'tool.jsonl', path: '/jsonl', icon: '🧾', descKey: 'tool.jsonl.desc' },
+      // JSON flatten helps reshape nested payloads into key/value paths.
+      { nameKey: 'tool.jsonFlatten', path: '/json-flatten', icon: '🧩', descKey: 'tool.jsonFlatten.desc' },
+      { nameKey: 'tool.graphql', path: '/graphql', icon: '🔷', descKey: 'tool.graphql.desc' },
       { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫', descKey: 'tool.jwt.desc' },
       { nameKey: 'tool.sql', path: '/sql', icon: '🗃️', descKey: 'tool.sql.desc' },
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦', descKey: 'tool.mybatis.desc' },
@@ -48,6 +51,8 @@ const toolsConfig = [
       { nameKey: 'tool.jsonMinify', path: '/json-minify', icon: '📦', descKey: 'tool.jsonMinify.desc' },
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊', descKey: 'tool.jsonCsv.desc' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍', descKey: 'tool.jsonDiff.desc' },
+      // Env diff is useful for comparing deployment configurations.
+      { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪', descKey: 'tool.envDiff.desc' },
     ]
   },
   {
@@ -125,6 +130,8 @@ const toolsConfig = [
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍', descKey: 'tool.urlParser.desc' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢', descKey: 'tool.ipv4Converter.desc' },
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨', descKey: 'tool.httpHeaders.desc' },
+      // Cookie parsing complements HTTP header inspection.
+      { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪', descKey: 'tool.cookieParser.desc' },
     ]
   }
 ]

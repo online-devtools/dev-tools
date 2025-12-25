@@ -40,6 +40,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Data Format
     '/json',
     '/jsonl',
+    '/json-flatten',
+    '/graphql',
     '/jwt',
     '/sql',
     '/mybatis',
@@ -57,6 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/openapi',
     '/schema-mock',
     '/env-manager',
+    '/env-diff',
     '/code-minifier',
     '/sql-builder',
     // Generators
@@ -115,6 +118,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/url-parser',
     '/ipv4-converter',
     '/http-headers',
+    '/cookie-parser',
     '/http-builder',
     // Additional tools
     '/phone-parser',

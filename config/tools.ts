@@ -37,6 +37,8 @@ export const toolCategories = [
     tools: [
       { nameKey: 'tool.json', path: '/json', icon: '📋' },
       { nameKey: 'tool.jsonl', path: '/jsonl', icon: '🧾' },
+      // JSON flattening helps map nested payloads into key/value paths.
+      { nameKey: 'tool.jsonFlatten', path: '/json-flatten', icon: '🧩' },
       { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫' },
       { nameKey: 'tool.sql', path: '/sql', icon: '🗃️' },
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦' },
@@ -54,6 +56,8 @@ export const toolCategories = [
       { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
       { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
       { nameKey: 'tool.envManager', path: '/env-manager', icon: '⚙️' },
+      // Env diff supports comparing environment files for deployment checks.
+      { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪' },
       { nameKey: 'tool.codeMinifier', path: '/code-minifier', icon: '📦' },
       { nameKey: 'tool.sqlBuilder', path: '/sql-builder', icon: '🗃️' },
     ]
@@ -151,7 +155,11 @@ export const toolCategories = [
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢' },
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨' },
+      // Cookie parser belongs with other HTTP helpers.
+      { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪' },
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪' },
+      { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌' },
+      { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐' },
     ]
   }
 ]
