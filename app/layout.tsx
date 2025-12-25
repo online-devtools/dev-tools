@@ -3,6 +3,7 @@ import './globals.css'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dev-tools.example.com'), // 실제 배포 URL로 변경 필요
@@ -212,6 +213,7 @@ export default function RootLayout({
           </LayoutWrapper>
         </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
