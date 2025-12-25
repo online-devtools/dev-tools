@@ -18,12 +18,8 @@ Automated tests are limited to linting, so treat `npm run lint` as required pre-
 ## Commit & Pull Request Guidelines
 Existing history favors short, imperative commit subjects (“Update image URLs…”, “Add MyBatis tool…”). Continue that pattern, referencing the primary area first (`Add PasswordGenerator tool section`). PRs should summarize the feature, list affected routes or components, and link any tracked issue. Include before/after screenshots for UI changes and describe manual verification steps (commands run, tools exercised) so reviewers can reproduce the validation quickly.
 
-
-
-
-너가 작성하는 모든 코드에 백엔드 출신이 내가 봐도 이해할 수 있는 수준의 자세한 문법과 로직의 주석을 작성해야한다.
-
-
-### Remember
-You should use tools as much as possible, ideally more than 100 times. You should also implement your own tests first before attempting the problem.
-새로운 기능 추가시 영어 다국어 처리도 반든시 추가해야한다.
+## Agent Behavior Requirements
+- 너가 작성하는 모든 코드에 백엔드 출신이 내가 봐도 이해할 수 있는 수준의 자세한 문법과 로직의 주석을 작성해야한다.
+- You should use tools as much as possible, ideally more than 100 times.
+- You should also implement your own tests first before attempting the problem.
+- 새로운 기능 추가시 영어 다국어 처리도 반든시 추가해야한다.
