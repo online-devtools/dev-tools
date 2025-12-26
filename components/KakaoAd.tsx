@@ -4,14 +4,15 @@ import { useEffect, useRef } from 'react'
 import Script from 'next/script'
 
 // Kakao AdFit render function signature so we can call it without any.
-type KakaoAdFitRender = (element: HTMLInsElement) => void
+// ins 태그는 HTMLModElement로 표현되므로 해당 타입을 사용한다.
+type KakaoAdFitRender = (element: HTMLModElement) => void
 // Command queue signature used before the AdFit script is ready.
 type KakaoAdFitCommand = () => void
 
 // AdFit runtime object shape used by the global script.
 type KakaoAdFitRuntime = {
   render?: KakaoAdFitRender
-  destroy?: (element: HTMLInsElement) => void
+  destroy?: (element: HTMLModElement) => void
   cmd?: KakaoAdFitCommand[]
 }
 
@@ -43,7 +44,7 @@ export default function KakaoAd({
   scriptStrategy = 'afterInteractive',
 }: KakaoAdProps) {
   // ins 태그를 직접 참조해 AdFit render 호출에 전달한다.
-  const insRef = useRef<HTMLInsElement>(null)
+  const insRef = useRef<HTMLModElement>(null)
   // 스크립트 로드 전 중복 큐잉을 막기 위한 플래그다.
   const renderQueuedRef = useRef(false)
   // 실제 render 호출이 끝났는지 추적해 중복 렌더링을 방지한다.
