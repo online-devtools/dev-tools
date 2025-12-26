@@ -31,6 +31,8 @@ const toolsConfig = [
       { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐', descKey: 'tool.bip39.desc' },
       { nameKey: 'tool.csp', path: '/csp', icon: '🛡️', descKey: 'tool.csp.desc' },
       { nameKey: 'tool.sri', path: '/sri', icon: '🔒', descKey: 'tool.sri.desc' },
+      // Offline secret scanner helps catch accidental token leaks in text.
+      { nameKey: 'tool.secretScanner', path: '/secret-scanner', icon: '🕵️', descKey: 'tool.secretScanner.desc' },
       { nameKey: 'tool.envCrypto', path: '/env-crypto', icon: '🧾', descKey: 'tool.envCrypto.desc' },
       { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️', descKey: 'tool.sshKeys.desc' },
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩', descKey: 'tool.saml.desc' },
@@ -147,6 +149,8 @@ const toolsConfig = [
       { nameKey: 'tool.cors', path: '/cors', icon: '🚦', descKey: 'tool.cors.desc' },
       { nameKey: 'tool.latency', path: '/latency', icon: '📶', descKey: 'tool.latency.desc' },
       { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈', descKey: 'tool.apiResponseTime.desc' },
+      // HAR analyzer provides offline insight into network logs.
+      { nameKey: 'tool.harAnalyzer', path: '/har-analyzer', icon: '📡', descKey: 'tool.harAnalyzer.desc' },
     ]
   },
   {

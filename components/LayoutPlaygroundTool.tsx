@@ -41,7 +41,8 @@ export default function LayoutPlaygroundTool() {
   const containerStyle = useMemo<CSSProperties>(() => {
     // Convert the selected settings into inline styles for the preview box.
     if (mode === 'flex') {
-      return {
+      // Explicitly type the object to keep literal unions compatible with CSSProperties.
+      const flexStyle: CSSProperties = {
         display: 'flex',
         flexDirection: flexSettings.direction,
         justifyContent: flexSettings.justify,
@@ -49,10 +50,11 @@ export default function LayoutPlaygroundTool() {
         gap: `${flexSettings.gap}px`,
         flexWrap: flexSettings.wrap,
       }
+      return flexStyle
     }
 
     // Grid preview uses CSS grid properties to mirror the output CSS.
-    return {
+    const gridStyle: CSSProperties = {
       display: 'grid',
       gridTemplateColumns: gridSettings.columns,
       gridTemplateRows: gridSettings.rows,
@@ -60,6 +62,7 @@ export default function LayoutPlaygroundTool() {
       justifyItems: gridSettings.justifyItems,
       alignItems: gridSettings.alignItems,
     }
+    return gridStyle
   }, [mode, flexSettings, gridSettings])
 
   const resetSettings = () => {

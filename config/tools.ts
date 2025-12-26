@@ -31,6 +31,8 @@ export const toolCategories = [
       { nameKey: 'tool.regexSafety', path: '/regex-safety', icon: '🛡️' },
       { nameKey: 'tool.csp', path: '/csp', icon: '🛡️' },
       { nameKey: 'tool.sri', path: '/sri', icon: '🔒' },
+      // Secret scanner runs locally to detect token leaks before sharing logs.
+      { nameKey: 'tool.secretScanner', path: '/secret-scanner', icon: '🕵️' },
       { nameKey: 'tool.envCrypto', path: '/env-crypto', icon: '🧾' },
       { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️' },
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩' },
@@ -173,6 +175,8 @@ export const toolCategories = [
       { nameKey: 'tool.cors', path: '/cors', icon: '🚦' },
       { nameKey: 'tool.latency', path: '/latency', icon: '📶' },
       { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈' },
+      // HAR analyzer is offline-only and helps inspect captured network logs.
+      { nameKey: 'tool.harAnalyzer', path: '/har-analyzer', icon: '📡' },
     ]
   },
   {
