@@ -80,7 +80,8 @@ const computeFingerprintSha256 = async (bytes: Uint8Array): Promise<string> => {
     return hash
   }
 
-  const digest = await subtle.digest('SHA-256', bytes)
+  // Use a new ArrayBuffer to satisfy Web Crypto typing across runtimes.
+  const digest = await subtle.digest('SHA-256', new Uint8Array(bytes).buffer)
   const base64 = typeof btoa === 'function'
     ? btoa(String.fromCharCode(...new Uint8Array(digest)))
     : Buffer.from(digest).toString('base64')

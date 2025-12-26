@@ -27,7 +27,8 @@ const getSubtleCrypto = async (): Promise<SubtleCrypto> => {
   }
 
   const nodeCrypto = await import('crypto')
-  return nodeCrypto.webcrypto.subtle
+  // Node's SubtleCrypto typings diverge from DOM typings; cast to share the API shape.
+  return nodeCrypto.webcrypto.subtle as unknown as SubtleCrypto
 }
 
 export const hashArrayBuffer = async (

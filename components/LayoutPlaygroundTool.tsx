@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { type CSSProperties, useMemo, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -38,7 +38,7 @@ export default function LayoutPlaygroundTool() {
   // Convert the current settings into a copyable CSS block.
   const cssOutput = useMemo(() => buildLayoutCss(settings), [settings])
 
-  const containerStyle = useMemo(() => {
+  const containerStyle = useMemo<CSSProperties>(() => {
     // Convert the selected settings into inline styles for the preview box.
     if (mode === 'flex') {
       return {
@@ -112,7 +112,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={flexSettings.direction}
-                onChange={(e) => setFlexSettings((prev) => ({ ...prev, direction: e.target.value }))}
+                onChange={(e) =>
+                  setFlexSettings((prev) => ({
+                    ...prev,
+                    direction: e.target.value as FlexLayoutSettings['direction'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="row">row</option>
@@ -127,7 +132,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={flexSettings.justify}
-                onChange={(e) => setFlexSettings((prev) => ({ ...prev, justify: e.target.value }))}
+                onChange={(e) =>
+                  setFlexSettings((prev) => ({
+                    ...prev,
+                    justify: e.target.value as FlexLayoutSettings['justify'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="flex-start">flex-start</option>
@@ -144,7 +154,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={flexSettings.align}
-                onChange={(e) => setFlexSettings((prev) => ({ ...prev, align: e.target.value }))}
+                onChange={(e) =>
+                  setFlexSettings((prev) => ({
+                    ...prev,
+                    align: e.target.value as FlexLayoutSettings['align'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="stretch">stretch</option>
@@ -160,7 +175,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={flexSettings.wrap}
-                onChange={(e) => setFlexSettings((prev) => ({ ...prev, wrap: e.target.value }))}
+                onChange={(e) =>
+                  setFlexSettings((prev) => ({
+                    ...prev,
+                    wrap: e.target.value as FlexLayoutSettings['wrap'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="nowrap">nowrap</option>
@@ -212,7 +232,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={gridSettings.justifyItems}
-                onChange={(e) => setGridSettings((prev) => ({ ...prev, justifyItems: e.target.value }))}
+                onChange={(e) =>
+                  setGridSettings((prev) => ({
+                    ...prev,
+                    justifyItems: e.target.value as GridLayoutSettings['justifyItems'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="stretch">stretch</option>
@@ -227,7 +252,12 @@ export default function LayoutPlaygroundTool() {
               </label>
               <select
                 value={gridSettings.alignItems}
-                onChange={(e) => setGridSettings((prev) => ({ ...prev, alignItems: e.target.value }))}
+                onChange={(e) =>
+                  setGridSettings((prev) => ({
+                    ...prev,
+                    alignItems: e.target.value as GridLayoutSettings['alignItems'],
+                  }))
+                }
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="stretch">stretch</option>

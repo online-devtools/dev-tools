@@ -16,7 +16,8 @@ const getSubtleCrypto = async (): Promise<SubtleCrypto> => {
     return globalThis.crypto.subtle
   }
   const nodeCrypto = await import('crypto')
-  return nodeCrypto.webcrypto.subtle
+  // Node's SubtleCrypto typings diverge from DOM typings; cast to share the API shape.
+  return nodeCrypto.webcrypto.subtle as unknown as SubtleCrypto
 }
 
 export const generatePkceChallenge = async (verifier: string): Promise<string> => {

@@ -227,9 +227,6 @@ const translations: Record<Language, Record<string, string>> = {
     'category.workflow': 'Workflow',
     'category.files': 'Files & Assets',
     'category.frontend': 'Frontend UI',
-    'category.workflow': 'Workflow',
-    'category.files': 'Files & Assets',
-    'category.frontend': 'Frontend UI',
 
     // Tool Names
     'tool.base64': 'Base64',
