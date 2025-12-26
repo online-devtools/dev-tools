@@ -3,6 +3,24 @@
 import { useEffect, useRef } from 'react'
 import Script from 'next/script'
 
+type CoupangPartnersOptions = {
+  id: number
+  trackingCode: string
+  subId: string | null
+  template: 'carousel' | string
+  width: string
+  height: string
+  container?: HTMLElement
+}
+
+type CoupangPartners = {
+  G: new (options: CoupangPartnersOptions) => void
+}
+
+type WindowWithPartners = Window & {
+  PartnersCoupang?: CoupangPartners
+}
+
 type CoupangAdProps = {
   // Tailwind classes for the outer wrapper to control spacing and alignment.
   wrapperClassName?: string
@@ -24,41 +42,38 @@ export default function CoupangAd({
   const scriptLoadedRef = useRef(false)
 
   useEffect(() => {
-    // Script가 이미 로드되었고, PartnersCoupang이 존재하는 경우 광고 초기화
-    if (scriptLoadedRef.current && typeof window !== 'undefined' && (window as any).PartnersCoupang) {
+    // 스크립트가 이미 로드된 상태라면 바로 초기화해 광고를 표시한다.
+    if (typeof window !== 'undefined' && (window as WindowWithPartners).PartnersCoupang) {
+      scriptLoadedRef.current = true
       initAd()
     }
   }, [])
 
   const initAd = () => {
-    // 브라우저 환경에서만 실행되도록 체크하고, 컨테이너가 없으면 초기화를 중단한다.
+    // 브라우저 환경이 아니거나, 광고 컨테이너가 없으면 실행하지 않는다.
     if (typeof window === 'undefined' || !adContainerRef.current) {
       return
     }
 
-    const partners = (window as any).PartnersCoupang
+    const partners = (window as WindowWithPartners).PartnersCoupang
     if (!partners) {
       return
     }
 
-    // 기존 광고 HTML을 비워서 중복 렌더링을 방지한다.
+    // 기존 광고 HTML을 비워 중복 렌더링을 방지한다.
     adContainerRef.current.innerHTML = ''
 
-    // 광고 스크립트를 컨테이너 내부에 삽입해 여러 배치에서도 위치가 유지되게 한다.
     try {
-      const inlineScript = document.createElement('script')
-      inlineScript.type = 'text/javascript'
-      inlineScript.text = `
-        new window.PartnersCoupang.G({
-          id: 950900,
-          trackingCode: "AF6325868",
-          subId: null,
-          template: "carousel",
-          width: "680",
-          height: "140"
-        });
-      `
-      adContainerRef.current.appendChild(inlineScript)
+      // container 옵션을 전달하면 광고가 해당 컨테이너에 정확히 렌더링된다.
+      new partners.G({
+        id: 950900,
+        trackingCode: 'AF6325868',
+        subId: null,
+        template: 'carousel',
+        width: '680',
+        height: '140',
+        container: adContainerRef.current,
+      })
     } catch (error) {
       console.error('Coupang ad initialization failed:', error)
     }
