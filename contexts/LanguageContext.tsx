@@ -205,6 +205,10 @@ const translations: Record<Language, Record<string, string>> = {
     'home.feature5.desc': '복잡한 가입 절차 없이 바로 접속해서 사용할 수 있습니다.',
     'home.feature6.title': '지속적인 업데이트',
     'home.feature6.desc': '개발자 커뮤니티의 피드백을 반영하여 새로운 도구를 지속적으로 추가합니다.',
+    // Home Page - Sponsored block
+    'home.sponsored.badge': '스폰서',
+    'home.sponsored.title': '쿠팡 파트너스 추천 상품',
+    'home.sponsored.desc': '일부 링크는 제휴 수익을 포함하며 서비스 운영에 도움이 됩니다.',
     'home.snippets.title': '언어별 코드 스니펫으로 바로 복붙',
     'home.snippets.desc': 'Base64, JWT, CSV 변환 등 자주 쓰는 작업을 언어별 예제로 제공합니다.',
     'home.snippets.cta': '스니펫 보기',
@@ -2576,6 +2580,10 @@ const translations: Record<Language, Record<string, string>> = {
     'home.feature5.desc': 'Start using immediately without complex registration process.',
     'home.feature6.title': 'Continuous Updates',
     'home.feature6.desc': 'New tools are continuously added based on developer community feedback.',
+    // Home Page - Sponsored block
+    'home.sponsored.badge': 'Sponsored',
+    'home.sponsored.title': 'Coupang partner picks',
+    'home.sponsored.desc': 'Some links are affiliate links that help keep the tools free.',
     'home.snippets.title': 'Copy-paste code snippets by language',
     'home.snippets.desc': 'Common tasks like Base64, JWT, CSV conversion with ready examples.',
     'home.snippets.cta': 'View snippets',
