@@ -28,6 +28,12 @@ const toolsConfig = [
       { nameKey: 'tool.stringObfuscator', path: '/string-obfuscator', icon: '🎭', descKey: 'tool.stringObfuscator.desc' },
       { nameKey: 'tool.passwordStrength', path: '/password-strength', icon: '💪', descKey: 'tool.passwordStrength.desc' },
       { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐', descKey: 'tool.bip39.desc' },
+      { nameKey: 'tool.csp', path: '/csp', icon: '🛡️', descKey: 'tool.csp.desc' },
+      { nameKey: 'tool.sri', path: '/sri', icon: '🔒', descKey: 'tool.sri.desc' },
+      { nameKey: 'tool.envCrypto', path: '/env-crypto', icon: '🧾', descKey: 'tool.envCrypto.desc' },
+      { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️', descKey: 'tool.sshKeys.desc' },
+      { nameKey: 'tool.saml', path: '/saml', icon: '🧩', descKey: 'tool.saml.desc' },
+      { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑', descKey: 'tool.oauth.desc' },
     ]
   },
   {
@@ -51,8 +57,10 @@ const toolsConfig = [
       { nameKey: 'tool.jsonMinify', path: '/json-minify', icon: '📦', descKey: 'tool.jsonMinify.desc' },
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊', descKey: 'tool.jsonCsv.desc' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍', descKey: 'tool.jsonDiff.desc' },
+      { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭', descKey: 'tool.jsonPath.desc' },
       // Env diff is useful for comparing deployment configurations.
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪', descKey: 'tool.envDiff.desc' },
+      { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️', descKey: 'tool.schemaVisualizer.desc' },
     ]
   },
   {
@@ -83,7 +91,6 @@ const toolsConfig = [
   {
     categoryKey: 'category.text',
     items: [
-      { nameKey: 'tool.slugify', path: '/slugify', icon: '🔗', descKey: 'URL/파일명 안전 문자열 변환' },
       { nameKey: 'tool.slugify', path: '/slugify', icon: '🔗', descKey: 'tool.slugify.desc' },
       { nameKey: 'tool.natoAlphabet', path: '/nato-alphabet', icon: '📻', descKey: 'tool.natoAlphabet.desc' },
       { nameKey: 'tool.textBinary', path: '/text-binary', icon: '0', descKey: 'tool.textBinary.desc' },
@@ -105,7 +112,7 @@ const toolsConfig = [
   {
     categoryKey: 'category.info',
     items: [
-      { nameKey: 'tool.httpStatus', path: '/http-status', icon: '🌐', descKey: 'HTTP 상태 코드 목록' },
+      { nameKey: 'tool.httpStatus', path: '/http-status', icon: '🌐', descKey: 'tool.httpStatus.desc' },
       { nameKey: 'tool.mimeTypes', path: '/mime-types', icon: '📄', descKey: 'tool.mimeTypes.desc' },
       { nameKey: 'tool.keycode', path: '/keycode', icon: '⌨️', descKey: 'tool.keycode.desc' },
       { nameKey: 'tool.deviceInfo', path: '/device-info', icon: '📱', descKey: 'tool.deviceInfo.desc' },
@@ -132,6 +139,39 @@ const toolsConfig = [
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨', descKey: 'tool.httpHeaders.desc' },
       // Cookie parsing complements HTTP header inspection.
       { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪', descKey: 'tool.cookieParser.desc' },
+      { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪', descKey: 'tool.httpBuilder.desc' },
+      { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌', descKey: 'tool.websocket.desc' },
+      { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐', descKey: 'tool.sslCert.desc' },
+      { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐', descKey: 'tool.dnsLookup.desc' },
+      { nameKey: 'tool.cors', path: '/cors', icon: '🚦', descKey: 'tool.cors.desc' },
+      { nameKey: 'tool.latency', path: '/latency', icon: '📶', descKey: 'tool.latency.desc' },
+      { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈', descKey: 'tool.apiResponseTime.desc' },
+    ]
+  },
+  {
+    categoryKey: 'category.workflow',
+    items: [
+      { nameKey: 'tool.commitMessage', path: '/commit-message', icon: '✅', descKey: 'tool.commitMessage.desc' },
+      { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦', descKey: 'tool.dependencyChecker.desc' },
+      { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍', descKey: 'tool.regexDebugger.desc' },
+    ]
+  },
+  {
+    categoryKey: 'category.files',
+    items: [
+      { nameKey: 'tool.exif', path: '/exif', icon: '📷', descKey: 'tool.exif.desc' },
+      { nameKey: 'tool.fileHash', path: '/file-hash', icon: '🔐', descKey: 'tool.fileHash.desc' },
+      { nameKey: 'tool.pdfMetadata', path: '/pdf-metadata', icon: '📄', descKey: 'tool.pdfMetadata.desc' },
+      { nameKey: 'tool.favicon', path: '/favicon', icon: '🖼️', descKey: 'tool.favicon.desc' },
+    ]
+  },
+  {
+    categoryKey: 'category.frontend',
+    items: [
+      { nameKey: 'tool.colorPalette', path: '/color-palette', icon: '🎨', descKey: 'tool.colorPalette.desc' },
+      { nameKey: 'tool.layoutPlayground', path: '/layout-playground', icon: '📐', descKey: 'tool.layoutPlayground.desc' },
+      { nameKey: 'tool.easing', path: '/easing', icon: '🧭', descKey: 'tool.easing.desc' },
+      { nameKey: 'tool.breakpointTester', path: '/breakpoint-tester', icon: '📱', descKey: 'tool.breakpointTester.desc' },
     ]
   }
 ]

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     template: '%s | Developer Tools'
   },
-  description: '개발자를 위한 15가지 필수 온라인 도구 모음. Base64, URL 인코딩, JSON 포맷터, JWT 디코더, 정규식 테스터, QR 코드 생성기 등 개발에 필요한 모든 유틸리티를 한 곳에서 무료로 사용하세요.',
+  description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음. Base64, JSON, JWT, 정규식, DNS Lookup, WebSocket, CORS 테스터 등 개발에 필요한 유틸리티를 한 곳에서 무료로 사용하세요.',
   keywords: [
     '개발자 도구',
     'developer tools',
@@ -36,6 +36,15 @@ export const metadata: Metadata = {
     'Jasypt 암호화',
     'HTML 포맷터',
     'Lorem Ipsum 생성기',
+    'CSP 헤더 빌더',
+    'SRI 해시 생성기',
+    'SSH 키 생성기',
+    'OAuth Playground',
+    'CORS 테스터',
+    'DNS Lookup',
+    'WebSocket 테스터',
+    '응답 시간 측정',
+    'JSONPath Finder',
     '온라인 개발 도구',
     '무료 개발 도구',
     'web developer tools'
@@ -59,7 +68,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: siteBaseUrl,
     title: 'Developer Tools - 개발자를 위한 필수 도구 모음',
-    description: '개발자를 위한 15가지 필수 온라인 도구 모음. Base64, JSON, JWT, 정규식, QR 코드 등 개발에 필요한 모든 유틸리티',
+    description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음. Base64, JSON, JWT, 정규식, DNS Lookup, WebSocket 등 개발에 필요한 유틸리티',
     siteName: 'Developer Tools',
     images: [
       {
@@ -73,7 +82,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Developer Tools - 개발자를 위한 필수 도구 모음',
-    description: '개발자를 위한 15가지 필수 온라인 도구 모음',
+    description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음',
     images: ['/og-image'],
   },
   alternates: {
@@ -111,7 +120,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebApplication',
               name: 'Developer Tools',
-              description: '개발자를 위한 15가지 필수 온라인 도구 모음',
+              description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음',
               // 구조화된 데이터도 canonical과 동일한 base URL을 사용해 검색 엔진 혼선을 줄인다.
               url: siteBaseUrl,
               applicationCategory: 'DeveloperApplication',
@@ -136,7 +145,19 @@ export default function RootLayout({
                 'HTML/XML 포맷터',
                 'Lorem Ipsum 생성기',
                 'Diff Checker',
-                '케이스 변환기'
+                '케이스 변환기',
+                'CSP 헤더 빌더',
+                'SRI 해시 생성기',
+                'SSH 키 생성기',
+                'OAuth Playground',
+                'CORS 테스터',
+                'DNS Lookup',
+                'WebSocket 테스터',
+                '응답 시간 측정',
+                'JSONPath Finder',
+                '스키마 시각화',
+                '레이아웃 플레이그라운드',
+                '브레이크포인트 테스터'
               ],
               inLanguage: 'ko-KR',
             }),

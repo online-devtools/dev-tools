@@ -29,6 +29,12 @@ export const toolCategories = [
       { nameKey: 'tool.bip39', path: '/bip39', icon: '🔐' },
       { nameKey: 'tool.cryptoBundle', path: '/crypto-bundle', icon: '🧰' },
       { nameKey: 'tool.regexSafety', path: '/regex-safety', icon: '🛡️' },
+      { nameKey: 'tool.csp', path: '/csp', icon: '🛡️' },
+      { nameKey: 'tool.sri', path: '/sri', icon: '🔒' },
+      { nameKey: 'tool.envCrypto', path: '/env-crypto', icon: '🧾' },
+      { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️' },
+      { nameKey: 'tool.saml', path: '/saml', icon: '🧩' },
+      { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑' },
     ]
   },
   {
@@ -39,6 +45,7 @@ export const toolCategories = [
       { nameKey: 'tool.jsonl', path: '/jsonl', icon: '🧾' },
       // JSON flattening helps map nested payloads into key/value paths.
       { nameKey: 'tool.jsonFlatten', path: '/json-flatten', icon: '🧩' },
+      { nameKey: 'tool.graphql', path: '/graphql', icon: '🔷' },
       { nameKey: 'tool.jwt', path: '/jwt', icon: '🎫' },
       { nameKey: 'tool.sql', path: '/sql', icon: '🗃️' },
       { nameKey: 'tool.mybatis', path: '/mybatis', icon: '🐦' },
@@ -60,6 +67,8 @@ export const toolCategories = [
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪' },
       { nameKey: 'tool.codeMinifier', path: '/code-minifier', icon: '📦' },
       { nameKey: 'tool.sqlBuilder', path: '/sql-builder', icon: '🗃️' },
+      { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭' },
+      { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️' },
     ]
   },
   {
@@ -80,7 +89,6 @@ export const toolCategories = [
       { nameKey: 'tool.cssGradient', path: '/css-gradient', icon: '🎨' },
       { nameKey: 'tool.boxShadow', path: '/box-shadow', icon: '📦' },
       { nameKey: 'tool.mockData', path: '/mock-data', icon: '🎲' },
-      { nameKey: 'tool.exif', path: '/exif', icon: '📷' },
     ]
   },
   {
@@ -162,6 +170,38 @@ export const toolCategories = [
       { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌' },
       { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐' },
       { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐' },
+      { nameKey: 'tool.cors', path: '/cors', icon: '🚦' },
+      { nameKey: 'tool.latency', path: '/latency', icon: '📶' },
+      { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈' },
+    ]
+  },
+  {
+    categoryKey: 'category.workflow',
+    icon: '🧭',
+    tools: [
+      { nameKey: 'tool.commitMessage', path: '/commit-message', icon: '✅' },
+      { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦' },
+      { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍' },
+    ]
+  },
+  {
+    categoryKey: 'category.files',
+    icon: '🗂️',
+    tools: [
+      { nameKey: 'tool.exif', path: '/exif', icon: '📷' },
+      { nameKey: 'tool.fileHash', path: '/file-hash', icon: '🔐' },
+      { nameKey: 'tool.pdfMetadata', path: '/pdf-metadata', icon: '📄' },
+      { nameKey: 'tool.favicon', path: '/favicon', icon: '🖼️' },
+    ]
+  },
+  {
+    categoryKey: 'category.frontend',
+    icon: '🎨',
+    tools: [
+      { nameKey: 'tool.colorPalette', path: '/color-palette', icon: '🎨' },
+      { nameKey: 'tool.layoutPlayground', path: '/layout-playground', icon: '📐' },
+      { nameKey: 'tool.easing', path: '/easing', icon: '🧭' },
+      { nameKey: 'tool.breakpointTester', path: '/breakpoint-tester', icon: '📱' },
     ]
   }
 ]

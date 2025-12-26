@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/string-obfuscator',
     '/crypto-bundle',
     '/regex-safety',
+    '/csp',
+    '/sri',
+    '/env-crypto',
+    '/ssh-keys',
+    '/saml',
+    '/oauth',
     // Data Format
     '/json',
     '/jsonl',
@@ -55,6 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/json-minify',
     '/json-csv',
     '/json-diff',
+    '/json-path',
     '/json-schema',
     '/openapi',
     '/schema-mock',
@@ -62,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/env-diff',
     '/code-minifier',
     '/sql-builder',
+    '/schema-visualizer',
     // Generators
     '/uuid',
     '/qrcode',
@@ -75,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/css-gradient',
     '/box-shadow',
     '/mock-data',
+    '/exif',
     // Converters
     '/timestamp',
     '/color',
@@ -120,6 +129,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/http-headers',
     '/cookie-parser',
     '/http-builder',
+    '/websocket',
+    '/ssl-cert',
+    '/dns-lookup',
+    '/cors',
+    '/latency',
+    '/api-response-time',
+    // Workflow
+    '/commit-message',
+    '/dependency-checker',
+    '/regex-debugger',
+    // Files
+    '/file-hash',
+    '/pdf-metadata',
+    '/favicon',
+    // Frontend
+    '/color-palette',
+    '/layout-playground',
+    '/easing',
+    '/breakpoint-tester',
     // Additional tools
     '/phone-parser',
     '/iban-validator',
