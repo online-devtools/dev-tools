@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import CoupangAd from '@/components/CoupangAd'
 
 // Tool configuration with translation keys
 const toolsConfig = [
@@ -143,9 +142,6 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* Coupang Partners Ad */}
-      <CoupangAd />
-
       <div className="space-y-8">
         {toolsConfig.map((category) => (
           <div key={category.categoryKey}>
