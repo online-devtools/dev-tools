@@ -2,11 +2,25 @@
 
 import { useState, useEffect } from 'react'
 
-export default function AdBlockDetector() {
+type AdBlockDetectorProps = {
+  // 애드블록 감지 시 상위 컴포넌트에 알려 전체 렌더링을 차단할 수 있게 한다.
+  onDetected?: () => void
+  // 부모가 이미 차단 상태를 알고 있을 때 즉시 오버레이를 띄우도록 강제한다.
+  forcedDetected?: boolean
+}
+
+export default function AdBlockDetector({ onDetected, forcedDetected = false }: AdBlockDetectorProps) {
   const [adBlockDetected, setAdBlockDetected] = useState(false)
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
+    // 부모가 강제로 차단 상태를 넘겨준 경우 즉시 차단 UI를 표시한다.
+    if (forcedDetected) {
+      setAdBlockDetected(true)
+      setIsChecking(false)
+      return
+    }
+
     const detectAdBlock = async () => {
       let detectionCount = 0
       const detectionThreshold = 2 // 3가지 중 2가지 이상 감지되면 차단
@@ -86,7 +100,10 @@ export default function AdBlockDetector() {
         console.log(`[AdBlock] 총 ${detectionCount}개 감지됨 (임계값: ${detectionThreshold})`)
 
         if (detectionCount >= detectionThreshold) {
+          // 감지 결과를 내부 상태로 저장해 오버레이를 표시한다.
           setAdBlockDetected(true)
+          // 부모에게도 알려 전체 렌더링을 차단할 수 있게 한다.
+          onDetected?.()
         }
 
         setIsChecking(false)
@@ -104,10 +121,12 @@ export default function AdBlockDetector() {
     }, 1500)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [forcedDetected, onDetected])
 
   // 확인 중이거나 애드블락이 감지되지 않으면 아무것도 표시하지 않음
-  if (isChecking || !adBlockDetected) {
+  const shouldBlock = forcedDetected || adBlockDetected
+
+  if (isChecking || !shouldBlock) {
     return null
   }
 
