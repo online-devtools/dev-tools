@@ -69,7 +69,11 @@ export default function DependencyCheckerTool() {
             return { ...entry, latest: t('dependencyChecker.status.unknown'), status: 'unknown' as const }
           }
 
-          const status = entry.current.replace(/^[^0-9]*/, '') === latest ? 'up-to-date' : 'outdated'
+          // TypeScript widens conditional expressions to string without an explicit annotation, so we pin it
+          // to DependencyStatus['status'] to satisfy the setResults DependencyStatus[] requirement.
+          const status: DependencyStatus['status'] =
+            entry.current.replace(/^[^0-9]*/, '') === latest ? 'up-to-date' : 'outdated'
+          // Return a full DependencyStatus shape to avoid widening the union to a generic string.
           return { ...entry, latest, status }
         })
       )
