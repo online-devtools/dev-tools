@@ -65,6 +65,8 @@ export const toolCategories = [
       { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
       { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
       { nameKey: 'tool.envManager', path: '/env-manager', icon: '⚙️' },
+      // Env linter validates .env files for duplicates and missing values.
+      { nameKey: 'tool.envLinter', path: '/env-linter', icon: '🧪' },
       // Env diff supports comparing environment files for deployment checks.
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪' },
       { nameKey: 'tool.codeMinifier', path: '/code-minifier', icon: '📦' },
@@ -116,6 +118,8 @@ export const toolCategories = [
       { nameKey: 'tool.textBinary', path: '/text-binary', icon: '0' },
       { nameKey: 'tool.textUnicode', path: '/text-unicode', icon: 'U' },
       { nameKey: 'tool.textStats', path: '/text-stats', icon: '📊' },
+      // Log inspector helps filter and analyze local log files.
+      { nameKey: 'tool.logInspector', path: '/log-inspector', icon: '🪵' },
       { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n' },
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧' },

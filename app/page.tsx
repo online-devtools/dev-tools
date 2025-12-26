@@ -61,6 +61,8 @@ const toolsConfig = [
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊', descKey: 'tool.jsonCsv.desc' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍', descKey: 'tool.jsonDiff.desc' },
       { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭', descKey: 'tool.jsonPath.desc' },
+      // Env lint helps validate config files before deployment.
+      { nameKey: 'tool.envLinter', path: '/env-linter', icon: '🧪', descKey: 'tool.envLinter.desc' },
       // Env diff is useful for comparing deployment configurations.
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪', descKey: 'tool.envDiff.desc' },
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️', descKey: 'tool.schemaVisualizer.desc' },
@@ -99,6 +101,8 @@ const toolsConfig = [
       { nameKey: 'tool.textBinary', path: '/text-binary', icon: '0', descKey: 'tool.textBinary.desc' },
       { nameKey: 'tool.textUnicode', path: '/text-unicode', icon: 'U', descKey: 'tool.textUnicode.desc' },
       { nameKey: 'tool.textStats', path: '/text-stats', icon: '📊', descKey: 'tool.textStats.desc' },
+      // Log inspector filters local logs without server uploads.
+      { nameKey: 'tool.logInspector', path: '/log-inspector', icon: '🪵', descKey: 'tool.logInspector.desc' },
       { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n', descKey: 'tool.numeronym.desc' },
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃', descKey: 'tool.listConverter.desc' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧', descKey: 'tool.emailNormalizer.desc' },
