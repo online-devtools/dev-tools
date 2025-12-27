@@ -12,7 +12,7 @@ interface NavigationProps {
 
 export default function Navigation({ onToggleSidebar }: NavigationProps) {
   const { searchQuery, setSearchQuery, isSearchOpen, setIsSearchOpen } = useSearch()
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   // Keyboard shortcut: Ctrl+K / Cmd+K
@@ -35,7 +35,10 @@ export default function Navigation({ onToggleSidebar }: NavigationProps) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isSearchOpen, setIsSearchOpen, setSearchQuery])
 
+  // 현재 선택된 언어에 맞춰 검색 입력 안내 문구를 구성한다.
   const placeholder = language === 'ko' ? '도구 검색... (Ctrl+K)' : 'Search tools... (Ctrl+K)'
+  // 후원 버튼 라벨은 i18n 키에서 가져와 텍스트와 접근성 라벨을 동시에 맞춘다.
+  const buyMeCoffeeLabel = t('nav.buyMeCoffee')
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
@@ -114,6 +117,19 @@ export default function Navigation({ onToggleSidebar }: NavigationProps) {
 
           {/* Theme Toggle and Language Switcher */}
           <div className="flex-shrink-0 flex items-center gap-2">
+            {/* Buy Me a Coffee 버튼은 외부 후원 페이지로 이동시키는 헤더 액션이다. */}
+            <a
+              href="https://www.buymeacoffee.com/dlrbgns090p"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={buyMeCoffeeLabel}
+              className="inline-flex items-center gap-2 rounded-full bg-[#FFDD00] px-3 py-2 text-xs font-semibold text-black shadow-sm transition hover:bg-[#ffd43b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFDD00] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-800"
+            >
+              {/* 아이콘은 장식 요소이므로 스크린 리더에서는 숨긴다. */}
+              <span aria-hidden="true">☕</span>
+              {/* 좁은 화면에서는 텍스트를 숨겨 레이아웃 깨짐을 방지한다. */}
+              <span className="hidden sm:inline">{buyMeCoffeeLabel}</span>
+            </a>
             <ThemeToggle />
             <LanguageSwitcher />
           </div>

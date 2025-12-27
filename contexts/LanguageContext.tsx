@@ -35,6 +35,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.faq': 'FAQ',
     'nav.snippets': '코드 스니펫',
     'nav.changelog': '업데이트 로그',
+    // Buy Me a Coffee 후원 버튼 라벨
+    'nav.buyMeCoffee': '커피 한잔 후원',
 
     // Search
     'search.noResults': '검색 결과가 없습니다',
@@ -2606,6 +2608,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.faq': 'FAQ',
     'nav.snippets': 'Code Snippets',
     'nav.changelog': 'Changelog',
+    // Buy Me a Coffee support button label
+    'nav.buyMeCoffee': 'Buy me a coffee',
 
     // Search
     'search.noResults': 'No results found',
