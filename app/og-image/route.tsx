@@ -72,7 +72,7 @@ export function GET() {
             opacity: 0.85,
           }}
         >
-          <span>dev-tools.example.com</span>
+          <span>dev-tools-online.com</span>
           <span>빠르고 안전한 클라이언트 사이드 처리</span>
         </div>
       </div>

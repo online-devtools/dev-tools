@@ -37,7 +37,7 @@
 메타데이터/robots/sitemap의 base URL은 `utils/siteUrl.ts`에서 공통으로 계산합니다.
 
 - **권장**: `NEXT_PUBLIC_SITE_URL`을 실제 도메인으로 설정
-- **대체**: 미설정 시 `VERCEL_URL` 또는 기본값(`https://dev-tools-online.vercel.app`)을 사용
+- **대체**: 미설정 시 `VERCEL_URL` 또는 기본값(`https://dev-tools-online.com`)을 사용
 
 ### 2. Google Search Console 등록
 1. [Google Search Console](https://search.google.com/search-console) 접속

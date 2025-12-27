@@ -75,7 +75,7 @@ function validateUrl(value) {
   return urlPattern.test(value)
 }
 
-console.log(validateUrl('https://dev-tools.example.com/path?query=1'))
+console.log(validateUrl('https://dev-tools-online.com/path?query=1'))
 📊
 CSV ↔ JSON 데이터 정제
 •

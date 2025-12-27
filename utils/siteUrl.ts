@@ -2,7 +2,7 @@ import { normalizeBaseUrl } from '@/utils/normalizeBaseUrl'
 
 // Centralize the canonical site URL selection so metadata, robots, and sitemap stay consistent.
 // This prevents SEO regressions where different files emit different base URLs.
-const DEFAULT_SITE_URL = 'https://dev-tools-online.vercel.app'
+const DEFAULT_SITE_URL = 'https://dev-tools-online.com'
 
 export const resolveSiteBaseUrl = (env: NodeJS.ProcessEnv): string => {
   // Prefer an explicitly configured public URL to keep canonical tags stable in production.

@@ -25,6 +25,6 @@ describe('resolveSiteBaseUrl', () => {
     const env = {} as NodeJS.ProcessEnv
 
     // The default value matches the public production domain for this project.
-    expect(resolveSiteBaseUrl(env)).toBe('https://dev-tools-online.vercel.app')
+    expect(resolveSiteBaseUrl(env)).toBe('https://dev-tools-online.com')
   })
 })
