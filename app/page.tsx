@@ -61,6 +61,7 @@ const toolsConfig = [
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊', descKey: 'tool.jsonCsv.desc' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍', descKey: 'tool.jsonDiff.desc' },
       { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭', descKey: 'tool.jsonPath.desc' },
+      { nameKey: 'tool.schemaToTs', path: '/schema-to-ts', icon: '🧬', descKey: 'tool.schemaToTs.desc' },
       // Env lint helps validate config files before deployment.
       { nameKey: 'tool.envLinter', path: '/env-linter', icon: '🧪', descKey: 'tool.envLinter.desc' },
       // Env diff is useful for comparing deployment configurations.
@@ -103,6 +104,7 @@ const toolsConfig = [
       { nameKey: 'tool.textStats', path: '/text-stats', icon: '📊', descKey: 'tool.textStats.desc' },
       // Log inspector filters local logs without server uploads.
       { nameKey: 'tool.logInspector', path: '/log-inspector', icon: '🪵', descKey: 'tool.logInspector.desc' },
+      { nameKey: 'tool.logRedactor', path: '/log-redactor', icon: '🧹', descKey: 'tool.logRedactor.desc' },
       { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n', descKey: 'tool.numeronym.desc' },
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃', descKey: 'tool.listConverter.desc' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧', descKey: 'tool.emailNormalizer.desc' },
@@ -144,6 +146,7 @@ const toolsConfig = [
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍', descKey: 'tool.urlParser.desc' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢', descKey: 'tool.ipv4Converter.desc' },
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨', descKey: 'tool.httpHeaders.desc' },
+      { nameKey: 'tool.securityHeaders', path: '/security-headers', icon: '🛡️', descKey: 'tool.securityHeaders.desc' },
       // Cookie parsing complements HTTP header inspection.
       { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪', descKey: 'tool.cookieParser.desc' },
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪', descKey: 'tool.httpBuilder.desc' },
@@ -163,6 +166,7 @@ const toolsConfig = [
       { nameKey: 'tool.commitMessage', path: '/commit-message', icon: '✅', descKey: 'tool.commitMessage.desc' },
       { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦', descKey: 'tool.dependencyChecker.desc' },
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍', descKey: 'tool.regexDebugger.desc' },
+      { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹', descKey: 'tool.patchViewer.desc' },
     ]
   },
   {

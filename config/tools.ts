@@ -62,6 +62,7 @@ export const toolCategories = [
       { nameKey: 'tool.jsonCsv', path: '/json-csv', icon: '📊' },
       { nameKey: 'tool.jsonDiff', path: '/json-diff', icon: '🔍' },
       { nameKey: 'tool.jsonSchema', path: '/json-schema', icon: '📐' },
+      { nameKey: 'tool.schemaToTs', path: '/schema-to-ts', icon: '🧬' },
       { nameKey: 'tool.openapi', path: '/openapi', icon: '📜' },
       { nameKey: 'tool.schemaMock', path: '/schema-mock', icon: '🧩' },
       { nameKey: 'tool.envManager', path: '/env-manager', icon: '⚙️' },
@@ -120,6 +121,7 @@ export const toolCategories = [
       { nameKey: 'tool.textStats', path: '/text-stats', icon: '📊' },
       // Log inspector helps filter and analyze local log files.
       { nameKey: 'tool.logInspector', path: '/log-inspector', icon: '🪵' },
+      { nameKey: 'tool.logRedactor', path: '/log-redactor', icon: '🧹' },
       { nameKey: 'tool.numeronym', path: '/numeronym', icon: 'i18n' },
       { nameKey: 'tool.listConverter', path: '/list-converter', icon: '📃' },
       { nameKey: 'tool.emailNormalizer', path: '/email-normalizer', icon: '📧' },
@@ -170,6 +172,7 @@ export const toolCategories = [
       { nameKey: 'tool.urlParser', path: '/url-parser', icon: '🔍' },
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢' },
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨' },
+      { nameKey: 'tool.securityHeaders', path: '/security-headers', icon: '🛡️' },
       // Cookie parser belongs with other HTTP helpers.
       { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪' },
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪' },
@@ -190,6 +193,7 @@ export const toolCategories = [
       { nameKey: 'tool.commitMessage', path: '/commit-message', icon: '✅' },
       { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦' },
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍' },
+      { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹' },
     ]
   },
   {
