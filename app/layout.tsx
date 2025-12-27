@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
@@ -118,10 +119,10 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6853743390551388"
           crossOrigin="anonymous"
         />
-        {/* Buy Me a Coffee 버튼 스크립트를 헤더에 로드해 페이지 렌더 시 버튼 위젯이 생성되도록 합니다. */}
-        <script
-          type="text/javascript"
+        {/* Buy Me a Coffee 위젯은 Next Script로 비동기 로드해 렌더링 차단과 ESLint 에러를 피한다. */}
+        <Script
           src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+          strategy="afterInteractive"
           data-name="bmc-button"
           data-slug="dlrbgns090p"
           data-color="#FFDD00"
