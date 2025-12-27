@@ -218,6 +218,10 @@ const translations: Record<Language, Record<string, string>> = {
     'home.hero.cards.free.desc': '모든 기능 제한 없음',
     'home.hero.cards.devices.title': '모든 기기 지원',
     'home.hero.cards.devices.desc': '반응형 디자인',
+    'home.featured.badge': '추천',
+    'home.featured.title': '새로운 도구 모음',
+    'home.featured.description': '최근 추가된 기능을 먼저 확인하고 바로 써보세요',
+    'home.featured.tagNew': 'NEW',
     'home.aboutTitle': 'Developer Tools란?',
     'home.aboutText1': 'Developer Tools는 웹 개발자, 백엔드 개발자, 프론트엔드 개발자, 풀스택 개발자 등 모든 개발자들이 일상적으로 필요로 하는 다양한 온라인 유틸리티 도구를 한 곳에서 제공하는 무료 웹 서비스입니다. Base64 인코딩/디코딩, JSON 포맷팅, JWT 토큰 디코딩, 정규식 테스트, QR 코드 생성 등 개발 과정에서 자주 사용되는 80가지 이상의 전문 도구를 별도의 설치나 회원가입 없이 바로 사용할 수 있습니다.',
     'home.aboutText2': '모든 도구는 클라이언트 사이드에서만 작동하여 사용자의 데이터가 서버로 전송되지 않으므로 완벽한 프라이버시를 보장합니다. 또한 반응형 디자인으로 제작되어 데스크톱, 태블릿, 모바일 등 모든 기기에서 최적화된 사용 경험을 제공합니다. 다크 모드를 자동으로 지원하여 장시간 개발 작업 시에도 눈의 피로를 최소화할 수 있습니다.',
@@ -371,9 +375,11 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.httpBuilder': 'HTTP 빌더',
     'tool.httpHeaders': 'HTTP 헤더 변환기',
     'tool.securityHeaders': '보안 헤더 분석기',
+    'tool.urlCleaner': 'URL 정리기',
     'tool.websocket': 'WebSocket 테스터',
     'tool.sslCert': 'SSL 인증서 분석기',
     'tool.dnsLookup': 'DNS Lookup',
+    'tool.robotsTester': 'Robots.txt 테스터',
     // Cookie parser tool for HTTP header parsing.
     'tool.cookieParser': 'Cookie Parser',
     'tool.csp': 'CSP 헤더 빌더',
@@ -492,9 +498,11 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.httpBuilder.desc': 'HTTP 요청 구성 및 코드 스니펫 생성',
     'tool.httpHeaders.desc': 'HTTP 헤더 ↔ JSON 변환',
     'tool.securityHeaders.desc': 'HTTP 보안 헤더 누락/약한 설정 점검',
+    'tool.urlCleaner.desc': '추적 파라미터 제거 및 쿼리 정렬',
     'tool.websocket.desc': 'WebSocket 연결 테스트 및 메시지 송수신',
     'tool.sslCert.desc': 'SSL/TLS 인증서 파싱 및 정보 확인',
     'tool.dnsLookup.desc': '도메인 DNS 레코드 조회',
+    'tool.robotsTester.desc': 'robots.txt 규칙 허용 여부 확인',
     // Cookie parser description for HTTP header conversions.
     'tool.cookieParser.desc': 'Cookie 헤더 ↔ JSON 변환',
     // Env linter description for validating .env files.
@@ -1862,6 +1870,51 @@ const translations: Record<Language, Record<string, string>> = {
     'securityHeaders.items.coep.title': 'Cross-Origin-Embedder-Policy',
     'securityHeaders.items.corp.title': 'Cross-Origin-Resource-Policy',
 
+    // URL Cleaner
+    'urlCleaner.title': 'URL 정리기',
+    'urlCleaner.description': 'UTM 등 추적 파라미터를 제거하고 쿼리를 정렬합니다',
+    'urlCleaner.input.label': 'URL 입력',
+    'urlCleaner.input.placeholder': 'https://example.com?utm_source=google&b=2&a=1',
+    'urlCleaner.options.title': '정리 옵션',
+    'urlCleaner.options.removeTracking': '추적 파라미터 제거',
+    'urlCleaner.options.removeEmpty': '빈 파라미터 제거',
+    'urlCleaner.options.sortQuery': '쿼리 정렬',
+    'urlCleaner.actions.clean': '정리 실행',
+    'urlCleaner.actions.sample': '샘플 불러오기',
+    'urlCleaner.actions.clear': '초기화',
+    'urlCleaner.output.label': '정리된 URL',
+    'urlCleaner.output.placeholder': '정리 결과가 여기 표시됩니다...',
+    'urlCleaner.stats.removed': '제거된 파라미터 {{count}}개',
+    'urlCleaner.error.invalid': '올바른 URL을 입력하세요',
+    'urlCleaner.error.unknown': '정리 중 오류가 발생했습니다',
+
+    // Robots.txt Tester
+    'robotsTester.title': 'Robots.txt 테스터',
+    'robotsTester.description': 'robots.txt 규칙으로 경로 접근 가능 여부를 확인합니다',
+    'robotsTester.input.robots': 'robots.txt 입력',
+    'robotsTester.input.robotsPlaceholder': 'User-agent: *\nDisallow: /admin',
+    'robotsTester.input.userAgent': 'User-agent',
+    'robotsTester.input.userAgentPlaceholder': 'Googlebot 또는 *',
+    'robotsTester.input.target': '검사 경로/URL',
+    'robotsTester.input.targetPlaceholder': '/admin/help 또는 https://example.com/admin',
+    'robotsTester.actions.analyze': '검사하기',
+    'robotsTester.actions.sample': '샘플 불러오기',
+    'robotsTester.actions.clear': '초기화',
+    'robotsTester.result.allowed': '접근 허용',
+    'robotsTester.result.disallowed': '접근 차단',
+    'robotsTester.result.reason': '판정 이유',
+    'robotsTester.result.reason.allow': 'Allow 규칙 적용',
+    'robotsTester.result.reason.disallow': 'Disallow 규칙 적용',
+    'robotsTester.result.reason.noMatch': '매칭 규칙 없음',
+    'robotsTester.result.group': '적용 그룹',
+    'robotsTester.result.matchedRule': '적용 규칙',
+    'robotsTester.result.rulesTitle': '그룹 규칙',
+    'robotsTester.result.ruleAllow': 'ALLOW',
+    'robotsTester.result.ruleDisallow': 'DISALLOW',
+    'robotsTester.error.empty': 'robots.txt 입력이 비어있습니다',
+    'robotsTester.error.invalidLine': '라인 {{line}} 형식 오류',
+    'robotsTester.error.unknown': '검사 중 오류가 발생했습니다',
+
     // Cookie Parser Tool
     'cookieParser.title': '쿠키 파서',
     'cookieParser.description': 'Cookie 헤더와 JSON을 서로 변환합니다',
@@ -2892,6 +2945,10 @@ const translations: Record<Language, Record<string, string>> = {
     'home.hero.cards.free.desc': 'No feature limits',
     'home.hero.cards.devices.title': 'Works everywhere',
     'home.hero.cards.devices.desc': 'Responsive on any device',
+    'home.featured.badge': 'Featured',
+    'home.featured.title': 'New tools you can try now',
+    'home.featured.description': 'Discover the latest additions and jump in right away',
+    'home.featured.tagNew': 'NEW',
     'home.aboutTitle': 'About Developer Tools',
     'home.aboutText1': 'Developer Tools is a free web service that provides a variety of online utility tools that all developers need on a daily basis, including web developers, backend developers, frontend developers, and full-stack developers, in one place. You can use 80+ professional tools frequently used in the development process, such as Base64 encoding/decoding, JSON formatting, JWT token decoding, regular expression testing, and QR code generation, without installation or registration.',
     'home.aboutText2': 'All tools work only on the client side, so your data is never sent to the server, ensuring complete privacy. It is also designed responsively to provide an optimized user experience on all devices, including desktops, tablets, and mobile devices. It automatically supports dark mode to minimize eye strain during long development sessions.',
@@ -3041,10 +3098,12 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.httpBuilder': 'HTTP Builder',
     'tool.httpHeaders': 'HTTP Headers',
     'tool.securityHeaders': 'Security Headers',
+    'tool.urlCleaner': 'URL Cleaner',
     'tool.cookieParser': 'Cookie Parser',
     'tool.websocket': 'WebSocket Tester',
     'tool.sslCert': 'SSL Certificate Analyzer',
     'tool.dnsLookup': 'DNS Lookup',
+    'tool.robotsTester': 'Robots.txt Tester',
     'tool.csp': 'CSP Builder',
     'tool.sri': 'SRI Generator',
     // Offline secret scanner for local token inspection.
@@ -3162,6 +3221,7 @@ const translations: Record<Language, Record<string, string>> = {
     'tool.httpBuilder.desc': 'Compose HTTP requests and snippets offline',
     'tool.httpHeaders.desc': 'Convert HTTP headers and JSON',
     'tool.securityHeaders.desc': 'Check missing or weak HTTP security headers',
+    'tool.urlCleaner.desc': 'Remove tracking params and normalize query strings',
     // Cookie parser description for header parsing/building.
     'tool.cookieParser.desc': 'Parse Cookie headers and build them from JSON',
     // Env linter description for validating .env files.
@@ -3224,6 +3284,7 @@ const translations: Record<Language, Record<string, string>> = {
     'dnsLookup.info.item4': 'Choose between Google DNS or Cloudflare DNS',
     'dnsLookup.info.recordTypes': 'Record Type Reference',
     'tool.dnsLookup.desc': 'Query DNS records for any domain',
+    'tool.robotsTester.desc': 'Check allow/disallow rules from robots.txt',
     'tool.csp.desc': 'Build Content Security Policy headers',
     'tool.sri.desc': 'Generate Subresource Integrity hashes',
     'tool.secretScanner.desc': 'Detect exposed tokens and API keys in local text',
@@ -3684,6 +3745,51 @@ const translations: Record<Language, Record<string, string>> = {
     'securityHeaders.items.coop.title': 'Cross-Origin-Opener-Policy',
     'securityHeaders.items.coep.title': 'Cross-Origin-Embedder-Policy',
     'securityHeaders.items.corp.title': 'Cross-Origin-Resource-Policy',
+
+    // URL Cleaner
+    'urlCleaner.title': 'URL Cleaner',
+    'urlCleaner.description': 'Remove tracking parameters and normalize query strings',
+    'urlCleaner.input.label': 'URL input',
+    'urlCleaner.input.placeholder': 'https://example.com?utm_source=google&b=2&a=1',
+    'urlCleaner.options.title': 'Cleanup options',
+    'urlCleaner.options.removeTracking': 'Remove tracking params',
+    'urlCleaner.options.removeEmpty': 'Remove empty params',
+    'urlCleaner.options.sortQuery': 'Sort query params',
+    'urlCleaner.actions.clean': 'Clean URL',
+    'urlCleaner.actions.sample': 'Load sample',
+    'urlCleaner.actions.clear': 'Clear',
+    'urlCleaner.output.label': 'Cleaned URL',
+    'urlCleaner.output.placeholder': 'Cleaned URL will appear here...',
+    'urlCleaner.stats.removed': 'Removed params: {{count}}',
+    'urlCleaner.error.invalid': 'Please enter a valid URL',
+    'urlCleaner.error.unknown': 'Failed to clean the URL',
+
+    // Robots.txt Tester
+    'robotsTester.title': 'Robots.txt Tester',
+    'robotsTester.description': 'Check allow/disallow rules for a path and user-agent',
+    'robotsTester.input.robots': 'robots.txt input',
+    'robotsTester.input.robotsPlaceholder': 'User-agent: *\nDisallow: /admin',
+    'robotsTester.input.userAgent': 'User-agent',
+    'robotsTester.input.userAgentPlaceholder': 'Googlebot or *',
+    'robotsTester.input.target': 'Target path/URL',
+    'robotsTester.input.targetPlaceholder': '/admin/help or https://example.com/admin',
+    'robotsTester.actions.analyze': 'Test rules',
+    'robotsTester.actions.sample': 'Load sample',
+    'robotsTester.actions.clear': 'Clear',
+    'robotsTester.result.allowed': 'Allowed',
+    'robotsTester.result.disallowed': 'Disallowed',
+    'robotsTester.result.reason': 'Decision reason',
+    'robotsTester.result.reason.allow': 'Allow rule matched',
+    'robotsTester.result.reason.disallow': 'Disallow rule matched',
+    'robotsTester.result.reason.noMatch': 'No matching rule',
+    'robotsTester.result.group': 'Matched group',
+    'robotsTester.result.matchedRule': 'Matched rule',
+    'robotsTester.result.rulesTitle': 'Group rules',
+    'robotsTester.result.ruleAllow': 'ALLOW',
+    'robotsTester.result.ruleDisallow': 'DISALLOW',
+    'robotsTester.error.empty': 'robots.txt input is empty',
+    'robotsTester.error.invalidLine': 'Line {{line}} format error',
+    'robotsTester.error.unknown': 'Failed to analyze robots.txt',
 
     // Cookie Parser Tool
     'cookieParser.title': 'Cookie Parser',
@@ -5316,9 +5422,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ko')
 
   useEffect(() => {
-    // Prefer a persisted language, otherwise detect from the browser locale once on mount.
+    // 언어 결정 우선순위:
+    // 1) URL 파라미터(lang=ko|en) → 공유 가능한 링크/SEO용
+    // 2) localStorage → 사용자가 마지막으로 선택한 언어
+    // 3) 브라우저 locale → 첫 방문자의 기본값
+    const params = new URLSearchParams(window.location.search)
+    const urlLang = params.get('lang')
+    const normalizedLang =
+      urlLang === 'ko' || urlLang === 'en' ? (urlLang as Language) : null
     const browserLang = navigator.language.toLowerCase()
     const savedLang = localStorage.getItem('language') as Language
+
+    if (normalizedLang) {
+      setLanguageState(normalizedLang)
+      // URL 파라미터로 선택된 언어는 다음 방문에서도 유지되도록 저장한다.
+      localStorage.setItem('language', normalizedLang)
+      return
+    }
 
     if (savedLang) {
       setLanguageState(savedLang)
@@ -5328,6 +5448,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       setLanguageState('en')
     }
   }, [])
+
+  useEffect(() => {
+    // <html lang> 값을 현재 언어와 동기화하면 스크린리더/검색엔진이 언어를 정확히 인식한다.
+    const htmlLang = language === 'ko' ? 'ko-KR' : 'en-US'
+    document.documentElement.lang = htmlLang
+  }, [language])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)

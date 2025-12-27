@@ -11,10 +11,28 @@ import { getSiteBaseUrl } from '@/utils/siteUrl'
 // This ensures Open Graph, JSON-LD, and canonical tags all point to the same domain.
 const siteBaseUrl = getSiteBaseUrl()
 const siteBase = new URL(siteBaseUrl)
+// Keep the logo URL absolute so structured data can reference it reliably.
+const logoUrl = new URL('/icon', siteBase).toString()
+// Provide hreflang alternates so search engines can surface the English UI.
+const languageAlternates = {
+  'ko-KR': siteBaseUrl,
+  'en-US': `${siteBaseUrl}/?lang=en`,
+  'x-default': siteBaseUrl,
+}
 
 export const metadata: Metadata = {
   // metadataBase must be an absolute URL object so relative metadata resolves correctly.
   metadataBase: siteBase,
+  // applicationName는 검색 엔진과 브라우저 UI에 표시되는 서비스 이름이다.
+  applicationName: 'Developer Tools',
+  // referrer 정책을 명시해 외부 링크 공유 시 필요한 정보만 전달한다.
+  referrer: 'origin-when-cross-origin',
+  // 자동 전화/주소 링크화를 막아 콘텐츠 의미가 왜곡되지 않도록 한다.
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   title: {
     default: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     template: '%s | Developer Tools'
@@ -67,6 +85,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
+    alternateLocale: ['en_US'],
     url: siteBaseUrl,
     title: 'Developer Tools - 개발자를 위한 필수 도구 모음',
     description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음. Base64, JSON, JWT, 정규식, DNS Lookup, WebSocket 등 개발에 필요한 유틸리티',
@@ -88,6 +107,8 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteBaseUrl,
+    // Add hreflang alternates to support localized discovery in search.
+    languages: languageAlternates,
   },
   verification: {
     google: 'Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k',
@@ -136,50 +157,81 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
+            // WebSite/Organization/WebApplication을 @graph로 묶어 검색 엔진에 관계를 명확히 알린다.
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'WebApplication',
-              name: 'Developer Tools',
-              description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음',
-              // 구조화된 데이터도 canonical과 동일한 base URL을 사용해 검색 엔진 혼선을 줄인다.
-              url: siteBaseUrl,
-              applicationCategory: 'DeveloperApplication',
-              operatingSystem: 'Any',
-              offers: {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'KRW',
-              },
-              featureList: [
-                'Base64 인코더/디코더',
-                'URL 인코더/디코더',
-                'JSON 포맷터',
-                'JWT 디코더',
-                '정규식 테스터',
-                'QR 코드 생성기',
-                'UUID 생성기',
-                '해시 생성기',
-                '타임스탬프 변환기',
-                '컬러 변환기',
-                'Jasypt 암호화',
-                'HTML/XML 포맷터',
-                'Lorem Ipsum 생성기',
-                'Diff Checker',
-                '케이스 변환기',
-                'CSP 헤더 빌더',
-                'SRI 해시 생성기',
-                'SSH 키 생성기',
-                'OAuth Playground',
-                'CORS 테스터',
-                'DNS Lookup',
-                'WebSocket 테스터',
-                '응답 시간 측정',
-                'JSONPath Finder',
-                '스키마 시각화',
-                '레이아웃 플레이그라운드',
-                '브레이크포인트 테스터'
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  name: 'Developer Tools',
+                  url: siteBaseUrl,
+                  logo: logoUrl,
+                },
+                {
+                  '@type': 'WebSite',
+                  name: 'Developer Tools',
+                  url: siteBaseUrl,
+                  // Declare both Korean and English to signal multilingual support.
+                  inLanguage: ['ko-KR', 'en-US'],
+                  publisher: {
+                    '@type': 'Organization',
+                    name: 'Developer Tools',
+                    url: siteBaseUrl,
+                    logo: logoUrl,
+                  },
+                },
+                {
+                  '@type': 'WebApplication',
+                  name: 'Developer Tools',
+                  description: '개발자를 위한 80가지 이상의 필수 온라인 도구 모음',
+                  // 구조화된 데이터도 canonical과 동일한 base URL을 사용해 검색 엔진 혼선을 줄인다.
+                  url: siteBaseUrl,
+                  applicationCategory: 'DeveloperApplication',
+                  operatingSystem: 'Any',
+                  offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'KRW',
+                  },
+                  featureList: [
+                    'Base64 인코더/디코더',
+                    'URL 인코더/디코더',
+                    'JSON 포맷터',
+                    'JWT 디코더',
+                    '정규식 테스터',
+                    'QR 코드 생성기',
+                    'UUID 생성기',
+                    '해시 생성기',
+                    '타임스탬프 변환기',
+                    '컬러 변환기',
+                    'Jasypt 암호화',
+                    'HTML/XML 포맷터',
+                    'Lorem Ipsum 생성기',
+                    'Diff Checker',
+                    '케이스 변환기',
+                    'CSP 헤더 빌더',
+                    'SRI 해시 생성기',
+                    'SSH 키 생성기',
+                    'OAuth Playground',
+                    'CORS 테스터',
+                    'DNS Lookup',
+                    'WebSocket 테스터',
+                    '응답 시간 측정',
+                    'JSONPath Finder',
+                    '스키마 시각화',
+                    '레이아웃 플레이그라운드',
+                    '브레이크포인트 테스터',
+                  ],
+                  // Provide language metadata for search engines and rich results.
+                  inLanguage: ['ko-KR', 'en-US'],
+                  publisher: {
+                    '@type': 'Organization',
+                    name: 'Developer Tools',
+                    url: siteBaseUrl,
+                    logo: logoUrl,
+                  },
+                },
               ],
-              inLanguage: 'ko-KR',
             }),
           }}
         />

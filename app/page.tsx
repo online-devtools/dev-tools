@@ -147,12 +147,14 @@ const toolsConfig = [
       { nameKey: 'tool.ipv4Converter', path: '/ipv4-converter', icon: '🔢', descKey: 'tool.ipv4Converter.desc' },
       { nameKey: 'tool.httpHeaders', path: '/http-headers', icon: '📨', descKey: 'tool.httpHeaders.desc' },
       { nameKey: 'tool.securityHeaders', path: '/security-headers', icon: '🛡️', descKey: 'tool.securityHeaders.desc' },
+      { nameKey: 'tool.urlCleaner', path: '/url-cleaner', icon: '🧽', descKey: 'tool.urlCleaner.desc' },
       // Cookie parsing complements HTTP header inspection.
       { nameKey: 'tool.cookieParser', path: '/cookie-parser', icon: '🍪', descKey: 'tool.cookieParser.desc' },
       { nameKey: 'tool.httpBuilder', path: '/http-builder', icon: '🧪', descKey: 'tool.httpBuilder.desc' },
       { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌', descKey: 'tool.websocket.desc' },
       { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐', descKey: 'tool.sslCert.desc' },
       { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐', descKey: 'tool.dnsLookup.desc' },
+      { nameKey: 'tool.robotsTester', path: '/robots-tester', icon: '🤖', descKey: 'tool.robotsTester.desc' },
       { nameKey: 'tool.cors', path: '/cors', icon: '🚦', descKey: 'tool.cors.desc' },
       { nameKey: 'tool.latency', path: '/latency', icon: '📶', descKey: 'tool.latency.desc' },
       { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈', descKey: 'tool.apiResponseTime.desc' },
@@ -214,6 +216,46 @@ const heroHighlights = [
   },
 ]
 
+// Featured tools are highlighted near the top to improve discovery.
+const featuredTools = [
+  {
+    nameKey: 'tool.securityHeaders',
+    descKey: 'tool.securityHeaders.desc',
+    path: '/security-headers',
+    icon: '🛡️',
+  },
+  {
+    nameKey: 'tool.logRedactor',
+    descKey: 'tool.logRedactor.desc',
+    path: '/log-redactor',
+    icon: '🧹',
+  },
+  {
+    nameKey: 'tool.patchViewer',
+    descKey: 'tool.patchViewer.desc',
+    path: '/patch-viewer',
+    icon: '🩹',
+  },
+  {
+    nameKey: 'tool.schemaToTs',
+    descKey: 'tool.schemaToTs.desc',
+    path: '/schema-to-ts',
+    icon: '🧬',
+  },
+  {
+    nameKey: 'tool.urlCleaner',
+    descKey: 'tool.urlCleaner.desc',
+    path: '/url-cleaner',
+    icon: '🧽',
+  },
+  {
+    nameKey: 'tool.robotsTester',
+    descKey: 'tool.robotsTester.desc',
+    path: '/robots-tester',
+    icon: '🤖',
+  },
+]
+
 export default function Home() {
   const { t } = useLanguage()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
@@ -261,6 +303,52 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Featured tools are surfaced near the top to improve visibility. */}
+      <section className="mb-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-blue-900/40 dark:text-blue-200">
+              {t('home.featured.badge')}
+            </div>
+            <h2 className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">
+              {t('home.featured.title')}
+            </h2>
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+              {t('home.featured.description')}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {featuredTools.map((tool) => (
+            <Link
+              key={tool.path}
+              href={tool.path}
+              className="group relative overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
+            >
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-50 via-white to-transparent opacity-70 dark:from-gray-900 dark:via-gray-900 dark:to-transparent" />
+              <div className="relative p-5 space-y-3">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-blue-500" />
+                  {t('home.featured.tagNew')}
+                </span>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">{tool.icon}</span>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {t(tool.nameKey)}
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                      {t(tool.descKey)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <div className="space-y-8">
         {/* Fragment를 사용해 카테고리 섹션 사이에 광고 섹션을 추가로 배치한다. */}

@@ -15,5 +15,7 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    // 명시적으로 Host를 지정해 검색 엔진이 대표 도메인을 인식하도록 돕는다.
+    host: baseUrl,
   }
 }
