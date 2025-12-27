@@ -185,6 +185,31 @@ const toolsConfig = [
   }
 ]
 
+// Hero 섹션의 특징 카드에 사용할 데이터 구조다.
+// icon은 시각적 힌트, titleKey/descKey는 i18n 번역 키로 연결해 복사본을 한 곳에서 관리한다.
+const heroHighlights = [
+  {
+    icon: '🛡️',
+    titleKey: 'home.hero.cards.privacy.title',
+    descKey: 'home.hero.cards.privacy.desc',
+  },
+  {
+    icon: '⚡',
+    titleKey: 'home.hero.cards.instant.title',
+    descKey: 'home.hero.cards.instant.desc',
+  },
+  {
+    icon: '💸',
+    titleKey: 'home.hero.cards.free.title',
+    descKey: 'home.hero.cards.free.desc',
+  },
+  {
+    icon: '📱',
+    titleKey: 'home.hero.cards.devices.title',
+    descKey: 'home.hero.cards.devices.desc',
+  },
+]
+
 export default function Home() {
   const { t } = useLanguage()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
@@ -193,31 +218,45 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* 스폰서 카드로 첫 화면에서 광고를 확인할 수 있게 배치한다. */}
-      <section className="mb-10">
-        <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/90 dark:bg-gray-800/90 shadow-lg">
-          {/* 배경 그라디언트는 강조용이며 클릭 이벤트를 막지 않도록 pointer-events-none 처리한다. */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-amber-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900" />
-          <div className="relative flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:p-8">
-            <div className="flex-1 space-y-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-amber-900/40 dark:text-amber-200">
-                <span className="h-2 w-2 rounded-full bg-amber-500" />
-                {t('home.sponsored.badge')}
-              </span>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {t('home.sponsored.title')}
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {t('home.sponsored.desc')}
-              </p>
-            </div>
-            <div className="flex-1">
-              {/* 카드 내부에서는 여백을 제거하고, 홈에서는 빠른 로딩 전략을 사용한다. */}
-              <CoupangAd wrapperClassName="my-0" scriptStrategy="afterInteractive" />
-            </div>
+      {/* Hero Section - 핵심 가치 제안 */}
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-8 md:p-12 mb-12 border border-blue-100 dark:border-gray-700">
+        {/* 상단 배지 영역은 서비스의 핵심 메시지를 짧게 강조한다. */}
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+            {t('home.hero.badge')}
+          </div>
+          {/* 타이틀과 서브타이틀은 번역 키로 관리해 다국어를 동시에 지원한다. */}
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            {t('home.hero.title')}
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+            {t('home.hero.subtitle')}
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
+            {t('home.hero.privacyNote')}
+          </p>
+
+          {/* Key Features - 핵심 특징 */}
+          <div className="grid md:grid-cols-4 gap-4 mt-8">
+            {/* heroHighlights 배열을 순회해 카드 UI를 반복 생성한다. */}
+            {heroHighlights.map((highlight) => (
+              <div
+                key={highlight.titleKey}
+                className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
+              >
+                {/* 아이콘은 텍스트 제목과 함께 보조 시각 정보를 제공한다. */}
+                <div className="text-2xl mb-2">{highlight.icon}</div>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
+                  {t(highlight.titleKey)}
+                </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {t(highlight.descKey)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
 
       <div className="space-y-8">
         {/* Fragment를 사용해 카테고리 섹션 사이에 광고 섹션을 추가로 배치한다. */}

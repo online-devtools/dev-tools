@@ -118,6 +118,20 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6853743390551388"
           crossOrigin="anonymous"
         />
+        {/* Buy Me a Coffee 버튼 스크립트를 헤더에 로드해 페이지 렌더 시 버튼 위젯이 생성되도록 합니다. */}
+        <script
+          type="text/javascript"
+          src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+          data-name="bmc-button"
+          data-slug="dlrbgns090p"
+          data-color="#FFDD00"
+          data-emoji=""
+          data-font="Cookie"
+          data-text="Buy me a coffee"
+          data-outline-color="#000000"
+          data-font-color="#000000"
+          data-coffee-color="#ffffff"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
