@@ -108,6 +108,11 @@ export default function RootLayout({
           name="google-site-verification"
           content="Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k"
         />
+        {/* Google Search Console 추가 검증용 메타 태그입니다. */}
+        <meta
+          name="google-site-verification"
+          content="NexoY6FhlE-ob4BUgQqvntKcLZiJbgcUom6TUTgHEw8"
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6853743390551388"
