@@ -173,9 +173,9 @@ const baseMetadata: Omit<
   category: 'technology',
 }
 
-export const generateMetadata = (): Metadata => {
+export const generateMetadata = async (): Promise<Metadata> => {
   // Read language + pathname from middleware to emit correct hreflang/canonical tags.
-  const requestHeaders = headers()
+  const requestHeaders = await headers()
   const requestLanguage = resolveRequestLanguage(requestHeaders.get(LANGUAGE_HEADER))
   const requestPathname = resolveRequestPathname(requestHeaders.get(PATHNAME_HEADER))
   const strippedPathname = stripLanguageFromPathname(requestPathname).pathname
@@ -451,13 +451,13 @@ const footerCopyByLanguage: Record<
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   // Read the request language so the root HTML attributes and providers match the URL.
-  const requestHeaders = headers()
+  const requestHeaders = await headers()
   const requestLanguage = resolveRequestLanguage(requestHeaders.get(LANGUAGE_HEADER))
   const htmlLang = localeByLanguage[requestLanguage]
   const structuredDescription = descriptionByLanguage[requestLanguage]
