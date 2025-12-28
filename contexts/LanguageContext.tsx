@@ -1,8 +1,16 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGE_COOKIE,
+  SupportedLanguage,
+  getLanguageFromPathname,
+  isSupportedLanguage,
+} from '@/utils/i18n'
 
-type Language = 'ko' | 'en'
+type Language = SupportedLanguage
 
 type TranslationReplacements = Record<string, string | number>
 
@@ -40,6 +48,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Search
     'search.noResults': '검색 결과가 없습니다',
+    'search.placeholder': '도구 검색... (Ctrl+K)',
 
     // Sidebar
     'sidebar.favorites': '즐겨찾기',
@@ -2855,6 +2864,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Search
     'search.noResults': 'No results found',
+    'search.placeholder': 'Search tools... (Ctrl+K)',
 
     // Sidebar
     'sidebar.favorites': 'Favorites',
@@ -5591,54 +5601,354 @@ const translations: Record<Language, Record<string, string>> = {
     'yamlTomlTool.actions.tomlToYaml': 'TOML → YAML',
     'yamlTomlTool.actions.yamlToToml': 'YAML → TOML',
     'yamlTomlTool.error.convert': 'Conversion failed: {{message}}',
+  },
+  ja: {
+    // Common
+    'common.copy': 'コピー',
+    'common.clear': 'クリア',
+    'common.copied': 'コピーしました！',
+
+    // Site title and description
+    'site.title': 'Developer Tools - 開発者向け必須ツール',
+    'site.description': '開発者向けの80以上の無料オンラインツール。Base64、JSON、JWT、正規表現、DNS Lookup、WebSocketなどを一か所で。',
+
+    // Navigation
+    'nav.home': 'ホーム',
+    'nav.about': '紹介',
+    'nav.contact': 'お問い合わせ',
+    'nav.privacy': 'プライバシーポリシー',
+    'nav.terms': '利用規約',
+    'nav.faq': 'FAQ',
+    'nav.snippets': 'コードスニペット',
+    'nav.changelog': '更新履歴',
+    'nav.buyMeCoffee': 'コーヒー1杯支援',
+
+    // Search
+    'search.noResults': '結果が見つかりません',
+    'search.placeholder': 'ツールを検索... (Ctrl+K)',
+
+    // Sidebar
+    'sidebar.favorites': 'お気に入り',
+    'sidebar.recent': '最近使用',
+
+    // Home Page
+    'home.title': '開発者向け必須ツール',
+    'home.subtitle': '開発で頻繁に使うユーティリティを一か所に',
+    'home.toolCount': '✨ 80+ プロ向け開発ツール',
+    'home.hero.badge': '必須開発ツール',
+    'home.hero.title': 'ブラウザだけで素早く作業',
+    'home.hero.subtitle': 'Base64からJWTまで、80以上のツールを無料で。インストール不要で端末内で完結。',
+    'home.hero.privacyNote': '✨ すべてのデータはブラウザ内に留まり、サーバーへ送信されません',
+    'home.hero.cards.privacy.title': 'プライバシー重視',
+    'home.hero.cards.privacy.desc': 'クライアントサイドのみ',
+    'home.hero.cards.instant.title': 'すぐ使える',
+    'home.hero.cards.instant.desc': '登録不要',
+    'home.hero.cards.free.title': 'ずっと無料',
+    'home.hero.cards.free.desc': '制限なし',
+    'home.hero.cards.devices.title': 'どこでも',
+    'home.hero.cards.devices.desc': 'あらゆる端末対応',
+    'home.featured.badge': '注目',
+    'home.featured.title': '新しいツールを試す',
+    'home.featured.description': '最新追加のツールをすぐに利用',
+    'home.featured.tagNew': 'NEW',
+    'home.aboutTitle': 'Developer Tools について',
+    'home.aboutText1': 'Developer Toolsは、開発者が日常的に使うオンラインツールを一つにまとめた無料サービスです。Base64、JSON、JWT、正規表現、QRコードなど80以上のツールをインストールや登録なしで利用できます。',
+    'home.aboutText2': 'すべてのツールはクライアントサイドで動作し、データはサーバーへ送信されません。レスポンシブ対応でデスクトップ/タブレット/スマホでも快適に使えます。ダークモードにも対応しています。',
+    'home.whyTitle': '選ばれる理由',
+    'home.feature1.title': '完全無料',
+    'home.feature1.desc': 'すべてのツールを無料で制限なしに利用できます。',
+    'home.feature2.title': 'プライバシー優先',
+    'home.feature2.desc': '処理はブラウザ内で完結し、データは送信されません。',
+    'home.feature3.title': '高速',
+    'home.feature3.desc': 'サーバー通信なしで即座に結果を取得。',
+    'home.feature4.title': '全端末対応',
+    'home.feature4.desc': 'PC/タブレット/スマホに最適化。',
+    'home.feature5.title': '登録不要',
+    'home.feature5.desc': '面倒な登録なしで今すぐ使えます。',
+    'home.feature6.title': '継続アップデート',
+    'home.feature6.desc': 'コミュニティの声を反映し継続的に追加。',
+    'home.sponsored.badge': 'スポンサー',
+    'home.sponsored.title': 'Coupang パートナーおすすめ',
+    'home.sponsored.desc': '一部リンクはアフィリエイトで運営に役立ちます。',
+    'home.snippets.title': '言語別コードスニペット',
+    'home.snippets.desc': 'Base64/JWT/CSVなどの定番作業をコピペで。',
+    'home.snippets.cta': 'スニペットを見る',
+    'home.changelog.title': '更新履歴で最新状況',
+    'home.changelog.desc': '新機能や修正を公開します。',
+    'home.changelog.cta': '更新履歴を見る',
+
+    // Tool Categories
+    'category.encoding': 'エンコード & デコード',
+    'category.security': 'セキュリティ & 暗号化',
+    'category.dataFormat': 'データフォーマット',
+    'category.generators': '生成ツール',
+    'category.converters': '変換ツール',
+    'category.text': 'テキスト',
+    'category.calculators': '計算',
+    'category.info': '情報',
+    'category.tools': 'ツール',
+    'category.linux': 'Linux & システム',
+    'category.network': 'ネットワーク & DevOps',
+    'category.workflow': 'ワークフロー',
+    'category.files': 'ファイル & アセット',
+    'category.frontend': 'フロントエンド UI',
+  },
+  pt: {
+    // Common
+    'common.copy': 'Copiar',
+    'common.clear': 'Limpar',
+    'common.copied': 'Copiado!',
+
+    // Site title and description
+    'site.title': 'Developer Tools - Ferramentas essenciais para desenvolvedores',
+    'site.description': 'Mais de 80 ferramentas online gratuitas para desenvolvedores. Base64, JSON, JWT, Regex, DNS Lookup, WebSocket e mais em um só lugar.',
+
+    // Navigation
+    'nav.home': 'Início',
+    'nav.about': 'Sobre',
+    'nav.contact': 'Contato',
+    'nav.privacy': 'Política de Privacidade',
+    'nav.terms': 'Termos de Serviço',
+    'nav.faq': 'FAQ',
+    'nav.snippets': 'Trechos de código',
+    'nav.changelog': 'Changelog',
+    'nav.buyMeCoffee': 'Compre-me um café',
+
+    // Search
+    'search.noResults': 'Nenhum resultado encontrado',
+    'search.placeholder': 'Pesquisar ferramentas... (Ctrl+K)',
+
+    // Sidebar
+    'sidebar.favorites': 'Favoritos',
+    'sidebar.recent': 'Recentes',
+
+    // Home Page
+    'home.title': 'Ferramentas essenciais para desenvolvedores',
+    'home.subtitle': 'Utilitários usados com frequência em um só lugar',
+    'home.toolCount': '✨ 80+ Ferramentas profissionais',
+    'home.hero.badge': 'Ferramentas indispensáveis',
+    'home.hero.title': 'Acelere com utilitários no navegador',
+    'home.hero.subtitle': 'De Base64 a JWT, use 80+ ferramentas grátis sem instalação e mantendo tudo no seu dispositivo.',
+    'home.hero.privacyNote': '✨ Todos os dados ficam no seu navegador e nunca são enviados ao servidor',
+    'home.hero.cards.privacy.title': 'Privacidade por padrão',
+    'home.hero.cards.privacy.desc': 'Processamento 100% local',
+    'home.hero.cards.instant.title': 'Prontas na hora',
+    'home.hero.cards.instant.desc': 'Sem cadastro',
+    'home.hero.cards.free.title': 'Sempre grátis',
+    'home.hero.cards.free.desc': 'Sem limites',
+    'home.hero.cards.devices.title': 'Funciona em todo lugar',
+    'home.hero.cards.devices.desc': 'Responsivo em qualquer dispositivo',
+    'home.featured.badge': 'Destaque',
+    'home.featured.title': 'Novas ferramentas para testar',
+    'home.featured.description': 'Conheça as adições mais recentes',
+    'home.featured.tagNew': 'NOVO',
+    'home.aboutTitle': 'Sobre o Developer Tools',
+    'home.aboutText1': 'Developer Tools é um serviço gratuito que reúne utilitários online usados diariamente por desenvolvedores. Use 80+ ferramentas profissionais — Base64, JSON, JWT, Regex, QR Code e muito mais — sem instalação ou cadastro.',
+    'home.aboutText2': 'Todas as ferramentas rodam no navegador, então seus dados nunca são enviados ao servidor. O design é responsivo para desktop, tablet e celular, com suporte a modo escuro.',
+    'home.whyTitle': 'Por que escolher o Developer Tools?',
+    'home.feature1.title': 'Totalmente grátis',
+    'home.feature1.desc': 'Use todas as ferramentas sem custo ou limitações.',
+    'home.feature2.title': 'Privacidade em primeiro lugar',
+    'home.feature2.desc': 'Todo processamento acontece no seu navegador.',
+    'home.feature3.title': 'Desempenho rápido',
+    'home.feature3.desc': 'Resultados instantâneos sem comunicação com servidores.',
+    'home.feature4.title': 'Suporte a todos os dispositivos',
+    'home.feature4.desc': 'Experiência otimizada em PC, tablet e smartphone.',
+    'home.feature5.title': 'Sem cadastro',
+    'home.feature5.desc': 'Comece a usar imediatamente, sem registro.',
+    'home.feature6.title': 'Atualizações contínuas',
+    'home.feature6.desc': 'Novas ferramentas adicionadas conforme feedback da comunidade.',
+    'home.sponsored.badge': 'Patrocinado',
+    'home.sponsored.title': 'Recomendações Coupang',
+    'home.sponsored.desc': 'Alguns links são afiliados e ajudam a manter o serviço.',
+    'home.snippets.title': 'Snippets prontos por linguagem',
+    'home.snippets.desc': 'Tarefas comuns como Base64, JWT e CSV com exemplos prontos.',
+    'home.snippets.cta': 'Ver snippets',
+    'home.changelog.title': 'Changelog com atualizações ativas',
+    'home.changelog.desc': 'Novos recursos e correções sempre publicados.',
+    'home.changelog.cta': 'Ver changelog',
+
+    // Tool Categories
+    'category.encoding': 'Codificação e Decodificação',
+    'category.security': 'Segurança e Criptografia',
+    'category.dataFormat': 'Formato de Dados',
+    'category.generators': 'Geradores',
+    'category.converters': 'Conversores',
+    'category.text': 'Texto',
+    'category.calculators': 'Calculadoras',
+    'category.info': 'Informações',
+    'category.tools': 'Ferramentas',
+    'category.linux': 'Linux e Sistema',
+    'category.network': 'Rede e DevOps',
+    'category.workflow': 'Fluxo de trabalho',
+    'category.files': 'Arquivos e Assets',
+    'category.frontend': 'Frontend UI',
+  },
+  de: {
+    // Common
+    'common.copy': 'Kopieren',
+    'common.clear': 'Leeren',
+    'common.copied': 'Kopiert!',
+
+    // Site title and description
+    'site.title': 'Developer Tools - Unverzichtbare Tools für Entwickler',
+    'site.description': 'Über 80 kostenlose Online-Tools für Entwickler. Base64, JSON, JWT, Regex, DNS Lookup, WebSocket und mehr an einem Ort.',
+
+    // Navigation
+    'nav.home': 'Start',
+    'nav.about': 'Über uns',
+    'nav.contact': 'Kontakt',
+    'nav.privacy': 'Datenschutz',
+    'nav.terms': 'Nutzungsbedingungen',
+    'nav.faq': 'FAQ',
+    'nav.snippets': 'Code-Snippets',
+    'nav.changelog': 'Changelog',
+    'nav.buyMeCoffee': 'Kaffee spendieren',
+
+    // Search
+    'search.noResults': 'Keine Ergebnisse gefunden',
+    'search.placeholder': 'Tools suchen... (Ctrl+K)',
+
+    // Sidebar
+    'sidebar.favorites': 'Favoriten',
+    'sidebar.recent': 'Zuletzt verwendet',
+
+    // Home Page
+    'home.title': 'Unverzichtbare Tools für Entwickler',
+    'home.subtitle': 'Häufig genutzte Utilities an einem Ort',
+    'home.toolCount': '✨ 80+ professionelle Entwicklertools',
+    'home.hero.badge': 'Must-have Tools',
+    'home.hero.title': 'Schneller arbeiten mit Browser-Utilities',
+    'home.hero.subtitle': 'Von Base64 bis JWT: 80+ Tools gratis ohne Installation, alles bleibt auf deinem Gerät.',
+    'home.hero.privacyNote': '✨ Alle Daten bleiben im Browser und werden nie an Server gesendet',
+    'home.hero.cards.privacy.title': 'Datenschutz zuerst',
+    'home.hero.cards.privacy.desc': 'Nur clientseitige Verarbeitung',
+    'home.hero.cards.instant.title': 'Sofort startklar',
+    'home.hero.cards.instant.desc': 'Keine Registrierung',
+    'home.hero.cards.free.title': 'Immer kostenlos',
+    'home.hero.cards.free.desc': 'Keine Limits',
+    'home.hero.cards.devices.title': 'Überall nutzbar',
+    'home.hero.cards.devices.desc': 'Responsiv auf jedem Gerät',
+    'home.featured.badge': 'Featured',
+    'home.featured.title': 'Neue Tools ausprobieren',
+    'home.featured.description': 'Entdecke die neuesten Ergänzungen',
+    'home.featured.tagNew': 'NEU',
+    'home.aboutTitle': 'Über Developer Tools',
+    'home.aboutText1': 'Developer Tools ist ein kostenloser Webdienst, der viele Online-Utilities bündelt, die Entwickler täglich brauchen. Nutze 80+ professionelle Tools wie Base64, JSON, JWT, Regex und QR-Code ohne Installation oder Registrierung.',
+    'home.aboutText2': 'Alle Tools laufen vollständig im Browser, sodass keine Daten an Server gesendet werden. Die Oberfläche ist responsiv und unterstützt auch den Dunkelmodus.',
+    'home.whyTitle': 'Warum Developer Tools?',
+    'home.feature1.title': 'Komplett kostenlos',
+    'home.feature1.desc': 'Alle Tools ohne Einschränkungen nutzen.',
+    'home.feature2.title': 'Datenschutz im Fokus',
+    'home.feature2.desc': 'Verarbeitung erfolgt vollständig im Browser.',
+    'home.feature3.title': 'Schnelle Performance',
+    'home.feature3.desc': 'Sofortige Ergebnisse ohne Serverkommunikation.',
+    'home.feature4.title': 'Alle Geräte unterstützt',
+    'home.feature4.desc': 'Optimiert für PC, Tablet und Smartphone.',
+    'home.feature5.title': 'Keine Registrierung',
+    'home.feature5.desc': 'Sofort starten ohne Konto.',
+    'home.feature6.title': 'Ständige Updates',
+    'home.feature6.desc': 'Neue Tools basierend auf Community-Feedback.',
+    'home.sponsored.badge': 'Gesponsert',
+    'home.sponsored.title': 'Coupang Partner-Empfehlungen',
+    'home.sponsored.desc': 'Einige Links sind Affiliate-Links und unterstützen den Betrieb.',
+    'home.snippets.title': 'Code-Snippets nach Sprache',
+    'home.snippets.desc': 'Häufige Aufgaben wie Base64, JWT und CSV mit Beispielen.',
+    'home.snippets.cta': 'Snippets ansehen',
+    'home.changelog.title': 'Changelog zeigt Updates',
+    'home.changelog.desc': 'Neue Funktionen und Fixes transparent dokumentiert.',
+    'home.changelog.cta': 'Changelog ansehen',
+
+    // Tool Categories
+    'category.encoding': 'Kodierung & Dekodierung',
+    'category.security': 'Sicherheit & Verschlüsselung',
+    'category.dataFormat': 'Datenformat',
+    'category.generators': 'Generatoren',
+    'category.converters': 'Konverter',
+    'category.text': 'Text',
+    'category.calculators': 'Rechner',
+    'category.info': 'Info',
+    'category.tools': 'Tools',
+    'category.linux': 'Linux & System',
+    'category.network': 'Netzwerk & DevOps',
+    'category.workflow': 'Workflow',
+    'category.files': 'Dateien & Assets',
+    'category.frontend': 'Frontend UI',
   }
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('ko')
+export function LanguageProvider({
+  children,
+  initialLanguage = DEFAULT_LANGUAGE,
+}: {
+  children: React.ReactNode
+  initialLanguage?: Language
+}) {
+  // Initialize from the server-provided language when available, defaulting to Korean.
+  const [language, setLanguageState] = useState<Language>(initialLanguage)
+  const pathname = usePathname()
+
+  // Persist language across reloads via localStorage + cookie so middleware can read it.
+  const persistLanguage = (nextLanguage: Language) => {
+    localStorage.setItem('language', nextLanguage)
+    document.cookie = `${LANGUAGE_COOKIE}=${nextLanguage}; path=/; max-age=31536000`
+  }
 
   useEffect(() => {
     // 언어 결정 우선순위:
-    // 1) URL 파라미터(lang=ko|en) → 공유 가능한 링크/SEO용
-    // 2) localStorage → 사용자가 마지막으로 선택한 언어
-    // 3) 브라우저 locale → 첫 방문자의 기본값
-    const params = new URLSearchParams(window.location.search)
-    const urlLang = params.get('lang')
-    const normalizedLang =
-      urlLang === 'ko' || urlLang === 'en' ? (urlLang as Language) : null
-    const browserLang = navigator.language.toLowerCase()
-    const savedLang = localStorage.getItem('language') as Language
-
-    if (normalizedLang) {
-      setLanguageState(normalizedLang)
-      // URL 파라미터로 선택된 언어는 다음 방문에서도 유지되도록 저장한다.
-      localStorage.setItem('language', normalizedLang)
+    // 1) URL 경로의 언어 프리픽스 (/ko, /en, /ja, /pt, /de)
+    // 2) localStorage에 저장된 사용자 선택 언어
+    // 3) 브라우저 locale
+    const languageFromPath = getLanguageFromPathname(pathname)
+    if (languageFromPath) {
+      if (languageFromPath !== language) {
+        setLanguageState(languageFromPath)
+      }
+      persistLanguage(languageFromPath)
       return
     }
 
-    if (savedLang) {
-      setLanguageState(savedLang)
-    } else if (browserLang.startsWith('ko')) {
-      setLanguageState('ko')
-    } else {
-      setLanguageState('en')
+    const savedLang = localStorage.getItem('language')
+    const normalizedSaved = isSupportedLanguage(savedLang) ? savedLang : null
+    const browserLang = navigator.language.toLowerCase()
+    const browserFallback = (() => {
+      // 브라우저 locale을 지원 언어로 매핑해 기본 언어를 결정한다.
+      if (browserLang.startsWith('ko')) return 'ko'
+      if (browserLang.startsWith('ja')) return 'ja'
+      if (browserLang.startsWith('pt')) return 'pt'
+      if (browserLang.startsWith('de')) return 'de'
+      return 'en'
+    })()
+    const nextLanguage = normalizedSaved ?? browserFallback
+
+    if (nextLanguage !== language) {
+      setLanguageState(nextLanguage)
     }
-  }, [])
+    persistLanguage(nextLanguage)
+  }, [language, pathname])
 
   useEffect(() => {
     // <html lang> 값을 현재 언어와 동기화하면 스크린리더/검색엔진이 언어를 정확히 인식한다.
-    const htmlLang = language === 'ko' ? 'ko-KR' : 'en-US'
+    const htmlLangMap: Record<Language, string> = {
+      ko: 'ko-KR',
+      en: 'en-US',
+      ja: 'ja-JP',
+      pt: 'pt-BR',
+      de: 'de-DE',
+    }
+    const htmlLang = htmlLangMap[language]
     document.documentElement.lang = htmlLang
   }, [language])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
-    localStorage.setItem('language', lang)
+    persistLanguage(lang)
   }
 
   // t() centralizes lookup + interpolation so every component consumes strings consistently.
   const t = (key: string, replacements?: TranslationReplacements): string => {
-    const template = translations[language][key] || key
+    // 현재 언어에 키가 없으면 영어를 fallback으로 사용한다.
+    const template = translations[language][key] || translations.en[key] || key
     if (!replacements) {
       return template
     }

@@ -10,6 +10,7 @@ import KakaoAd from './KakaoAd'
 import { SearchProvider } from '@/contexts/SearchContext'
 import { FavoritesProvider } from '@/contexts/FavoritesContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { stripLanguageFromPathname } from '@/utils/i18n'
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -18,7 +19,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   // Next.js App Router hook으로 현재 경로를 가져와 홈 전용 광고와 충돌하지 않게 한다.
   const pathname = usePathname()
   // 홈에서는 상단에 별도 광고 배치가 있으므로 전역 광고는 숨긴다.
-  const isHomePage = pathname === '/'
+  const isHomePage = stripLanguageFromPathname(pathname).pathname === '/'
   // 차단 상태는 애드블록 감지 결과에 따라 결정한다.
   const shouldBlockContent = adBlockDetected
 

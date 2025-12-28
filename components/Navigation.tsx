@@ -12,7 +12,7 @@ interface NavigationProps {
 
 export default function Navigation({ onToggleSidebar }: NavigationProps) {
   const { searchQuery, setSearchQuery, isSearchOpen, setIsSearchOpen } = useSearch()
-  const { language, t } = useLanguage()
+  const { t } = useLanguage()
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   // Keyboard shortcut: Ctrl+K / Cmd+K
@@ -36,7 +36,7 @@ export default function Navigation({ onToggleSidebar }: NavigationProps) {
   }, [isSearchOpen, setIsSearchOpen, setSearchQuery])
 
   // 현재 선택된 언어에 맞춰 검색 입력 안내 문구를 구성한다.
-  const placeholder = language === 'ko' ? '도구 검색... (Ctrl+K)' : 'Search tools... (Ctrl+K)'
+  const placeholder = t('search.placeholder')
   // 후원 버튼 라벨은 i18n 키에서 가져와 텍스트와 접근성 라벨을 동시에 맞춘다.
   const buyMeCoffeeLabel = t('nav.buyMeCoffee')
 

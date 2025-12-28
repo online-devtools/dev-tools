@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
+import { SUPPORTED_LANGUAGES, buildLocalizedPathname } from '@/utils/i18n'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // sitemap에는 절대 URL만 허용되므로 공통 유틸에서 base URL을 확정한다.
@@ -167,12 +168,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/bip39',
   ]
 
-  // 각 경로를 Next.js가 요구하는 Sitemap 형태로 변환한다.
-  // lastModified는 호출 시점의 시간으로 지정하여 최신 업데이트 신호를 검색엔진에 전달한다.
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
-  }))
+  // 언어별 프리픽스가 포함된 URL을 모두 생성해 다국어 인덱싱을 보장한다.
+  const localizedRoutes = SUPPORTED_LANGUAGES.flatMap((language) =>
+    routes.map((route) => {
+      const normalizedRoute = route === '' ? '/' : route
+      const localizedPath = buildLocalizedPathname(normalizedRoute, language)
+      return {
+        url: `${baseUrl}${localizedPath}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: route === '' ? 1 : 0.8,
+      }
+    }),
+  )
+
+  return localizedRoutes
 }

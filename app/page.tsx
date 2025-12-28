@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { buildLocalizedPathname } from '@/utils/i18n'
 import CoupangAd from '@/components/CoupangAd'
 
 // Tool configuration with translation keys
@@ -285,10 +286,14 @@ const featuredTools = [
 ]
 
 export default function Home() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   // 광고 노출을 강화하되 과도한 반복을 피하려고 초반 카테고리 뒤에만 삽입한다.
   const sponsoredInsertIndex = 1
+  const localizePath = (path: string) => {
+    // 홈 페이지 링크는 locale 프리픽스를 붙여서 이동한다.
+    return buildLocalizedPathname(path, language)
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -352,7 +357,7 @@ export default function Home() {
           {featuredTools.map((tool) => (
             <Link
               key={tool.path}
-              href={tool.path}
+              href={localizePath(tool.path)}
               className="group relative overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-50 via-white to-transparent opacity-70 dark:from-gray-900 dark:via-gray-900 dark:to-transparent" />
@@ -390,7 +395,7 @@ export default function Home() {
                 {category.items.map((tool) => (
                   <Link
                     key={tool.path}
-                    href={tool.path}
+                    href={localizePath(tool.path)}
                     className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all"
                   >
                     <div className="flex items-start space-x-3">
@@ -452,7 +457,7 @@ export default function Home() {
             </p>
           </div>
           <Link
-            href="/snippets"
+            href={localizePath('/snippets')}
             className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
           >
             {t('home.snippets.cta')}
@@ -471,7 +476,7 @@ export default function Home() {
             </p>
           </div>
           <Link
-            href="/changelog"
+            href={localizePath('/changelog')}
             className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
           >
             {t('home.changelog.cta')}

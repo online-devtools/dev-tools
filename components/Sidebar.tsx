@@ -7,6 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useSearch } from '@/contexts/SearchContext'
 import { useFavorites } from '@/contexts/FavoritesContext'
 import { toolCategories } from '@/config/tools'
+import { buildLocalizedPathname, stripLanguageFromPathname } from '@/utils/i18n'
 
 interface SidebarProps {
   isOpen: boolean
@@ -14,12 +15,19 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const { searchQuery } = useSearch()
   const { favorites, recentTools, toggleFavorite, addToRecent, isFavorite } = useFavorites()
   const pathname = usePathname()
+  // 라우터에서 받은 경로는 locale 프리픽스를 제거해 내부 비교에 사용한다.
+  const normalizedPathname = stripLanguageFromPathname(pathname).pathname
   // 카테고리 접힘 상태를 관리합니다. 기본은 모두 펼침으로 시작해 사용자가 토글할 수 있게 합니다.
   const [openCategories, setOpenCategories] = useState<string[]>(toolCategories.map((c) => c.categoryKey))
+
+  const localizePath = (path: string) => {
+    // 링크 이동 시 locale 프리픽스를 붙여 불필요한 리다이렉트를 줄인다.
+    return buildLocalizedPathname(path, language)
+  }
 
   const toggleCategory = (categoryKey: string) => {
     setOpenCategories((prev) =>
@@ -62,12 +70,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   // Add current page to recent tools
   useEffect(() => {
-    if (pathname && pathname !== '/' && pathname !== '/about' && pathname !== '/contact' &&
-        pathname !== '/privacy' && pathname !== '/terms' && pathname !== '/faq' &&
-        pathname !== '/snippets' && pathname !== '/changelog') {
-      addToRecent(pathname)
+    if (normalizedPathname && normalizedPathname !== '/' && normalizedPathname !== '/about' && normalizedPathname !== '/contact' &&
+        normalizedPathname !== '/privacy' && normalizedPathname !== '/terms' && normalizedPathname !== '/faq' &&
+        normalizedPathname !== '/snippets' && normalizedPathname !== '/changelog') {
+      addToRecent(normalizedPathname)
     }
-  }, [pathname, addToRecent])
+  }, [normalizedPathname, addToRecent])
 
   // Helper function to get tool info by path
   const getToolInfo = (path: string) => {
@@ -102,7 +110,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         <div className="p-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 mb-6" onClick={onClose}>
+          <Link href={localizePath('/')} className="flex items-center space-x-2 mb-6" onClick={onClose}>
             <span className="text-2xl font-bold text-gray-800 dark:text-white">
               🛠️ Dev Tools
             </span>
@@ -121,10 +129,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   return (
                     <div key={tool.path} className="flex items-center group">
                       <Link
-                        href={tool.path}
+                        href={localizePath(tool.path)}
                         onClick={onClose}
                         className={`flex-1 flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
-                          pathname === tool.path
+                          normalizedPathname === tool.path
                             ? 'bg-blue-500 text-white'
                             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                         }`}
@@ -164,10 +172,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   return (
                     <div key={tool.path} className="flex items-center group">
                       <Link
-                        href={tool.path}
+                        href={localizePath(tool.path)}
                         onClick={onClose}
                         className={`flex-1 flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
-                          pathname === tool.path
+                          normalizedPathname === tool.path
                             ? 'bg-blue-500 text-white'
                             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                         }`}
@@ -238,10 +246,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       {category.tools.map((tool) => (
                         <div key={tool.path} className="flex items-center group">
                           <Link
-                            href={tool.path}
+                            href={localizePath(tool.path)}
                             onClick={onClose}
                             className={`flex-1 flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
-                              pathname === tool.path
+                              normalizedPathname === tool.path
                                 ? 'bg-blue-500 text-white'
                                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                             }`}
@@ -282,10 +290,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             {/* Additional pages */}
             <div className="border-t border-gray-200 dark:border-gray-700 mt-4 pt-4 space-y-1">
               <Link
-                href="/snippets"
+                href={localizePath('/snippets')}
                 onClick={onClose}
                 className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
-                  pathname === '/snippets'
+                  normalizedPathname === '/snippets'
                     ? 'bg-blue-500 text-white'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
@@ -293,10 +301,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {t('nav.snippets')}
               </Link>
               <Link
-                href="/faq"
+                href={localizePath('/faq')}
                 onClick={onClose}
                 className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
-                  pathname === '/faq'
+                  normalizedPathname === '/faq'
                     ? 'bg-blue-500 text-white'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
@@ -304,10 +312,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {t('nav.faq')}
               </Link>
               <Link
-                href="/changelog"
+                href={localizePath('/changelog')}
                 onClick={onClose}
                 className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
-                  pathname === '/changelog'
+                  normalizedPathname === '/changelog'
                     ? 'bg-blue-500 text-white'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
