@@ -275,7 +275,9 @@ export default function NetworkPathTool() {
                     <div className="text-sm text-red-600 dark:text-red-300">{result.error}</div>
                   ) : (
                     <div className="text-sm text-gray-600 dark:text-gray-300">
-                      {result.status === 0 ? t('networkPath.dns.ok') : t('networkPath.dns.status', { status: result.status })}
+                      {result.status === 0
+                        ? t('networkPath.dns.ok')
+                        : t('networkPath.dns.status', { status: result.status ?? 'unknown' })}
                     </div>
                   )}
                   {result.answers.length > 0 ? (
