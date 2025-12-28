@@ -11,6 +11,8 @@ Source routes live under `app/`, where each directory (for example `app/base64` 
 
 ## Coding Style & Naming Conventions
 TypeScript is strict-mode (`tsconfig.json`) with React 18 function components. Use 2-space indentation, trailing commas, and favor const/arrow components. File names match intent: route folders are lowercase (e.g., `app/qrcode`), shared components use `PascalCase.tsx`, hooks or helpers use camelCase. Tailwind classes should remain inlined on JSX elements; extract into small components if chains exceed three logical groups to preserve readability. Prefer native Web APIs or `crypto-js` utilities already included. Whenever a feature needs translations, extend the dictionaries in `LanguageContext` and reference the new keys via `useLanguage().t`.
+## Next.js 15 Metadata & Headers
+In Next.js 15, `headers()` is async. When using `headers()` inside `generateMetadata` or layouts, make the function `async` and `await headers()` before calling `.get()`. This avoids build-time TypeScript errors.
 
 ## Testing Guidelines
 Automated tests are limited to linting, so treat `npm run lint` as required pre-commit verification. For each tool, perform manual smoke tests: validate base/URL encoders with known sample strings, verify numeric converters with boundary data, and double-check formatters with malformed input. When adding a visual component, confirm both light/dark modes and responsive layouts using mobile and desktop widths in the dev server.
