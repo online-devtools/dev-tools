@@ -78,7 +78,10 @@ const toHex = (buffer: ArrayBuffer): string => {
 
 const hashSha256 = async (bytes: Uint8Array): Promise<string> => {
   const subtle = getSubtleCrypto()
-  const digest = await subtle.digest('SHA-256', bytes)
+  // WebCrypto typings require an ArrayBuffer-backed view, so copy into ArrayBuffer.
+  const buffer = new ArrayBuffer(bytes.byteLength)
+  new Uint8Array(buffer).set(bytes)
+  const digest = await subtle.digest('SHA-256', buffer)
   return toHex(digest)
 }
 
