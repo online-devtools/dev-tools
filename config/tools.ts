@@ -189,6 +189,10 @@ export const toolCategories = [
       { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈' },
       // HAR analyzer is offline-only and helps inspect captured network logs.
       { nameKey: 'tool.harAnalyzer', path: '/har-analyzer', icon: '📡' },
+      { nameKey: 'tool.tlsDiagnostics', path: '/tls-diagnostics', icon: '🔐' },
+      { nameKey: 'tool.grpcClient', path: '/grpc-client', icon: '📡' },
+      { nameKey: 'tool.webhookTester', path: '/webhook-tester', icon: '🪝' },
+      { nameKey: 'tool.networkPath', path: '/network-path', icon: '🛰️' },
     ]
   },
   {
@@ -200,6 +204,14 @@ export const toolCategories = [
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍' },
       { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹' },
       { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹' },
+      { nameKey: 'tool.apiScenario', path: '/api-scenario', icon: '🧭' },
+      { nameKey: 'tool.contractTester', path: '/contract-tester', icon: '📜' },
+      { nameKey: 'tool.gitConflict', path: '/git-conflict', icon: '⚔️' },
+      { nameKey: 'tool.packageMerge', path: '/package-merge', icon: '📦' },
+      { nameKey: 'tool.dockerCompose', path: '/docker-compose', icon: '🐳' },
+      { nameKey: 'tool.terraformLinter', path: '/terraform-linter', icon: '🏗️' },
+      { nameKey: 'tool.stackTrace', path: '/stack-trace', icon: '🔍' },
+      { nameKey: 'tool.errorCode', path: '/error-code', icon: '❌' },
     ]
   },
   {
@@ -220,6 +232,8 @@ export const toolCategories = [
       { nameKey: 'tool.layoutPlayground', path: '/layout-playground', icon: '📐' },
       { nameKey: 'tool.easing', path: '/easing', icon: '🧭' },
       { nameKey: 'tool.breakpointTester', path: '/breakpoint-tester', icon: '📱' },
+      { nameKey: 'tool.lighthouseReport', path: '/lighthouse-report', icon: '🚦' },
+      { nameKey: 'tool.visualDiff', path: '/visual-diff', icon: '🖼️' },
     ]
   }
 ]

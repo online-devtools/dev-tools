@@ -144,12 +144,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/cors',
     '/latency',
     '/api-response-time',
+    '/tls-diagnostics',
+    '/grpc-client',
+    '/webhook-tester',
+    '/network-path',
     // Workflow
     '/commit-message',
     '/dependency-checker',
     '/regex-debugger',
     '/patch-viewer',
     '/patch-linter',
+    '/api-scenario',
+    '/contract-tester',
     // Files
     '/file-hash',
     '/pdf-metadata',
@@ -159,6 +165,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/layout-playground',
     '/easing',
     '/breakpoint-tester',
+    '/lighthouse-report',
+    '/visual-diff',
     // Additional tools
     '/phone-parser',
     '/iban-validator',

@@ -398,7 +398,7 @@ const footerCopyByLanguage: Record<
     terms: '이용약관',
     privacy: '개인정보 처리방침',
     privacyNote:
-      '모든 도구는 클라이언트 사이드에서만 작동하며, 입력 데이터는 서버로 전송되지 않습니다.',
+      '대부분의 도구는 브라우저에서 동작하며, 네트워크가 필요한 도구만 실행 시에 데이터가 전송됩니다.',
   },
   en: {
     summary:
@@ -411,7 +411,7 @@ const footerCopyByLanguage: Record<
     terms: 'Terms of Service',
     privacy: 'Privacy Policy',
     privacyNote:
-      'All tools run entirely in the browser, and input data is never sent to a server.',
+      'Most tools run in the browser; tools that require network access only send data when you run them.',
   },
   ja: {
     summary:
@@ -423,7 +423,7 @@ const footerCopyByLanguage: Record<
     contact: 'お問い合わせ',
     terms: '利用規約',
     privacy: 'プライバシーポリシー',
-    privacyNote: 'すべてのツールはブラウザ内で動作し、入力データはサーバーへ送信されません。',
+    privacyNote: 'ほとんどのツールはブラウザ内で動作し、ネットワークが必要なツールのみ実行時にデータを送信します。',
   },
   pt: {
     summary:
@@ -435,7 +435,7 @@ const footerCopyByLanguage: Record<
     contact: 'Contato',
     terms: 'Termos de Serviço',
     privacy: 'Política de Privacidade',
-    privacyNote: 'Todas as ferramentas rodam no navegador e os dados não são enviados ao servidor.',
+    privacyNote: 'A maioria das ferramentas roda no navegador; apenas as que precisam de rede enviam dados quando você executa.',
   },
   de: {
     summary:
@@ -447,7 +447,7 @@ const footerCopyByLanguage: Record<
     contact: 'Kontakt',
     terms: 'Nutzungsbedingungen',
     privacy: 'Datenschutz',
-    privacyNote: 'Alle Tools laufen im Browser; Eingabedaten werden nicht an Server gesendet.',
+    privacyNote: 'Die meisten Tools laufen im Browser; nur Tools mit Netzwerkanforderungen senden Daten beim Ausführen.',
   },
 }
 

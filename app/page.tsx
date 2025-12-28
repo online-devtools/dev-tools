@@ -164,6 +164,10 @@ const toolsConfig = [
       { nameKey: 'tool.apiResponseTime', path: '/api-response-time', icon: '📈', descKey: 'tool.apiResponseTime.desc' },
       // HAR analyzer provides offline insight into network logs.
       { nameKey: 'tool.harAnalyzer', path: '/har-analyzer', icon: '📡', descKey: 'tool.harAnalyzer.desc' },
+      { nameKey: 'tool.tlsDiagnostics', path: '/tls-diagnostics', icon: '🔐', descKey: 'tool.tlsDiagnostics.desc' },
+      { nameKey: 'tool.grpcClient', path: '/grpc-client', icon: '📡', descKey: 'tool.grpcClient.desc' },
+      { nameKey: 'tool.webhookTester', path: '/webhook-tester', icon: '🪝', descKey: 'tool.webhookTester.desc' },
+      { nameKey: 'tool.networkPath', path: '/network-path', icon: '🛰️', descKey: 'tool.networkPath.desc' },
     ]
   },
   {
@@ -174,6 +178,8 @@ const toolsConfig = [
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍', descKey: 'tool.regexDebugger.desc' },
       { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹', descKey: 'tool.patchViewer.desc' },
       { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹', descKey: 'tool.patchLinter.desc' },
+      { nameKey: 'tool.apiScenario', path: '/api-scenario', icon: '🧭', descKey: 'tool.apiScenario.desc' },
+      { nameKey: 'tool.contractTester', path: '/contract-tester', icon: '📜', descKey: 'tool.contractTester.desc' },
     ]
   },
   {
@@ -192,6 +198,8 @@ const toolsConfig = [
       { nameKey: 'tool.layoutPlayground', path: '/layout-playground', icon: '📐', descKey: 'tool.layoutPlayground.desc' },
       { nameKey: 'tool.easing', path: '/easing', icon: '🧭', descKey: 'tool.easing.desc' },
       { nameKey: 'tool.breakpointTester', path: '/breakpoint-tester', icon: '📱', descKey: 'tool.breakpointTester.desc' },
+      { nameKey: 'tool.lighthouseReport', path: '/lighthouse-report', icon: '🚦', descKey: 'tool.lighthouseReport.desc' },
+      { nameKey: 'tool.visualDiff', path: '/visual-diff', icon: '🖼️', descKey: 'tool.visualDiff.desc' },
     ]
   }
 ]
