@@ -154,6 +154,9 @@ const toolsConfig = [
       { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌', descKey: 'tool.websocket.desc' },
       { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐', descKey: 'tool.sslCert.desc' },
       { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐', descKey: 'tool.dnsLookup.desc' },
+      { nameKey: 'tool.dnsCompare', path: '/dns-compare', icon: '⚖️', descKey: 'tool.dnsCompare.desc' },
+      { nameKey: 'tool.sitemapAnalyzer', path: '/sitemap-analyzer', icon: '🗺️', descKey: 'tool.sitemapAnalyzer.desc' },
+      { nameKey: 'tool.certChain', path: '/cert-chain', icon: '🔐', descKey: 'tool.certChain.desc' },
       { nameKey: 'tool.robotsTester', path: '/robots-tester', icon: '🤖', descKey: 'tool.robotsTester.desc' },
       { nameKey: 'tool.cors', path: '/cors', icon: '🚦', descKey: 'tool.cors.desc' },
       { nameKey: 'tool.latency', path: '/latency', icon: '📶', descKey: 'tool.latency.desc' },
@@ -169,6 +172,7 @@ const toolsConfig = [
       { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦', descKey: 'tool.dependencyChecker.desc' },
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍', descKey: 'tool.regexDebugger.desc' },
       { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹', descKey: 'tool.patchViewer.desc' },
+      { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹', descKey: 'tool.patchLinter.desc' },
     ]
   },
   {
@@ -237,6 +241,12 @@ const featuredTools = [
     icon: '🩹',
   },
   {
+    nameKey: 'tool.patchLinter',
+    descKey: 'tool.patchLinter.desc',
+    path: '/patch-linter',
+    icon: '🧹',
+  },
+  {
     nameKey: 'tool.schemaToTs',
     descKey: 'tool.schemaToTs.desc',
     path: '/schema-to-ts',
@@ -247,6 +257,24 @@ const featuredTools = [
     descKey: 'tool.urlCleaner.desc',
     path: '/url-cleaner',
     icon: '🧽',
+  },
+  {
+    nameKey: 'tool.sitemapAnalyzer',
+    descKey: 'tool.sitemapAnalyzer.desc',
+    path: '/sitemap-analyzer',
+    icon: '🗺️',
+  },
+  {
+    nameKey: 'tool.dnsCompare',
+    descKey: 'tool.dnsCompare.desc',
+    path: '/dns-compare',
+    icon: '⚖️',
+  },
+  {
+    nameKey: 'tool.certChain',
+    descKey: 'tool.certChain.desc',
+    path: '/cert-chain',
+    icon: '🔐',
   },
   {
     nameKey: 'tool.robotsTester',

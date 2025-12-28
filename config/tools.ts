@@ -180,6 +180,9 @@ export const toolCategories = [
       { nameKey: 'tool.websocket', path: '/websocket', icon: '🔌' },
       { nameKey: 'tool.sslCert', path: '/ssl-cert', icon: '🔐' },
       { nameKey: 'tool.dnsLookup', path: '/dns-lookup', icon: '🌐' },
+      { nameKey: 'tool.dnsCompare', path: '/dns-compare', icon: '⚖️' },
+      { nameKey: 'tool.sitemapAnalyzer', path: '/sitemap-analyzer', icon: '🗺️' },
+      { nameKey: 'tool.certChain', path: '/cert-chain', icon: '🔐' },
       { nameKey: 'tool.robotsTester', path: '/robots-tester', icon: '🤖' },
       { nameKey: 'tool.cors', path: '/cors', icon: '🚦' },
       { nameKey: 'tool.latency', path: '/latency', icon: '📶' },
@@ -196,6 +199,7 @@ export const toolCategories = [
       { nameKey: 'tool.dependencyChecker', path: '/dependency-checker', icon: '📦' },
       { nameKey: 'tool.regexDebugger', path: '/regex-debugger', icon: '🔍' },
       { nameKey: 'tool.patchViewer', path: '/patch-viewer', icon: '🩹' },
+      { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹' },
     ]
   },
   {

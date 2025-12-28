@@ -136,6 +136,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/websocket',
     '/ssl-cert',
     '/dns-lookup',
+    '/dns-compare',
+    '/sitemap-analyzer',
+    '/cert-chain',
     '/robots-tester',
     '/cors',
     '/latency',
@@ -145,6 +148,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/dependency-checker',
     '/regex-debugger',
     '/patch-viewer',
+    '/patch-linter',
     // Files
     '/file-hash',
     '/pdf-metadata',
