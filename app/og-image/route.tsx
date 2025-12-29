@@ -39,7 +39,12 @@ export function GET() {
           <span>15+ Utilities</span>
         </div>
 
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <h1
             style={{
               fontSize: 84,
