@@ -156,6 +156,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/patch-linter',
     '/api-scenario',
     '/contract-tester',
+    '/otel-trace',
+    '/k8s-validator',
+    '/dockerfile-linter',
+    '/github-actions-linter',
+    '/terraform-diff',
+    '/changelog-generator',
     // Files
     '/file-hash',
     '/pdf-metadata',
@@ -167,6 +173,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/breakpoint-tester',
     '/lighthouse-report',
     '/visual-diff',
+    '/sql-explain',
+    '/timezone',
+    '/pagination-tester',
+    '/webauthn',
     // Additional tools
     '/phone-parser',
     '/iban-validator',

@@ -37,6 +37,7 @@ export const toolCategories = [
       { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️' },
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩' },
       { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑' },
+      { nameKey: 'tool.webauthn', path: '/webauthn', icon: '🛡️' },
     ]
   },
   {
@@ -74,6 +75,7 @@ export const toolCategories = [
       { nameKey: 'tool.sqlBuilder', path: '/sql-builder', icon: '🗃️' },
       { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭' },
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️' },
+      { nameKey: 'tool.sqlExplain', path: '/sql-explain', icon: '🧮' },
     ]
   },
   {
@@ -108,6 +110,7 @@ export const toolCategories = [
       { nameKey: 'tool.tempConverter', path: '/temp-converter', icon: '🌡️' },
       { nameKey: 'tool.svgOptimizer', path: '/svg-optimizer', icon: '⚡' },
       { nameKey: 'tool.curlConverter', path: '/curl-converter', icon: '🔄' },
+      { nameKey: 'tool.timezone', path: '/timezone', icon: '🕒' },
     ]
   },
   {
@@ -193,6 +196,7 @@ export const toolCategories = [
       { nameKey: 'tool.grpcClient', path: '/grpc-client', icon: '📡' },
       { nameKey: 'tool.webhookTester', path: '/webhook-tester', icon: '🪝' },
       { nameKey: 'tool.networkPath', path: '/network-path', icon: '🛰️' },
+      { nameKey: 'tool.paginationTester', path: '/pagination-tester', icon: '📄' },
     ]
   },
   {
@@ -206,6 +210,12 @@ export const toolCategories = [
       { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹' },
       { nameKey: 'tool.apiScenario', path: '/api-scenario', icon: '🧭' },
       { nameKey: 'tool.contractTester', path: '/contract-tester', icon: '📜' },
+      { nameKey: 'tool.otelTrace', path: '/otel-trace', icon: '🧵' },
+      { nameKey: 'tool.k8sValidator', path: '/k8s-validator', icon: '☸️' },
+      { nameKey: 'tool.dockerfileLinter', path: '/dockerfile-linter', icon: '🐳' },
+      { nameKey: 'tool.ghaLinter', path: '/github-actions-linter', icon: '🤖' },
+      { nameKey: 'tool.terraformDiff', path: '/terraform-diff', icon: '🌍' },
+      { nameKey: 'tool.changelogGenerator', path: '/changelog-generator', icon: '📝' },
       { nameKey: 'tool.gitConflict', path: '/git-conflict', icon: '⚔️' },
       { nameKey: 'tool.packageMerge', path: '/package-merge', icon: '📦' },
       { nameKey: 'tool.dockerCompose', path: '/docker-compose', icon: '🐳' },

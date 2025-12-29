@@ -39,6 +39,7 @@ const toolsConfig = [
       { nameKey: 'tool.sshKeys', path: '/ssh-keys', icon: '🗝️', descKey: 'tool.sshKeys.desc' },
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩', descKey: 'tool.saml.desc' },
       { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑', descKey: 'tool.oauth.desc' },
+      { nameKey: 'tool.webauthn', path: '/webauthn', icon: '🛡️', descKey: 'tool.webauthn.desc' },
     ]
   },
   {
@@ -69,6 +70,7 @@ const toolsConfig = [
       // Env diff is useful for comparing deployment configurations.
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪', descKey: 'tool.envDiff.desc' },
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️', descKey: 'tool.schemaVisualizer.desc' },
+      { nameKey: 'tool.sqlExplain', path: '/sql-explain', icon: '🧮', descKey: 'tool.sqlExplain.desc' },
     ]
   },
   {
@@ -94,6 +96,7 @@ const toolsConfig = [
       { nameKey: 'tool.baseconv', path: '/baseconv', icon: '🔢', descKey: 'tool.baseconv.desc' },
       { nameKey: 'tool.romanNumeral', path: '/roman-numeral', icon: 'Ⅰ', descKey: 'tool.romanNumeral.desc' },
       { nameKey: 'tool.tempConverter', path: '/temp-converter', icon: '🌡️', descKey: 'tool.tempConverter.desc' },
+      { nameKey: 'tool.timezone', path: '/timezone', icon: '🕒', descKey: 'tool.timezone.desc' },
     ]
   },
   {
@@ -169,6 +172,7 @@ const toolsConfig = [
       { nameKey: 'tool.grpcClient', path: '/grpc-client', icon: '📡', descKey: 'tool.grpcClient.desc' },
       { nameKey: 'tool.webhookTester', path: '/webhook-tester', icon: '🪝', descKey: 'tool.webhookTester.desc' },
       { nameKey: 'tool.networkPath', path: '/network-path', icon: '🛰️', descKey: 'tool.networkPath.desc' },
+      { nameKey: 'tool.paginationTester', path: '/pagination-tester', icon: '📄', descKey: 'tool.paginationTester.desc' },
     ]
   },
   {
@@ -181,6 +185,12 @@ const toolsConfig = [
       { nameKey: 'tool.patchLinter', path: '/patch-linter', icon: '🧹', descKey: 'tool.patchLinter.desc' },
       { nameKey: 'tool.apiScenario', path: '/api-scenario', icon: '🧭', descKey: 'tool.apiScenario.desc' },
       { nameKey: 'tool.contractTester', path: '/contract-tester', icon: '📜', descKey: 'tool.contractTester.desc' },
+      { nameKey: 'tool.otelTrace', path: '/otel-trace', icon: '🧵', descKey: 'tool.otelTrace.desc' },
+      { nameKey: 'tool.k8sValidator', path: '/k8s-validator', icon: '☸️', descKey: 'tool.k8sValidator.desc' },
+      { nameKey: 'tool.dockerfileLinter', path: '/dockerfile-linter', icon: '🐳', descKey: 'tool.dockerfileLinter.desc' },
+      { nameKey: 'tool.ghaLinter', path: '/github-actions-linter', icon: '🤖', descKey: 'tool.ghaLinter.desc' },
+      { nameKey: 'tool.terraformDiff', path: '/terraform-diff', icon: '🌍', descKey: 'tool.terraformDiff.desc' },
+      { nameKey: 'tool.changelogGenerator', path: '/changelog-generator', icon: '📝', descKey: 'tool.changelogGenerator.desc' },
     ]
   },
   {
