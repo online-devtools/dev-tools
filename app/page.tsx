@@ -5,6 +5,7 @@ import { Fragment, useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { buildLocalizedPathname } from '@/utils/i18n'
 import CoupangAd from '@/components/CoupangAd'
+import KakaoAd from '@/components/KakaoAd'
 
 // Tool configuration with translation keys
 const toolsConfig = [
@@ -392,9 +393,10 @@ export default function Home() {
       </section>
 
       <div className="space-y-8">
-        {/* Fragment를 사용해 카테고리 섹션 사이에 광고 섹션을 추가로 배치한다. */}
+        {/* Fragment를 사용해 카테고리 섹션 위에 광고 섹션을 배치한다. */}
         {toolsConfig.map((category, index) => (
           <Fragment key={category.categoryKey}>
+            <KakaoAd />
             <div>
               <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
                 {t(category.categoryKey)}
