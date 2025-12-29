@@ -5,8 +5,8 @@ import Script from 'next/script'
 
 type KakaoAdProps = {
   adUnit?: string
-  width?: number
-  height?: number
+  width?: number | string
+  height?: number | string
   wrapperClassName?: string
 }
 
