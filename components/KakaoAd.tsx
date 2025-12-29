@@ -1,7 +1,6 @@
 'use client'
 
-import { useId } from 'react'
-import Script from 'next/script'
+import { useEffect, useId, useRef } from 'react'
 
 type KakaoAdProps = {
   adUnit?: string
@@ -17,9 +16,23 @@ export default function KakaoAd({
   wrapperClassName = 'w-full flex justify-center',
 }: KakaoAdProps) {
   const baseId = useId().replace(/:/g, '')
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const script = document.createElement('script')
+    script.src = 'https://t1.daumcdn.net/kas/static/ba.min.js'
+    script.async = true
+    containerRef.current.appendChild(script)
+
+    return () => {
+      script.remove()
+    }
+  }, [adUnit, width, height])
 
   return (
-    <div className={wrapperClassName}>
+    <div className={wrapperClassName} ref={containerRef}>
       <ins
         className="kakao_ad_area"
         style={{ display: 'none' }}
@@ -27,11 +40,6 @@ export default function KakaoAd({
         data-ad-width={String(width)}
         data-ad-height={String(height)}
         id={`kakao-ad-${baseId}`}
-      />
-      <Script
-        id="kakao-adfit-script"
-        src="https://t1.daumcdn.net/kas/static/ba.min.js"
-        strategy="afterInteractive"
       />
     </div>
   )
