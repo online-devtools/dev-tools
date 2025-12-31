@@ -94,6 +94,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Additional tools
     '/phone-parser', '/iban-validator', '/ascii-art', '/mac-address',
     '/password-strength', '/bip39',
+    // New tools (2024)
+    '/msgpack', '/pem-der', '/systemd-generator', '/feature-flag',
+    '/image-optimizer', '/hex-viewer', '/lockfile-diff',
   ]
 
   // 도구별 설정 생성 - 인기 도구는 높은 우선순위 부여

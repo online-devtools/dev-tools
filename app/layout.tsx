@@ -555,6 +555,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     url: siteBaseUrl,
                     logo: logoUrl,
                   },
+                  // SearchAction - Google Sitelinks 검색창 활성화
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target: {
+                      '@type': 'EntryPoint',
+                      urlTemplate: `${siteBaseUrl}/?search={search_term_string}`,
+                    },
+                    'query-input': 'required name=search_term_string',
+                  },
                 },
                 {
                   '@type': 'WebApplication',

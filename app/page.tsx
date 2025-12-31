@@ -205,6 +205,8 @@ const toolsConfig = [
       { nameKey: 'tool.fileHash', path: '/file-hash', icon: '🔐', descKey: 'tool.fileHash.desc' },
       { nameKey: 'tool.pdfMetadata', path: '/pdf-metadata', icon: '📄', descKey: 'tool.pdfMetadata.desc' },
       { nameKey: 'tool.favicon', path: '/favicon', icon: '🖼️', descKey: 'tool.favicon.desc' },
+      { nameKey: 'tool.imageOptimizer', path: '/image-optimizer', icon: '🖼️', descKey: 'tool.imageOptimizer.desc' },
+      { nameKey: 'tool.hexViewer', path: '/hex-viewer', icon: '🔬', descKey: 'tool.hexViewer.desc' },
     ]
   },
   {
