@@ -40,6 +40,7 @@ const toolsConfig = [
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩', descKey: 'tool.saml.desc' },
       { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑', descKey: 'tool.oauth.desc' },
       { nameKey: 'tool.webauthn', path: '/webauthn', icon: '🛡️', descKey: 'tool.webauthn.desc' },
+      { nameKey: 'tool.pemDer', path: '/pem-der', icon: '🔐', descKey: 'tool.pemDer.desc' },
     ]
   },
   {
@@ -71,6 +72,7 @@ const toolsConfig = [
       { nameKey: 'tool.envDiff', path: '/env-diff', icon: '🧪', descKey: 'tool.envDiff.desc' },
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️', descKey: 'tool.schemaVisualizer.desc' },
       { nameKey: 'tool.sqlExplain', path: '/sql-explain', icon: '🧮', descKey: 'tool.sqlExplain.desc' },
+      { nameKey: 'tool.msgpack', path: '/msgpack', icon: '📦', descKey: 'tool.msgpack.desc' },
     ]
   },
   {
@@ -141,6 +143,7 @@ const toolsConfig = [
       { nameKey: 'tool.chmod', path: '/chmod', icon: '🔐', descKey: 'tool.chmod.desc' },
       { nameKey: 'tool.regex', path: '/regex', icon: '🔍', descKey: 'tool.regex.desc' },
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰', descKey: 'tool.cron.desc' },
+      { nameKey: 'tool.systemdGenerator', path: '/systemd-generator', icon: '⚙️', descKey: 'tool.systemdGenerator.desc' },
     ]
   },
   {
@@ -191,6 +194,8 @@ const toolsConfig = [
       { nameKey: 'tool.ghaLinter', path: '/github-actions-linter', icon: '🤖', descKey: 'tool.ghaLinter.desc' },
       { nameKey: 'tool.terraformDiff', path: '/terraform-diff', icon: '🌍', descKey: 'tool.terraformDiff.desc' },
       { nameKey: 'tool.changelogGenerator', path: '/changelog-generator', icon: '📝', descKey: 'tool.changelogGenerator.desc' },
+      { nameKey: 'tool.featureFlag', path: '/feature-flag', icon: '🚩', descKey: 'tool.featureFlag.desc' },
+      { nameKey: 'tool.lockfileDiff', path: '/lockfile-diff', icon: '📦', descKey: 'tool.lockfileDiff.desc' },
     ]
   },
   {

@@ -487,6 +487,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-P7SJHKJP');`,
           }}
         />
+        {/* Google tag (gtag.js) - GA4 직접 연동 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-F77CE5RFZM"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F77CE5RFZM');
+`,
+          }}
+        />
         <meta
           name="google-site-verification"
           content="Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k"
