@@ -577,31 +577,14 @@ export default function Home() {
         </div>
         <aside className="space-y-6 lg:sticky lg:top-24 h-fit">
           <section className="rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/95 dark:bg-gray-800/95 shadow-lg p-6">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-200">
-                  {t('home.adGuide.copyLabel')}
-                </p>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {t('home.adGuide.title')}
-                </h2>
-              </div>
-              <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                <p>{t('home.adGuide.description')}</p>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">
-                  {t('home.adGuide.sdkGuide')}
-                </p>
-                <p>{t('home.adGuide.unitInfo')}</p>
-                <p>{t('home.adGuide.delay')}</p>
-              </div>
-              <div className="flex justify-center">
-                <KakaoAd
-                  adUnit="DAN-qFx9tFDvJHdCjASg"
-                  width={160}
-                  height={600}
-                  wrapperClassName="flex justify-center"
-                />
-              </div>
+            {/* 오른쪽 사이드에는 광고만 노출해 안내 문구를 숨긴다. */}
+            <div className="flex justify-center">
+              <KakaoAd
+                adUnit="DAN-qFx9tFDvJHdCjASg"
+                width={160}
+                height={600}
+                wrapperClassName="flex justify-center"
+              />
             </div>
           </section>
         </aside>
