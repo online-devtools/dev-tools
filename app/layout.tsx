@@ -6,7 +6,6 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
-import GoogleAnalytics from '@/components/GoogleAnalytics'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
 import {
   DEFAULT_LANGUAGE,
@@ -672,8 +671,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </ThemeProvider>
         {/* Vercel Analytics - 성능 모니터링 */}
         <Analytics />
-        {/* Google Analytics 4 - 트래픽 분석 (GA_ID 환경변수 필요) */}
-        <GoogleAnalytics />
       </body>
     </html>
   )
