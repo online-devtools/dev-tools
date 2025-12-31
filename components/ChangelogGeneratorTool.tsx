@@ -63,7 +63,7 @@ export default function ChangelogGeneratorTool() {
 
     const orderedGroups = Object.values(groups)
     if (others.length) {
-      orderedGroups.push({ title: t('changelog.other'), items: others })
+      orderedGroups.push({ title: t('changelogGenerator.other'), items: others })
     }
 
     const headerDate = date ? ` (${date})` : ''
@@ -80,15 +80,16 @@ export default function ChangelogGeneratorTool() {
   }
 
   const hint = useMemo(() => {
-    return t('changelog.hint')
+    return t('changelogGenerator.hint')
   }, [t])
 
+  // Use changelogGenerator.* keys to avoid clashing with the /changelog page copy strings.
   return (
-    <ToolCard title={`📝 ${t('changelog.title')}`} description={t('changelog.description')}>
+    <ToolCard title={`📝 ${t('changelogGenerator.title')}`} description={t('changelogGenerator.description')}>
       <div className="space-y-5">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelog.version')}</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelogGenerator.version')}</label>
             <input
               value={version}
               onChange={(e) => setVersion(e.target.value)}
@@ -96,7 +97,7 @@ export default function ChangelogGeneratorTool() {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelog.date')}</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelogGenerator.date')}</label>
             <input
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -107,12 +108,12 @@ export default function ChangelogGeneratorTool() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelog.input')}</label>
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('changelogGenerator.input')}</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={8}
-            placeholder={t('changelog.placeholder')}
+            placeholder={t('changelogGenerator.placeholder')}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
           />
           <div className="text-xs text-gray-500 dark:text-gray-400">{hint}</div>
@@ -120,10 +121,10 @@ export default function ChangelogGeneratorTool() {
 
         <div className="flex flex-wrap gap-2">
           <button onClick={generate} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
-            {t('changelog.generate')}
+            {t('changelogGenerator.generate')}
           </button>
           <button onClick={handleClear} className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg">
-            {t('changelog.clear')}
+            {t('changelogGenerator.clear')}
           </button>
         </div>
 
