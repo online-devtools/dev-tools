@@ -323,254 +323,288 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* Hero Section - 핵심 가치 제안 */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-8 md:p-12 mb-12 border border-blue-100 dark:border-gray-700">
-        {/* 상단 배지 영역은 서비스의 핵심 메시지를 짧게 강조한다. */}
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
-            {t('home.hero.badge')}
-          </div>
-          {/* 타이틀과 서브타이틀은 번역 키로 관리해 다국어를 동시에 지원한다. */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            {t('home.hero.title')}
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-            {t('home.hero.subtitle')}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
-            {t('home.hero.privacyNote')}
-          </p>
-
-          {/* Key Features - 핵심 특징 */}
-          <div className="grid md:grid-cols-4 gap-4 mt-8">
-            {/* heroHighlights 배열을 순회해 카드 UI를 반복 생성한다. */}
-            {heroHighlights.map((highlight) => (
-              <div
-                key={highlight.titleKey}
-                className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
-              >
-                {/* 아이콘은 텍스트 제목과 함께 보조 시각 정보를 제공한다. */}
-                <div className="text-2xl mb-2">{highlight.icon}</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
-                  {t(highlight.titleKey)}
-                </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  {t(highlight.descKey)}
-                </p>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="min-w-0">
+          {/* Hero Section - 핵심 가치 제안 */}
+          <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-8 md:p-12 mb-12 border border-blue-100 dark:border-gray-700">
+            {/* 상단 배지 영역은 서비스의 핵심 메시지를 짧게 강조한다. */}
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                {t('home.hero.badge')}
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
+              {/* 타이틀과 서브타이틀은 번역 키로 관리해 다국어를 동시에 지원한다. */}
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                {t('home.hero.title')}
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                {t('home.hero.subtitle')}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
+                {t('home.hero.privacyNote')}
+              </p>
 
-      {/* Featured tools are surfaced near the top to improve visibility. */}
-      <section className="mb-12">
-        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-blue-900/40 dark:text-blue-200">
-              {t('home.featured.badge')}
-            </div>
-            <h2 className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">
-              {t('home.featured.title')}
-            </h2>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-              {t('home.featured.description')}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredTools.map((tool) => (
-            <Link
-              key={tool.path}
-              href={localizePath(tool.path)}
-              className="group relative overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
-            >
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-50 via-white to-transparent opacity-70 dark:from-gray-900 dark:via-gray-900 dark:to-transparent" />
-              <div className="relative p-5 space-y-3">
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">
-                  <span className="inline-flex h-2 w-2 rounded-full bg-blue-500" />
-                  {t('home.featured.tagNew')}
-                </span>
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">{tool.icon}</span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {t(tool.nameKey)}
+              {/* Key Features - 핵심 특징 */}
+              <div className="grid md:grid-cols-4 gap-4 mt-8">
+                {/* heroHighlights 배열을 순회해 카드 UI를 반복 생성한다. */}
+                {heroHighlights.map((highlight) => (
+                  <div
+                    key={highlight.titleKey}
+                    className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700"
+                  >
+                    {/* 아이콘은 텍스트 제목과 함께 보조 시각 정보를 제공한다. */}
+                    <div className="text-2xl mb-2">{highlight.icon}</div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
+                      {t(highlight.titleKey)}
                     </h3>
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                      {t(tool.descKey)}
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      {t(highlight.descKey)}
                     </p>
                   </div>
-                </div>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+            </div>
+          </div>
 
-      <div className="space-y-8">
-        {/* Fragment를 사용해 카테고리 섹션 위에 광고 섹션을 배치한다. */}
-        {toolsConfig.map((category, index) => (
-          <Fragment key={category.categoryKey}>
-            <KakaoAd />
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
-                {t(category.categoryKey)}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {category.items.map((tool) => (
-                  <Link
-                    key={tool.path}
-                    href={localizePath(tool.path)}
-                    className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all"
-                  >
-                    <div className="flex items-start space-x-3">
-                      <span className="text-3xl">{tool.icon}</span>
+          {/* Featured tools are surfaced near the top to improve visibility. */}
+          <section className="mb-12">
+            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-blue-900/40 dark:text-blue-200">
+                  {t('home.featured.badge')}
+                </div>
+                <h2 className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">
+                  {t('home.featured.title')}
+                </h2>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                  {t('home.featured.description')}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredTools.map((tool) => (
+                <Link
+                  key={tool.path}
+                  href={localizePath(tool.path)}
+                  className="group relative overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
+                >
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-50 via-white to-transparent opacity-70 dark:from-gray-900 dark:via-gray-900 dark:to-transparent" />
+                  <div className="relative p-5 space-y-3">
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">
+                      <span className="inline-flex h-2 w-2 rounded-full bg-blue-500" />
+                      {t('home.featured.tagNew')}
+                    </span>
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">{tool.icon}</span>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                           {t(tool.nameKey)}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                           {t(tool.descKey)}
                         </p>
                       </div>
                     </div>
-                  </Link>
-                ))}
-              </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-            {index === sponsoredInsertIndex && (
-              <section className="mt-10">
-                <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/90 dark:bg-gray-800/90 shadow-lg">
-                  {/* 스폰서 섹션도 상단과 동일한 톤으로 통일해 자연스럽게 노출되게 한다. */}
-                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-amber-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900" />
-                  <div className="relative flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:p-8">
-                    <div className="flex-1 space-y-3">
-                      <span className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-amber-900/40 dark:text-amber-200">
-                        <span className="h-2 w-2 rounded-full bg-amber-500" />
-                        {t('home.sponsored.badge')}
-                      </span>
-                      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                        {t('home.sponsored.title')}
-                      </h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        {t('home.sponsored.desc')}
-                      </p>
-                    </div>
-                    <div className="flex-1">
-                      {/* 목록 스크롤 중에도 광고가 바로 보여지도록 동일한 컴포넌트를 재사용한다. */}
-                      <CoupangAd wrapperClassName="my-0" scriptStrategy="afterInteractive" />
-                    </div>
+          </section>
+
+          <div className="space-y-8">
+            {/* Fragment를 사용해 카테고리 섹션 위에 광고 섹션을 배치한다. */}
+            {toolsConfig.map((category, index) => (
+              <Fragment key={category.categoryKey}>
+                <KakaoAd />
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+                    {t(category.categoryKey)}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {category.items.map((tool) => (
+                      <Link
+                        key={tool.path}
+                        href={localizePath(tool.path)}
+                        className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all"
+                      >
+                        <div className="flex items-start space-x-3">
+                          <span className="text-3xl">{tool.icon}</span>
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                              {t(tool.nameKey)}
+                            </h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              {t(tool.descKey)}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
-              </section>
-            )}
-          </Fragment>
-        ))}
-      </div>
-
-      <div className="mt-10 space-y-4">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
-          <div className="flex-1">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
-              {t('nav.snippets')}
-            </p>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
-              {t('home.snippets.title')}
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              {t('home.snippets.desc')}
-            </p>
+                {index === sponsoredInsertIndex && (
+                  <section className="mt-10">
+                    <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/90 dark:bg-gray-800/90 shadow-lg">
+                      {/* 스폰서 섹션도 상단과 동일한 톤으로 통일해 자연스럽게 노출되게 한다. */}
+                      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-amber-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900" />
+                      <div className="relative flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:p-8">
+                        <div className="flex-1 space-y-3">
+                          <span className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-amber-900/40 dark:text-amber-200">
+                            <span className="h-2 w-2 rounded-full bg-amber-500" />
+                            {t('home.sponsored.badge')}
+                          </span>
+                          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                            {t('home.sponsored.title')}
+                          </h2>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                            {t('home.sponsored.desc')}
+                          </p>
+                        </div>
+                        <div className="flex-1">
+                          {/* 목록 스크롤 중에도 광고가 바로 보여지도록 동일한 컴포넌트를 재사용한다. */}
+                          <CoupangAd wrapperClassName="my-0" scriptStrategy="afterInteractive" />
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </Fragment>
+            ))}
           </div>
-          <Link
-            href={localizePath('/snippets')}
-            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
-          >
-            {t('home.snippets.cta')}
-          </Link>
-        </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
-          <div className="flex-1">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
-              {t('nav.changelog')}
-            </p>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
-              {t('home.changelog.title')}
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              {t('home.changelog.desc')}
-            </p>
-          </div>
-          <Link
-            href={localizePath('/changelog')}
-            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
-          >
-            {t('home.changelog.cta')}
-          </Link>
-        </div>
-      </div>
 
-      {/* 접을 수 있는 소개 섹션 - 맨 아래 */}
-      <div className="mt-12">
-        <button
-          onClick={() => setIsAboutOpen(!isAboutOpen)}
-          className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all flex items-center justify-between"
-        >
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-            {t('home.aboutTitle')}
-          </h2>
-          <svg
-            className={`w-6 h-6 text-gray-600 dark:text-gray-400 transition-transform ${
-              isAboutOpen ? 'rotate-180' : ''
-            }`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        {isAboutOpen && (
-          <div className="mt-4 space-y-6">
-            {/* 소개 섹션 */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700">
-              <div className="space-y-4 text-gray-700 dark:text-gray-300">
-                <p className="leading-relaxed">
-                  {t('home.aboutText1')}
+          <div className="mt-10 space-y-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+                  {t('nav.snippets')}
                 </p>
-                <p className="leading-relaxed">
-                  {t('home.aboutText2')}
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
+                  {t('home.snippets.title')}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {t('home.snippets.desc')}
                 </p>
               </div>
+              <Link
+                href={localizePath('/snippets')}
+                className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+              >
+                {t('home.snippets.cta')}
+              </Link>
             </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center gap-4">
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+                  {t('nav.changelog')}
+                </p>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">
+                  {t('home.changelog.title')}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {t('home.changelog.desc')}
+                </p>
+              </div>
+              <Link
+                href={localizePath('/changelog')}
+                className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+              >
+                {t('home.changelog.cta')}
+              </Link>
+            </div>
+          </div>
 
-            {/* 주요 특징 */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg shadow-md p-8 border border-blue-200 dark:border-gray-600">
-              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
-                {t('home.whyTitle')}
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <div key={num} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">
-                      {num}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-800 dark:text-white mb-1">
-                        {t(`home.feature${num}.title`)}
-                      </h4>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
-                        {t(`home.feature${num}.desc`)}
-                      </p>
-                    </div>
+          {/* 접을 수 있는 소개 섹션 - 맨 아래 */}
+          <div className="mt-12">
+            <button
+              onClick={() => setIsAboutOpen(!isAboutOpen)}
+              className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all flex items-center justify-between"
+            >
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                {t('home.aboutTitle')}
+              </h2>
+              <svg
+                className={`w-6 h-6 text-gray-600 dark:text-gray-400 transition-transform ${
+                  isAboutOpen ? 'rotate-180' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {isAboutOpen && (
+              <div className="mt-4 space-y-6">
+                {/* 소개 섹션 */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700">
+                  <div className="space-y-4 text-gray-700 dark:text-gray-300">
+                    <p className="leading-relaxed">
+                      {t('home.aboutText1')}
+                    </p>
+                    <p className="leading-relaxed">
+                      {t('home.aboutText2')}
+                    </p>
                   </div>
-                ))}
+                </div>
+
+                {/* 주요 특징 */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg shadow-md p-8 border border-blue-200 dark:border-gray-600">
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+                    {t('home.whyTitle')}
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[1, 2, 3, 4, 5, 6].map((num) => (
+                      <div key={num} className="flex items-start space-x-3">
+                        <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">
+                          {num}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-800 dark:text-white mb-1">
+                            {t(`home.feature${num}.title`)}
+                          </h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            {t(`home.feature${num}.desc`)}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <aside className="space-y-6 lg:sticky lg:top-24 h-fit">
+          <section className="rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/95 dark:bg-gray-800/95 shadow-lg p-6">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-200">
+                  {t('home.adGuide.copyLabel')}
+                </p>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  {t('home.adGuide.title')}
+                </h2>
+              </div>
+              <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <p>{t('home.adGuide.description')}</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200">
+                  {t('home.adGuide.sdkGuide')}
+                </p>
+                <p>{t('home.adGuide.unitInfo')}</p>
+                <p>{t('home.adGuide.delay')}</p>
+              </div>
+              <div className="flex justify-center">
+                <KakaoAd
+                  adUnit="DAN-qFx9tFDvJHdCjASg"
+                  width={160}
+                  height={600}
+                  wrapperClassName="flex justify-center"
+                />
               </div>
             </div>
-          </div>
-        )}
+          </section>
+        </aside>
       </div>
     </div>
   )
