@@ -575,18 +575,14 @@ export default function Home() {
             )}
           </div>
         </div>
-        <aside className="space-y-6 lg:sticky lg:top-24 h-fit">
-          <section className="rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/95 dark:bg-gray-800/95 shadow-lg p-6">
-            {/* 오른쪽 사이드에는 광고만 노출해 안내 문구를 숨긴다. */}
-            <div className="flex justify-center">
-              <KakaoAd
-                adUnit="DAN-qFx9tFDvJHdCjASg"
-                width={160}
-                height={600}
-                wrapperClassName="flex justify-center"
-              />
-            </div>
-          </section>
+        <aside className="lg:sticky lg:top-24 h-fit">
+          {/* 사이드바 박스 없이 광고 요소만 렌더링해 순수 광고 영역으로 노출한다. */}
+          <KakaoAd
+            adUnit="DAN-qFx9tFDvJHdCjASg"
+            width={160}
+            height={600}
+            wrapperClassName="flex justify-center"
+          />
         </aside>
       </div>
     </div>
