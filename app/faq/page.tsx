@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getSiteBaseUrl } from '@/utils/siteUrl'
 
 export const metadata: Metadata = {
   title: '자주 묻는 질문',
@@ -9,8 +10,78 @@ export const metadata: Metadata = {
   },
 }
 
+// FAQ 데이터 배열 - Schema.org FAQPage 마크업용
+// 검색 결과에서 리치 스니펫으로 표시됨
+const faqData = [
+  {
+    question: 'Developer Tools는 무엇인가요?',
+    answer: 'Developer Tools는 개발자들이 자주 사용하는 유틸리티 도구 170개 이상을 한 곳에서 제공하는 무료 웹 서비스입니다. Base64 인코딩, JWT 디버깅, JSON 포맷팅, 정규식 테스트 등 다양한 도구를 설치 없이 브라우저에서 바로 사용할 수 있습니다.',
+  },
+  {
+    question: '모든 기능이 무료인가요?',
+    answer: '네, Developer Tools의 모든 도구는 완전히 무료이며 제한 없이 사용하실 수 있습니다. 숨겨진 비용, 프리미엄 플랜, 사용 제한 등이 전혀 없습니다.',
+  },
+  {
+    question: '회원가입이 필요한가요?',
+    answer: '아니요, 회원가입 없이 바로 모든 도구를 사용하실 수 있습니다. 복잡한 가입 절차나 로그인 과정 없이 사이트에 접속하시면 즉시 사용 가능합니다.',
+  },
+  {
+    question: '입력한 데이터는 어디에 저장되나요?',
+    answer: '입력하신 데이터는 절대 서버로 전송되거나 저장되지 않습니다. 모든 도구는 클라이언트 사이드(사용자의 브라우저)에서만 작동하며, 모든 처리는 사용자의 컴퓨터에서 이루어집니다.',
+  },
+  {
+    question: '모바일에서도 사용할 수 있나요?',
+    answer: '네, 모든 도구는 반응형으로 제작되어 모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 경험을 제공합니다.',
+  },
+  {
+    question: '어떤 브라우저에서 사용할 수 있나요?',
+    answer: 'Chrome, Firefox, Safari, Edge 등 모든 최신 웹 브라우저에서 사용하실 수 있습니다. 최상의 경험을 위해 브라우저를 최신 버전으로 업데이트하시는 것을 권장합니다.',
+  },
+  {
+    question: '다국어를 지원하나요?',
+    answer: '네, 현재 한국어, 영어, 일본어, 포르투갈어, 독일어를 지원하고 있습니다. 사이트 상단의 언어 전환 버튼을 통해 원하시는 언어로 전환하실 수 있습니다.',
+  },
+  {
+    question: '비밀번호나 API 키를 입력해도 안전한가요?',
+    answer: '기술적으로는 안전합니다. 모든 데이터는 브라우저에서만 처리되고 서버로 전송되지 않습니다. 하지만 보안을 위해 실제 운영 환경에서 사용 중인 비밀번호나 API 키 대신 테스트 데이터나 더미 값을 사용하는 것을 권장합니다.',
+  },
+]
+
+// FAQPage Schema.org 구조화된 데이터 생성
+// Google 검색 결과에서 FAQ 리치 스니펫으로 표시됨
+function generateFAQSchema() {
+  const siteBaseUrl = getSiteBaseUrl()
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqData.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+    // 추가 메타데이터
+    publisher: {
+      '@type': 'Organization',
+      name: 'Developer Tools',
+      url: siteBaseUrl,
+    },
+  }
+}
+
 export default function FAQPage() {
+  const faqSchema = generateFAQSchema()
+
   return (
+    <>
+      {/* FAQPage 구조화된 데이터 삽입 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <div className="max-w-4xl mx-auto">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
@@ -256,5 +327,6 @@ export default function FAQPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

@@ -6,6 +6,7 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
 import {
   DEFAULT_LANGUAGE,
@@ -205,7 +206,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
       siteName: 'Developer Tools',
       images: [
         {
-          url: '/og-image',
+          // 언어 파라미터를 포함한 OG 이미지 URL로 다국어 이미지 제공
+          url: `/og-image?lang=${requestLanguage}`,
           width: 1200,
           height: 630,
           alt: localizedTitle.default,
@@ -216,7 +218,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
       card: 'summary_large_image',
       title: localizedTitle.default,
       description: localizedDescription,
-      images: ['/og-image'],
+      // 트위터 카드도 언어별 이미지 사용
+      images: [`/og-image?lang=${requestLanguage}`],
     },
     alternates: {
       canonical: canonicalUrl,
@@ -475,6 +478,16 @@ export default async function RootLayout({
   return (
     <html lang={htmlLang} suppressHydrationWarning>
       <head>
+        {/* Google Tag Manager - head script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P7SJHKJP');`,
+          }}
+        />
         <meta
           name="google-site-verification"
           content="Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k"
@@ -582,6 +595,15 @@ export default async function RootLayout({
         />
       </head>
       <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        {/* Google Tag Manager (noscript) - body 시작 직후 */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-P7SJHKJP"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <ThemeProvider>
           <LanguageProvider initialLanguage={requestLanguage}>
             <LayoutWrapper>
@@ -648,7 +670,10 @@ export default async function RootLayout({
           </LayoutWrapper>
         </LanguageProvider>
         </ThemeProvider>
+        {/* Vercel Analytics - 성능 모니터링 */}
         <Analytics />
+        {/* Google Analytics 4 - 트래픽 분석 (GA_ID 환경변수 필요) */}
+        <GoogleAnalytics />
       </body>
     </html>
   )
