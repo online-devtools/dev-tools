@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 interface DecodedData {
   header: any
@@ -14,6 +16,9 @@ interface DecodedData {
 }
 
 export default function JWTTool() {
+  const { language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.jwt[howToLang]
   const [input, setInput] = useState('')
   const [header, setHeader] = useState('')
   const [payload, setPayload] = useState('')
@@ -79,6 +84,13 @@ export default function JWTTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/jwt"
+    />
     <ToolCard
       title="🎫 JWT Decoder"
       description="JWT (JSON Web Token)을 디코딩하고 검증합니다"
@@ -172,5 +184,6 @@ export default function JWTTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

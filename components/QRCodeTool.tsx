@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function QRCodeTool() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.qrcode[howToLang]
   // QR 코드 대상 텍스트, 이미지 URL, 크기 상태를 관리합니다.
   const [text, setText] = useState('')
   const [qrCode, setQrCode] = useState('')
@@ -39,6 +42,13 @@ export default function QRCodeTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/qrcode"
+    />
     <ToolCard
       title={`📱 ${t('qrcodeTool.title')}`}
       description={t('qrcodeTool.description')}
@@ -100,5 +110,6 @@ export default function QRCodeTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

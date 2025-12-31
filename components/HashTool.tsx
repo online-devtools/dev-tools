@@ -3,8 +3,13 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import CryptoJS from 'crypto-js'
+import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function HashTool() {
+  const { language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.hash[howToLang]
   const [input, setInput] = useState('')
   const [md5, setMd5] = useState('')
   const [sha1, setSha1] = useState('')
@@ -39,6 +44,13 @@ export default function HashTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/hash"
+    />
     <ToolCard
       title="🔒 Hash Generator"
       description="MD5, SHA-1, SHA-256, SHA-512 해시를 생성합니다"
@@ -137,5 +149,6 @@ export default function HashTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

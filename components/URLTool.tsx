@@ -4,9 +4,12 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function URLTool() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.url[howToLang]
   // 입력/출력/에러 상태를 관리해 URL 인코딩/디코딩 결과를 표시합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
@@ -41,6 +44,13 @@ export default function URLTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/url"
+    />
     <ToolCard
       title={`🔗 ${t('urlTool.title')}`}
       description={t('urlTool.description')}
@@ -90,5 +100,6 @@ export default function URLTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

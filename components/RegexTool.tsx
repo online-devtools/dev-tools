@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { runRegexTest } from '@/utils/regex'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 // Errors surface translation keys so we can reuse LanguageContext.t()
 type TranslatableMessage = {
@@ -12,7 +13,7 @@ type TranslatableMessage = {
 }
 
 export default function RegexTool() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [pattern, setPattern] = useState('')
   const [flags, setFlags] = useState('g')
   const [testString, setTestString] = useState('')
@@ -61,7 +62,17 @@ export default function RegexTool() {
     { nameKey: 'regex.commonPatterns.hex', pattern: '#[0-9A-Fa-f]{6}' },
   ]
 
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.regex[howToLang]
+
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/regex"
+    />
     <ToolCard
       title={`🔍 ${t('regex.title')}`}
       description={t('regex.description')}
@@ -171,5 +182,6 @@ export default function RegexTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

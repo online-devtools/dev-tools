@@ -1,9 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ToolCard from './ToolCard'
+import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function ColorTool() {
+  const { language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.color[howToLang]
   const [hex, setHex] = useState('#3B82F6')
   const [rgb, setRgb] = useState({ r: 59, g: 130, b: 246 })
   const [hsl, setHsl] = useState({ h: 217, s: 91, l: 60 })
@@ -118,6 +123,13 @@ export default function ColorTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/color"
+    />
     <ToolCard
       title="🎨 Color Converter"
       description="HEX, RGB, HSL 색상 코드를 상호 변환합니다"
@@ -239,5 +251,6 @@ export default function ColorTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function TimestampTool() {
   const { t, language } = useLanguage()
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.timestamp[howToLang]
   // 현재 타임스탬프, 입력, 결과, 에러 상태를 관리합니다.
   const [currentTimestamp, setCurrentTimestamp] = useState(Date.now())
   const [input, setInput] = useState('')
@@ -64,6 +67,13 @@ export default function TimestampTool() {
   }
 
   return (
+    <>
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/timestamp"
+    />
     <ToolCard
       title={`⏰ ${t('timestamp.title')}`}
       description={t('timestamp.description')}
@@ -143,5 +153,6 @@ export default function TimestampTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }
