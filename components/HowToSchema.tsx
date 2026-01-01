@@ -287,4 +287,24 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  semver: {
+    ko: {
+      name: 'SemVer 버전 비교 및 정렬 방법',
+      description: 'Semantic Versioning 규칙으로 버전을 비교하고 정렬하는 방법을 알아보세요',
+      steps: [
+        { name: '버전 입력', text: '비교할 두 버전(예: 1.2.3, 2.0.0-beta)을 입력하세요' },
+        { name: '비교 버튼 클릭', text: '비교 버튼을 클릭하여 어느 버전이 더 높은지 확인하세요' },
+        { name: '버전 목록 정렬', text: '여러 버전을 한 줄씩 입력하고 오름차순/내림차순으로 정렬하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Compare and Sort SemVer Versions',
+      description: 'Learn how to compare and sort versions using Semantic Versioning rules',
+      steps: [
+        { name: 'Enter Versions', text: 'Enter two versions to compare (e.g., 1.2.3, 2.0.0-beta)' },
+        { name: 'Click Compare', text: 'Click the Compare button to see which version is higher' },
+        { name: 'Sort Version List', text: 'Enter multiple versions (one per line) and sort them in ascending or descending order' },
+      ],
+    },
+  },
 }

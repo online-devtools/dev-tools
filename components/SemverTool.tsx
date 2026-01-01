@@ -5,11 +5,15 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { compareSemver, SemverError, sortSemverList } from '@/utils/semver'
+import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 type SortOrder = 'asc' | 'desc'
 
 export default function SemverTool() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  // 현재 언어에 맞는 HowTo 데이터 선택 (영어가 기본)
+  const howToLang = language === 'ko' ? 'ko' : 'en'
+  const howToData = HOWTO_DATA.semver[howToLang]
   // Comparison inputs and outputs are stored separately from list sorting to keep UX clear.
   const [leftVersion, setLeftVersion] = useState('')
   const [rightVersion, setRightVersion] = useState('')
@@ -81,6 +85,14 @@ export default function SemverTool() {
   }
 
   return (
+    <>
+    {/* HowTo 스키마 - 검색 결과에 단계별 가이드 표시 */}
+    <HowToSchema
+      name={howToData.name}
+      description={howToData.description}
+      steps={howToData.steps}
+      toolPath="/semver"
+    />
     <ToolCard
       title={`🔢 ${t('semver.title')}`}
       description={t('semver.description')}
@@ -186,5 +198,6 @@ export default function SemverTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }
