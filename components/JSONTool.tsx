@@ -4,12 +4,9 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function JSONTool() {
-  const { t, language } = useLanguage()
-  const howToLang = language === 'ko' ? 'ko' : 'en'
-  const howToData = HOWTO_DATA.json[howToLang]
+  const { t } = useLanguage()
   // 입력 JSON과 결과/에러 상태를 관리해 번역된 메시지를 즉시 반영합니다.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
@@ -58,12 +55,6 @@ export default function JSONTool() {
 
   return (
     <>
-    <HowToSchema
-      name={howToData.name}
-      description={howToData.description}
-      steps={howToData.steps}
-      toolPath="/json"
-    />
     <ToolCard
       title={`📋 ${t('jsonTool.title')}`}
       description={t('jsonTool.description')}

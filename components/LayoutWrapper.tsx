@@ -7,6 +7,8 @@ import Sidebar from './Sidebar'
 import AdBlockDetector from './AdBlockDetector'
 import CoupangAd from './CoupangAd'
 import KakaoAd from './KakaoAd'
+import RelatedToolsSection from './RelatedToolsSection'
+import ToolSchemasAuto from './ToolSchemasAuto'
 import { SearchProvider } from '@/contexts/SearchContext'
 import { FavoritesProvider } from '@/contexts/FavoritesContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
@@ -51,7 +53,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
                 {/* Page Content */}
                 <main className="flex-1 overflow-y-auto bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+                  {/* 자동 구조화 데이터 삽입으로 도구 페이지 SEO를 강화한다. */}
+                  <ToolSchemasAuto />
                   {children}
+                  {/* 도구 페이지에만 노출되는 관련 도구 섹션으로 내부 링크를 강화한다. */}
+                  <div className="container mx-auto px-4 pb-10">
+                    <RelatedToolsSection />
+                  </div>
                   {/* Kakao Adfit - 320x100 */}
                   <KakaoAd adUnit="DAN-3cGWSgJtH0Co8Hkh" width="320" height="100" />
                   {/* Kakao Adfit - 300x250 */}

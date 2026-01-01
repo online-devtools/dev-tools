@@ -5,13 +5,9 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { decodeBase64, encodeBase64 } from '@/utils/encoding'
-import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function Base64Tool() {
-  const { t, language } = useLanguage()
-  // 현재 언어에 맞는 HowTo 데이터 선택 (영어가 기본)
-  const howToLang = language === 'ko' ? 'ko' : 'en'
-  const howToData = HOWTO_DATA.base64[howToLang]
+  const { t } = useLanguage()
   // Local component state mirrors the controlled textareas and which error message to show.
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
@@ -46,13 +42,6 @@ export default function Base64Tool() {
 
   return (
     <>
-    {/* HowTo 스키마 - 검색 결과에 단계별 가이드 표시 */}
-    <HowToSchema
-      name={howToData.name}
-      description={howToData.description}
-      steps={howToData.steps}
-      toolPath="/base64"
-    />
     <ToolCard
       title={`🔤 ${t('base64.title')}`}
       description={t('base64.description')}

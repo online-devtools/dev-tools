@@ -2,13 +2,8 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
-import { useLanguage } from '@/contexts/LanguageContext'
-import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 
 export default function UUIDTool() {
-  const { language } = useLanguage()
-  const howToLang = language === 'ko' ? 'ko' : 'en'
-  const howToData = HOWTO_DATA.uuid[howToLang]
   const [uuids, setUuids] = useState<string[]>([])
   const [count, setCount] = useState(1)
 
@@ -35,12 +30,6 @@ export default function UUIDTool() {
 
   return (
     <>
-    <HowToSchema
-      name={howToData.name}
-      description={howToData.description}
-      steps={howToData.steps}
-      toolPath="/uuid"
-    />
     <ToolCard
       title="🆔 UUID Generator"
       description="UUID (Universally Unique Identifier)를 생성합니다"

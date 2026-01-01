@@ -63,6 +63,10 @@ const translations: Record<Language, Record<string, string>> = {
     'sidebar.favorites': '즐겨찾기',
     'sidebar.recent': '최근 사용',
 
+    // Related Tools
+    'relatedTools.title': '관련 도구',
+    'relatedTools.description': '함께 쓰면 좋은 도구를 확인하세요.',
+
     // Token Counter
     'tokenCounter.description': 'OpenAI GPT 및 Anthropic Claude 모델의 토큰 수와 API 비용을 예측합니다',
     'tokenCounter.selectModel': 'AI 모델 선택',
@@ -2954,6 +2958,13 @@ const translations: Record<Language, Record<string, string>> = {
     'lighthouse.opportunities': '주요 개선 항목',
     'lighthouse.opportunity.noSavings': '절감 추정 없음',
     'lighthouse.summary': '요약',
+    'lighthouse.guide.title': 'Core Web Vitals 점검 가이드',
+    'lighthouse.guide.description': 'PageSpeed Insights 또는 Lighthouse로 LCP·FID·CLS를 확인하세요.',
+    'lighthouse.guide.lcp': 'LCP <= 2.5초',
+    'lighthouse.guide.fid': 'FID <= 100ms (Lighthouse에서는 Max Potential FID 참고)',
+    'lighthouse.guide.cls': 'CLS <= 0.1',
+    'lighthouse.guide.pagespeed': 'PageSpeed Insights 열기',
+    'lighthouse.guide.lighthouse': 'Lighthouse 문서 보기',
 
     'visualDiff.title': '비주얼 디프',
     'visualDiff.description': '두 이미지를 비교해 픽셀 차이를 표시합니다',
@@ -3721,6 +3732,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Sidebar
     'sidebar.favorites': 'Favorites',
     'sidebar.recent': 'Recent',
+
+    // Related Tools
+    'relatedTools.title': 'Related Tools',
+    'relatedTools.description': 'Explore tools that pair well with this one.',
 
     // Token Counter
     'tokenCounter.description': 'Estimate token count and API costs for OpenAI GPT and Anthropic Claude models',
@@ -6166,6 +6181,13 @@ const translations: Record<Language, Record<string, string>> = {
     'lighthouse.opportunities': 'Top opportunities',
     'lighthouse.opportunity.noSavings': 'No savings estimate',
     'lighthouse.summary': 'Summary',
+    'lighthouse.guide.title': 'Core Web Vitals Checklist',
+    'lighthouse.guide.description': 'Check LCP, FID, and CLS with PageSpeed Insights or Lighthouse.',
+    'lighthouse.guide.lcp': 'LCP <= 2.5s',
+    'lighthouse.guide.fid': 'FID <= 100ms (use Lighthouse Max Potential FID as a proxy)',
+    'lighthouse.guide.cls': 'CLS <= 0.1',
+    'lighthouse.guide.pagespeed': 'Open PageSpeed Insights',
+    'lighthouse.guide.lighthouse': 'View Lighthouse docs',
 
     'visualDiff.title': 'Visual Diff',
     'visualDiff.description': 'Compare two images and highlight pixel differences',
@@ -7350,6 +7372,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Sidebar
     'sidebar.favorites': 'お気に入り',
     'sidebar.recent': '最近使用',
+
+    // Related Tools
+    'relatedTools.title': '関連ツール',
+    'relatedTools.description': 'このツールと一緒に使うと便利なツールです。',
 
     // Home Page
     'home.title': '開発者向け必須ツール',
@@ -9289,6 +9315,13 @@ const translations: Record<Language, Record<string, string>> = {
     'lighthouse.opportunity.noSavings': 'No savings estimate',
     'lighthouse.placeholder': 'Paste a Lighthouse JSON report...',
     'lighthouse.summary': 'Summary',
+    'lighthouse.guide.title': 'Core Web Vitals チェックリスト',
+    'lighthouse.guide.description': 'PageSpeed Insights または Lighthouse で LCP・FID・CLS を確認してください。',
+    'lighthouse.guide.lcp': 'LCP <= 2.5秒',
+    'lighthouse.guide.fid': 'FID <= 100ms（Lighthouse の Max Potential FID を参考）',
+    'lighthouse.guide.cls': 'CLS <= 0.1',
+    'lighthouse.guide.pagespeed': 'PageSpeed Insights を開く',
+    'lighthouse.guide.lighthouse': 'Lighthouse ドキュメントを見る',
     'lighthouse.title': 'Lighthouse Report Analyzer',
     'lighthouse.upload': 'Upload JSON file',
     'lighthouse.vitals.bad': 'Needs work',
@@ -10772,6 +10805,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Sidebar
     'sidebar.favorites': 'Favoritos',
     'sidebar.recent': 'Recentes',
+
+    // Related Tools
+    'relatedTools.title': 'Ferramentas relacionadas',
+    'relatedTools.description': 'Veja ferramentas que combinam bem com esta.',
 
     // Home Page
     'home.title': 'Ferramentas essenciais para desenvolvedores',
@@ -12711,6 +12748,13 @@ const translations: Record<Language, Record<string, string>> = {
     'lighthouse.opportunity.noSavings': 'No savings estimate',
     'lighthouse.placeholder': 'Paste a Lighthouse JSON report...',
     'lighthouse.summary': 'Summary',
+    'lighthouse.guide.title': 'Checklist de Core Web Vitals',
+    'lighthouse.guide.description': 'Verifique LCP, FID e CLS no PageSpeed Insights ou Lighthouse.',
+    'lighthouse.guide.lcp': 'LCP <= 2.5s',
+    'lighthouse.guide.fid': 'FID <= 100ms (use o Max Potential FID do Lighthouse como proxy)',
+    'lighthouse.guide.cls': 'CLS <= 0.1',
+    'lighthouse.guide.pagespeed': 'Abrir PageSpeed Insights',
+    'lighthouse.guide.lighthouse': 'Ver documentação do Lighthouse',
     'lighthouse.title': 'Lighthouse Report Analyzer',
     'lighthouse.upload': 'Upload JSON file',
     'lighthouse.vitals.bad': 'Needs work',
@@ -14194,6 +14238,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Sidebar
     'sidebar.favorites': 'Favoriten',
     'sidebar.recent': 'Zuletzt verwendet',
+
+    // Related Tools
+    'relatedTools.title': 'Verwandte Tools',
+    'relatedTools.description': 'Entdecke Tools, die gut dazu passen.',
 
     // Home Page
     'home.title': 'Unverzichtbare Tools für Entwickler',
@@ -16133,6 +16181,13 @@ const translations: Record<Language, Record<string, string>> = {
     'lighthouse.opportunity.noSavings': 'No savings estimate',
     'lighthouse.placeholder': 'Paste a Lighthouse JSON report...',
     'lighthouse.summary': 'Summary',
+    'lighthouse.guide.title': 'Core Web Vitals Checkliste',
+    'lighthouse.guide.description': 'Prüfe LCP, FID und CLS mit PageSpeed Insights oder Lighthouse.',
+    'lighthouse.guide.lcp': 'LCP <= 2.5 s',
+    'lighthouse.guide.fid': 'FID <= 100 ms (Lighthouse Max Potential FID als Proxy)',
+    'lighthouse.guide.cls': 'CLS <= 0.1',
+    'lighthouse.guide.pagespeed': 'PageSpeed Insights öffnen',
+    'lighthouse.guide.lighthouse': 'Lighthouse-Dokumentation',
     'lighthouse.title': 'Lighthouse Report Analyzer',
     'lighthouse.upload': 'Upload JSON file',
     'lighthouse.vitals.bad': 'Needs work',

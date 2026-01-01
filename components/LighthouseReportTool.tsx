@@ -97,6 +97,10 @@ export default function LighthouseReportTool() {
   const vitals = useMemo(() => {
     if (!report?.audits) return []
     const lcp = report.audits['largest-contentful-paint']?.numericValue
+    // Lighthouse reports "max-potential-fid" as a lab proxy for FID.
+    const fidAudit = report.audits['max-potential-fid']
+    // Keep the raw numeric value in ms so we can compare against the 100ms threshold.
+    const fid = fidAudit?.numericValue
     const cls = report.audits['cumulative-layout-shift']?.numericValue
     const inp = report.audits['interaction-to-next-paint']?.numericValue
 
@@ -106,6 +110,12 @@ export default function LighthouseReportTool() {
         value: lcp,
         good: typeof lcp === 'number' ? lcp <= 2500 : null,
         label: report.audits['largest-contentful-paint']?.displayValue,
+      },
+      {
+        id: 'FID',
+        value: fid,
+        good: typeof fid === 'number' ? fid <= 100 : null,
+        label: fidAudit?.displayValue,
       },
       {
         id: 'CLS',
@@ -149,6 +159,36 @@ export default function LighthouseReportTool() {
       description={t('lighthouse.description')}
     >
       <div className="space-y-5">
+        {/* Core Web Vitals 체크 가이드를 노출해 실측 도구 사용을 안내한다. */}
+        <div className="rounded-lg border border-blue-100 bg-blue-50/60 p-4 text-sm text-blue-900 dark:border-blue-900/50 dark:bg-blue-900/20 dark:text-blue-100">
+          <div className="text-sm font-semibold">{t('lighthouse.guide.title')}</div>
+          <p className="mt-1 text-sm text-blue-800 dark:text-blue-200">
+            {t('lighthouse.guide.description')}
+          </p>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-blue-800 dark:text-blue-200">
+            <li>{t('lighthouse.guide.lcp')}</li>
+            <li>{t('lighthouse.guide.fid')}</li>
+            <li>{t('lighthouse.guide.cls')}</li>
+          </ul>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <a
+              href="https://pagespeed.web.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-blue-200 px-3 py-1 text-xs font-medium text-blue-800 transition-colors hover:border-blue-400 hover:text-blue-900 dark:border-blue-800 dark:text-blue-100 dark:hover:border-blue-400"
+            >
+              {t('lighthouse.guide.pagespeed')}
+            </a>
+            <a
+              href="https://developer.chrome.com/docs/lighthouse/overview/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-blue-200 px-3 py-1 text-xs font-medium text-blue-800 transition-colors hover:border-blue-400 hover:text-blue-900 dark:border-blue-800 dark:text-blue-100 dark:hover:border-blue-400"
+            >
+              {t('lighthouse.guide.lighthouse')}
+            </a>
+          </div>
+        </div>
         <div className="space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
             {t('lighthouse.input')}
