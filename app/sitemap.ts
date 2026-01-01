@@ -97,6 +97,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // New tools (2024)
     '/msgpack', '/pem-der', '/systemd-generator', '/feature-flag',
     '/image-optimizer', '/hex-viewer', '/lockfile-diff',
+    // New tools (2025)
+    '/bson', '/nginx-config', '/db-connection', '/git-hooks',
+    '/ascii-table', '/protobuf',
   ]
 
   // 도구별 설정 생성 - 인기 도구는 높은 우선순위 부여

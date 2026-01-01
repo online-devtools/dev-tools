@@ -73,6 +73,9 @@ const toolsConfig = [
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️', descKey: 'tool.schemaVisualizer.desc' },
       { nameKey: 'tool.sqlExplain', path: '/sql-explain', icon: '🧮', descKey: 'tool.sqlExplain.desc' },
       { nameKey: 'tool.msgpack', path: '/msgpack', icon: '📦', descKey: 'tool.msgpack.desc' },
+      { nameKey: 'tool.bson', path: '/bson', icon: '🍃', descKey: 'tool.bson.desc' },
+      { nameKey: 'tool.protobuf', path: '/protobuf', icon: '📡', descKey: 'tool.protobuf.desc' },
+      { nameKey: 'tool.dbConnection', path: '/db-connection', icon: '🔌', descKey: 'tool.dbConnection.desc' },
     ]
   },
   {
@@ -135,6 +138,7 @@ const toolsConfig = [
       { nameKey: 'tool.userAgent', path: '/user-agent', icon: '🖥️', descKey: 'tool.userAgent.desc' },
       { nameKey: 'tool.phoneParser', path: '/phone-parser', icon: '📞', descKey: 'tool.phoneParser.desc' },
       { nameKey: 'tool.ibanValidator', path: '/iban-validator', icon: '🏦', descKey: 'tool.ibanValidator.desc' },
+      { nameKey: 'tool.asciiTable', path: '/ascii-table', icon: '📟', descKey: 'tool.asciiTable.desc' },
     ]
   },
   {
@@ -144,6 +148,7 @@ const toolsConfig = [
       { nameKey: 'tool.regex', path: '/regex', icon: '🔍', descKey: 'tool.regex.desc' },
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰', descKey: 'tool.cron.desc' },
       { nameKey: 'tool.systemdGenerator', path: '/systemd-generator', icon: '⚙️', descKey: 'tool.systemdGenerator.desc' },
+      { nameKey: 'tool.nginxConfig', path: '/nginx-config', icon: '🌐', descKey: 'tool.nginxConfig.desc' },
     ]
   },
   {
@@ -196,6 +201,7 @@ const toolsConfig = [
       { nameKey: 'tool.changelogGenerator', path: '/changelog-generator', icon: '📝', descKey: 'tool.changelogGenerator.desc' },
       { nameKey: 'tool.featureFlag', path: '/feature-flag', icon: '🚩', descKey: 'tool.featureFlag.desc' },
       { nameKey: 'tool.lockfileDiff', path: '/lockfile-diff', icon: '📦', descKey: 'tool.lockfileDiff.desc' },
+      { nameKey: 'tool.gitHooks', path: '/git-hooks', icon: '🪝', descKey: 'tool.gitHooks.desc' },
     ]
   },
   {
@@ -323,7 +329,8 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] xl:grid-cols-[minmax(0,1fr)_320px]">
+      {/* 메인+사이드 구성에서 광고 영역 폭을 줄여 우측 여백을 최소화한다. */}
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px] xl:grid-cols-[minmax(0,1fr)_240px]">
         <div className="min-w-0">
           {/* Hero Section - 핵심 가치 제안 */}
           <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-700 rounded-2xl shadow-lg p-8 md:p-12 mb-12 border border-blue-100 dark:border-gray-700">
