@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 export default function ColorTool() {
   const [hex, setHex] = useState('#3B82F6')
@@ -119,6 +120,7 @@ export default function ColorTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="color" toolPath="/color" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="🎨 Color Converter"
       description="HEX, RGB, HSL 색상 코드를 상호 변환합니다"

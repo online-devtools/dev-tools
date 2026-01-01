@@ -5,6 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { compareSemver, SemverError, sortSemverList } from '@/utils/semver'
+import ToolSchemas from './ToolSchemas'
 
 type SortOrder = 'asc' | 'desc'
 
@@ -82,6 +83,7 @@ export default function SemverTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="semver" toolPath="/semver" categoryKey="category.calculators" categoryType="generator" />
     <ToolCard
       title={`🔢 ${t('semver.title')}`}
       description={t('semver.description')}

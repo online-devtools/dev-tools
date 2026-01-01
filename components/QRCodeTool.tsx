@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function QRCodeTool() {
   const { t } = useLanguage()
@@ -40,6 +41,7 @@ export default function QRCodeTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="qrcode" toolPath="/qrcode" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={`📱 ${t('qrcodeTool.title')}`}
       description={t('qrcodeTool.description')}

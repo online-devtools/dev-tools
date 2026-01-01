@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import CryptoJS from 'crypto-js'
+import ToolSchemas from './ToolSchemas'
 
 export default function HashTool() {
   const [input, setInput] = useState('')
@@ -40,6 +41,7 @@ export default function HashTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="hash" toolPath="/hash" categoryKey="category.security" categoryType="security" />
     <ToolCard
       title="🔒 Hash Generator"
       description="MD5, SHA-1, SHA-256, SHA-512 해시를 생성합니다"

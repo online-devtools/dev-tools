@@ -5,6 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { decodeBase64, encodeBase64 } from '@/utils/encoding'
+import ToolSchemas from './ToolSchemas'
 
 export default function Base64Tool() {
   const { t } = useLanguage()
@@ -42,6 +43,7 @@ export default function Base64Tool() {
 
   return (
     <>
+    <ToolSchemas toolKey="base64" toolPath="/base64" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title={`🔤 ${t('base64.title')}`}
       description={t('base64.description')}

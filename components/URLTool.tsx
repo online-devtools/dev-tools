@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function URLTool() {
   const { t } = useLanguage()
@@ -42,6 +43,7 @@ export default function URLTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="url" toolPath="/url" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title={`🔗 ${t('urlTool.title')}`}
       description={t('urlTool.description')}

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function TimestampTool() {
   const { t, language } = useLanguage()
@@ -65,6 +66,7 @@ export default function TimestampTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="timestamp" toolPath="/timestamp" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`⏰ ${t('timestamp.title')}`}
       description={t('timestamp.description')}

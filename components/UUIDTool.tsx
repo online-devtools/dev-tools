@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 export default function UUIDTool() {
   const [uuids, setUuids] = useState<string[]>([])
@@ -30,6 +31,7 @@ export default function UUIDTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="uuid" toolPath="/uuid" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title="🆔 UUID Generator"
       description="UUID (Universally Unique Identifier)를 생성합니다"

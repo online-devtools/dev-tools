@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { runRegexTest } from '@/utils/regex'
+import ToolSchemas from './ToolSchemas'
 
 // Errors surface translation keys so we can reuse LanguageContext.t()
 type TranslatableMessage = {
@@ -63,6 +64,7 @@ export default function RegexTool() {
 
   return (
     <>
+    <ToolSchemas toolKey="regex" toolPath="/regex" categoryKey="category.linux" categoryType="generator" />
     <ToolCard
       title={`🔍 ${t('regex.title')}`}
       description={t('regex.description')}
