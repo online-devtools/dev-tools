@@ -307,4 +307,204 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  bcrypt: {
+    ko: {
+      name: 'Bcrypt 해시 생성 및 검증 방법',
+      description: '비밀번호를 bcrypt로 해시하고 검증하는 방법을 알아보세요',
+      steps: [
+        { name: '비밀번호 입력', text: '해시할 비밀번호를 입력하세요' },
+        { name: '해시 생성', text: 'Hash 버튼을 클릭하여 bcrypt 해시를 생성하세요' },
+        { name: '검증', text: '원본 비밀번호와 해시를 입력하여 일치 여부를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate and Verify Bcrypt Hash',
+      description: 'Learn how to hash and verify passwords using bcrypt',
+      steps: [
+        { name: 'Enter Password', text: 'Enter the password to hash' },
+        { name: 'Generate Hash', text: 'Click the Hash button to generate a bcrypt hash' },
+        { name: 'Verify', text: 'Enter the original password and hash to verify matching' },
+      ],
+    },
+  },
+  'html-entities': {
+    ko: {
+      name: 'HTML 엔티티 인코딩/디코딩 방법',
+      description: 'HTML 특수 문자를 엔티티로 변환하거나 원래대로 복원하는 방법을 알아보세요',
+      steps: [
+        { name: 'HTML 입력', text: '변환할 HTML 또는 엔티티를 입력하세요' },
+        { name: '변환 선택', text: 'Encode 또는 Decode 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '변환된 결과를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Encode/Decode HTML Entities',
+      description: 'Learn how to convert HTML special characters to entities and vice versa',
+      steps: [
+        { name: 'Enter HTML', text: 'Enter the HTML or entities to convert' },
+        { name: 'Select Conversion', text: 'Click the Encode or Decode button' },
+        { name: 'Copy Result', text: 'Copy the converted result to use' },
+      ],
+    },
+  },
+  csv: {
+    ko: {
+      name: 'CSV 포맷팅 및 변환 방법',
+      description: 'CSV 데이터를 포맷하거나 JSON으로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: 'CSV 입력', text: 'CSV 데이터를 입력하세요' },
+        { name: '포맷 선택', text: '원하는 형식(포맷, JSON 변환)을 선택하세요' },
+        { name: '결과 확인', text: '변환된 결과를 확인하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Format and Convert CSV',
+      description: 'Learn how to format CSV data or convert it to JSON',
+      steps: [
+        { name: 'Enter CSV', text: 'Enter your CSV data' },
+        { name: 'Select Format', text: 'Choose your desired format (format, JSON conversion)' },
+        { name: 'View Result', text: 'View and copy the converted result' },
+      ],
+    },
+  },
+  cron: {
+    ko: {
+      name: 'Cron 표현식 생성 및 검증 방법',
+      description: 'Cron 표현식을 생성하거나 해석하는 방법을 알아보세요',
+      steps: [
+        { name: 'Cron 입력', text: 'Cron 표현식을 입력하거나 시간을 선택하세요' },
+        { name: '표현식 확인', text: 'Cron 표현식이 자동으로 생성됩니다' },
+        { name: '다음 실행 시간 확인', text: '다음 실행 시간을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate and Validate Cron Expressions',
+      description: 'Learn how to generate or interpret cron expressions',
+      steps: [
+        { name: 'Enter Cron', text: 'Enter a cron expression or select time' },
+        { name: 'Verify Expression', text: 'The cron expression is automatically generated' },
+        { name: 'Check Next Run', text: 'View the next execution times' },
+      ],
+    },
+  },
+  ipcalc: {
+    ko: {
+      name: 'IP 주소 계산 방법',
+      description: 'IP 주소와 서브넷을 계산하는 방법을 알아보세요',
+      steps: [
+        { name: 'IP 입력', text: 'IP 주소와 CIDR를 입력하세요 (예: 192.168.1.0/24)' },
+        { name: '계산', text: '자동으로 서브넷 정보가 계산됩니다' },
+        { name: '결과 확인', text: '네트워크 주소, 브로드캐스트, 호스트 범위를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Calculate IP Addresses',
+      description: 'Learn how to calculate IP addresses and subnets',
+      steps: [
+        { name: 'Enter IP', text: 'Enter IP address with CIDR (e.g., 192.168.1.0/24)' },
+        { name: 'Calculate', text: 'Subnet information is calculated automatically' },
+        { name: 'View Results', text: 'View network address, broadcast, and host range' },
+      ],
+    },
+  },
+  diff: {
+    ko: {
+      name: '텍스트 비교 방법',
+      description: '두 텍스트의 차이점을 시각적으로 비교하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: '비교할 두 텍스트를 각각 입력하세요' },
+        { name: '비교 실행', text: 'Compare 버튼을 클릭하세요' },
+        { name: '차이점 확인', text: '추가, 삭제, 변경된 부분을 색상으로 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Compare Text Differences',
+      description: 'Learn how to visually compare differences between two texts',
+      steps: [
+        { name: 'Enter Texts', text: 'Enter the two texts to compare' },
+        { name: 'Run Comparison', text: 'Click the Compare button' },
+        { name: 'View Differences', text: 'View additions, deletions, and changes in color' },
+      ],
+    },
+  },
+  lorem: {
+    ko: {
+      name: 'Lorem Ipsum 생성 방법',
+      description: '더미 텍스트를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '길이 선택', text: '생성할 단어, 문장 또는 단락 수를 선택하세요' },
+        { name: '생성', text: 'Generate 버튼을 클릭하세요' },
+        { name: '복사', text: '생성된 Lorem Ipsum 텍스트를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Lorem Ipsum',
+      description: 'Learn how to generate placeholder text',
+      steps: [
+        { name: 'Select Length', text: 'Choose the number of words, sentences, or paragraphs' },
+        { name: 'Generate', text: 'Click the Generate button' },
+        { name: 'Copy', text: 'Copy the generated Lorem Ipsum text' },
+      ],
+    },
+  },
+  case: {
+    ko: {
+      name: '텍스트 케이스 변환 방법',
+      description: '텍스트를 다양한 케이스로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: '변환할 텍스트를 입력하세요' },
+        { name: '케이스 선택', text: 'camelCase, snake_case, UPPER_CASE 등을 선택하세요' },
+        { name: '결과 복사', text: '변환된 텍스트를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Text Case',
+      description: 'Learn how to convert text to various cases',
+      steps: [
+        { name: 'Enter Text', text: 'Enter the text to convert' },
+        { name: 'Select Case', text: 'Choose camelCase, snake_case, UPPER_CASE, etc.' },
+        { name: 'Copy Result', text: 'Copy the converted text' },
+      ],
+    },
+  },
+  slugify: {
+    ko: {
+      name: 'URL Slug 생성 방법',
+      description: '텍스트를 URL 친화적인 slug로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: 'slug로 변환할 텍스트를 입력하세요' },
+        { name: '자동 변환', text: '자동으로 URL 친화적 형식으로 변환됩니다' },
+        { name: '옵션 조정', text: '구분자, 대소문자 등의 옵션을 조정하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate URL Slugs',
+      description: 'Learn how to convert text to URL-friendly slugs',
+      steps: [
+        { name: 'Enter Text', text: 'Enter the text to convert to a slug' },
+        { name: 'Auto Convert', text: 'The text is automatically converted to URL-friendly format' },
+        { name: 'Adjust Options', text: 'Adjust separator, case, and other options' },
+      ],
+    },
+  },
+  chmod: {
+    ko: {
+      name: 'Chmod 권한 계산 방법',
+      description: 'Unix 파일 권한을 숫자와 기호로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '권한 선택', text: '소유자, 그룹, 기타 사용자의 권한을 선택하세요' },
+        { name: '숫자 확인', text: '자동으로 계산된 chmod 숫자를 확인하세요' },
+        { name: '명령어 복사', text: '생성된 chmod 명령어를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Calculate Chmod Permissions',
+      description: 'Learn how to convert Unix file permissions between numeric and symbolic',
+      steps: [
+        { name: 'Select Permissions', text: 'Choose permissions for owner, group, and others' },
+        { name: 'View Number', text: 'View the automatically calculated chmod number' },
+        { name: 'Copy Command', text: 'Copy the generated chmod command' },
+      ],
+    },
+  },
 }

@@ -5,6 +5,7 @@ import he from 'he'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function HTMLEntitiesTool() {
   const { t } = useLanguage()
@@ -21,6 +22,8 @@ export default function HTMLEntitiesTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="html-entities" toolPath="/html-entities" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title={`&lt;/&gt; ${t('htmlEntities.title')}`}
       description={t('htmlEntities.description')}
@@ -66,5 +69,6 @@ export default function HTMLEntitiesTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

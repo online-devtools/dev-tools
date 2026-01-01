@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function BcryptTool() {
   const { t } = useLanguage()
@@ -53,6 +54,8 @@ export default function BcryptTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="bcrypt" toolPath="/bcrypt" categoryKey="category.encoding" categoryType="security" />
     <ToolCard
       title={`🔐 ${t('tool.bcrypt')}`}
       description={t('bcrypt.description')}
@@ -153,5 +156,6 @@ export default function BcryptTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

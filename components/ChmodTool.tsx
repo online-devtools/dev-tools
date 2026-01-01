@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 interface Permission {
   owner: { read: boolean; write: boolean; execute: boolean }
@@ -64,6 +65,8 @@ export default function ChmodTool() {
   )
 
   return (
+    <>
+    <ToolSchemas toolKey="chmod" toolPath="/chmod" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="🔐 Unix Permission Calculator"
       description="chmod 권한 계산기"
@@ -169,5 +172,6 @@ export default function ChmodTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

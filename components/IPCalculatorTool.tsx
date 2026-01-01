@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 export default function IPCalculatorTool() {
   const [ip, setIp] = useState('192.168.1.0')
@@ -77,6 +78,8 @@ export default function IPCalculatorTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="ipcalc" toolPath="/ipcalc" categoryKey="category.calculators" categoryType="network" />
     <ToolCard
       title="🌐 IP/CIDR Calculator"
       description="IP 서브넷 계산기"
@@ -205,5 +208,6 @@ export default function IPCalculatorTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

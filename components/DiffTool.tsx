@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function DiffTool() {
   const { t } = useLanguage()
@@ -43,6 +44,8 @@ export default function DiffTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="diff" toolPath="/diff" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`📊 ${t('diffTool.title')}`}
       description={t('diffTool.description')}
@@ -119,5 +122,6 @@ export default function DiffTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 function describeCron(cron: string, t: (k: string, r?: Record<string, string | number>) => string): string {
   // 매우 단순한 설명 생성기: 분 시 일 월 요일 다섯 필드를 기준으로 설명합니다.
@@ -66,6 +67,8 @@ export default function CronHumanTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="cron" toolPath="/cron" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`⏱️ ${t('cronHuman.title')}`}
       description={t('cronHuman.description')}
@@ -113,5 +116,6 @@ export default function CronHumanTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

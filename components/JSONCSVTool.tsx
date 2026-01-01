@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import ToolSchemas from './ToolSchemas'
 
 export default function JSONCSVTool() {
   const [input, setInput] = useState('')
@@ -52,6 +53,8 @@ export default function JSONCSVTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="csv" toolPath="/csv" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="JSON to CSV"
       description="JSON 배열을 CSV 형식으로 변환합니다"
@@ -84,5 +87,6 @@ export default function JSONCSVTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

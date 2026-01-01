@@ -4,6 +4,7 @@ import { useState } from 'react'
 import slugify from 'slugify'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import ToolSchemas from './ToolSchemas'
 
 export default function SlugifyTool() {
   const [input, setInput] = useState('')
@@ -31,6 +32,8 @@ export default function SlugifyTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="slugify" toolPath="/slugify" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="Slugify String"
       description="문자열을 URL/파일명으로 사용 가능하도록 변환합니다"
@@ -101,5 +104,6 @@ export default function SlugifyTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import ToolSchemas from './ToolSchemas'
 
 export default function LoremTool() {
   const [paragraphs, setParagraphs] = useState(3)
@@ -67,6 +68,8 @@ export default function LoremTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="lorem" toolPath="/lorem" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title="📄 Lorem Ipsum Generator"
       description="더미 텍스트를 생성합니다"
@@ -169,5 +172,6 @@ export default function LoremTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }
