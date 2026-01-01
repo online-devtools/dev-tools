@@ -25,3 +25,4 @@ Existing history favors short, imperative commit subjects (“Update image URLs�
 - You should use tools as much as possible, ideally more than 100 times.
 - You should also implement your own tests first before attempting the problem.
 - 새로운 기능 추가시 영어 다국어 처리도 반든시 추가해야한다.
+- **HowTo 스키마 필수**: 새 도구 추가 시 `components/HowToSchema.tsx`의 `HOWTO_DATA`에 ko/en 항목을 추가하고, Tool 컴포넌트에 `<HowToSchema>` 를 적용하여 검색 결과에 리치 스니펫이 표시되도록 한다.
