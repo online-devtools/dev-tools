@@ -1,6 +1,14 @@
 import { MetadataRoute } from 'next'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
 import { SUPPORTED_LANGUAGES, buildLocalizedPathname } from '@/utils/i18n'
+import {
+  getCategoryPaths,
+  getToolPathsFromConfig,
+  resolveRouteLastModified,
+} from '@/utils/sitemapRoutes'
+
+// Use the Node.js runtime so filesystem-based timestamps are available.
+export const runtime = 'nodejs'
 
 // 라우트 설정 타입 - 경로, 우선순위, 변경 빈도 포함
 interface RouteConfig {
@@ -9,8 +17,8 @@ interface RouteConfig {
   changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 }
 
-// 빌드 시점의 날짜를 한 번만 계산하여 일관성 유지
-// 모든 URL에 동일한 lastModified 값을 사용하여 크롤러 혼란 방지
+// Build timestamp is used as a fallback when a page file is missing.
+// This keeps sitemap generation deterministic while still allowing file-based dates.
 const BUILD_DATE = new Date()
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -43,67 +51,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/timestamp', '/hash', '/password', '/color', '/diff', '/cron',
   ]
 
-  // 모든 도구 경로 목록 (인기 도구 포함)
-  const allToolPaths = [
-    // Encoding
-    '/base64', '/url', '/html-entities', '/base64-file', '/image-base64', '/data-url',
-    // Security
-    '/jasypt', '/jwt-keys', '/hash', '/password', '/jwt-signer', '/bcrypt', '/hmac',
-    '/otp', '/basic-auth', '/string-obfuscator', '/crypto-bundle', '/regex-safety',
-    '/csp', '/sri', '/env-crypto', '/ssh-keys', '/saml', '/oauth',
-    // Data Format
-    '/json', '/jsonl', '/json-flatten', '/graphql', '/jwt', '/sql', '/mybatis',
-    '/csv', '/html', '/yaml-json', '/yaml-toml', '/json-toml', '/xml-json',
-    '/markdown-html', '/json-minify', '/json-csv', '/json-diff', '/json-path',
-    '/json-schema', '/schema-to-ts', '/openapi', '/schema-mock', '/env-manager',
-    '/env-diff', '/code-minifier', '/sql-builder', '/schema-visualizer',
-    // Generators
-    '/uuid', '/qrcode', '/lorem', '/token-generator', '/token-counter', '/ulid',
-    '/port-generator', '/emoji-picker', '/meta-tags', '/css-gradient', '/box-shadow',
-    '/mock-data', '/exif',
-    // Converters
-    '/timestamp', '/color', '/case', '/baseconv', '/roman-numeral', '/temp-converter',
-    '/svg-optimizer', '/curl-converter',
-    // Text
-    '/slugify', '/nato-alphabet', '/text-binary', '/text-unicode', '/text-stats',
-    '/log-redactor', '/numeronym', '/list-converter', '/email-normalizer',
-    '/markdown-table', '/sorter',
-    // Calculators
-    '/math-eval', '/percentage-calc', '/semver',
-    // Info
-    '/http-status', '/mime-types', '/keycode', '/device-info', '/user-agent', '/a11y-check',
-    // Linux
-    '/chmod', '/regex', '/cron', '/cron-human', '/gitignore-generator',
-    // Network
-    '/ipcalc', '/diff', '/url-parser', '/ipv4-converter', '/http-headers',
-    '/security-headers', '/url-cleaner', '/cookie-parser', '/http-builder',
-    '/websocket', '/ssl-cert', '/dns-lookup', '/dns-compare', '/sitemap-analyzer',
-    '/cert-chain', '/robots-tester', '/cors', '/latency', '/api-response-time',
-    '/tls-diagnostics', '/grpc-client', '/webhook-tester', '/network-path',
-    // Workflow
-    '/commit-message', '/dependency-checker', '/regex-debugger', '/patch-viewer',
-    '/patch-linter', '/api-scenario', '/contract-tester', '/otel-trace',
-    '/k8s-validator', '/dockerfile-linter', '/github-actions-linter', '/terraform-diff',
-    '/changelog-generator', '/terraform-linter', '/stack-trace', '/git-conflict',
-    // Files
-    '/file-hash', '/pdf-metadata', '/favicon',
-    // Frontend
-    '/color-palette', '/layout-playground', '/easing', '/breakpoint-tester',
-    '/lighthouse-report', '/visual-diff', '/sql-explain', '/timezone',
-    '/pagination-tester', '/webauthn',
-    // Additional tools
-    '/phone-parser', '/iban-validator', '/ascii-art', '/mac-address',
-    '/password-strength', '/bip39',
-    // New tools (2024)
-    '/msgpack', '/pem-der', '/systemd-generator', '/feature-flag',
-    '/image-optimizer', '/hex-viewer', '/lockfile-diff',
-    // New tools (2025)
-    '/bson', '/nginx-config', '/db-connection', '/git-hooks',
-    '/ascii-table', '/protobuf',
-  ]
+  // All tool paths are derived from config so the sitemap stays in sync.
+  const toolPaths = getToolPathsFromConfig()
+
+  // Category hubs should be indexed so internal linking flows through them.
+  const categoryPages: RouteConfig[] = getCategoryPaths().map((path) => ({
+    path,
+    priority: 0.7,
+    changeFrequency: 'weekly',
+  }))
 
   // 도구별 설정 생성 - 인기 도구는 높은 우선순위 부여
-  const toolPages: RouteConfig[] = [...new Set(allToolPaths)].map(path => ({
+  const toolPages: RouteConfig[] = toolPaths.map((path) => ({
     path,
     // 인기 도구는 0.9, 일반 도구는 0.8 우선순위
     priority: popularToolPaths.includes(path) ? 0.9 : 0.8,
@@ -115,6 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...corePages,
     ...infoPages,
     ...legalPages,
+    ...categoryPages,
     ...toolPages,
   ]
 
@@ -123,10 +83,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     allRoutes.map((route) => {
       const normalizedPath = route.path === '' ? '/' : route.path
       const localizedPath = buildLocalizedPathname(normalizedPath, language)
+      // Use the page file mtime when available so crawlers see fresher updates.
+      const lastModified = resolveRouteLastModified(normalizedPath, BUILD_DATE)
       return {
         url: `${baseUrl}${localizedPath}`,
-        // 모든 페이지에 동일한 빌드 날짜 사용 - 일관성 유지
-        lastModified: BUILD_DATE,
+        lastModified,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       }

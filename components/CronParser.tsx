@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 export default function CronParser() {
   const [cronExpression, setCronExpression] = useState('0 0 * * *')
@@ -104,6 +105,8 @@ export default function CronParser() {
   ]
 
   return (
+    <>
+    <ToolSchemas toolKey="cron" toolPath="/cron" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title="⏰ Cron Expression Parser"
       description="Cron 표현식을 해석하고 다음 실행 시간을 확인합니다"
@@ -193,5 +196,6 @@ export default function CronParser() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

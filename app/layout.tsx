@@ -7,6 +7,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { Analytics } from '@vercel/analytics/next'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
+import { resolveToolMetadata } from '@/utils/toolMetadata'
 import {
   DEFAULT_LANGUAGE,
   LANGUAGE_HEADER,
@@ -190,6 +191,21 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
   const localizedTitle = titleByLanguage[requestLanguage]
   const localizedDescription = descriptionByLanguage[requestLanguage]
+  // Prefer tool-specific metadata when the path matches a known tool.
+  const toolMetadata = resolveToolMetadata(requestPathname, requestLanguage)
+  // Use a title template for tools so the site name remains in every title tag.
+  const effectiveTitle = toolMetadata
+    ? {
+        default: `${toolMetadata.title} | Developer Tools`,
+        template: localizedTitle.template,
+      }
+    : localizedTitle
+  // Fall back to the site-wide description if a tool-specific description is unavailable.
+  const effectiveDescription = toolMetadata?.description ?? localizedDescription
+  // OpenGraph/Twitter need a concrete string instead of a title template object.
+  const openGraphTitle = toolMetadata
+    ? `${toolMetadata.title} | Developer Tools`
+    : localizedTitle.default
   const openGraphLocale = openGraphLocaleByLanguage[requestLanguage]
   const alternateLocale = SUPPORTED_LANGUAGES
     .filter((language) => language !== requestLanguage)
@@ -197,15 +213,15 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
   return {
     ...baseMetadata,
-    title: localizedTitle,
-    description: localizedDescription,
+    title: effectiveTitle,
+    description: effectiveDescription,
     openGraph: {
       type: 'website',
       locale: openGraphLocale,
       alternateLocale,
       url: canonicalUrl,
-      title: localizedTitle.default,
-      description: localizedDescription,
+      title: openGraphTitle,
+      description: effectiveDescription,
       siteName: 'Developer Tools',
       images: [
         {
@@ -219,8 +235,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
     },
     twitter: {
       card: 'summary_large_image',
-      title: localizedTitle.default,
-      description: localizedDescription,
+      title: openGraphTitle,
+      description: effectiveDescription,
       // 트위터 카드도 언어별 이미지 사용
       images: [`/og-image?lang=${requestLanguage}`],
     },
@@ -482,8 +498,11 @@ export default async function RootLayout({
     <html lang={htmlLang} suppressHydrationWarning>
       <head>
         {/* Google Tag Manager - head script */}
-        <script
+        <Script
+          id="gtm-loader"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
+            // Load GTM after hydration to reduce render-blocking work.
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -492,12 +511,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* Google tag (gtag.js) - GA4 직접 연동 */}
-        <script
-          async
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-F77CE5RFZM"
+          strategy="afterInteractive"
         />
-        <script
+        <Script
+          id="gtag-config"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
+            // Configure GA4 after the library loads so analytics work without blocking LCP.
             __html: `
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -515,9 +537,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           name="google-site-verification"
           content="NexoY6FhlE-ob4BUgQqvntKcLZiJbgcUom6TUTgHEw8"
         />
-        <script
-          async
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6853743390551388"
+          strategy="lazyOnload"
           crossOrigin="anonymous"
         />
         {/* Buy Me a Coffee 위젯은 Next Script로 비동기 로드해 렌더링 차단과 ESLint 에러를 피한다. */}

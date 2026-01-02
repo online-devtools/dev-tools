@@ -4,6 +4,7 @@ import { useState } from 'react'
 import mime from 'mime-types'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 // 미리보기 섹션에 사용할 공통 MIME 타입 목록을 정의합니다.
 const commonTypes = [
@@ -47,6 +48,8 @@ export default function MIMETypesTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="mime-types" toolPath="/mime-types" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title={`🗂️ ${t('mime.title')}`}
       description={t('mime.description')}
@@ -99,5 +102,6 @@ export default function MIMETypesTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

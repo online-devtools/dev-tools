@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { buildLocalizedPathname } from '@/utils/i18n'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
+import { getCategoryPath } from '@/utils/categoryRoutes'
 import { getRelatedToolsForPathname, resolveToolByPathname } from '@/utils/relatedTools'
 
 interface RelatedToolsSectionProps {
@@ -30,6 +31,12 @@ export default function RelatedToolsSection({ maxItems = 3 }: RelatedToolsSectio
     buildLocalizedPathname(currentTool.path, language),
     siteBaseUrl,
   ).toString()
+  // Derive the category URL so users can jump to the full category hub.
+  const categoryPath = getCategoryPath(currentTool.categoryKey)
+  const categoryHref = categoryPath
+    ? buildLocalizedPathname(categoryPath, language)
+    : null
+  const categoryName = t(currentTool.categoryKey)
 
   // JSON-LD ItemList helps AI/search engines understand cross-tool relationships.
   const relatedToolsSchema = {
@@ -57,9 +64,19 @@ export default function RelatedToolsSection({ maxItems = 3 }: RelatedToolsSectio
       />
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
         <div className="mb-4 space-y-1">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-            {t('relatedTools.title')}
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+              {t('relatedTools.title')}
+            </h2>
+            {categoryHref && (
+              <Link
+                href={categoryHref}
+                className="text-sm font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200"
+              >
+                {t('relatedTools.viewCategory', { category: categoryName })}
+              </Link>
+            )}
+          </div>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             {t('relatedTools.description')}
           </p>

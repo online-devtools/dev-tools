@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function CSVConverter() {
   const { t } = useLanguage()
@@ -105,6 +106,8 @@ export default function CSVConverter() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="csv" toolPath="/csv" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`📊 ${t('csvTool.title')}`}
       description={t('csvTool.description')}
@@ -179,5 +182,6 @@ Jane,25,jane@example.com`}
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

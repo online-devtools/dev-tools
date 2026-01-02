@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 import BreadcrumbSchema from './BreadcrumbSchema'
 import ToolSchema, { TOOL_CATEGORIES } from './ToolSchema'
+import { getCategoryPath } from '@/utils/categoryRoutes'
 
 /**
  * ToolSchemas - 통합 스키마 컴포넌트
@@ -42,6 +43,8 @@ export default function ToolSchemas({
   const toolName = t(`tool.${toolKey}`)
   const toolDescription = t(`${toolKey}.description`)
   const categoryName = t(categoryKey)
+  // Use a real category hub path when available so breadcrumbs create valid internal links.
+  const categoryPath = getCategoryPath(categoryKey) ?? '/'
   const homeName = t('nav.home') || '홈'
 
   return (
@@ -60,7 +63,7 @@ export default function ToolSchemas({
       <BreadcrumbSchema
         items={[
           { name: homeName, path: '/' },
-          { name: categoryName, path: '/' },
+          { name: categoryName, path: categoryPath },
           { name: toolName, path: toolPath },
         ]}
       />

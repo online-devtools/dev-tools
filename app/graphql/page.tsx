@@ -1,15 +1,4 @@
 import GraphQLTool from '@/components/GraphQLTool'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'GraphQL Query Formatter & Validator',
-  description: 'Format, validate, and minify GraphQL queries. Free online GraphQL formatter, validator, and compression tool for developers.',
-  keywords: ['GraphQL', 'GraphQL formatter', 'GraphQL validator', 'GraphQL query', 'GraphQL minify', 'GraphQL 포맷터', 'GraphQL 검증', 'GraphQL 압축'],
-  openGraph: {
-    title: 'GraphQL Query Formatter & Validator - Developer Tools',
-    description: 'Format, validate, and minify GraphQL queries with this free online tool',
-  },
-}
 
 export default function GraphQLPage() {
   return (
