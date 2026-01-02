@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { totp, authenticator } from 'otplib'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function OTPTool() {
   const { t } = useLanguage()
@@ -77,6 +78,8 @@ export default function OTPTool() {
   }, [secret])
 
   return (
+    <>
+    <ToolSchemas toolKey="otp" toolPath="/otp" categoryKey="category.generators" categoryType="security" />
     <ToolCard
       title={`⏱️ ${t('otp.title')}`}
       description={t('otp.description')}
@@ -200,5 +203,6 @@ export default function OTPTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

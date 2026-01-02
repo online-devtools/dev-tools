@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { marked } from 'marked'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
+import ToolSchemas from './ToolSchemas'
 
 export default function MarkdownHTMLTool() {
   const [input, setInput] = useState('')
@@ -20,6 +21,8 @@ export default function MarkdownHTMLTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="markdown-html" toolPath="/markdown-html" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="Markdown to HTML"
       description="Markdown을 HTML로 변환합니다"
@@ -70,5 +73,6 @@ export default function MarkdownHTMLTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

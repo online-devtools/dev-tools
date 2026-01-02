@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function BasicAuthTool() {
   const { t } = useLanguage()
@@ -39,6 +40,8 @@ export default function BasicAuthTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="basic-auth" toolPath="/basic-auth" categoryKey="category.encoding" categoryType="security" />
     <ToolCard
       title={`🔑 ${t('basicAuth.title')}`}
       description={t('basicAuth.description')}
@@ -92,5 +95,6 @@ export default function BasicAuthTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -5,6 +5,7 @@ import * as yaml from 'js-yaml'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function YAMLJSONTool() {
   const { t } = useLanguage()
@@ -38,6 +39,8 @@ export default function YAMLJSONTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="yaml-json" toolPath="/yaml-json" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`🧾 ${t('yamlJsonTool.title')}`}
       description={t('yamlJsonTool.description')}
@@ -78,5 +81,6 @@ export default function YAMLJSONTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

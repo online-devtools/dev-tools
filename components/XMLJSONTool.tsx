@@ -5,6 +5,7 @@ import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function XMLJSONTool() {
   const { t } = useLanguage()
@@ -40,6 +41,8 @@ export default function XMLJSONTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="xml-json" toolPath="/xml-json" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`🗂️ ${t('xmlJsonTool.title')}`}
       description={t('xmlJsonTool.description')}
@@ -80,5 +83,6 @@ export default function XMLJSONTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

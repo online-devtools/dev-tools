@@ -507,4 +507,204 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  password: {
+    ko: {
+      name: '강력한 비밀번호 생성 방법',
+      description: '안전한 비밀번호를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '길이 설정', text: '비밀번호 길이를 16자 이상으로 설정하세요' },
+        { name: '옵션 선택', text: '대문자, 소문자, 숫자, 특수문자를 포함하도록 선택하세요' },
+        { name: '생성 및 복사', text: 'Generate 버튼을 클릭하고 생성된 비밀번호를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Strong Password',
+      description: 'Learn how to generate secure passwords',
+      steps: [
+        { name: 'Set Length', text: 'Set password length to 16 characters or more' },
+        { name: 'Select Options', text: 'Include uppercase, lowercase, numbers, and symbols' },
+        { name: 'Generate & Copy', text: 'Click Generate button and copy the password' },
+      ],
+    },
+  },
+  'yaml-json': {
+    ko: {
+      name: 'YAML과 JSON 상호 변환 방법',
+      description: 'YAML을 JSON으로, JSON을 YAML로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '데이터 입력', text: 'YAML 또는 JSON 데이터를 입력창에 붙여넣으세요' },
+        { name: '변환 선택', text: 'YAML→JSON 또는 JSON→YAML 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '변환된 결과를 복사 버튼으로 저장하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Between YAML and JSON',
+      description: 'Learn how to convert YAML to JSON and vice versa',
+      steps: [
+        { name: 'Enter Data', text: 'Paste YAML or JSON data into the input field' },
+        { name: 'Select Conversion', text: 'Click YAML→JSON or JSON→YAML button' },
+        { name: 'Copy Result', text: 'Copy the converted result' },
+      ],
+    },
+  },
+  'xml-json': {
+    ko: {
+      name: 'XML과 JSON 상호 변환 방법',
+      description: 'XML을 JSON으로, JSON을 XML로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '데이터 입력', text: 'XML 또는 JSON 데이터를 입력창에 붙여넣으세요' },
+        { name: '변환 선택', text: 'XML→JSON 또는 JSON→XML 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '변환된 결과를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Between XML and JSON',
+      description: 'Learn how to convert XML to JSON and vice versa',
+      steps: [
+        { name: 'Enter Data', text: 'Paste XML or JSON data into the input field' },
+        { name: 'Select Conversion', text: 'Click XML→JSON or JSON→XML button' },
+        { name: 'Copy Result', text: 'Copy the converted result' },
+      ],
+    },
+  },
+  'markdown-html': {
+    ko: {
+      name: 'Markdown을 HTML로 변환하는 방법',
+      description: 'Markdown 문법을 HTML로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: 'Markdown 입력', text: 'Markdown 문법으로 작성된 텍스트를 입력하세요' },
+        { name: '미리보기', text: 'HTML 미리보기를 확인하세요' },
+        { name: 'HTML 복사', text: '변환된 HTML 코드를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Markdown to HTML',
+      description: 'Learn how to convert Markdown syntax to HTML',
+      steps: [
+        { name: 'Enter Markdown', text: 'Enter text written in Markdown syntax' },
+        { name: 'Preview', text: 'Check the HTML preview' },
+        { name: 'Copy HTML', text: 'Copy the converted HTML code' },
+      ],
+    },
+  },
+  'basic-auth': {
+    ko: {
+      name: 'Basic Auth 헤더 생성 방법',
+      description: 'HTTP Basic Authentication 헤더를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '인증 정보 입력', text: '사용자명과 비밀번호를 입력하세요' },
+        { name: '헤더 생성', text: 'Generate 버튼을 클릭하세요' },
+        { name: '헤더 복사', text: '생성된 Authorization 헤더를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Basic Auth Header',
+      description: 'Learn how to generate HTTP Basic Authentication header',
+      steps: [
+        { name: 'Enter Credentials', text: 'Enter username and password' },
+        { name: 'Generate Header', text: 'Click the Generate button' },
+        { name: 'Copy Header', text: 'Copy the generated Authorization header' },
+      ],
+    },
+  },
+  hmac: {
+    ko: {
+      name: 'HMAC 해시 생성 방법',
+      description: '메시지와 시크릿 키로 HMAC을 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '메시지 입력', text: '해시할 메시지를 입력하세요' },
+        { name: '시크릿 키 입력', text: '시크릿 키를 입력하고 알고리즘을 선택하세요' },
+        { name: 'HMAC 생성', text: 'Generate 버튼을 클릭하여 HMAC을 생성하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate HMAC Hash',
+      description: 'Learn how to generate HMAC with message and secret key',
+      steps: [
+        { name: 'Enter Message', text: 'Enter the message to hash' },
+        { name: 'Enter Secret Key', text: 'Enter secret key and select algorithm' },
+        { name: 'Generate HMAC', text: 'Click Generate button to create and copy HMAC' },
+      ],
+    },
+  },
+  otp: {
+    ko: {
+      name: 'OTP 생성 및 검증 방법',
+      description: 'TOTP 기반 일회용 비밀번호를 생성하고 검증하는 방법을 알아보세요',
+      steps: [
+        { name: '시크릿 생성', text: 'Generate Secret 버튼으로 시크릿 키를 생성하세요' },
+        { name: 'OTP 생성', text: 'Generate Token 버튼으로 6자리 OTP를 생성하세요' },
+        { name: 'OTP 검증', text: '시크릿 키와 토큰을 입력하여 유효성을 검증하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate and Verify OTP',
+      description: 'Learn how to generate and verify TOTP-based one-time password',
+      steps: [
+        { name: 'Generate Secret', text: 'Click Generate Secret button to create secret key' },
+        { name: 'Generate OTP', text: 'Click Generate Token button to create 6-digit OTP' },
+        { name: 'Verify OTP', text: 'Enter secret key and token to verify validity' },
+      ],
+    },
+  },
+  ulid: {
+    ko: {
+      name: 'ULID 생성 방법',
+      description: '정렬 가능한 고유 식별자 ULID를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '개수 입력', text: '생성할 ULID 개수를 입력하세요 (1-1000)' },
+        { name: 'ULID 생성', text: 'Generate 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '생성된 ULID를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate ULID',
+      description: 'Learn how to generate sortable unique identifier ULID',
+      steps: [
+        { name: 'Enter Count', text: 'Enter number of ULIDs to generate (1-1000)' },
+        { name: 'Generate ULID', text: 'Click the Generate button' },
+        { name: 'Copy Result', text: 'Copy the generated ULIDs' },
+      ],
+    },
+  },
+  'json-toml': {
+    ko: {
+      name: 'JSON과 TOML 상호 변환 방법',
+      description: 'JSON을 TOML로, TOML을 JSON으로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '데이터 입력', text: 'JSON 또는 TOML 데이터를 입력창에 붙여넣으세요' },
+        { name: '변환 선택', text: 'JSON→TOML 또는 TOML→JSON 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '변환된 결과를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Between JSON and TOML',
+      description: 'Learn how to convert JSON to TOML and vice versa',
+      steps: [
+        { name: 'Enter Data', text: 'Paste JSON or TOML data into the input field' },
+        { name: 'Select Conversion', text: 'Click JSON→TOML or TOML→JSON button' },
+        { name: 'Copy Result', text: 'Copy the converted result' },
+      ],
+    },
+  },
+  'base64-file': {
+    ko: {
+      name: '파일 Base64 변환 방법',
+      description: '파일을 Base64로 인코딩하거나 Base64를 파일로 디코딩하는 방법을 알아보세요',
+      steps: [
+        { name: '파일 선택', text: '변환할 파일을 업로드하세요' },
+        { name: 'Base64 확인', text: '생성된 Base64 문자열을 확인하세요' },
+        { name: '결과 복사', text: 'Base64 문자열을 복사하거나 파일로 다운로드하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert File to Base64',
+      description: 'Learn how to encode file to Base64 or decode Base64 to file',
+      steps: [
+        { name: 'Select File', text: 'Upload the file to convert' },
+        { name: 'View Base64', text: 'View the generated Base64 string' },
+        { name: 'Copy Result', text: 'Copy Base64 string or download as file' },
+      ],
+    },
+  },
 }

@@ -5,6 +5,7 @@ import * as TOML from '@iarna/toml'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function JSONTOMLTool() {
   const { t } = useLanguage()
@@ -38,6 +39,8 @@ export default function JSONTOMLTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="json-toml" toolPath="/json-toml" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`📝 ${t('jsonTomlTool.title')}`}
       description={t('jsonTomlTool.description')}
@@ -78,5 +81,6 @@ export default function JSONTOMLTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

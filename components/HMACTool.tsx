@@ -5,6 +5,7 @@ import CryptoJS from 'crypto-js'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function HMACTool() {
   const { t } = useLanguage()
@@ -46,6 +47,8 @@ export default function HMACTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="hmac" toolPath="/hmac" categoryKey="category.encoding" categoryType="security" />
     <ToolCard
       title={`🔐 ${t('hmac.title')}`}
       description={t('hmac.description')}
@@ -110,5 +113,6 @@ export default function HMACTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

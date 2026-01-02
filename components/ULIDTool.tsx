@@ -5,6 +5,7 @@ import { ulid } from 'ulid'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function ULIDTool() {
   const { t } = useLanguage()
@@ -33,6 +34,8 @@ export default function ULIDTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="ulid" toolPath="/ulid" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={`🆔 ${t('ulidTool.title')}`}
       description={t('ulidTool.description')}
@@ -78,5 +81,6 @@ export default function ULIDTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }
