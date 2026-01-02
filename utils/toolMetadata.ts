@@ -21,11 +21,11 @@ export const resolveToolMetadata = (
     return null
   }
 
-  // Tool title comes from the tool name key; description prefers the tool desc key.
+  // Tool title comes from the tool name key; descriptions prefer the fuller tool copy.
   const title = getTranslationOrKey(language, tool.nameKey)
   const description =
-    getTranslationOrNull(language, `${tool.nameKey}.desc`) ??
     getTranslationOrNull(language, `${tool.toolKey}.description`) ??
+    getTranslationOrNull(language, `${tool.nameKey}.desc`) ??
     title
 
   return {

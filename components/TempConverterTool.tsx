@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ToolCard from './ToolCard'
+import ToolSchemas from './ToolSchemas'
 
 export default function TempConverterTool() {
   const [value, setValue] = useState('')
@@ -38,6 +39,8 @@ export default function TempConverterTool() {
   const results = !isNaN(num) ? convert(num, fromUnit) : null
 
   return (
+    <>
+    <ToolSchemas toolKey="tempConverter" toolPath="/temp-converter" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title="Temperature Converter"
       description="다양한 온도 단위를 변환합니다"
@@ -113,5 +116,6 @@ export default function TempConverterTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

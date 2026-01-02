@@ -11,7 +11,7 @@ describe('resolveToolMetadata', () => {
 
     // The metadata should match the Korean tool title and description strings.
     expect(result?.title).toBe(translations.ko['tool.base64'])
-    expect(result?.description).toBe(translations.ko['tool.base64.desc'])
+    expect(result?.description).toBe(translations.ko['base64.description'])
   })
 
   it('normalizes language prefixes before resolving metadata', () => {
@@ -20,7 +20,7 @@ describe('resolveToolMetadata', () => {
 
     // English metadata should be returned when the language is English.
     expect(result?.title).toBe(translations.en['tool.base64'])
-    expect(result?.description).toBe(translations.en['tool.base64.desc'])
+    expect(result?.description).toBe(translations.en['base64.description'])
   })
 
   it('returns null for unknown tool paths', () => {

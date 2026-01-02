@@ -1107,4 +1107,64 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  dataUrl: {
+    ko: {
+      name: 'Data URL 변환 방법',
+      description: '파일을 Data URL로 변환하거나 Data URL을 파일로 다운로드하는 방법을 알아보세요',
+      steps: [
+        { name: '파일 선택', text: '변환할 파일을 선택하세요' },
+        { name: 'Data URL 확인', text: '생성된 Data URL을 확인하고 복사하세요' },
+        { name: '파일 다운로드', text: 'Data URL을 붙여넣어 파일로 다운로드하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Data URL',
+      description: 'Learn how to convert files to Data URL or download Data URL as files',
+      steps: [
+        { name: 'Select File', text: 'Select the file to convert' },
+        { name: 'View Data URL', text: 'View and copy the generated Data URL' },
+        { name: 'Download File', text: 'Paste Data URL to download as file' },
+      ],
+    },
+  },
+  tempConverter: {
+    ko: {
+      name: '온도 변환 방법',
+      description: '섭씨, 화씨, 켈빈, 랭킨 온도를 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '온도 값 입력', text: '변환할 온도 값을 입력하세요' },
+        { name: '단위 선택', text: '입력한 온도의 단위를 선택하세요' },
+        { name: '변환 결과 확인', text: '모든 단위로 변환된 결과를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Temperature',
+      description: 'Learn how to convert Celsius, Fahrenheit, Kelvin, and Rankine',
+      steps: [
+        { name: 'Enter Temperature', text: 'Enter the temperature value to convert' },
+        { name: 'Select Unit', text: 'Select the unit of the input temperature' },
+        { name: 'View Results', text: 'View converted results in all units' },
+      ],
+    },
+  },
+  tokenGenerator: {
+    ko: {
+      name: '랜덤 토큰 생성 방법',
+      description: '암호학적으로 안전한 랜덤 토큰을 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '길이 설정', text: '생성할 토큰의 길이를 설정하세요' },
+        { name: '문자 유형 선택', text: '대문자, 소문자, 숫자, 특수문자 포함 여부를 선택하세요' },
+        { name: '토큰 생성', text: 'Generate 버튼을 클릭하여 랜덤 토큰을 생성하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Random Token',
+      description: 'Learn how to generate cryptographically secure random tokens',
+      steps: [
+        { name: 'Set Length', text: 'Set the length of the token to generate' },
+        { name: 'Select Character Types', text: 'Select uppercase, lowercase, numbers, and symbols' },
+        { name: 'Generate Token', text: 'Click Generate button to create random token' },
+      ],
+    },
+  },
 }

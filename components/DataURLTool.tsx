@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function DataURLTool() {
   const { t } = useLanguage()
@@ -42,6 +43,8 @@ export default function DataURLTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="dataUrl" toolPath="/data-url" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title={`🖼️ ${t('dataUrl.title')}`}
       description={t('dataUrl.description')}
@@ -89,5 +92,6 @@ export default function DataURLTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

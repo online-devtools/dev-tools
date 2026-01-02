@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function TokenGeneratorTool() {
   const { t } = useLanguage()
@@ -49,6 +50,8 @@ export default function TokenGeneratorTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="tokenGenerator" toolPath="/token-generator" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={`🎲 ${t('token.title')}`}
       description={t('token.description')}
@@ -126,5 +129,6 @@ export default function TokenGeneratorTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

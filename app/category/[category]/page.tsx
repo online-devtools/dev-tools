@@ -34,10 +34,11 @@ export const generateStaticParams = (): CategoryPageParams[] => {
 export const generateMetadata = async ({
   params,
 }: {
-  params: CategoryPageParams
+  params: Promise<CategoryPageParams>
 }): Promise<Metadata> => {
   const language = await resolveRequestLanguage()
-  const categoryKey = getCategoryKeyBySlug(params.category)
+  const resolvedParams = await params
+  const categoryKey = getCategoryKeyBySlug(resolvedParams.category)
 
   if (!categoryKey) {
     return {
@@ -56,10 +57,11 @@ export const generateMetadata = async ({
 export default async function CategoryPage({
   params,
 }: {
-  params: CategoryPageParams
+  params: Promise<CategoryPageParams>
 }) {
   const language = await resolveRequestLanguage()
-  const categoryKey = getCategoryKeyBySlug(params.category)
+  const resolvedParams = await params
+  const categoryKey = getCategoryKeyBySlug(resolvedParams.category)
 
   if (!categoryKey) {
     notFound()
