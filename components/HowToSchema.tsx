@@ -707,4 +707,204 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  'jwt-signer': {
+    ko: {
+      name: 'JWT 토큰 서명 방법',
+      description: 'JWT 토큰을 생성하고 서명하는 방법을 알아보세요',
+      steps: [
+        { name: '페이로드 입력', text: 'JWT 페이로드 데이터를 JSON 형식으로 입력하세요' },
+        { name: '시크릿 키 입력', text: '서명에 사용할 시크릿 키를 입력하세요' },
+        { name: 'JWT 생성', text: 'Sign 버튼을 클릭하여 서명된 JWT를 생성하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Sign JWT Token',
+      description: 'Learn how to create and sign JWT tokens',
+      steps: [
+        { name: 'Enter Payload', text: 'Enter JWT payload data in JSON format' },
+        { name: 'Enter Secret', text: 'Enter the secret key for signing' },
+        { name: 'Generate JWT', text: 'Click Sign button to create and copy signed JWT' },
+      ],
+    },
+  },
+  'user-agent': {
+    ko: {
+      name: 'User Agent 분석 방법',
+      description: 'User Agent 문자열을 파싱하여 브라우저와 OS 정보를 확인하는 방법을 알아보세요',
+      steps: [
+        { name: 'User Agent 입력', text: 'User Agent 문자열을 입력하세요' },
+        { name: '자동 파싱', text: '브라우저, OS, 디바이스 정보가 자동으로 파싱됩니다' },
+        { name: '결과 확인', text: '파싱된 정보를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Parse User Agent',
+      description: 'Learn how to parse User Agent string to identify browser and OS',
+      steps: [
+        { name: 'Enter User Agent', text: 'Enter the User Agent string' },
+        { name: 'Auto Parse', text: 'Browser, OS, and device info are parsed automatically' },
+        { name: 'View Results', text: 'View the parsed information' },
+      ],
+    },
+  },
+  'json-minify': {
+    ko: {
+      name: 'JSON 압축 방법',
+      description: 'JSON을 압축하여 공백을 제거하는 방법을 알아보세요',
+      steps: [
+        { name: 'JSON 입력', text: '압축할 JSON 데이터를 입력하세요' },
+        { name: 'Minify 버튼 클릭', text: 'Minify 버튼을 클릭하세요' },
+        { name: '압축된 JSON 복사', text: '공백이 제거된 JSON을 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Minify JSON',
+      description: 'Learn how to minify JSON by removing whitespace',
+      steps: [
+        { name: 'Enter JSON', text: 'Enter the JSON data to minify' },
+        { name: 'Click Minify', text: 'Click the Minify button' },
+        { name: 'Copy Minified JSON', text: 'Copy the JSON with whitespace removed' },
+      ],
+    },
+  },
+  'url-parser': {
+    ko: {
+      name: 'URL 파싱 방법',
+      description: 'URL을 구성 요소별로 분해하여 분석하는 방법을 알아보세요',
+      steps: [
+        { name: 'URL 입력', text: '파싱할 URL을 입력하세요' },
+        { name: '자동 파싱', text: '프로토콜, 호스트, 경로, 쿼리 파라미터가 자동으로 파싱됩니다' },
+        { name: '결과 확인', text: '각 구성 요소를 확인하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Parse URL',
+      description: 'Learn how to parse URL into its components',
+      steps: [
+        { name: 'Enter URL', text: 'Enter the URL to parse' },
+        { name: 'Auto Parse', text: 'Protocol, host, path, and query params are parsed automatically' },
+        { name: 'View Results', text: 'View and copy each component' },
+      ],
+    },
+  },
+  'password-strength': {
+    ko: {
+      name: '비밀번호 강도 확인 방법',
+      description: '비밀번호의 강도를 분석하고 개선 방법을 확인하는 방법을 알아보세요',
+      steps: [
+        { name: '비밀번호 입력', text: '확인할 비밀번호를 입력하세요' },
+        { name: '강도 확인', text: '강도 점수와 예상 크랙 시간을 확인하세요' },
+        { name: '개선 방법 확인', text: '더 강력한 비밀번호를 위한 제안을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Check Password Strength',
+      description: 'Learn how to analyze password strength and get improvement suggestions',
+      steps: [
+        { name: 'Enter Password', text: 'Enter the password to check' },
+        { name: 'View Strength', text: 'View the strength score and estimated crack time' },
+        { name: 'View Suggestions', text: 'View suggestions for a stronger password' },
+      ],
+    },
+  },
+  'image-base64': {
+    ko: {
+      name: '이미지 Base64 변환 방법',
+      description: '이미지를 Base64로 인코딩하거나 디코딩하는 방법을 알아보세요',
+      steps: [
+        { name: '이미지 업로드', text: '변환할 이미지 파일을 업로드하세요' },
+        { name: 'Base64 확인', text: '생성된 Base64 문자열과 미리보기를 확인하세요' },
+        { name: '결과 복사', text: 'Base64 문자열을 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Image to Base64',
+      description: 'Learn how to encode image to Base64 or decode Base64 to image',
+      steps: [
+        { name: 'Upload Image', text: 'Upload the image file to convert' },
+        { name: 'View Base64', text: 'View the generated Base64 string and preview' },
+        { name: 'Copy Result', text: 'Copy the Base64 string to use' },
+      ],
+    },
+  },
+  'http-status': {
+    ko: {
+      name: 'HTTP 상태 코드 조회 방법',
+      description: 'HTTP 상태 코드의 의미를 검색하고 확인하는 방법을 알아보세요',
+      steps: [
+        { name: '상태 코드 입력', text: '조회할 HTTP 상태 코드를 입력하세요 (예: 404)' },
+        { name: '설명 확인', text: '상태 코드의 의미와 설명을 확인하세요' },
+        { name: '카테고리 탐색', text: '2xx, 4xx, 5xx 등 카테고리별로 탐색하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Look Up HTTP Status Codes',
+      description: 'Learn how to search and view HTTP status code meanings',
+      steps: [
+        { name: 'Enter Status Code', text: 'Enter the HTTP status code to look up (e.g., 404)' },
+        { name: 'View Description', text: 'View the meaning and description of the status code' },
+        { name: 'Browse Categories', text: 'Browse by category like 2xx, 4xx, 5xx' },
+      ],
+    },
+  },
+  'base-converter': {
+    ko: {
+      name: '진법 변환 방법',
+      description: '숫자를 2진수, 8진수, 10진수, 16진수로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '숫자 입력', text: '변환할 숫자를 입력하세요' },
+        { name: '입력 진법 선택', text: '입력한 숫자의 진법을 선택하세요' },
+        { name: '변환 결과 확인', text: '다른 진법으로 변환된 결과를 확인하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Number Bases',
+      description: 'Learn how to convert numbers between binary, octal, decimal, and hexadecimal',
+      steps: [
+        { name: 'Enter Number', text: 'Enter the number to convert' },
+        { name: 'Select Input Base', text: 'Select the base of the input number' },
+        { name: 'View Conversions', text: 'View and copy the converted results in other bases' },
+      ],
+    },
+  },
+  'text-stats': {
+    ko: {
+      name: '텍스트 통계 확인 방법',
+      description: '텍스트의 문자 수, 단어 수, 줄 수를 확인하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: '분석할 텍스트를 입력하세요' },
+        { name: '통계 확인', text: '문자 수, 단어 수, 줄 수가 실시간으로 계산됩니다' },
+        { name: '상세 정보 확인', text: '평균 단어 길이, 읽기 시간 등 상세 정보를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Check Text Statistics',
+      description: 'Learn how to count characters, words, and lines in text',
+      steps: [
+        { name: 'Enter Text', text: 'Enter the text to analyze' },
+        { name: 'View Statistics', text: 'Character, word, and line counts are calculated in real-time' },
+        { name: 'View Details', text: 'View detailed info like average word length and reading time' },
+      ],
+    },
+  },
+  'json-path-finder': {
+    ko: {
+      name: 'JSON 경로 검색 방법',
+      description: 'JSONPath로 JSON 데이터를 쿼리하는 방법을 알아보세요',
+      steps: [
+        { name: 'JSON 입력', text: '검색할 JSON 데이터를 입력하세요' },
+        { name: 'JSONPath 입력', text: 'JSONPath 표현식을 입력하세요 (예: $.users[0].name)' },
+        { name: '결과 확인', text: '매칭된 값을 확인하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Search JSON with JSONPath',
+      description: 'Learn how to query JSON data using JSONPath',
+      steps: [
+        { name: 'Enter JSON', text: 'Enter the JSON data to search' },
+        { name: 'Enter JSONPath', text: 'Enter JSONPath expression (e.g., $.users[0].name)' },
+        { name: 'View Results', text: 'View and copy the matched values' },
+      ],
+    },
+  },
 }

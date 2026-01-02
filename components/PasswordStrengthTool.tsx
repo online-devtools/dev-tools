@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function PasswordStrengthTool() {
   const { t } = useLanguage()
@@ -146,6 +147,8 @@ export default function PasswordStrengthTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="password-strength" toolPath="/password-strength" categoryKey="category.security" categoryType="security" />
     <ToolCard
       title={`🛡️ ${t('passwordStrength.title')}`}
       description={t('passwordStrength.description')}
@@ -293,5 +296,6 @@ export default function PasswordStrengthTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

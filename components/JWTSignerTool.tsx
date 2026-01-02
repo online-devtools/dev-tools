@@ -5,6 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { createSignedJwt, JwtAlgorithm } from '@/utils/jwt'
+import ToolSchemas from './ToolSchemas'
 
 export default function JWTSignerTool() {
   const { t } = useLanguage()
@@ -94,6 +95,8 @@ export default function JWTSignerTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="jwt-signer" toolPath="/jwt-signer" categoryKey="category.encoding" categoryType="security" />
     <ToolCard title={`🧾 ${t('jwtSigner.title')}`} description={t('jwtSigner.description')}>
       <div className="space-y-5">
         <div className="grid md:grid-cols-2 gap-4">
@@ -186,5 +189,6 @@ export default function JWTSignerTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

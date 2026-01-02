@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function JSONMinifyTool() {
   const { t } = useLanguage()
@@ -35,6 +36,8 @@ export default function JSONMinifyTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="json-minify" toolPath="/json-minify" categoryKey="category.formatters" categoryType="formatting" />
     <ToolCard
       title={`📦 ${t('jsonMinify.title')}`}
       description={t('jsonMinify.description')}
@@ -85,5 +88,6 @@ export default function JSONMinifyTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

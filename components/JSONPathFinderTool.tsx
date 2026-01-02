@@ -5,6 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { JsonPathError, JsonPathEntry, listJsonPaths } from '@/utils/jsonPath'
+import ToolSchemas from './ToolSchemas'
 
 export default function JSONPathFinderTool() {
   const { t } = useLanguage()
@@ -58,6 +59,8 @@ export default function JSONPathFinderTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="json-path-finder" toolPath="/json-path-finder" categoryKey="category.formatters" categoryType="formatting" />
     <ToolCard
       title={`🧭 ${t('jsonPath.title')}`}
       description={t('jsonPath.description')}
@@ -138,5 +141,6 @@ export default function JSONPathFinderTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

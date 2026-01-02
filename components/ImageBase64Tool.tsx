@@ -4,6 +4,7 @@ import { useState, useRef, DragEvent } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function ImageBase64Tool() {
   const { t } = useLanguage()
@@ -98,6 +99,8 @@ export default function ImageBase64Tool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="image-base64" toolPath="/image-base64" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title={t('tool.imageBase64')}
       description={t('imageBase64.description')}
@@ -230,5 +233,6 @@ export default function ImageBase64Tool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }
