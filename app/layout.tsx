@@ -167,6 +167,10 @@ const baseMetadata: Omit<
   },
   verification: {
     google: 'Jq8ncQ8slNfWXuqPL_ZZv8f10qrXEApKFkjkwDsy56k',
+    // Microsoft/Bing verification uses a custom meta name not covered by presets.
+    other: {
+      'msvalidate.01': '33260982A16D04E9CE1FAE1D749F510F',
+    },
     // yandex: 'yandex-verification-code',
     // bing: 'bing-verification-code',
   },

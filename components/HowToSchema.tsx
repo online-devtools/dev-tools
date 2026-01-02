@@ -907,4 +907,204 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
+  'regex-debugger': {
+    ko: {
+      name: '정규식 디버깅 방법',
+      description: '정규식 패턴을 테스트하고 디버깅하는 방법을 알아보세요',
+      steps: [
+        { name: '정규식 입력', text: '테스트할 정규식 패턴을 입력하세요' },
+        { name: '테스트 문자열 입력', text: '매칭을 확인할 테스트 문자열을 입력하세요' },
+        { name: '결과 분석', text: '매칭 결과와 캡처 그룹을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Debug Regular Expressions',
+      description: 'Learn how to test and debug regex patterns',
+      steps: [
+        { name: 'Enter Regex', text: 'Enter the regex pattern to test' },
+        { name: 'Enter Test String', text: 'Enter test string to check matches' },
+        { name: 'Analyze Results', text: 'View matching results and capture groups' },
+      ],
+    },
+  },
+  'sql-builder': {
+    ko: {
+      name: 'SQL 쿼리 생성 방법',
+      description: 'GUI로 SQL 쿼리를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '쿼리 타입 선택', text: 'SELECT, INSERT, UPDATE, DELETE 중 선택하세요' },
+        { name: '테이블과 컬럼 설정', text: '대상 테이블과 컬럼을 선택하세요' },
+        { name: 'SQL 생성', text: '생성된 SQL 쿼리를 확인하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Build SQL Queries',
+      description: 'Learn how to generate SQL queries using GUI',
+      steps: [
+        { name: 'Select Query Type', text: 'Choose SELECT, INSERT, UPDATE, or DELETE' },
+        { name: 'Set Tables and Columns', text: 'Select target tables and columns' },
+        { name: 'Generate SQL', text: 'View and copy the generated SQL query' },
+      ],
+    },
+  },
+  'gitignore-generator': {
+    ko: {
+      name: '.gitignore 파일 생성 방법',
+      description: '프로젝트에 맞는 .gitignore 파일을 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '기술 스택 선택', text: '사용하는 언어와 프레임워크를 선택하세요' },
+        { name: '추가 패턴 입력', text: '커스텀 제외 패턴을 추가하세요' },
+        { name: '.gitignore 생성', text: '생성된 .gitignore 파일을 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate .gitignore File',
+      description: 'Learn how to create .gitignore file for your project',
+      steps: [
+        { name: 'Select Tech Stack', text: 'Choose languages and frameworks you use' },
+        { name: 'Add Custom Patterns', text: 'Add custom exclusion patterns' },
+        { name: 'Generate .gitignore', text: 'Copy the generated .gitignore file' },
+      ],
+    },
+  },
+  'env-manager': {
+    ko: {
+      name: '환경변수 관리 방법',
+      description: '.env 파일을 관리하고 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '환경변수 입력', text: 'KEY=VALUE 형식으로 환경변수를 입력하세요' },
+        { name: '포맷 선택', text: '변환할 형식을 선택하세요 (JSON, YAML 등)' },
+        { name: '결과 복사', text: '변환된 환경변수를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Manage Environment Variables',
+      description: 'Learn how to manage and convert .env files',
+      steps: [
+        { name: 'Enter Variables', text: 'Enter environment variables in KEY=VALUE format' },
+        { name: 'Select Format', text: 'Choose output format (JSON, YAML, etc.)' },
+        { name: 'Copy Result', text: 'Copy the converted environment variables' },
+      ],
+    },
+  },
+  'mock-data': {
+    ko: {
+      name: 'Mock 데이터 생성 방법',
+      description: '테스트용 가짜 데이터를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '데이터 타입 선택', text: '생성할 데이터 타입을 선택하세요 (이름, 이메일 등)' },
+        { name: '개수 설정', text: '생성할 데이터 개수를 설정하세요' },
+        { name: '데이터 생성', text: 'Generate 버튼을 클릭하여 Mock 데이터를 생성하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Mock Data',
+      description: 'Learn how to create fake data for testing',
+      steps: [
+        { name: 'Select Data Type', text: 'Choose data type to generate (name, email, etc.)' },
+        { name: 'Set Count', text: 'Set the number of records to generate' },
+        { name: 'Generate Data', text: 'Click Generate button to create mock data' },
+      ],
+    },
+  },
+  'sort': {
+    ko: {
+      name: '텍스트 정렬 방법',
+      description: '텍스트 줄을 정렬하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: '정렬할 텍스트를 한 줄씩 입력하세요' },
+        { name: '정렬 옵션 선택', text: '오름차순/내림차순, 대소문자 구분 여부를 선택하세요' },
+        { name: '정렬 실행', text: 'Sort 버튼을 클릭하여 정렬된 결과를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Sort Text Lines',
+      description: 'Learn how to sort text lines',
+      steps: [
+        { name: 'Enter Text', text: 'Enter text to sort, one line at a time' },
+        { name: 'Select Options', text: 'Choose ascending/descending and case sensitivity' },
+        { name: 'Sort', text: 'Click Sort button to view sorted results' },
+      ],
+    },
+  },
+  'yaml-toml': {
+    ko: {
+      name: 'YAML과 TOML 변환 방법',
+      description: 'YAML을 TOML로, TOML을 YAML로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '데이터 입력', text: 'YAML 또는 TOML 데이터를 입력하세요' },
+        { name: '변환 방향 선택', text: 'YAML→TOML 또는 TOML→YAML 버튼을 클릭하세요' },
+        { name: '결과 복사', text: '변환된 결과를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert Between YAML and TOML',
+      description: 'Learn how to convert YAML to TOML and vice versa',
+      steps: [
+        { name: 'Enter Data', text: 'Enter YAML or TOML data' },
+        { name: 'Select Direction', text: 'Click YAML→TOML or TOML→YAML button' },
+        { name: 'Copy Result', text: 'Copy the converted result' },
+      ],
+    },
+  },
+  'device-info': {
+    ko: {
+      name: '디바이스 정보 확인 방법',
+      description: '브라우저와 디바이스 정보를 확인하는 방법을 알아보세요',
+      steps: [
+        { name: '페이지 접속', text: '디바이스 정보 도구 페이지에 접속하세요' },
+        { name: '정보 확인', text: '자동으로 감지된 브라우저, OS, 화면 정보를 확인하세요' },
+        { name: '정보 복사', text: '필요한 정보를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Check Device Information',
+      description: 'Learn how to view browser and device information',
+      steps: [
+        { name: 'Access Page', text: 'Access the device info tool page' },
+        { name: 'View Info', text: 'View automatically detected browser, OS, and screen info' },
+        { name: 'Copy Info', text: 'Copy the information you need' },
+      ],
+    },
+  },
+  'bson': {
+    ko: {
+      name: 'BSON 변환 방법',
+      description: 'JSON을 BSON으로, BSON을 JSON으로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: 'JSON 입력', text: '변환할 JSON 데이터를 입력하세요' },
+        { name: 'BSON 변환', text: 'Convert to BSON 버튼을 클릭하세요' },
+        { name: '결과 확인', text: 'BSON 바이너리 또는 Hex 표현을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert BSON',
+      description: 'Learn how to convert between JSON and BSON',
+      steps: [
+        { name: 'Enter JSON', text: 'Enter JSON data to convert' },
+        { name: 'Convert to BSON', text: 'Click Convert to BSON button' },
+        { name: 'View Result', text: 'View BSON binary or Hex representation' },
+      ],
+    },
+  },
+  'markdown-table': {
+    ko: {
+      name: 'Markdown 테이블 생성 방법',
+      description: 'Markdown 형식의 테이블을 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '테이블 크기 설정', text: '행과 열의 개수를 설정하세요' },
+        { name: '데이터 입력', text: '각 셀에 데이터를 입력하세요' },
+        { name: 'Markdown 생성', text: '생성된 Markdown 테이블을 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Create Markdown Table',
+      description: 'Learn how to generate Markdown tables',
+      steps: [
+        { name: 'Set Table Size', text: 'Set the number of rows and columns' },
+        { name: 'Enter Data', text: 'Enter data in each cell' },
+        { name: 'Generate Markdown', text: 'Copy the generated Markdown table' },
+      ],
+    },
+  },
 }

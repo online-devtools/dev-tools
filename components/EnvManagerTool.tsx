@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 interface EnvVariable {
   id: number
@@ -158,6 +159,8 @@ export default function EnvManagerTool() {
   }, [variables, outputFormat])
 
   return (
+    <>
+    <ToolSchemas toolKey="env-manager" toolPath="/env-manager" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={t('envManager.title')}
       description={t('envManager.description')}
@@ -284,5 +287,6 @@ export default function EnvManagerTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

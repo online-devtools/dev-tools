@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 type Alignment = 'left' | 'center' | 'right'
 
@@ -79,6 +80,8 @@ export default function MarkdownTableTool() {
   const markdown = generateMarkdown()
 
   return (
+    <>
+    <ToolSchemas toolKey="markdown-table" toolPath="/markdown-table" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={t('mdTable.title')}
       description={t('mdTable.description')}
@@ -201,6 +204,7 @@ export default function MarkdownTableTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { RegexDebuggerError, analyzeRegexMatches } from '@/utils/regexDebugger'
+import ToolSchemas from './ToolSchemas'
 
 export default function RegexDebuggerTool() {
   const { t } = useLanguage()
@@ -41,6 +42,8 @@ export default function RegexDebuggerTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="regex-debugger" toolPath="/regex-debugger" categoryKey="category.testing" categoryType="testing" />
     <ToolCard
       title={`🧪 ${t('regexDebugger.title')}`}
       description={t('regexDebugger.description')}
@@ -134,5 +137,6 @@ export default function RegexDebuggerTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

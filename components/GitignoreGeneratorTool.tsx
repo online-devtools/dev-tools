@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 const templates: Record<string, string[]> = {
   node: [
@@ -166,6 +167,8 @@ export default function GitignoreGeneratorTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="gitignore-generator" toolPath="/gitignore-generator" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={t('tool.gitignoreGenerator')}
       description={t('gitignore.description')}
@@ -339,5 +342,6 @@ export default function GitignoreGeneratorTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function SortTool() {
   const { t } = useLanguage()
@@ -56,6 +57,8 @@ export default function SortTool() {
   }, [input, mode, order, trimLines, removeEmpty, dedupe, caseSensitive])
 
   return (
+    <>
+    <ToolSchemas toolKey="sort" toolPath="/sort" categoryKey="category.formatters" categoryType="formatting" />
     <ToolCard
       title={`↕️ ${t('sorter.title')}`}
       description={t('sorter.description')}
@@ -181,5 +184,6 @@ export default function SortTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

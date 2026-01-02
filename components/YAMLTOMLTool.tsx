@@ -6,6 +6,7 @@ import * as TOML from '@iarna/toml'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 export default function YAMLTOMLTool() {
   const { t } = useLanguage()
@@ -39,6 +40,8 @@ export default function YAMLTOMLTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="yaml-toml" toolPath="/yaml-toml" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`📑 ${t('yamlTomlTool.title')}`}
       description={t('yamlTomlTool.description')}
@@ -79,5 +82,6 @@ export default function YAMLTOMLTool() {
         />
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 interface Column {
   id: number
@@ -98,6 +99,8 @@ export default function SQLBuilderTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="sql-builder" toolPath="/sql-builder" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={t('sqlBuilder.title')}
       description={t('sqlBuilder.description')}
@@ -304,5 +307,6 @@ export default function SQLBuilderTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

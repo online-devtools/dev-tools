@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 type DataType = 'name' | 'email' | 'phone' | 'address' | 'company' | 'date' | 'number' | 'uuid' | 'lorem'
 type OutputFormat = 'json' | 'csv' | 'sql'
@@ -131,6 +132,8 @@ export default function MockDataTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="mock-data" toolPath="/mock-data" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={t('mockData.title')}
       description={t('mockData.description')}
@@ -265,5 +268,6 @@ export default function MockDataTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }
