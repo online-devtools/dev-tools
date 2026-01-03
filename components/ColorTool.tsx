@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function ColorTool() {
   const [hex, setHex] = useState('#3B82F6')
@@ -13,10 +13,10 @@ export default function ColorTool() {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null
   }
 
@@ -120,128 +120,127 @@ export default function ColorTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="color" toolPath="/color" categoryKey="category.converters" categoryType="converter" />
-    <ToolCard
-      title="🎨 Color Converter"
-      description="HEX, RGB, HSL 색상 코드를 상호 변환합니다"
-    >
-      <div className="space-y-6">
-        <div
-          className="w-full h-32 rounded-lg border-4 border-gray-300 dark:border-gray-600 shadow-lg"
-          style={{ backgroundColor: hex }}
-        />
+      <ToolCard
+        title="🎨 Color Converter"
+        description="HEX, RGB, HSL 색상 코드를 상호 변환합니다"
+      >
+        <div className="space-y-6">
+          <div
+            className="w-full h-32 rounded-lg border-4 border-gray-300 dark:border-gray-600 shadow-lg"
+            style={{ backgroundColor: hex }}
+          />
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              HEX
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={hex}
-                onChange={(e) => handleHexChange(e.target.value)}
-                className="flex-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-gray-800 dark:text-gray-200"
-              />
-              <input
-                type="color"
-                value={hex}
-                onChange={(e) => handleHexChange(e.target.value)}
-                className="w-16 h-12 rounded-lg cursor-pointer"
-              />
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                HEX
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={hex}
+                  onChange={(e) => handleHexChange(e.target.value)}
+                  className="flex-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-gray-800 dark:text-gray-200"
+                />
+                <input
+                  type="color"
+                  value={hex}
+                  onChange={(e) => handleHexChange(e.target.value)}
+                  className="w-16 h-12 rounded-lg cursor-pointer"
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              RGB
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">R</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="255"
-                  value={rgb.r}
-                  onChange={(e) => handleRgbChange(parseInt(e.target.value) || 0, rgb.g, rgb.b)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                RGB
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">R</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="255"
+                    value={rgb.r}
+                    onChange={(e) => handleRgbChange(parseInt(e.target.value) || 0, rgb.g, rgb.b)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">G</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="255"
+                    value={rgb.g}
+                    onChange={(e) => handleRgbChange(rgb.r, parseInt(e.target.value) || 0, rgb.b)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">B</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="255"
+                    value={rgb.b}
+                    onChange={(e) => handleRgbChange(rgb.r, rgb.g, parseInt(e.target.value) || 0)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">G</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="255"
-                  value={rgb.g}
-                  onChange={(e) => handleRgbChange(rgb.r, parseInt(e.target.value) || 0, rgb.b)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">B</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="255"
-                  value={rgb.b}
-                  onChange={(e) => handleRgbChange(rgb.r, rgb.g, parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-mono">
+                rgb({rgb.r}, {rgb.g}, {rgb.b})
               </div>
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-mono">
-              rgb({rgb.r}, {rgb.g}, {rgb.b})
-            </div>
-          </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              HSL
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">H (0-360)</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="360"
-                  value={hsl.h}
-                  onChange={(e) => handleHslChange(parseInt(e.target.value) || 0, hsl.s, hsl.l)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                HSL
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">H (0-360)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="360"
+                    value={hsl.h}
+                    onChange={(e) => handleHslChange(parseInt(e.target.value) || 0, hsl.s, hsl.l)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">S (0-100)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={hsl.s}
+                    onChange={(e) => handleHslChange(hsl.h, parseInt(e.target.value) || 0, hsl.l)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">L (0-100)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={hsl.l}
+                    onChange={(e) => handleHslChange(hsl.h, hsl.s, parseInt(e.target.value) || 0)}
+                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">S (0-100)</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  value={hsl.s}
-                  onChange={(e) => handleHslChange(hsl.h, parseInt(e.target.value) || 0, hsl.l)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-mono">
+                hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
               </div>
-              <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">L (0-100)</label>
-                <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  value={hsl.l}
-                  onChange={(e) => handleHslChange(hsl.h, hsl.s, parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 dark:text-gray-200"
-                />
-              </div>
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-mono">
-              hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
             </div>
           </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

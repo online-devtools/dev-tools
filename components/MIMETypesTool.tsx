@@ -4,7 +4,7 @@ import { useState } from 'react'
 import mime from 'mime-types'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 // 미리보기 섹션에 사용할 공통 MIME 타입 목록을 정의합니다.
 const commonTypes = [
@@ -49,59 +49,58 @@ export default function MIMETypesTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="mime-types" toolPath="/mime-types" categoryKey="category.network" categoryType="network" />
-    <ToolCard
-      title={`🗂️ ${t('mime.title')}`}
-      description={t('mime.description')}
-    >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('mime.input.label')}
-          </label>
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && lookup()}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder={t('mime.input.placeholder')}
-          />
-        </div>
-
-        <button
-          onClick={lookup}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-        >
-          {t('mime.action.convert')}
-        </button>
-
-        {result && (
-          <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-              {t('mime.result.label')}
-            </div>
-            <div className="text-xl font-bold text-gray-900 dark:text-white">
-              {result}
-            </div>
+      <ToolCard
+        title={`🗂️ ${t('mime.title')}`}
+        description={t('mime.description')}
+      >
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {t('mime.input.label')}
+            </label>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && lookup()}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              placeholder={t('mime.input.placeholder')}
+            />
           </div>
-        )}
 
-        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-3">
-            {t('mime.common.title')}
-          </h3>
-          <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-            {commonTypes.map(({ ext, mime: mimeType }) => (
-              <div key={ext} className="flex justify-between">
-                <span className="font-mono">{ext}</span>
-                <span className="text-gray-600 dark:text-gray-400">{mimeType}</span>
+          <button
+            onClick={lookup}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          >
+            {t('mime.action.convert')}
+          </button>
+
+          {result && (
+            <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                {t('mime.result.label')}
               </div>
-            ))}
+              <div className="text-xl font-bold text-gray-900 dark:text-white">
+                {result}
+              </div>
+            </div>
+          )}
+
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <h3 className="font-semibold text-gray-800 dark:text-white mb-3">
+              {t('mime.common.title')}
+            </h3>
+            <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              {commonTypes.map(({ ext, mime: mimeType }) => (
+                <div key={ext} className="flex justify-between">
+                  <span className="font-mono">{ext}</span>
+                  <span className="text-gray-600 dark:text-gray-400">{mimeType}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

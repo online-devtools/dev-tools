@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 export default function JSONTool() {
   const { t } = useLanguage()
@@ -56,7 +55,6 @@ export default function JSONTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="json" toolPath="/json" categoryKey="category.dataFormat" categoryType="formatting" />
     <ToolCard
       title={`📋 ${t('jsonTool.title')}`}
       description={t('jsonTool.description')}

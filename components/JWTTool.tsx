@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
-import ToolSchemas from './ToolSchemas'
 
 interface DecodedData {
   header: any
@@ -81,7 +80,6 @@ export default function JWTTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="jwt" toolPath="/jwt" categoryKey="category.dataFormat" categoryType="security" />
     <ToolCard
       title="🎫 JWT Decoder"
       description="JWT (JSON Web Token)을 디코딩하고 검증합니다"

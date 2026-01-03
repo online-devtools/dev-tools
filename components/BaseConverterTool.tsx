@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 type Base = 'binary' | 'octal' | 'decimal' | 'hexadecimal'
 
@@ -104,7 +103,6 @@ export default function BaseConverterTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="base-converter" toolPath="/base-converter" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`🔢 ${t('baseConv.title')}`}
       description={t('baseConv.description')}

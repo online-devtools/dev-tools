@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
-import ToolSchemas from './ToolSchemas'
 
 export default function Base64FileTool() {
   const [output, setOutput] = useState('')
@@ -41,7 +40,6 @@ export default function Base64FileTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="base64-file" toolPath="/base64-file" categoryKey="category.encoding" categoryType="encoding" />
     <ToolCard
       title="Base64 File Converter"
       description="파일을 Base64로 변환하거나 Base64를 파일로 변환합니다"

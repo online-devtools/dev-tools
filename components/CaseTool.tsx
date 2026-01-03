@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 export default function CaseTool() {
   const { t } = useLanguage()
@@ -76,7 +75,6 @@ export default function CaseTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="case" toolPath="/case" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={`📝 ${t('caseTool.title')}`}
       description={t('caseTool.description')}

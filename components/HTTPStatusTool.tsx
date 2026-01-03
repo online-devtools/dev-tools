@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 const STATUS_CODES = {
   '1xx': [
@@ -47,7 +46,6 @@ export default function HTTPStatusTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="http-status" toolPath="/http-status" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title={`🌐 ${t('httpStatusTool.title')}`}
       description={t('httpStatusTool.description')}

@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 export default function TextStatsTool() {
   const { t } = useLanguage()
@@ -42,7 +41,6 @@ export default function TextStatsTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="text-stats" toolPath="/text-stats" categoryKey="category.text" categoryType="formatting" />
     <ToolCard
       title={`📊 ${t('textStats.title')}`}
       description={t('textStats.description')}

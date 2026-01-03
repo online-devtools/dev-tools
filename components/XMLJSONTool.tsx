@@ -5,7 +5,7 @@ import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function XMLJSONTool() {
   const { t } = useLanguage()
@@ -42,47 +42,46 @@ export default function XMLJSONTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="xml-json" toolPath="/xml-json" categoryKey="category.converters" categoryType="converter" />
-    <ToolCard
-      title={`🗂️ ${t('xmlJsonTool.title')}`}
-      description={t('xmlJsonTool.description')}
-    >
-      <div className="space-y-4">
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          label={t('xmlJsonTool.input.label')}
-          placeholder={t('xmlJsonTool.input.placeholder')}
-        />
+      <ToolCard
+        title={`🗂️ ${t('xmlJsonTool.title')}`}
+        description={t('xmlJsonTool.description')}
+      >
+        <div className="space-y-4">
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            label={t('xmlJsonTool.input.label')}
+            placeholder={t('xmlJsonTool.input.placeholder')}
+          />
 
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            onClick={xmlToJson}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            {t('xmlJsonTool.actions.xmlToJson')}
-          </button>
-          <button
-            onClick={jsonToXml}
-            className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            {t('xmlJsonTool.actions.jsonToXml')}
-          </button>
-        </div>
-
-        {error && (
-          <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg">
-            {error}
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={xmlToJson}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              {t('xmlJsonTool.actions.xmlToJson')}
+            </button>
+            <button
+              onClick={jsonToXml}
+              className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              {t('xmlJsonTool.actions.jsonToXml')}
+            </button>
           </div>
-        )}
 
-        <TextAreaWithCopy
-          value={output}
-          readOnly
-          label={t('xmlJsonTool.output.label')}
-        />
-      </div>
-    </ToolCard>
+          {error && (
+            <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg">
+              {error}
+            </div>
+          )}
+
+          <TextAreaWithCopy
+            value={output}
+            readOnly
+            label={t('xmlJsonTool.output.label')}
+          />
+        </div>
+      </ToolCard>
     </>
   )
 }

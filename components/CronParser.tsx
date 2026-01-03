@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function CronParser() {
   const [cronExpression, setCronExpression] = useState('0 0 * * *')
@@ -106,96 +106,95 @@ export default function CronParser() {
 
   return (
     <>
-    <ToolSchemas toolKey="cron" toolPath="/cron" categoryKey="category.generators" categoryType="generator" />
-    <ToolCard
-      title="⏰ Cron Expression Parser"
-      description="Cron 표현식을 해석하고 다음 실행 시간을 확인합니다"
-    >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Cron Expression
-          </label>
-          <input
-            type="text"
-            value={cronExpression}
-            onChange={(e) => setCronExpression(e.target.value)}
-            placeholder="0 0 * * *"
-            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-mono"
-          />
-          <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-            Format: minute hour day month weekday
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Quick Presets
-          </label>
-          <div className="flex gap-2 flex-wrap">
-            {presetExpressions.map((preset) => (
-              <button
-                key={preset.value}
-                onClick={() => setCronExpression(preset.value)}
-                className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-colors"
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <button
-          onClick={handleParse}
-          className="w-full px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
-        >
-          Parse & Calculate
-        </button>
-
-        {error && (
-          <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-
-        {description && (
-          <div className="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Description
-            </div>
-            <div className="text-green-700 dark:text-green-300">
-              {description}
+      <ToolCard
+        title="⏰ Cron Expression Parser"
+        description="Cron 표현식을 해석하고 다음 실행 시간을 확인합니다"
+      >
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Cron Expression
+            </label>
+            <input
+              type="text"
+              value={cronExpression}
+              onChange={(e) => setCronExpression(e.target.value)}
+              placeholder="0 0 * * *"
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-mono"
+            />
+            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              Format: minute hour day month weekday
             </div>
           </div>
-        )}
 
-        {nextRuns.length > 0 && (
-          <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Next 5 Executions
-            </div>
-            <ul className="space-y-1">
-              {nextRuns.map((run, index) => (
-                <li key={index} className="text-sm text-blue-700 dark:text-blue-300 font-mono">
-                  {index + 1}. {run}
-                </li>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Quick Presets
+            </label>
+            <div className="flex gap-2 flex-wrap">
+              {presetExpressions.map((preset) => (
+                <button
+                  key={preset.value}
+                  onClick={() => setCronExpression(preset.value)}
+                  className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-colors"
+                >
+                  {preset.label}
+                </button>
               ))}
-            </ul>
+            </div>
           </div>
-        )}
 
-        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm">
-          <div className="font-medium text-gray-700 dark:text-gray-300 mb-2">Cron Format Guide</div>
-          <div className="space-y-1 text-gray-600 dark:text-gray-400 font-mono text-xs">
-            <div>* * * * * → minute hour day month weekday</div>
-            <div>* → every</div>
-            <div>*/5 → every 5</div>
-            <div>1,2,3 → at 1, 2, and 3</div>
-            <div>1-5 → from 1 to 5</div>
+          <button
+            onClick={handleParse}
+            className="w-full px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+          >
+            Parse & Calculate
+          </button>
+
+          {error && (
+            <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          {description && (
+            <div className="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Description
+              </div>
+              <div className="text-green-700 dark:text-green-300">
+                {description}
+              </div>
+            </div>
+          )}
+
+          {nextRuns.length > 0 && (
+            <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Next 5 Executions
+              </div>
+              <ul className="space-y-1">
+                {nextRuns.map((run, index) => (
+                  <li key={index} className="text-sm text-blue-700 dark:text-blue-300 font-mono">
+                    {index + 1}. {run}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm">
+            <div className="font-medium text-gray-700 dark:text-gray-300 mb-2">Cron Format Guide</div>
+            <div className="space-y-1 text-gray-600 dark:text-gray-400 font-mono text-xs">
+              <div>* * * * * → minute hour day month weekday</div>
+              <div>* → every</div>
+              <div>*/5 → every 5</div>
+              <div>1,2,3 → at 1, 2, and 3</div>
+              <div>1-5 → from 1 to 5</div>
+            </div>
           </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

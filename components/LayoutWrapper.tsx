@@ -13,6 +13,7 @@ import { SearchProvider } from '@/contexts/SearchContext'
 import { FavoritesProvider } from '@/contexts/FavoritesContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { stripLanguageFromPathname } from '@/utils/i18n'
+import Breadcrumbs from './Breadcrumbs'
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -53,6 +54,9 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
                 {/* Page Content */}
                 <main className="flex-1 overflow-y-auto bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+                  <div className="container mx-auto px-4 pt-4">
+                    <Breadcrumbs />
+                  </div>
                   {/* 자동 구조화 데이터 삽입으로 도구 페이지 SEO를 강화한다. */}
                   <ToolSchemasAuto />
                   {children}

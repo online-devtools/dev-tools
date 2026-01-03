@@ -38,6 +38,8 @@ export const toolCategories = [
       { nameKey: 'tool.saml', path: '/saml', icon: '🧩' },
       { nameKey: 'tool.oauth', path: '/oauth', icon: '🔑' },
       { nameKey: 'tool.webauthn', path: '/webauthn', icon: '🛡️' },
+      // PEM/DER conversion shares certificate workflows with other security tools.
+      { nameKey: 'tool.pemDer', path: '/pem-der', icon: '🔐' },
     ]
   },
   {
@@ -76,6 +78,11 @@ export const toolCategories = [
       { nameKey: 'tool.jsonPath', path: '/json-path', icon: '🧭' },
       { nameKey: 'tool.schemaVisualizer', path: '/schema-visualizer', icon: '🗺️' },
       { nameKey: 'tool.sqlExplain', path: '/sql-explain', icon: '🧮' },
+      // Binary formats and connection helpers belong in the data-format group for schema consistency.
+      { nameKey: 'tool.msgpack', path: '/msgpack', icon: '📦' },
+      { nameKey: 'tool.bson', path: '/bson', icon: '🍃' },
+      { nameKey: 'tool.protobuf', path: '/protobuf', icon: '📡' },
+      { nameKey: 'tool.dbConnection', path: '/db-connection', icon: '🔌' },
     ]
   },
   {
@@ -153,6 +160,8 @@ export const toolCategories = [
       { nameKey: 'tool.phoneParser', path: '/phone-parser', icon: '📞' },
       { nameKey: 'tool.ibanValidator', path: '/iban-validator', icon: '🏦' },
       { nameKey: 'tool.a11yCheck', path: '/a11y-check', icon: '♿' },
+      // ASCII tables are reference material, so keep them in the info section.
+      { nameKey: 'tool.asciiTable', path: '/ascii-table', icon: '📟' },
     ]
   },
   {
@@ -164,6 +173,9 @@ export const toolCategories = [
       { nameKey: 'tool.cron', path: '/cron', icon: '⏰' },
       { nameKey: 'tool.gitignoreGenerator', path: '/gitignore-generator', icon: '📝' },
       { nameKey: 'tool.cronHuman', path: '/cron-human', icon: '🗓️' },
+      // Service config generators are grouped with other Linux utilities.
+      { nameKey: 'tool.systemdGenerator', path: '/systemd-generator', icon: '⚙️' },
+      { nameKey: 'tool.nginxConfig', path: '/nginx-config', icon: '🌐' },
     ]
   },
   {
@@ -222,6 +234,10 @@ export const toolCategories = [
       { nameKey: 'tool.terraformLinter', path: '/terraform-linter', icon: '🏗️' },
       { nameKey: 'tool.stackTrace', path: '/stack-trace', icon: '🔍' },
       { nameKey: 'tool.errorCode', path: '/error-code', icon: '❌' },
+      // Workflow guardrails for releases and repository hygiene.
+      { nameKey: 'tool.featureFlag', path: '/feature-flag', icon: '🚩' },
+      { nameKey: 'tool.lockfileDiff', path: '/lockfile-diff', icon: '📦' },
+      { nameKey: 'tool.gitHooks', path: '/git-hooks', icon: '🪝' },
     ]
   },
   {
@@ -232,6 +248,9 @@ export const toolCategories = [
       { nameKey: 'tool.fileHash', path: '/file-hash', icon: '🔐' },
       { nameKey: 'tool.pdfMetadata', path: '/pdf-metadata', icon: '📄' },
       { nameKey: 'tool.favicon', path: '/favicon', icon: '🖼️' },
+      // File-focused utilities stay together for quick discovery in navigation.
+      { nameKey: 'tool.imageOptimizer', path: '/image-optimizer', icon: '🖼️' },
+      { nameKey: 'tool.hexViewer', path: '/hex-viewer', icon: '🔬' },
     ]
   },
   {

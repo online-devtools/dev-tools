@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function SortTool() {
   const { t } = useLanguage()
@@ -58,132 +58,126 @@ export default function SortTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="sort" toolPath="/sort" categoryKey="category.formatters" categoryType="formatting" />
-    <ToolCard
-      title={`↕️ ${t('sorter.title')}`}
-      description={t('sorter.description')}
-    >
-      <div className="space-y-4">
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          label={t('sorter.input.label')}
-          placeholder={t('sorter.input.placeholder')}
-          rows={8}
-        />
+      <ToolCard
+        title={`↕️ ${t('sorter.title')}`}
+        description={t('sorter.description')}
+      >
+        <div className="space-y-4">
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            label={t('sorter.input.label')}
+            placeholder={t('sorter.input.placeholder')}
+            rows={8}
+          />
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('sorter.options.mode')}</p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setMode('alpha')}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  mode === 'alpha'
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('sorter.options.mode')}</p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setMode('alpha')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'alpha'
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                {t('sorter.mode.alpha')}
-              </button>
-              <button
-                onClick={() => setMode('length')}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  mode === 'length'
+                    }`}
+                >
+                  {t('sorter.mode.alpha')}
+                </button>
+                <button
+                  onClick={() => setMode('length')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'length'
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                {t('sorter.mode.length')}
-              </button>
-              <button
-                onClick={() => setMode('numeric')}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  mode === 'numeric'
+                    }`}
+                >
+                  {t('sorter.mode.length')}
+                </button>
+                <button
+                  onClick={() => setMode('numeric')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'numeric'
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                {t('sorter.mode.numeric')}
-              </button>
+                    }`}
+                >
+                  {t('sorter.mode.numeric')}
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('sorter.options.order')}</p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setOrder('asc')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${order === 'asc'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    }`}
+                >
+                  {t('sorter.order.asc')}
+                </button>
+                <button
+                  onClick={() => setOrder('desc')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${order === 'desc'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    }`}
+                >
+                  {t('sorter.order.desc')}
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('sorter.options.order')}</p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setOrder('asc')}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  order === 'asc'
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                {t('sorter.order.asc')}
-              </button>
-              <button
-                onClick={() => setOrder('desc')}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  order === 'desc'
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                {t('sorter.order.desc')}
-              </button>
-            </div>
+          <div className="grid md:grid-cols-2 gap-2 text-sm">
+            <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={trimLines}
+                onChange={(e) => setTrimLines(e.target.checked)}
+                className="rounded"
+              />
+              {t('sorter.options.trim')}
+            </label>
+            <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={removeEmpty}
+                onChange={(e) => setRemoveEmpty(e.target.checked)}
+                className="rounded"
+              />
+              {t('sorter.options.removeEmpty')}
+            </label>
+            <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={dedupe}
+                onChange={(e) => setDedupe(e.target.checked)}
+                className="rounded"
+              />
+              {t('sorter.options.dedupe')}
+            </label>
+            <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={caseSensitive}
+                onChange={(e) => setCaseSensitive(e.target.checked)}
+                className="rounded"
+              />
+              {t('sorter.options.caseSensitive')}
+            </label>
           </div>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-2 text-sm">
-          <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-            <input
-              type="checkbox"
-              checked={trimLines}
-              onChange={(e) => setTrimLines(e.target.checked)}
-              className="rounded"
-            />
-            {t('sorter.options.trim')}
-          </label>
-          <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-            <input
-              type="checkbox"
-              checked={removeEmpty}
-              onChange={(e) => setRemoveEmpty(e.target.checked)}
-              className="rounded"
-            />
-            {t('sorter.options.removeEmpty')}
-          </label>
-          <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-            <input
-              type="checkbox"
-              checked={dedupe}
-              onChange={(e) => setDedupe(e.target.checked)}
-              className="rounded"
-            />
-            {t('sorter.options.dedupe')}
-          </label>
-          <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-            <input
-              type="checkbox"
-              checked={caseSensitive}
-              onChange={(e) => setCaseSensitive(e.target.checked)}
-              className="rounded"
-            />
-            {t('sorter.options.caseSensitive')}
-          </label>
+          <TextAreaWithCopy
+            value={output}
+            readOnly
+            label={t('sorter.output.label')}
+            placeholder={t('sorter.output.placeholder')}
+            rows={8}
+          />
         </div>
-
-        <TextAreaWithCopy
-          value={output}
-          readOnly
-          label={t('sorter.output.label')}
-          placeholder={t('sorter.output.placeholder')}
-          rows={8}
-        />
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

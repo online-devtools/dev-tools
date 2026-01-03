@@ -7,6 +7,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { parseHeaderLines } from '@/utils/apiResponseTime'
+import ToolSchemas from './ToolSchemas'
 
 const SAMPLE_OPENAPI = `openapi: 3.0.3
 info:
@@ -399,6 +400,8 @@ export default function ApiContractTesterTool() {
   }, [responseText])
 
   return (
+    <>
+    <ToolSchemas toolKey="contract-tester" toolPath="/contract-tester" categoryKey="category.workflow" categoryType="testing" />
     <ToolCard
       title={`📜 ${t('apiContract.title')}`}
       description={t('apiContract.description')}
@@ -605,5 +608,6 @@ export default function ApiContractTesterTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

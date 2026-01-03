@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function JSONCSVTool() {
   const [input, setInput] = useState('')
@@ -54,39 +54,38 @@ export default function JSONCSVTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="csv" toolPath="/csv" categoryKey="category.converters" categoryType="converter" />
-    <ToolCard
-      title="JSON to CSV"
-      description="JSON 배열을 CSV 형식으로 변환합니다"
-    >
-      <div className="space-y-4">
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          label="JSON 배열 입력"
-          placeholder='[{"name":"John","age":30},{"name":"Jane","age":25}]'
-        />
+      <ToolCard
+        title="JSON to CSV"
+        description="JSON 배열을 CSV 형식으로 변환합니다"
+      >
+        <div className="space-y-4">
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            label="JSON 배열 입력"
+            placeholder='[{"name":"John","age":30},{"name":"Jane","age":25}]'
+          />
 
-        <button
-          onClick={jsonToCSV}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-        >
-          JSON → CSV 변환
-        </button>
+          <button
+            onClick={jsonToCSV}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          >
+            JSON → CSV 변환
+          </button>
 
-        {error && (
-          <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg">
-            {error}
-          </div>
-        )}
+          {error && (
+            <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg">
+              {error}
+            </div>
+          )}
 
-        <TextAreaWithCopy
-          value={output}
-          readOnly
-          label="CSV 출력"
-        />
-      </div>
-    </ToolCard>
+          <TextAreaWithCopy
+            value={output}
+            readOnly
+            label="CSV 출력"
+          />
+        </div>
+      </ToolCard>
     </>
   )
 }

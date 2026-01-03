@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 const SAMPLE_SCENARIO = `[
   {
@@ -314,6 +315,8 @@ export default function ApiScenarioTool() {
   const mismatchCount = results.filter((result) => result.diff.statusMismatch || result.diff.bodyMismatch).length
 
   return (
+    <>
+    <ToolSchemas toolKey="api-scenario" toolPath="/api-scenario" categoryKey="category.workflow" categoryType="testing" />
     <ToolCard
       title={`🧭 ${t('apiScenario.title')}`}
       description={t('apiScenario.description')}
@@ -443,5 +446,6 @@ export default function ApiScenarioTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

@@ -327,7 +327,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'html-entities': {
+  htmlEntities: {
     ko: {
       name: 'HTML 엔티티 인코딩/디코딩 방법',
       description: 'HTML 특수 문자를 엔티티로 변환하거나 원래대로 복원하는 방법을 알아보세요',
@@ -527,7 +527,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'yaml-json': {
+  yamlJson: {
     ko: {
       name: 'YAML과 JSON 상호 변환 방법',
       description: 'YAML을 JSON으로, JSON을 YAML로 변환하는 방법을 알아보세요',
@@ -547,7 +547,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'xml-json': {
+  xmlJson: {
     ko: {
       name: 'XML과 JSON 상호 변환 방법',
       description: 'XML을 JSON으로, JSON을 XML로 변환하는 방법을 알아보세요',
@@ -567,7 +567,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'markdown-html': {
+  markdownHtml: {
     ko: {
       name: 'Markdown을 HTML로 변환하는 방법',
       description: 'Markdown 문법을 HTML로 변환하는 방법을 알아보세요',
@@ -587,7 +587,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'basic-auth': {
+  basicAuth: {
     ko: {
       name: 'Basic Auth 헤더 생성 방법',
       description: 'HTTP Basic Authentication 헤더를 생성하는 방법을 알아보세요',
@@ -667,7 +667,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'json-toml': {
+  jsonToml: {
     ko: {
       name: 'JSON과 TOML 상호 변환 방법',
       description: 'JSON을 TOML로, TOML을 JSON으로 변환하는 방법을 알아보세요',
@@ -687,7 +687,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'base64-file': {
+  base64File: {
     ko: {
       name: '파일 Base64 변환 방법',
       description: '파일을 Base64로 인코딩하거나 Base64를 파일로 디코딩하는 방법을 알아보세요',
@@ -707,7 +707,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'jwt-signer': {
+  jwtSigner: {
     ko: {
       name: 'JWT 토큰 서명 방법',
       description: 'JWT 토큰을 생성하고 서명하는 방법을 알아보세요',
@@ -727,7 +727,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'user-agent': {
+  userAgent: {
     ko: {
       name: 'User Agent 분석 방법',
       description: 'User Agent 문자열을 파싱하여 브라우저와 OS 정보를 확인하는 방법을 알아보세요',
@@ -747,7 +747,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'json-minify': {
+  jsonMinify: {
     ko: {
       name: 'JSON 압축 방법',
       description: 'JSON을 압축하여 공백을 제거하는 방법을 알아보세요',
@@ -767,7 +767,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'url-parser': {
+  urlParser: {
     ko: {
       name: 'URL 파싱 방법',
       description: 'URL을 구성 요소별로 분해하여 분석하는 방법을 알아보세요',
@@ -787,7 +787,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'password-strength': {
+  passwordStrength: {
     ko: {
       name: '비밀번호 강도 확인 방법',
       description: '비밀번호의 강도를 분석하고 개선 방법을 확인하는 방법을 알아보세요',
@@ -807,7 +807,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'image-base64': {
+  imageBase64: {
     ko: {
       name: '이미지 Base64 변환 방법',
       description: '이미지를 Base64로 인코딩하거나 디코딩하는 방법을 알아보세요',
@@ -827,7 +827,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'http-status': {
+  httpStatus: {
     ko: {
       name: 'HTTP 상태 코드 조회 방법',
       description: 'HTTP 상태 코드의 의미를 검색하고 확인하는 방법을 알아보세요',
@@ -847,7 +847,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'base-converter': {
+  baseconv: {
     ko: {
       name: '진법 변환 방법',
       description: '숫자를 2진수, 8진수, 10진수, 16진수로 변환하는 방법을 알아보세요',
@@ -867,7 +867,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'text-stats': {
+  textStats: {
     ko: {
       name: '텍스트 통계 확인 방법',
       description: '텍스트의 문자 수, 단어 수, 줄 수를 확인하는 방법을 알아보세요',
@@ -887,7 +887,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'json-path-finder': {
+  jsonPath: {
     ko: {
       name: 'JSON 경로 검색 방법',
       description: 'JSONPath로 JSON 데이터를 쿼리하는 방법을 알아보세요',
@@ -907,7 +907,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'regex-debugger': {
+  regexDebugger: {
     ko: {
       name: '정규식 디버깅 방법',
       description: '정규식 패턴을 테스트하고 디버깅하는 방법을 알아보세요',
@@ -927,7 +927,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'sql-builder': {
+  sqlBuilder: {
     ko: {
       name: 'SQL 쿼리 생성 방법',
       description: 'GUI로 SQL 쿼리를 생성하는 방법을 알아보세요',
@@ -947,7 +947,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'gitignore-generator': {
+  gitignoreGenerator: {
     ko: {
       name: '.gitignore 파일 생성 방법',
       description: '프로젝트에 맞는 .gitignore 파일을 생성하는 방법을 알아보세요',
@@ -967,7 +967,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'env-manager': {
+  envManager: {
     ko: {
       name: '환경변수 관리 방법',
       description: '.env 파일을 관리하고 변환하는 방법을 알아보세요',
@@ -987,7 +987,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'mock-data': {
+  mockData: {
     ko: {
       name: 'Mock 데이터 생성 방법',
       description: '테스트용 가짜 데이터를 생성하는 방법을 알아보세요',
@@ -1007,7 +1007,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'sort': {
+  sorter: {
     ko: {
       name: '텍스트 정렬 방법',
       description: '텍스트 줄을 정렬하는 방법을 알아보세요',
@@ -1027,7 +1027,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'yaml-toml': {
+  yamlToml: {
     ko: {
       name: 'YAML과 TOML 변환 방법',
       description: 'YAML을 TOML로, TOML을 YAML로 변환하는 방법을 알아보세요',
@@ -1047,7 +1047,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'device-info': {
+  deviceInfo: {
     ko: {
       name: '디바이스 정보 확인 방법',
       description: '브라우저와 디바이스 정보를 확인하는 방법을 알아보세요',
@@ -1087,7 +1087,7 @@ export const HOWTO_DATA: Record<string, {
       ],
     },
   },
-  'markdown-table': {
+  markdownTable: {
     ko: {
       name: 'Markdown 테이블 생성 방법',
       description: 'Markdown 형식의 테이블을 생성하는 방법을 알아보세요',
@@ -1164,6 +1164,306 @@ export const HOWTO_DATA: Record<string, {
         { name: 'Set Length', text: 'Set the length of the token to generate' },
         { name: 'Select Character Types', text: 'Select uppercase, lowercase, numbers, and symbols' },
         { name: 'Generate Token', text: 'Click Generate button to create random token' },
+      ],
+    },
+  },
+  a11yCheck: {
+    ko: {
+      name: '접근성 검사 방법',
+      description: 'HTML을 검사하여 웹 접근성 문제를 찾는 방법을 알아보세요',
+      steps: [
+        { name: 'HTML 입력', text: '검사할 HTML 코드를 입력하세요' },
+        { name: '검사 실행', text: '접근성 규칙에 따라 자동 검사를 실행하세요' },
+        { name: '결과 확인', text: '발견된 접근성 문제와 개선 방법을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Check Accessibility',
+      description: 'Learn how to check HTML for web accessibility issues',
+      steps: [
+        { name: 'Enter HTML', text: 'Enter the HTML code to check' },
+        { name: 'Run Check', text: 'Run automatic check based on accessibility rules' },
+        { name: 'View Results', text: 'View found accessibility issues and improvements' },
+      ],
+    },
+  },
+  contractTester: {
+    ko: {
+      name: 'API 계약 테스트 방법',
+      description: 'API 계약을 정의하고 테스트하는 방법을 알아보세요',
+      steps: [
+        { name: '계약 정의', text: 'API 요청과 응답 스키마를 정의하세요' },
+        { name: '테스트 실행', text: '실제 API를 호출하여 계약을 검증하세요' },
+        { name: '결과 분석', text: '계약 위반 사항과 차이점을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Test API Contract',
+      description: 'Learn how to define and test API contracts',
+      steps: [
+        { name: 'Define Contract', text: 'Define API request and response schemas' },
+        { name: 'Run Test', text: 'Call actual API to verify contract' },
+        { name: 'Analyze Results', text: 'Check contract violations and differences' },
+      ],
+    },
+  },
+  apiResponseTime: {
+    ko: {
+      name: 'API 응답 시간 측정 방법',
+      description: 'API 엔드포인트의 응답 시간을 측정하는 방법을 알아보세요',
+      steps: [
+        { name: 'URL 입력', text: '테스트할 API URL을 입력하세요' },
+        { name: '요청 설정', text: 'HTTP 메서드와 헤더를 설정하세요' },
+        { name: '응답 시간 확인', text: '평균, 최소, 최대 응답 시간을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Measure API Response Time',
+      description: 'Learn how to measure response time of API endpoints',
+      steps: [
+        { name: 'Enter URL', text: 'Enter the API URL to test' },
+        { name: 'Configure Request', text: 'Set HTTP method and headers' },
+        { name: 'Check Response Time', text: 'View average, min, and max response times' },
+      ],
+    },
+  },
+  apiScenario: {
+    ko: {
+      name: 'API 시나리오 테스트 방법',
+      description: '여러 API 호출을 순차적으로 테스트하는 방법을 알아보세요',
+      steps: [
+        { name: '시나리오 작성', text: 'API 호출 순서와 조건을 정의하세요' },
+        { name: '변수 설정', text: '이전 응답의 값을 다음 요청에 사용하세요' },
+        { name: '시나리오 실행', text: '전체 시나리오를 실행하고 결과를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Test API Scenario',
+      description: 'Learn how to test multiple API calls sequentially',
+      steps: [
+        { name: 'Write Scenario', text: 'Define API call sequence and conditions' },
+        { name: 'Set Variables', text: 'Use values from previous responses in next requests' },
+        { name: 'Run Scenario', text: 'Execute entire scenario and check results' },
+      ],
+    },
+  },
+  asciiArt: {
+    ko: {
+      name: 'ASCII 아트 생성 방법',
+      description: '텍스트를 ASCII 아트로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '텍스트 입력', text: 'ASCII 아트로 변환할 텍스트를 입력하세요' },
+        { name: '폰트 선택', text: '원하는 ASCII 아트 스타일을 선택하세요' },
+        { name: '결과 복사', text: '생성된 ASCII 아트를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate ASCII Art',
+      description: 'Learn how to convert text to ASCII art',
+      steps: [
+        { name: 'Enter Text', text: 'Enter text to convert to ASCII art' },
+        { name: 'Select Font', text: 'Choose desired ASCII art style' },
+        { name: 'Copy Result', text: 'Copy generated ASCII art to use' },
+      ],
+    },
+  },
+  bip39: {
+    ko: {
+      name: 'BIP39 니모닉 생성 방법',
+      description: '암호화폐 지갑을 위한 니모닉 문구를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '단어 수 선택', text: '12, 15, 18, 21, 24 단어 중 선택하세요' },
+        { name: '니모닉 생성', text: '랜덤 니모닉 문구를 생성하세요' },
+        { name: '시드 확인', text: '생성된 시드 값과 주소를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate BIP39 Mnemonic',
+      description: 'Learn how to generate mnemonic phrases for cryptocurrency wallets',
+      steps: [
+        { name: 'Select Word Count', text: 'Choose from 12, 15, 18, 21, or 24 words' },
+        { name: 'Generate Mnemonic', text: 'Generate random mnemonic phrase' },
+        { name: 'Check Seed', text: 'Verify generated seed value and address' },
+      ],
+    },
+  },
+  boxShadow: {
+    ko: {
+      name: 'Box Shadow 생성 방법',
+      description: 'CSS box-shadow 속성을 시각적으로 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '그림자 설정', text: 'X, Y 오프셋, 블러, 스프레드를 조정하세요' },
+        { name: '색상 선택', text: '그림자 색상과 투명도를 설정하세요' },
+        { name: 'CSS 복사', text: '생성된 CSS 코드를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Box Shadow',
+      description: 'Learn how to visually generate CSS box-shadow property',
+      steps: [
+        { name: 'Adjust Shadow', text: 'Adjust X, Y offset, blur, and spread' },
+        { name: 'Select Color', text: 'Set shadow color and opacity' },
+        { name: 'Copy CSS', text: 'Copy generated CSS code to use' },
+      ],
+    },
+  },
+  breakpointTester: {
+    ko: {
+      name: '반응형 브레이크포인트 테스트 방법',
+      description: '다양한 화면 크기에서 레이아웃을 테스트하는 방법을 알아보세요',
+      steps: [
+        { name: 'URL 입력', text: '테스트할 웹사이트 URL을 입력하세요' },
+        { name: '기기 선택', text: '모바일, 태블릿, 데스크탑 뷰를 선택하세요' },
+        { name: '레이아웃 확인', text: '각 브레이크포인트에서 레이아웃을 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Test Responsive Breakpoints',
+      description: 'Learn how to test layouts at various screen sizes',
+      steps: [
+        { name: 'Enter URL', text: 'Enter website URL to test' },
+        { name: 'Select Device', text: 'Choose mobile, tablet, or desktop view' },
+        { name: 'Check Layout', text: 'Verify layout at each breakpoint' },
+      ],
+    },
+  },
+  certChain: {
+    ko: {
+      name: 'SSL 인증서 체인 검사 방법',
+      description: 'SSL/TLS 인증서 체인을 검사하고 검증하는 방법을 알아보세요',
+      steps: [
+        { name: '도메인 입력', text: '검사할 도메인 이름을 입력하세요' },
+        { name: '인증서 확인', text: '인증서 체인과 만료일을 확인하세요' },
+        { name: '문제 해결', text: '인증서 관련 문제와 경고를 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Inspect SSL Certificate Chain',
+      description: 'Learn how to inspect and validate SSL/TLS certificate chains',
+      steps: [
+        { name: 'Enter Domain', text: 'Enter domain name to inspect' },
+        { name: 'Check Certificate', text: 'View certificate chain and expiration dates' },
+        { name: 'Resolve Issues', text: 'Check certificate-related issues and warnings' },
+      ],
+    },
+  },
+  changelogGenerator: {
+    ko: {
+      name: 'Changelog 생성 방법',
+      description: 'Git 커밋 히스토리에서 변경 로그를 생성하는 방법을 알아보세요',
+      steps: [
+        { name: '커밋 선택', text: '변경 로그에 포함할 커밋을 선택하세요' },
+        { name: '형식 설정', text: 'Markdown, Keep a Changelog 등 형식을 선택하세요' },
+        { name: 'Changelog 생성', text: '생성된 변경 로그를 복사하여 사용하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Generate Changelog',
+      description: 'Learn how to generate change logs from Git commit history',
+      steps: [
+        { name: 'Select Commits', text: 'Select commits to include in changelog' },
+        { name: 'Set Format', text: 'Choose format like Markdown or Keep a Changelog' },
+        { name: 'Generate Changelog', text: 'Copy generated changelog to use' },
+      ],
+    },
+  },
+  ipv4Converter: {
+    ko: {
+      name: 'IPv4 변환 방법',
+      description: 'IPv4 주소를 이진수, 10진수, 16진수로 변환하는 방법을 알아보세요',
+      steps: [
+        { name: 'IP 주소 입력', text: '변환할 IPv4 주소를 입력하세요' },
+        { name: '변환 확인', text: '자동으로 변환된 2진수, 10진수, 16진수 값을 확인하세요' },
+        { name: '결과 복사', text: '필요한 형식의 IP 주소를 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Convert IPv4',
+      description: 'Learn how to convert IPv4 address to binary, decimal, and hexadecimal',
+      steps: [
+        { name: 'Enter IP Address', text: 'Enter the IPv4 address to convert' },
+        { name: 'View Conversions', text: 'View automatically converted binary, decimal, and hex values' },
+        { name: 'Copy Result', text: 'Copy the IP address in your preferred format' },
+      ],
+    },
+  },
+  jsonDiff: {
+    ko: {
+      name: 'JSON 비교 방법',
+      description: '두 JSON 데이터의 차이점을 비교하는 방법을 알아보세요',
+      steps: [
+        { name: 'JSON 입력', text: '비교할 원본(Left)과 수정(Right) JSON을 입력하세요' },
+        { name: '비교 실행', text: 'Compare 버튼을 클릭하세요' },
+        { name: '차이점 분석', text: '추가, 삭제, 변경된 부분을 시각적으로 확인하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Compare JSON',
+      description: 'Learn how to compare differences between two JSON objects',
+      steps: [
+        { name: 'Enter JSON', text: 'Enter the original (Left) and modified (Right) JSON' },
+        { name: 'Run Comparison', text: 'Click the Compare button' },
+        { name: 'Analyze Differences', text: 'Visually identify additions, deletions, and changes' },
+      ],
+    },
+  },
+  codeMinifier: {
+    ko: {
+      name: '코드 압축 방법',
+      description: 'JavaScript, CSS, HTML 코드를 압축(Minify)하는 방법을 알아보세요',
+      steps: [
+        { name: '코드 입력', text: '압축할 코드를 입력창에 붙여넣으세요' },
+        { name: '언어 선택', text: 'JavaScript, CSS, HTML 중 언어를 선택하세요' },
+        { name: '압축 실행', text: 'Minify 버튼을 클릭하여 코드를 압축하고 복사하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Minify Code',
+      description: 'Learn how to minify JavaScript, CSS, and HTML code',
+      steps: [
+        { name: 'Enter Code', text: 'Paste the code you want to minify' },
+        { name: 'Select Language', text: 'Choose JavaScript, CSS, or HTML' },
+        { name: 'Run Minify', text: 'Click Minify button to compress and copy the code' },
+      ],
+    },
+  },
+  asciiTable: {
+    ko: {
+      name: 'ASCII 테이블 사용 방법',
+      description: 'ASCII 문자 코드를 검색하고 변환하는 방법을 알아보세요',
+      steps: [
+        { name: '문자 검색', text: '검색창을 사용하여 10진수, 16진수 또는 문자를 검색하세요' },
+        { name: '필터 사용', text: '제어 문자 또는 출력 가능 문자로 필터링하여 확인하세요' },
+        { name: '변환기 사용', text: '텍스트를 입력하여 ASCII 코드로 변환하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Use ASCII Table',
+      description: 'Learn how to look up and convert ASCII character codes',
+      steps: [
+        { name: 'Search Characters', text: 'Use the search bar to find decimals, hex codes, or characters' },
+        { name: 'Use Filters', text: 'Filter by control characters or printable characters' },
+        { name: 'Use Converter', text: 'Enter text to convert to ASCII codes' },
+      ],
+    },
+  },
+  hexViewer: {
+    ko: {
+      name: 'Hex Viewer 사용 방법',
+      description: '바이너리 파일을 16진수로 분석하는 방법을 알아보세요',
+      steps: [
+        { name: '파일 업로드', text: '분석할 바이너리 파일을 업로드하세요' },
+        { name: 'Hex 뷰 확인', text: '오프셋, Hex 값, ASCII 표현을 확인하세요' },
+        { name: '검색', text: '특정 16진수 패턴이나 문자열을 검색하세요' },
+      ],
+    },
+    en: {
+      name: 'How to Use Hex Viewer',
+      description: 'Learn how to analyze binary files in hexadecimal',
+      steps: [
+        { name: 'Upload File', text: 'Upload the binary file to analyze' },
+        { name: 'View Hex Dump', text: 'Inspect offsets, hex values, and ASCII representation' },
+        { name: 'Search', text: 'Search for specific hex patterns or strings' },
       ],
     },
   },

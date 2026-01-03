@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 export default function URLParserTool() {
   const { t } = useLanguage()
@@ -54,7 +53,6 @@ export default function URLParserTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="url-parser" toolPath="/url-parser" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title={`🔍 ${t('urlParser.title')}`}
       description={t('urlParser.description')}

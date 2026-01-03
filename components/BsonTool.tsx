@@ -4,7 +4,6 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 // Simple BSON-like encoder/decoder (simulates MongoDB Extended JSON)
 // Real BSON is binary, but we use Extended JSON format for web compatibility
@@ -228,7 +227,6 @@ export default function BsonTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="bson" toolPath="/bson" categoryKey="category.converters" categoryType="converter" />
     <ToolCard
       title={t('bson.title')}
       description={t('bson.description')}

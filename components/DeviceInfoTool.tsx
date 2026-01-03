@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import ToolCard from './ToolCard'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 export default function DeviceInfoTool() {
   const { t } = useLanguage()
@@ -42,7 +41,6 @@ export default function DeviceInfoTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="device-info" toolPath="/device-info" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title={`📱 ${t('deviceInfoTool.title')}`}
       description={t('deviceInfoTool.description')}

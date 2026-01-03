@@ -6,6 +6,7 @@ import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { calculateLatencyStats } from '@/utils/metrics'
 import { buildCsv, parseHeaderLines, ResponseSample } from '@/utils/apiResponseTime'
+import ToolSchemas from './ToolSchemas'
 
 // Provide a sensible default header set that works for JSON APIs.
 const DEFAULT_HEADERS = `Accept: application/json\nCache-Control: no-cache`
@@ -119,6 +120,8 @@ export default function ApiResponseTimeTool() {
   const csvOutput = useMemo(() => buildCsv(samples), [samples])
 
   return (
+    <>
+    <ToolSchemas toolKey="api-response-time" toolPath="/api-response-time" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title={`📈 ${t('apiResponse.title')}`}
       description={t('apiResponse.description')}
@@ -304,5 +307,6 @@ export default function ApiResponseTimeTool() {
         )}
       </div>
     </ToolCard>
+    </>
   )
 }

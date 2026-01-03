@@ -15,12 +15,6 @@ export default function ToolSchemasAuto() {
     return null
   }
 
-  // Skip auto-rendering for tools that already embed ToolSchemas directly.
-  const manualSchemaTools = new Set(['dataUrl', 'tempConverter', 'tokenGenerator'])
-  if (manualSchemaTools.has(tool.toolKey)) {
-    return null
-  }
-
   // Fall back to a safe category type when the mapping is missing.
   const categoryType = CATEGORY_TYPE_MAP[tool.categoryKey] ?? 'generator'
 

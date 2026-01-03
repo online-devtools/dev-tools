@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 type DataType = 'name' | 'email' | 'phone' | 'address' | 'company' | 'date' | 'number' | 'uuid' | 'lorem'
 type OutputFormat = 'json' | 'csv' | 'sql'
@@ -133,141 +133,139 @@ export default function MockDataTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="mock-data" toolPath="/mock-data" categoryKey="category.generators" categoryType="generator" />
-    <ToolCard
-      title={t('mockData.title')}
-      description={t('mockData.description')}
-    >
-      <div className="space-y-6">
-        {/* Fields Configuration */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('mockData.fields')}
-            </label>
-            <button
-              onClick={addField}
-              disabled={fields.length >= 10}
-              className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            >
-              + {t('mockData.addField')}
-            </button>
-          </div>
-
-          <div className="space-y-2">
-            {fields.map((field) => (
-              <div key={field.id} className="flex gap-2">
-                <input
-                  type="text"
-                  value={field.name}
-                  onChange={(e) => updateField(field.id, { name: e.target.value })}
-                  placeholder={t('mockData.fieldName')}
-                  className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-sm"
-                />
-                <select
-                  value={field.type}
-                  onChange={(e) => updateField(field.id, { type: e.target.value as DataType })}
-                  className="px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-sm"
-                >
-                  <option value="name">{t('mockData.type.name')}</option>
-                  <option value="email">{t('mockData.type.email')}</option>
-                  <option value="phone">{t('mockData.type.phone')}</option>
-                  <option value="address">{t('mockData.type.address')}</option>
-                  <option value="company">{t('mockData.type.company')}</option>
-                  <option value="date">{t('mockData.type.date')}</option>
-                  <option value="number">{t('mockData.type.number')}</option>
-                  <option value="uuid">{t('mockData.type.uuid')}</option>
-                  <option value="lorem">{t('mockData.type.lorem')}</option>
-                </select>
-                <button
-                  onClick={() => removeField(field.id)}
-                  disabled={fields.length <= 1}
-                  className="px-3 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Count */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('mockData.count')}: {count}
-          </label>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value={count}
-            onChange={(e) => setCount(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
-          />
-          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-            <span>1</span>
-            <span>100</span>
-          </div>
-        </div>
-
-        {/* Output Format */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('mockData.outputFormat')}
-          </label>
-          <div className="grid grid-cols-3 gap-2">
-            {(['json', 'csv', 'sql'] as OutputFormat[]).map(format => (
+      <ToolCard
+        title={t('mockData.title')}
+        description={t('mockData.description')}
+      >
+        <div className="space-y-6">
+          {/* Fields Configuration */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t('mockData.fields')}
+              </label>
               <button
-                key={format}
-                onClick={() => setOutputFormat(format)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  outputFormat === format
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
+                onClick={addField}
+                disabled={fields.length >= 10}
+                className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {format.toUpperCase()}
+                + {t('mockData.addField')}
               </button>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* Table Name (for SQL) */}
-        {outputFormat === 'sql' && (
+            <div className="space-y-2">
+              {fields.map((field) => (
+                <div key={field.id} className="flex gap-2">
+                  <input
+                    type="text"
+                    value={field.name}
+                    onChange={(e) => updateField(field.id, { name: e.target.value })}
+                    placeholder={t('mockData.fieldName')}
+                    className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-sm"
+                  />
+                  <select
+                    value={field.type}
+                    onChange={(e) => updateField(field.id, { type: e.target.value as DataType })}
+                    className="px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded text-sm"
+                  >
+                    <option value="name">{t('mockData.type.name')}</option>
+                    <option value="email">{t('mockData.type.email')}</option>
+                    <option value="phone">{t('mockData.type.phone')}</option>
+                    <option value="address">{t('mockData.type.address')}</option>
+                    <option value="company">{t('mockData.type.company')}</option>
+                    <option value="date">{t('mockData.type.date')}</option>
+                    <option value="number">{t('mockData.type.number')}</option>
+                    <option value="uuid">{t('mockData.type.uuid')}</option>
+                    <option value="lorem">{t('mockData.type.lorem')}</option>
+                  </select>
+                  <button
+                    onClick={() => removeField(field.id)}
+                    disabled={fields.length <= 1}
+                    className="px-3 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Count */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('mockData.tableName')}
+              {t('mockData.count')}: {count}
             </label>
             <input
-              type="text"
-              value={tableName}
-              onChange={(e) => setTableName(e.target.value)}
-              className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded"
+              type="range"
+              min="1"
+              max="100"
+              value={count}
+              onChange={(e) => setCount(parseInt(e.target.value))}
+              className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
             />
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <span>1</span>
+              <span>100</span>
+            </div>
           </div>
-        )}
 
-        {/* Output */}
-        <TextAreaWithCopy
-          value={generateOutput()}
-          readOnly
-          label={t('mockData.output')}
-          rows={15}
-        />
+          {/* Output Format */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {t('mockData.outputFormat')}
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {(['json', 'csv', 'sql'] as OutputFormat[]).map(format => (
+                <button
+                  key={format}
+                  onClick={() => setOutputFormat(format)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${outputFormat === format
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    }`}
+                >
+                  {format.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
 
-        {/* Info */}
-        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-          <h3 className="text-sm font-medium text-blue-900 dark:text-blue-300 mb-2">
-            {t('mockData.infoTitle')}
-          </h3>
-          <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1 list-disc list-inside">
-            <li>{t('mockData.info1')}</li>
-            <li>{t('mockData.info2')}</li>
-            <li>{t('mockData.info3')}</li>
-          </ul>
+          {/* Table Name (for SQL) */}
+          {outputFormat === 'sql' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {t('mockData.tableName')}
+              </label>
+              <input
+                type="text"
+                value={tableName}
+                onChange={(e) => setTableName(e.target.value)}
+                className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded"
+              />
+            </div>
+          )}
+
+          {/* Output */}
+          <TextAreaWithCopy
+            value={generateOutput()}
+            readOnly
+            label={t('mockData.output')}
+            rows={15}
+          />
+
+          {/* Info */}
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-900 dark:text-blue-300 mb-2">
+              {t('mockData.infoTitle')}
+            </h3>
+            <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1 list-disc list-inside">
+              <li>{t('mockData.info1')}</li>
+              <li>{t('mockData.info2')}</li>
+              <li>{t('mockData.info3')}</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

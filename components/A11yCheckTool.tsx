@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolSchemas from './ToolSchemas'
 
 type Issue = { type: string; detail: string }
 
@@ -46,6 +47,8 @@ export default function A11yCheckTool() {
   }
 
   return (
+    <>
+    <ToolSchemas toolKey="a11y-check" toolPath="/a11y-check" categoryKey="category.testing" categoryType="testing" />
     <ToolCard
       title={`♿ ${t('a11y.title')}`}
       description={t('a11y.description')}
@@ -82,5 +85,6 @@ export default function A11yCheckTool() {
         </div>
       </div>
     </ToolCard>
+    </>
   )
 }

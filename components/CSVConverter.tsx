@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function CSVConverter() {
   const { t } = useLanguage()
@@ -107,81 +107,80 @@ export default function CSVConverter() {
 
   return (
     <>
-    <ToolSchemas toolKey="csv" toolPath="/csv" categoryKey="category.converters" categoryType="converter" />
-    <ToolCard
-      title={`📊 ${t('csvTool.title')}`}
-      description={t('csvTool.description')}
-    >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('csvTool.delimiter.label')}
-          </label>
-          <select
-            value={delimiter}
-            onChange={(e) => setDelimiter(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-          >
-            <option value=",">{t('csvTool.delimiter.comma')}</option>
-            <option value=";">{t('csvTool.delimiter.semicolon')}</option>
-            <option value="\t">{t('csvTool.delimiter.tab')}</option>
-            <option value="|">{t('csvTool.delimiter.pipe')}</option>
-          </select>
-        </div>
-
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          placeholder={t('csvTool.input.placeholder')}
-          label={t('csvTool.input.label')}
-          rows={10}
-        />
-
-        <div className="flex gap-3 flex-wrap">
-          <button
-            onClick={csvToJSON}
-            className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('csvTool.actions.csvToJson')}
-          </button>
-          <button
-            onClick={jsonToCSV}
-            className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('csvTool.actions.jsonToCsv')}
-          </button>
-          <button
-            onClick={handleClear}
-            className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('csvTool.actions.clear')}
-          </button>
-        </div>
-
-        {error && (
-          <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
-            {error}
+      <ToolCard
+        title={`📊 ${t('csvTool.title')}`}
+        description={t('csvTool.description')}
+      >
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {t('csvTool.delimiter.label')}
+            </label>
+            <select
+              value={delimiter}
+              onChange={(e) => setDelimiter(e.target.value)}
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            >
+              <option value=",">{t('csvTool.delimiter.comma')}</option>
+              <option value=";">{t('csvTool.delimiter.semicolon')}</option>
+              <option value="\t">{t('csvTool.delimiter.tab')}</option>
+              <option value="|">{t('csvTool.delimiter.pipe')}</option>
+            </select>
           </div>
-        )}
 
-        <TextAreaWithCopy
-          value={output}
-          placeholder={t('csvTool.result.placeholder')}
-          readOnly
-          label={t('csvTool.result.label')}
-          rows={10}
-        />
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            placeholder={t('csvTool.input.placeholder')}
+            label={t('csvTool.input.label')}
+            rows={10}
+          />
 
-        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm space-y-2">
-          <div className="font-medium text-gray-700 dark:text-gray-300">{t('csvTool.example.label')}</div>
-          <pre className="text-xs text-gray-600 dark:text-gray-400 overflow-x-auto">
-{`name,age,email
+          <div className="flex gap-3 flex-wrap">
+            <button
+              onClick={csvToJSON}
+              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('csvTool.actions.csvToJson')}
+            </button>
+            <button
+              onClick={jsonToCSV}
+              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('csvTool.actions.jsonToCsv')}
+            </button>
+            <button
+              onClick={handleClear}
+              className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('csvTool.actions.clear')}
+            </button>
+          </div>
+
+          {error && (
+            <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          <TextAreaWithCopy
+            value={output}
+            placeholder={t('csvTool.result.placeholder')}
+            readOnly
+            label={t('csvTool.result.label')}
+            rows={10}
+          />
+
+          <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm space-y-2">
+            <div className="font-medium text-gray-700 dark:text-gray-300">{t('csvTool.example.label')}</div>
+            <pre className="text-xs text-gray-600 dark:text-gray-400 overflow-x-auto">
+              {`name,age,email
 John,30,john@example.com
 Jane,25,jane@example.com`}
-          </pre>
+            </pre>
+          </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

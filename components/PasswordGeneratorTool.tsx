@@ -4,7 +4,6 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
 
 type StrengthLevel = 'weak' | 'medium' | 'strong'
 interface StrengthState {
@@ -92,7 +91,6 @@ export default function PasswordGeneratorTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="password" toolPath="/password" categoryKey="category.generators" categoryType="generator" />
     <ToolCard
       title={`🔐 ${t('password.title')}`}
       description={t('password.description')}

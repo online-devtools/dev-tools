@@ -5,7 +5,7 @@ import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { decodeBase64, encodeBase64 } from '@/utils/encoding'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function Base64Tool() {
   const { t } = useLanguage()
@@ -43,54 +43,53 @@ export default function Base64Tool() {
 
   return (
     <>
-    <ToolSchemas toolKey="base64" toolPath="/base64" categoryKey="category.encoding" categoryType="encoding" />
-    <ToolCard
-      title={`🔤 ${t('base64.title')}`}
-      description={t('base64.description')}
-    >
-      <div className="space-y-4">
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          placeholder={t('base64.input.placeholder')}
-          label={t('base64.input.label')}
-        />
+      <ToolCard
+        title={`🔤 ${t('base64.title')}`}
+        description={t('base64.description')}
+      >
+        <div className="space-y-4">
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            placeholder={t('base64.input.placeholder')}
+            label={t('base64.input.label')}
+          />
 
-        <div className="flex gap-3 flex-wrap">
-          <button
-            onClick={handleEncode}
-            className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('base64.actions.encode')}
-          </button>
-          <button
-            onClick={handleDecode}
-            className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('base64.actions.decode')}
-          </button>
-          <button
-            onClick={handleClear}
-            className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
-          >
-            {t('base64.actions.clear')}
-          </button>
-        </div>
-
-        {errorKey && (
-          <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
-            {t(errorKey)}
+          <div className="flex gap-3 flex-wrap">
+            <button
+              onClick={handleEncode}
+              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('base64.actions.encode')}
+            </button>
+            <button
+              onClick={handleDecode}
+              className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('base64.actions.decode')}
+            </button>
+            <button
+              onClick={handleClear}
+              className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+            >
+              {t('base64.actions.clear')}
+            </button>
           </div>
-        )}
 
-        <TextAreaWithCopy
-          value={output}
-          placeholder={t('base64.output.placeholder')}
-          readOnly
-          label={t('base64.output.label')}
-        />
-      </div>
-    </ToolCard>
+          {errorKey && (
+            <div className="p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded-lg text-sm">
+              {t(errorKey)}
+            </div>
+          )}
+
+          <TextAreaWithCopy
+            value={output}
+            placeholder={t('base64.output.placeholder')}
+            readOnly
+            label={t('base64.output.label')}
+          />
+        </div>
+      </ToolCard>
     </>
   )
 }

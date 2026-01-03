@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { UAParser } from 'ua-parser-js'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
-import ToolSchemas from './ToolSchemas'
 
 export default function UserAgentTool() {
   const [input, setInput] = useState('')
@@ -28,7 +27,6 @@ export default function UserAgentTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="user-agent" toolPath="/user-agent" categoryKey="category.network" categoryType="network" />
     <ToolCard
       title="User Agent Parser"
       description="User Agent 문자열을 파싱합니다"

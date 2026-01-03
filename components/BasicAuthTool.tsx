@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ToolCard from './ToolCard'
 import TextAreaWithCopy from './TextAreaWithCopy'
 import { useLanguage } from '@/contexts/LanguageContext'
-import ToolSchemas from './ToolSchemas'
+
 
 export default function BasicAuthTool() {
   const { t } = useLanguage()
@@ -41,60 +41,59 @@ export default function BasicAuthTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="basic-auth" toolPath="/basic-auth" categoryKey="category.encoding" categoryType="security" />
-    <ToolCard
-      title={`🔑 ${t('basicAuth.title')}`}
-      description={t('basicAuth.description')}
-    >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('basicAuth.username')}
-          </label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder={t('basicAuth.usernamePlaceholder')}
+      <ToolCard
+        title={`🔑 ${t('basicAuth.title')}`}
+        description={t('basicAuth.description')}
+      >
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {t('basicAuth.username')}
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              placeholder={t('basicAuth.usernamePlaceholder')}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {t('basicAuth.password')}
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              placeholder={t('basicAuth.passwordPlaceholder')}
+            />
+          </div>
+
+          <button
+            onClick={generate}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          >
+            {t('basicAuth.actions.generate')}
+          </button>
+
+          <TextAreaWithCopy
+            value={output}
+            readOnly
+            label={t('basicAuth.output.label')}
           />
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t('basicAuth.password')}
-          </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            placeholder={t('basicAuth.passwordPlaceholder')}
-          />
-        </div>
-
-        <button
-          onClick={generate}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-        >
-          {t('basicAuth.actions.generate')}
-        </button>
-
-        <TextAreaWithCopy
-          value={output}
-          readOnly
-          label={t('basicAuth.output.label')}
-        />
-
-        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('basicAuth.howto.title')}</h3>
-          <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <div>• {t('basicAuth.howto.header', { header: output || 'Basic <base64>' })}</div>
-            <div>• {t('basicAuth.howto.curl', { header: output || 'Basic <base64>' })}</div>
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{t('basicAuth.howto.title')}</h3>
+            <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+              <div>• {t('basicAuth.howto.header', { header: output || 'Basic <base64>' })}</div>
+              <div>• {t('basicAuth.howto.curl', { header: output || 'Basic <base64>' })}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }
