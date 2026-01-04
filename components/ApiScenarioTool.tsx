@@ -316,136 +316,136 @@ export default function ApiScenarioTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="api-scenario" toolPath="/api-scenario" categoryKey="category.workflow" categoryType="testing" />
-    <ToolCard
-      title={`🧭 ${t('apiScenario.title')}`}
-      description={t('apiScenario.description')}
-    >
-      <div className="space-y-5">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiScenario.baseUrl')}
-            </label>
-            <input
-              value={baselineUrl}
-              onChange={(e) => setBaselineUrl(e.target.value)}
-              placeholder="https://api.staging.example.com"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiScenario.candidateUrl')}
-            </label>
-            <input
-              value={candidateUrl}
-              onChange={(e) => setCandidateUrl(e.target.value)}
-              placeholder="https://api.candidate.example.com"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            />
-          </div>
-        </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiScenario.scenario.label')}
-            </label>
-            <textarea
-              value={scenarioText}
-              onChange={(e) => setScenarioText(e.target.value)}
-              rows={10}
-              placeholder={t('apiScenario.scenario.placeholder')}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiScenario.variables.label')}
-            </label>
-            <textarea
-              value={varsText}
-              onChange={(e) => setVarsText(e.target.value)}
-              rows={10}
-              placeholder={t('apiScenario.variables.placeholder')}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={runScenario}
-            disabled={isRunning}
-            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg"
-          >
-            {isRunning ? t('apiScenario.running') : t('apiScenario.run')}
-          </button>
-          <button
-            onClick={() => {
-              setScenarioText(SAMPLE_SCENARIO)
-              setVarsText(SAMPLE_VARS)
-            }}
-            className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg"
-          >
-            {t('apiScenario.loadSample')}
-          </button>
-          <button
-            onClick={handleClear}
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
-          >
-            {t('apiScenario.clear')}
-          </button>
-        </div>
-
-        {error && (
-          <div className="p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-
-        {results.length > 0 && (
-          <div className="space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-gray-600 dark:text-gray-300">
-              <span>{t('apiScenario.summary.steps', { count: results.length })}</span>
-              <span>{t('apiScenario.summary.mismatches', { count: mismatchCount })}</span>
+      <ToolCard
+        title={`🧭 ${t('apiScenario.title')}`}
+        description={t('apiScenario.description')}
+      >
+        <div className="space-y-5">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t('apiScenario.baseUrl')}
+              </label>
+              <input
+                value={baselineUrl}
+                onChange={(e) => setBaselineUrl(e.target.value)}
+                placeholder="https://api.staging.example.com"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
             </div>
-            <div className="space-y-3">
-              {results.map((result) => (
-                <div key={result.name} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="font-semibold text-gray-800 dark:text-gray-200">{result.name}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {result.baseline.status ?? 'ERR'} ({result.baseline.durationMs.toFixed(0)}ms) →{' '}
-                      {result.candidate.status ?? 'ERR'} ({result.candidate.durationMs.toFixed(0)}ms)
-                    </div>
-                  </div>
-                  <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                    {result.diff.statusMismatch || result.diff.bodyMismatch
-                      ? t('apiScenario.diff.detected')
-                      : t('apiScenario.diff.none')}
-                  </div>
-                  {result.diff.differences.length > 0 && (
-                    <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                      {result.diff.differences.slice(0, 6).map((diff) => (
-                        <div key={diff}>{diff}</div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t('apiScenario.candidateUrl')}
+              </label>
+              <input
+                value={candidateUrl}
+                onChange={(e) => setCandidateUrl(e.target.value)}
+                placeholder="https://api.candidate.example.com"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
             </div>
-            <TextAreaWithCopy
-              label={t('apiScenario.summary.report')}
-              value={summaryText}
-              readOnly
-              rows={6}
-            />
           </div>
-        )}
-      </div>
-    </ToolCard>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t('apiScenario.scenario.label')}
+              </label>
+              <textarea
+                value={scenarioText}
+                onChange={(e) => setScenarioText(e.target.value)}
+                rows={10}
+                placeholder={t('apiScenario.scenario.placeholder')}
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t('apiScenario.variables.label')}
+              </label>
+              <textarea
+                value={varsText}
+                onChange={(e) => setVarsText(e.target.value)}
+                rows={10}
+                placeholder={t('apiScenario.variables.placeholder')}
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={runScenario}
+              disabled={isRunning}
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg"
+            >
+              {isRunning ? t('apiScenario.running') : t('apiScenario.run')}
+            </button>
+            <button
+              onClick={() => {
+                setScenarioText(SAMPLE_SCENARIO)
+                setVarsText(SAMPLE_VARS)
+              }}
+              className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg"
+            >
+              {t('apiScenario.loadSample')}
+            </button>
+            <button
+              onClick={handleClear}
+              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
+            >
+              {t('apiScenario.clear')}
+            </button>
+          </div>
+
+          {error && (
+            <div className="p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          {results.length > 0 && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <span>{t('apiScenario.summary.steps', { count: results.length })}</span>
+                <span>{t('apiScenario.summary.mismatches', { count: mismatchCount })}</span>
+              </div>
+              <div className="space-y-3">
+                {results.map((result) => (
+                  <div key={result.name} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="font-semibold text-gray-800 dark:text-gray-200">{result.name}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                        {result.baseline.status ?? 'ERR'} ({result.baseline.durationMs.toFixed(0)}ms) →{' '}
+                        {result.candidate.status ?? 'ERR'} ({result.candidate.durationMs.toFixed(0)}ms)
+                      </div>
+                    </div>
+                    <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                      {result.diff.statusMismatch || result.diff.bodyMismatch
+                        ? t('apiScenario.diff.detected')
+                        : t('apiScenario.diff.none')}
+                    </div>
+                    {result.diff.differences.length > 0 && (
+                      <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                        {result.diff.differences.slice(0, 6).map((diff) => (
+                          <div key={diff}>{diff}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <TextAreaWithCopy
+                label={t('apiScenario.summary.report')}
+                value={summaryText}
+                readOnly
+                rows={6}
+              />
+            </div>
+          )}
+        </div>
+      </ToolCard>
     </>
   )
 }

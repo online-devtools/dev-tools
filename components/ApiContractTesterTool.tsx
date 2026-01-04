@@ -190,8 +190,8 @@ const pickResponseSchema = (operation: any, status: number) => {
   const statusKey = responses[status]
     ? String(status)
     : Object.keys(responses).find((key) => key.startsWith('2')) ||
-      Object.keys(responses).find((key) => key === 'default') ||
-      Object.keys(responses)[0]
+    Object.keys(responses).find((key) => key === 'default') ||
+    Object.keys(responses)[0]
 
   const response = statusKey ? responses[statusKey] : undefined
   const content = response?.content || {}
@@ -401,213 +401,211 @@ export default function ApiContractTesterTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="contract-tester" toolPath="/contract-tester" categoryKey="category.workflow" categoryType="testing" />
-    <ToolCard
-      title={`📜 ${t('apiContract.title')}`}
-      description={t('apiContract.description')}
-    >
-      <div className="space-y-5">
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setMode('openapi')}
-            className={`px-4 py-2 rounded-lg ${
-              mode === 'openapi'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
-            }`}
-          >
-            OpenAPI
-          </button>
-          <button
-            onClick={() => setMode('graphql')}
-            className={`px-4 py-2 rounded-lg ${
-              mode === 'graphql'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
-            }`}
-          >
-            GraphQL
-          </button>
-        </div>
 
-        {mode === 'openapi' && (
-          <div className="space-y-4">
+      <ToolCard
+        title={`📜 ${t('apiContract.title')}`}
+        description={t('apiContract.description')}
+      >
+        <div className="space-y-5">
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setMode('openapi')}
+              className={`px-4 py-2 rounded-lg ${mode === 'openapi'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
+                }`}
+            >
+              OpenAPI
+            </button>
+            <button
+              onClick={() => setMode('graphql')}
+              className={`px-4 py-2 rounded-lg ${mode === 'graphql'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
+                }`}
+            >
+              GraphQL
+            </button>
+          </div>
+
+          {mode === 'openapi' && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('apiContract.spec.label')}
+                </label>
+                <textarea
+                  value={specText}
+                  onChange={(e) => setSpecText(e.target.value)}
+                  rows={8}
+                  placeholder={t('apiContract.spec.placeholder')}
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+                />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={handleParseSpec}
+                  className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg"
+                >
+                  {t('apiContract.spec.parse')}
+                </button>
+                <button
+                  onClick={() => setSpecText(SAMPLE_OPENAPI)}
+                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
+                >
+                  {t('apiContract.loadSample')}
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('apiContract.spec.label')}
+                {t('apiContract.baseUrl')}
               </label>
-              <textarea
-                value={specText}
-                onChange={(e) => setSpecText(e.target.value)}
-                rows={8}
-                placeholder={t('apiContract.spec.placeholder')}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+              <input
+                value={baseUrl}
+                onChange={(e) => setBaseUrl(e.target.value)}
+                placeholder={mode === 'openapi' ? 'https://api.example.com' : 'https://api.example.com/graphql'}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={handleParseSpec}
-                className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg"
-              >
-                {t('apiContract.spec.parse')}
-              </button>
-              <button
-                onClick={() => setSpecText(SAMPLE_OPENAPI)}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
-              >
-                {t('apiContract.loadSample')}
-              </button>
-            </div>
+            {mode === 'openapi' && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('apiContract.operation')}
+                </label>
+                <select
+                  value={operationId}
+                  onChange={(e) => setOperationId(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  {operations.map((operation) => (
+                    <option key={operation.id} value={operation.id}>
+                      {operation.id}{operation.summary ? ` - ${operation.summary}` : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
-        )}
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiContract.baseUrl')}
-            </label>
-            <input
-              value={baseUrl}
-              onChange={(e) => setBaseUrl(e.target.value)}
-              placeholder={mode === 'openapi' ? 'https://api.example.com' : 'https://api.example.com/graphql'}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            />
-          </div>
           {mode === 'openapi' && (
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('apiContract.operation')}
+                {t('apiContract.pathOverride')}
               </label>
-              <select
-                value={operationId}
-                onChange={(e) => setOperationId(e.target.value)}
+              <input
+                value={pathOverride}
+                onChange={(e) => setPathOverride(e.target.value)}
+                placeholder={t('apiContract.pathOverride.placeholder')}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                {operations.map((operation) => (
-                  <option key={operation.id} value={operation.id}>
-                    {operation.id}{operation.summary ? ` - ${operation.summary}` : ''}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
           )}
-        </div>
 
-        {mode === 'openapi' && (
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiContract.pathOverride')}
-            </label>
-            <input
-              value={pathOverride}
-              onChange={(e) => setPathOverride(e.target.value)}
-              placeholder={t('apiContract.pathOverride.placeholder')}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            />
-          </div>
-        )}
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            {t('apiContract.headers')}
-          </label>
-          <textarea
-            value={headersText}
-            onChange={(e) => setHeadersText(e.target.value)}
-            rows={4}
-            placeholder="Authorization: Bearer ..."
-            className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
-          />
-        </div>
-
-        {mode === 'openapi' && (
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('apiContract.requestBody')}
+              {t('apiContract.headers')}
             </label>
             <textarea
-              value={requestBody}
-              onChange={(e) => setRequestBody(e.target.value)}
-              rows={6}
-              placeholder={t('apiContract.requestBody.placeholder')}
+              value={headersText}
+              onChange={(e) => setHeadersText(e.target.value)}
+              rows={4}
+              placeholder="Authorization: Bearer ..."
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
             />
           </div>
-        )}
 
-        {mode === 'graphql' && (
-          <div className="space-y-4">
+          {mode === 'openapi' && (
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('apiContract.graphql.query')}
+                {t('apiContract.requestBody')}
               </label>
               <textarea
-                value={graphqlQuery}
-                onChange={(e) => setGraphqlQuery(e.target.value)}
+                value={requestBody}
+                onChange={(e) => setRequestBody(e.target.value)}
                 rows={6}
-                placeholder={t('apiContract.graphql.query.placeholder')}
+                placeholder={t('apiContract.requestBody.placeholder')}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
               />
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setGraphqlQuery(SAMPLE_GRAPHQL_QUERY)}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
-              >
-                {t('apiContract.loadSample')}
-              </button>
+          )}
+
+          {mode === 'graphql' && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('apiContract.graphql.query')}
+                </label>
+                <textarea
+                  value={graphqlQuery}
+                  onChange={(e) => setGraphqlQuery(e.target.value)}
+                  rows={6}
+                  placeholder={t('apiContract.graphql.query.placeholder')}
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setGraphqlQuery(SAMPLE_GRAPHQL_QUERY)}
+                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg"
+                >
+                  {t('apiContract.loadSample')}
+                </button>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('apiContract.graphql.variables')}
+                </label>
+                <textarea
+                  value={graphqlVariables}
+                  onChange={(e) => setGraphqlVariables(e.target.value)}
+                  rows={4}
+                  placeholder={t('apiContract.graphql.variables.placeholder')}
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
+                />
+              </div>
             </div>
+          )}
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleRun}
+              disabled={isRunning}
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg"
+            >
+              {isRunning ? t('apiContract.running') : t('apiContract.run')}
+            </button>
+          </div>
+
+          {error && (
+            <div className="p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          {result && (
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('apiContract.graphql.variables')}
-              </label>
-              <textarea
-                value={graphqlVariables}
-                onChange={(e) => setGraphqlVariables(e.target.value)}
-                rows={4}
-                placeholder={t('apiContract.graphql.variables.placeholder')}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg resize-none font-mono text-sm text-gray-800 dark:text-gray-200"
-              />
+              <div className={`p-3 rounded-lg text-sm ${result.ok ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-700'}`}>
+                {result.errors.map((item) => (
+                  <div key={item}>{item}</div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={handleRun}
-            disabled={isRunning}
-            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg"
-          >
-            {isRunning ? t('apiContract.running') : t('apiContract.run')}
-          </button>
+          {responseText && (
+            <TextAreaWithCopy
+              label={t('apiContract.response')}
+              value={responsePreview}
+              readOnly
+              rows={8}
+            />
+          )}
         </div>
-
-        {error && (
-          <div className="p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-
-        {result && (
-          <div className="space-y-2">
-            <div className={`p-3 rounded-lg text-sm ${result.ok ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-700'}`}>
-              {result.errors.map((item) => (
-                <div key={item}>{item}</div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {responseText && (
-          <TextAreaWithCopy
-            label={t('apiContract.response')}
-            value={responsePreview}
-            readOnly
-            rows={8}
-          />
-        )}
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }
