@@ -83,6 +83,7 @@ export default function HowToSchema({
 
 // 주요 도구별 HowTo 데이터 사전 정의
 // 각 도구 페이지에서 import하여 사용
+// 키 이름은 config/tools.ts의 toolKey와 동일해야 자동 스키마 매칭이 깨지지 않는다.
 export const HOWTO_DATA: Record<string, {
   ko: { name: string; description: string; steps: HowToStep[] };
   en: { name: string; description: string; steps: HowToStep[] };
