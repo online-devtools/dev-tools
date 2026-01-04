@@ -3,6 +3,8 @@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getSiteBaseUrl } from '@/utils/siteUrl'
 
+import { ToolKey } from '@/config/tools'
+
 // HowTo 스키마의 각 단계 타입 정의
 interface HowToStep {
   name: string        // 단계 이름 (예: "텍스트 입력")
@@ -84,10 +86,10 @@ export default function HowToSchema({
 // 주요 도구별 HowTo 데이터 사전 정의
 // 각 도구 페이지에서 import하여 사용
 // 키 이름은 config/tools.ts의 toolKey와 동일해야 자동 스키마 매칭이 깨지지 않는다.
-export const HOWTO_DATA: Record<string, {
+export const HOWTO_DATA: Partial<Record<ToolKey, {
   ko: { name: string; description: string; steps: HowToStep[] };
   en: { name: string; description: string; steps: HowToStep[] };
-}> = {
+}>> = {
   base64: {
     ko: {
       name: 'Base64 인코딩/디코딩 방법',

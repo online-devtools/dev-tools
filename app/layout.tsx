@@ -497,6 +497,15 @@ export default async function RootLayout({
   return (
     <html lang={htmlLang} suppressHydrationWarning>
       <head>
+        {/* Preconnect to critical third-party origins to reduce connection latency. */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://cdnjs.buymeacoffee.com" />
+        <link rel="dns-prefetch" href="https://cdnjs.buymeacoffee.com" />
         {/* Google Tag Manager - head script */}
         <Script
           id="gtm-loader"
@@ -573,8 +582,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   '@type': 'WebSite',
                   name: 'Developer Tools',
                   url: siteBaseUrl,
-                  // Declare both Korean and English to signal multilingual support.
-                  inLanguage: ['ko-KR', 'en-US'],
+                  // Declare every supported locale to signal full multilingual coverage.
+                  inLanguage: ['ko-KR', 'en-US', 'ja-JP', 'pt-BR', 'de-DE'],
                   publisher: {
                     '@type': 'Organization',
                     name: 'Developer Tools',
@@ -606,7 +615,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   },
                   featureList,
                   // Provide language metadata for search engines and rich results.
-                  inLanguage: ['ko-KR', 'en-US'],
+                  inLanguage: ['ko-KR', 'en-US', 'ja-JP', 'pt-BR', 'de-DE'],
                   publisher: {
                     '@type': 'Organization',
                     name: 'Developer Tools',

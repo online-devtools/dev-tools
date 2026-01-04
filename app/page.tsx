@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { buildLocalizedPathname } from '@/utils/i18n'
+import { getSiteBaseUrl } from '@/utils/siteUrl'
+import { buildHomeItemListSchema } from '@/utils/homeSchema'
+import { getCategoryPath } from '@/utils/categoryRoutes'
 import CoupangAd from '@/components/CoupangAd'
 import KakaoAd from '@/components/KakaoAd'
 
@@ -326,9 +329,21 @@ export default function Home() {
     // 홈 페이지 링크는 locale 프리픽스를 붙여서 이동한다.
     return buildLocalizedPathname(path, language)
   }
+  // 구조화 데이터 생성을 위해 base URL과 도구 목록 스키마를 준비한다.
+  const siteBaseUrl = getSiteBaseUrl()
+  const homeItemListSchema = buildHomeItemListSchema({
+    categories: toolsConfig,
+    language,
+    t,
+    baseUrl: siteBaseUrl,
+  })
 
   return (
     <div className="max-w-7xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeItemListSchema) }}
+      />
       {/* 메인+사이드 구성에서 광고 영역 폭을 줄여 우측 여백을 최소화한다. */}
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px] xl:grid-cols-[minmax(0,1fr)_240px]">
         <div className="min-w-0">
@@ -420,63 +435,78 @@ export default function Home() {
 
           <div className="space-y-8">
             {/* Fragment를 사용해 카테고리 섹션 위에 광고 섹션을 배치한다. */}
-            {toolsConfig.map((category, index) => (
-              <Fragment key={category.categoryKey}>
-                <KakaoAd />
-                <div>
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
-                    {t(category.categoryKey)}
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {category.items.map((tool) => (
-                      <Link
-                        key={tool.path}
-                        href={localizePath(tool.path)}
-                        className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all"
-                      >
-                        <div className="flex items-start space-x-3">
-                          <span className="text-3xl">{tool.icon}</span>
-                          <div>
-                            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
-                              {t(tool.nameKey)}
-                            </h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {t(tool.descKey)}
+            {toolsConfig.map((category, index) => {
+              // 카테고리 허브로 연결해 내부 링크를 강화한다.
+              const categoryPath = getCategoryPath(category.categoryKey)
+              const categoryHref = categoryPath ? localizePath(categoryPath) : null
+
+              return (
+                <Fragment key={category.categoryKey}>
+                  <KakaoAd />
+                  <div>
+                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+                      {categoryHref ? (
+                        <Link
+                          href={categoryHref}
+                          className="hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+                        >
+                          {t(category.categoryKey)}
+                        </Link>
+                      ) : (
+                        t(category.categoryKey)
+                      )}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {category.items.map((tool) => (
+                        <Link
+                          key={tool.path}
+                          href={localizePath(tool.path)}
+                          className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all"
+                        >
+                          <div className="flex items-start space-x-3">
+                            <span className="text-3xl">{tool.icon}</span>
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                                {t(tool.nameKey)}
+                              </h3>
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                {t(tool.descKey)}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  {index === sponsoredInsertIndex && (
+                    <section className="mt-10">
+                      <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/90 dark:bg-gray-800/90 shadow-lg">
+                        {/* 스폰서 섹션도 상단과 동일한 톤으로 통일해 자연스럽게 노출되게 한다. */}
+                        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-amber-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900" />
+                        <div className="relative flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:p-8">
+                          <div className="flex-1 space-y-3">
+                            <span className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-amber-900/40 dark:text-amber-200">
+                              <span className="h-2 w-2 rounded-full bg-amber-500" />
+                              {t('home.sponsored.badge')}
+                            </span>
+                            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                              {t('home.sponsored.title')}
+                            </h2>
+                            <p className="text-sm text-gray-600 dark:text-gray-300">
+                              {t('home.sponsored.desc')}
                             </p>
                           </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                {index === sponsoredInsertIndex && (
-                  <section className="mt-10">
-                    <div className="relative overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/50 bg-white/90 dark:bg-gray-800/90 shadow-lg">
-                      {/* 스폰서 섹션도 상단과 동일한 톤으로 통일해 자연스럽게 노출되게 한다. */}
-                      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-amber-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900" />
-                      <div className="relative flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:p-8">
-                        <div className="flex-1 space-y-3">
-                          <span className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide dark:bg-amber-900/40 dark:text-amber-200">
-                            <span className="h-2 w-2 rounded-full bg-amber-500" />
-                            {t('home.sponsored.badge')}
-                          </span>
-                          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                            {t('home.sponsored.title')}
-                          </h2>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            {t('home.sponsored.desc')}
-                          </p>
-                        </div>
-                        <div className="flex-1">
-                          {/* 목록 스크롤 중에도 광고가 바로 보여지도록 동일한 컴포넌트를 재사용한다. */}
-                          <CoupangAd wrapperClassName="my-0" scriptStrategy="afterInteractive" />
+                          <div className="flex-1">
+                            {/* 목록 스크롤 중에도 광고가 바로 보여지도록 동일한 컴포넌트를 재사용한다. */}
+                            <CoupangAd wrapperClassName="my-0" scriptStrategy="afterInteractive" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </section>
-                )}
-              </Fragment>
-            ))}
+                    </section>
+                  )}
+                </Fragment>
+              )
+            })}
           </div>
 
           <div className="mt-10 space-y-4">

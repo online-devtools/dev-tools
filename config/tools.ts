@@ -265,4 +265,11 @@ export const toolCategories = [
       { nameKey: 'tool.visualDiff', path: '/visual-diff', icon: '🖼️' },
     ]
   }
-]
+] as const
+
+export type ToolCategory = typeof toolCategories[number]
+export type ToolItem = ToolCategory['tools'][number]
+export type ToolNameKey = ToolItem['nameKey']
+
+// Extract "base64" from "tool.base64"
+export type ToolKey = ToolNameKey extends `tool.${infer K}` ? K : never

@@ -5,6 +5,7 @@ import HowToSchema, { HOWTO_DATA } from './HowToSchema'
 import BreadcrumbSchema from './BreadcrumbSchema'
 import ToolSchema, { TOOL_CATEGORIES } from './ToolSchema'
 import { getCategoryPath } from '@/utils/categoryRoutes'
+import { ToolKey } from '@/config/tools'
 
 /**
  * ToolSchemas - 통합 스키마 컴포넌트
@@ -21,7 +22,7 @@ import { getCategoryPath } from '@/utils/categoryRoutes'
  */
 
 interface ToolSchemasProps {
-  toolKey: string           // HOWTO_DATA 키 및 도구 식별자 (예: "base64", "json")
+  toolKey: ToolKey          // HOWTO_DATA 키 및 도구 식별자 (예: "base64", "json")
   toolPath: string          // 도구 경로 (예: "/base64")
   categoryKey: string       // 카테고리 i18n 키 (예: "category.encoding")
   categoryType?: keyof typeof TOOL_CATEGORIES  // ToolSchema 카테고리 타입

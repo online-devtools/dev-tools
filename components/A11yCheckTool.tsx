@@ -48,43 +48,43 @@ export default function A11yCheckTool() {
 
   return (
     <>
-    <ToolSchemas toolKey="a11y-check" toolPath="/a11y-check" categoryKey="category.testing" categoryType="testing" />
-    <ToolCard
-      title={`♿ ${t('a11y.title')}`}
-      description={t('a11y.description')}
-    >
-      <div className="space-y-4">
-        <TextAreaWithCopy
-          value={input}
-          onChange={setInput}
-          label={t('a11y.input.label')}
-          placeholder={t('a11y.input.placeholder')}
-          rows={8}
-        />
 
-        <button
-          onClick={checkA11y}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-        >
-          {t('a11y.actions.check')}
-        </button>
+      <ToolCard
+        title={`♿ ${t('a11y.title')}`}
+        description={t('a11y.description')}
+      >
+        <div className="space-y-4">
+          <TextAreaWithCopy
+            value={input}
+            onChange={setInput}
+            label={t('a11y.input.label')}
+            placeholder={t('a11y.input.placeholder')}
+            rows={8}
+          />
 
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
-            {t('a11y.result.title', { count: issues.length })}
-          </h3>
-          {issues.length === 0 ? (
-            <p className="text-sm text-green-700 dark:text-green-300">{t('a11y.result.none')}</p>
-          ) : (
-            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
-              {issues.map((issue, idx) => (
-                <li key={`${issue.type}-${idx}`}>{issue.detail}</li>
-              ))}
-            </ul>
-          )}
+          <button
+            onClick={checkA11y}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          >
+            {t('a11y.actions.check')}
+          </button>
+
+          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
+              {t('a11y.result.title', { count: issues.length })}
+            </h3>
+            {issues.length === 0 ? (
+              <p className="text-sm text-green-700 dark:text-green-300">{t('a11y.result.none')}</p>
+            ) : (
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                {issues.map((issue, idx) => (
+                  <li key={`${issue.type}-${idx}`}>{issue.detail}</li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
-    </ToolCard>
+      </ToolCard>
     </>
   )
 }

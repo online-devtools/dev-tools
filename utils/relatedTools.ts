@@ -1,4 +1,4 @@
-import { toolCategories } from '@/config/tools'
+import { toolCategories, ToolKey } from '@/config/tools'
 import { stripLanguageFromPathname } from '@/utils/i18n'
 
 // Shared shape for tool metadata used in related links and schema generation.
@@ -7,7 +7,7 @@ export type ToolLookupItem = {
   path: string
   icon: string
   categoryKey: string
-  toolKey: string
+  toolKey: ToolKey
 }
 
 // Normalize incoming paths so lookups work for `/en/foo/` and `/foo`.
@@ -28,7 +28,7 @@ const normalizeToolPath = (pathname: string): string => {
 const TOOL_INDEX: ToolLookupItem[] = toolCategories.flatMap((category) => {
   return category.tools.map((tool) => {
     // The tool key mirrors the translation key suffix (e.g., `tool.base64` → `base64`).
-    const toolKey = tool.nameKey.replace(/^tool\./, '')
+    const toolKey = tool.nameKey.replace(/^tool\./, '') as ToolKey
 
     return {
       ...tool,
